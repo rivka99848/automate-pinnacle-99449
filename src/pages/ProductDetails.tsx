@@ -2,25 +2,22 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
+import { productsData } from "@/data/productsData";
+import dashboardImage from "@/assets/dashboard-screen.jpg";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
+  const { slug } = useParams<{ slug: string }>();
   
-  const features = [
-    "ניהול לקוחות ולידים בממשק אחד",
-    "ניהול פרויקטים ומשימות",
-    "מעקב אחרי כל שיחה ועסקה",
-    "אוטומציות חכמות למשימות",
-    "דשבורד עם תובנות בזמן אמת",
-    "אינטגרציה עם יומן גוגל ו-Email",
-    "שעתיים התאמה כלולים",
-  ];
+  const product = productsData.find((p) => p.slug === slug);
 
-  const handleCRMClick = async () => {
+  if (!product) {
+    return <Navigate to="/products" replace />;
+  }
+
+  const handleCTAClick = async () => {
     try {
-      // Send to webhook
       await fetch("https://n8n.chatnaki.co.il/webhook/crm", {
         method: "POST",
         headers: {
@@ -29,14 +26,12 @@ const ProductDetails = () => {
         body: JSON.stringify({ 
           action: "crm_interest",
           page: "product_details",
+          product: product.slug,
           timestamp: new Date().toISOString()
         }),
       });
-      
-      // Navigate to contact page
       navigate("/contact");
     } catch (error) {
-      // Still navigate even if webhook fails
       navigate("/contact");
     }
   };
@@ -46,104 +41,88 @@ const ProductDetails = () => {
       <Header />
 
       <main className="pt-32 pb-24">
-        <div className="container mx-auto px-4">
-          {/* Hero */}
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">מערכת CRM מלאה</span>
+        <div className="container mx-auto px-4 max-w-6xl">
+          {/* Hero Image */}
+          <div className="mb-12 animate-fade-in">
+            <img
+              src={dashboardImage}
+              alt={product.name}
+              className="w-full h-[400px] object-cover rounded-3xl shadow-2xl"
+            />
+          </div>
+
+          {/* Title & Description */}
+          <div className="text-center mb-12 animate-fade-in-up space-y-4">
+            <h1 className="text-3xl md:text-4xl font-bold">
+              {product.name}
             </h1>
-            <p className="text-2xl text-muted-foreground">
-              ניהול פרויקטים, משימות, לקוחות וכספים במקום אחד
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              {product.fullDescription}
             </p>
           </div>
 
-          {/* CRM Product */}
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-card p-12 rounded-3xl mb-12">
-              <h2 className="text-4xl font-bold mb-6 text-center">
-                מערכת CRM - ניהול פרויקטים ומשימות לקוחות וכספים
-              </h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div>
-                  <h3 className="text-2xl font-bold mb-6">תכונות עיקריות:</h3>
-                  <ul className="space-y-4">
-                    {features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-6 h-6 text-secondary mt-1 flex-shrink-0" />
-                        <span className="text-lg">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          {/* Price Section */}
+          <div className="text-center mb-16 animate-fade-in-scale">
+            <div className="inline-block bg-gradient-to-br from-secondary/10 to-secondary/5 p-8 rounded-3xl border border-secondary/20">
+              <div className="text-muted-foreground line-through text-xl mb-2">
+                {product.price.original}
+              </div>
+              <div className="text-5xl font-bold text-secondary mb-2">
+                {product.price.current}
+              </div>
+              <p className="text-muted-foreground">תשלום חד-פעמי בלבד</p>
+            </div>
+          </div>
 
-                <div className="bg-brand-darker p-8 rounded-2xl">
-                  <div className="text-center mb-6">
-                    <div className="text-muted-foreground line-through text-2xl mb-2">
-                      8,000 ש"ח
-                    </div>
-                    <div className="text-5xl font-bold text-secondary mb-2">
-                      2,400 ש"ח
-                    </div>
-                    <p className="text-muted-foreground">תשלום חד-פעמי בלבד</p>
+          {/* Features */}
+          <div className="mb-16 animate-fade-in-scale">
+            <h2 className="text-2xl font-bold mb-8 text-center">תכונות עיקריות</h2>
+            <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {product.features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-secondary mt-1 flex-shrink-0" />
+                  <span className="text-base">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Before & After Comparison */}
+          <div className="mb-16 animate-fade-in-up">
+            <div className="grid md:grid-cols-2 gap-12">
+              {/* Before */}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-destructive">מה יש לכם היום?</h2>
+                {product.beforeProblems.map((problem, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="text-base font-semibold">❌ {problem.title}</div>
+                    <p className="text-sm text-muted-foreground">{problem.description}</p>
                   </div>
-                  
-                  <p className="text-center text-lg mb-6">
-                    זו השקעה חד-פעמית שתחסוך לכם שעות של עבודה, תמנע אובדן לידים ולקוחות 
-                    ותיתן לכם שליטה מלאה על העסק
-                  </p>
-
-                  <Button 
-                    onClick={handleCRMClick}
-                    size="lg" 
-                    className="w-full text-lg py-6 rounded-full"
-                  >
-                    רוצה להתחיל לעבוד חכם
-                  </Button>
-                </div>
+                ))}
               </div>
 
-              {/* Benefits */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-destructive">מה יש לכם היום?</h3>
-                  <ul className="space-y-3">
-                    <li className="text-lg">❌ ניהול מבולגן ומסורבל</li>
-                    <li className="text-muted-foreground">אלפי שורות בטבלה, קשה למצוא נתונים, כל המידע מפוזר</li>
-                    <li className="text-lg">❌ אין תזכורות אוטומטיות</li>
-                    <li className="text-muted-foreground">אתם שוכחים משימות, מפספסים לידים ולקוחות נעלמים</li>
-                    <li className="text-lg">❌ תיעוד ידני ומתיש</li>
-                    <li className="text-muted-foreground">אתם כל הזמן צריכים לעדכן נתונים, להוסיף נוסחאות ולוודא שהכול עובד</li>
-                    <li className="text-lg">❌ בלגן בניהול לקוחות</li>
-                    <li className="text-muted-foreground">אין היסטוריה מסודרת, כל מידע מפוזר בקבצים שונים</li>
-                  </ul>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-secondary">עם המערכת שלנו:</h3>
-                  <ul className="space-y-3">
-                    <li className="text-lg">✅ הכול במקום אחד</li>
-                    <li className="text-muted-foreground">מערכת חכמה שמארגנת לכם את הלידים, הלקוחות והמשימות בצורה ברורה</li>
-                    <li className="text-lg">✅ פולואפים ותזכורות אוטומטיות</li>
-                    <li className="text-muted-foreground">המערכת דואגת שלא תפספסו אף ליד או משימה</li>
-                    <li className="text-lg">✅ הכול קורה לבד</li>
-                    <li className="text-muted-foreground">אוטומציות מתקדמות דואגות לניהול חכם בלי שתצטרכו להתעסק בזה</li>
-                    <li className="text-lg">✅ כרטיס לקוח מסודר</li>
-                    <li className="text-muted-foreground">כל המידע על כל לקוח מרוכז במקום אחד: שיחות, משימות, תשלומים ועוד</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <Button 
-                  onClick={handleCRMClick}
-                  size="lg" 
-                  className="text-lg px-12 py-6 rounded-full"
-                >
-                  הגיע הזמן לעשות סדר בעסק שלכם
-                </Button>
+              {/* After */}
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-secondary">עם המערכת שלנו:</h2>
+                {product.afterSolutions.map((solution, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="text-base font-semibold">✅ {solution.title}</div>
+                    <p className="text-sm text-muted-foreground">{solution.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+
+          {/* Final CTA */}
+          <div className="text-center animate-fade-in-scale">
+            <Button 
+              onClick={handleCTAClick}
+              size="lg" 
+              className="text-lg px-12 py-6 rounded-full"
+            >
+              הגיע הזמן לעשות סדר בעסק שלכם
+            </Button>
           </div>
         </div>
       </main>

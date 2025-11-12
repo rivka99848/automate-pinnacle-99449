@@ -70,23 +70,54 @@ const ProjectDetail = () => {
 
               {/* CTA */}
               <div className="text-center mt-12 space-y-4">
-                <h2 className="text-3xl font-bold mb-6">רוצים תוצאות דומות?</h2>
-                <p className="text-xl text-muted-foreground mb-8">
+                <h2 className="text-2xl font-bold mb-4">רוצים תוצאות דומות?</h2>
+                <p className="text-base text-muted-foreground mb-6">
                   בואו נדבר על איך אפשר ליישם את זה גם בעסק שלכם
                 </p>
                 <div className="flex gap-4 justify-center">
-                  <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full">
+                  <Button asChild size="lg" className="rounded-full">
                     <Link to="/contact">צרו קשר</Link>
                   </Button>
                   <Button
                     asChild
                     size="lg"
                     variant="outline"
-                    className="text-lg px-8 py-6 rounded-full"
+                    className="rounded-full"
                   >
                     <Link to={project.blogLink}>קרא את הסיפור המלא</Link>
                   </Button>
                 </div>
+              </div>
+            </div>
+
+            {/* Related Projects Strip */}
+            <div className="mt-16">
+              <h2 className="text-2xl font-bold mb-6 text-center">פרויקטים נוספים</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {projectsData
+                  .filter((p) => p.id !== project.id)
+                  .map((relatedProject) => (
+                    <Link
+                      key={relatedProject.id}
+                      to={`/projects/${relatedProject.slug}`}
+                      className="group"
+                    >
+                      <div className="bg-card rounded-2xl overflow-hidden hover-lift border border-border/50 hover:border-border transition-colors">
+                        <div className="aspect-video overflow-hidden">
+                          <img
+                            src={relatedProject.images[0]}
+                            alt={relatedProject.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
+                        <div className="p-3">
+                          <h3 className="text-sm font-semibold line-clamp-2">
+                            {relatedProject.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
               </div>
             </div>
           </div>

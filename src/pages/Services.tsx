@@ -13,11 +13,11 @@ const Services = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero */}
-          <div className="text-center mb-16 animate-fade-in-up">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <div className="text-center mb-12 animate-fade-in-up">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="text-gradient">השירותים שלנו</span>
             </h1>
-            <p className="text-2xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               פתרונות אוטומציה וניהול חכמים שיקלו על העסק שלכם ויחסכו לכם זמן וכסף
             </p>
           </div>
@@ -87,7 +87,7 @@ const Services = () => {
 
           {/* Additional Info */}
           <div className="max-w-4xl mx-auto bg-card p-8 rounded-3xl mb-16">
-            <h2 className="text-3xl font-bold mb-6 text-center">איך זה עובד?</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">איך זה עובד?</h2>
             <div className="space-y-6 text-lg text-muted-foreground">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
@@ -133,11 +133,11 @@ const Services = () => {
 
           {/* CTA */}
           <div className="text-center">
-            <h2 className="text-3xl font-bold mb-6">מוכנים להתחיל?</h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <h2 className="text-2xl font-bold mb-4">מוכנים להתחיל?</h2>
+            <p className="text-base text-muted-foreground mb-6">
               בואו נדבר על איך אנחנו יכולים לעזור לעסק שלכם
             </p>
-            <Button asChild size="lg" className="text-lg px-8 py-6 rounded-full">
+            <Button asChild size="lg" className="rounded-full">
               <Link to="/contact">צרו קשר</Link>
             </Button>
           </div>

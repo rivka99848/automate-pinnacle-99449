@@ -13,65 +13,42 @@ const Projects = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero */}
-          <div className="text-center mb-16 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <div className="text-center mb-12 animate-fade-in">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="text-gradient">הפרויקטים שלנו</span>
             </h1>
-            <p className="text-2xl text-muted-foreground">
+            <p className="text-lg text-muted-foreground">
               סיפורי הצלחה של לקוחות מרוצים
             </p>
           </div>
 
-          {/* Projects */}
-          <div className="max-w-5xl mx-auto space-y-16">
+          {/* Projects - Minimalist Cards */}
+          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
             {projectsData.map((project, index) => (
-              <div 
-                key={project.id} 
-                className="bg-card p-8 md:p-12 rounded-3xl hover-lift animate-fade-in"
+              <Link
+                key={project.id}
+                to={`/projects/${project.slug}`}
+                className="block hover-lift animate-fade-in-scale"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-start gap-4 mb-6">
-                  <div className={`w-16 h-16 rounded-full bg-brand-${project.color}/20 flex items-center justify-center flex-shrink-0`}>
-                    <span className={`text-2xl font-bold text-brand-${project.color}`}>{project.number}</span>
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-3xl font-bold mb-4">
+                <div className="bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-border transition-colors">
+                  {/* Project Image */}
+                  <ProjectGallery images={project.images} projectTitle={project.title} />
+                  
+                  {/* Content */}
+                  <div className="p-6 space-y-3">
+                    <h2 className="text-xl font-bold">
                       {project.title}
                     </h2>
-                    <p className="text-xl text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
                       {project.description}
                     </p>
+                    <Button variant="outline" size="sm" className="rounded-full w-full">
+                      קרא עוד
+                    </Button>
                   </div>
                 </div>
-
-                {/* Project Gallery */}
-                <ProjectGallery images={project.images} projectTitle={project.title} />
-              
-                <div className="bg-brand-darker p-6 rounded-2xl mb-6">
-                  <h3 className="text-xl font-bold mb-4">
-                    {project.color === "blue" ? "הפתרון שבנינו:" : "המערכת כוללת:"}
-                  </h3>
-                  <ul className="space-y-2 text-muted-foreground">
-                    {project.features.map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <blockquote className={`border-r-4 border-brand-${project.color} pr-6 py-4 mb-6 italic text-lg`}>
-                  "{project.quote}"
-                  <footer className="text-muted-foreground mt-2">– {project.author}</footer>
-                </blockquote>
-
-                <div className="flex gap-4">
-                  <Button asChild variant="default" size="lg" className="rounded-full flex-1">
-                    <Link to={`/projects/${project.slug}`}>פרטים נוספים</Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="rounded-full flex-1">
-                    <Link to={project.blogLink}>קרא את הסיפור המלא</Link>
-                  </Button>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
 
