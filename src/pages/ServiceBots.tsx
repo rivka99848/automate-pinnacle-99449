@@ -74,30 +74,30 @@ const ServiceBots = () => {
           </div>
 
           {/* סוגי בוטים */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-12 text-center">סוגי הבוטים שאנחנו בונים</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+          <div className="max-w-6xl mx-auto mb-24">
+            <h2 className="text-3xl font-bold mb-16 text-center">סוגי הבוטים שלנו</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
                   <MessageCircle className="w-7 h-7 text-brand-green" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">בוט WhatsApp</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   מענה אוטומטי בוואטסאפ - השאלות הכי נפוצות, מחירונים, זמינות ועוד. הלקוחות מקבלים תשובות מיידיות.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
                   <Sparkles className="w-7 h-7 text-brand-green" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">בוט AI חכם</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   בוט מבוסס בינה מלאכותית שמבין שאלות מורכבות, לומד מהשיחות ומשתפר עם הזמן.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
                   <Bot className="w-7 h-7 text-brand-green" />
                 </div>
@@ -110,10 +110,10 @@ const ServiceBots = () => {
           </div>
 
           {/* תכונות מפורטות */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-12 text-center">מה הבוט יודע לעשות?</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+          <div className="max-w-6xl mx-auto mb-24">
+            <h2 className="text-3xl font-bold mb-16 text-center">מה הבוט יודע לעשות?</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
                   <Clock className="w-7 h-7 text-brand-green" />
                 </div>

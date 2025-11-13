@@ -12,27 +12,24 @@ const ServiceAutomation = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
-          <div className="text-center mb-16 animate-fade-in-up">
-            <div className="inline-block mb-4 px-6 py-2 bg-brand-purple/20 border border-brand-purple rounded-full">
-              <span className="text-brand-purple font-semibold">03 • אוטומציות</span>
-            </div>
+          <div className="text-center mb-24 animate-fade-in-up">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-gradient">אוטומציות עסקיות חכמות</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
               אוטומציה חכמה של תהליכים עסקיים שחוסכת עד 70% מהזמן וממזערת טעויות אנוש. 
               המערכת מטפלת בכל המשימות החוזרות במקומך - אתם פשוט תהנו מהתוצאות.
             </p>
           </div>
 
           {/* למה אוטומציה? */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <div className="bg-card p-10 rounded-3xl">
-              <h2 className="text-3xl font-bold mb-8 text-center">למה אוטומציה משנה את המשחק?</h2>
+          <div className="max-w-5xl mx-auto mb-24">
+            <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-purple/30 transition-all">
+              <h2 className="text-3xl font-bold mb-12 text-center">למה אוטומציה משנה את המשחק?</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-destructive">🔴 המציאות המוכרת:</h3>
-                  <ul className="space-y-3 text-muted-foreground">
+                  <ul className="space-y-3 text-foreground/70">
                     <li className="flex items-start gap-3">
                       <span>•</span>
                       <span>משימות חוזרות שגוזלות שעות כל יום</span>
@@ -53,7 +50,7 @@ const ServiceAutomation = () => {
                 </div>
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-brand-purple">✅ החיים עם אוטומציה:</h3>
-                  <ul className="space-y-3 text-muted-foreground">
+                  <ul className="space-y-3 text-foreground/70">
                     <li className="flex items-start gap-3">
                       <span>✓</span>
                       <span>חיסכון של עד 70% בזמן ביצוע משימות</span>
@@ -77,10 +74,10 @@ const ServiceAutomation = () => {
           </div>
 
           {/* סוגי אוטומציות */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-12 text-center">מה אפשר לעשות עם אוטומציה?</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+          <div className="max-w-6xl mx-auto mb-24">
+            <h2 className="text-3xl font-bold mb-16 text-center">מה אפשר לעשות עם אוטומציה?</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center mb-4">
                   <RefreshCw className="w-7 h-7 text-brand-purple" />
                 </div>

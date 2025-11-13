@@ -74,65 +74,65 @@ const ServiceCRM = () => {
           </div>
 
           {/* תכונות מפורטות */}
-          <div className="max-w-6xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-12 text-center">מה כולל הפתרון?</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+          <div className="max-w-6xl mx-auto mb-24">
+            <h2 className="text-3xl font-bold mb-16 text-center">מה כולל הפתרון?</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Users className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">ניהול לקוחות ולידים</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   כל המידע על הלקוחות במקום אחד - היסטוריית שיחות, מסמכים, הערות ועוד. תוכלו לראות את כל התמונה במבט אחד.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <LineChart className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">מעקב עסקאות</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   עקבו אחרי כל עסקה משלב הליד ועד לסגירה. דעו בדיוק איפה כל עסקה נמצאת ומה הצעד הבא.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Database className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">דשבורד ותובנות</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   תמונת מצב מלאה על העסק - כמה עסקאות פתוחות, מה הסטטוס, מה החזוי לחודש הבא ועוד.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Calendar className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">אינטגרציה עם יומן</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   חיבור מלא ליומן גוגל - פגישות אוטומטיות, תזכורות ועדכונים בזמן אמת.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Mail className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">סנכרון מיילים</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   כל התכתבות עם הלקוח נשמרת אוטומטית במערכת. לא עוד חיפוש במייל - הכל במקום אחד.
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-2xl hover-lift">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Shield className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">ניהול הרשאות</h3>
-                <p className="text-muted-foreground">
+                <p className="text-foreground/70">
                   שליטה מלאה - מי רואה מה, מי יכול לערוך ומי יכול למחוק. מערכת הרשאות גמישה ומאובטחת.
                 </p>
               </div>
@@ -140,8 +140,9 @@ const ServiceCRM = () => {
           </div>
 
           {/* איך זה עובד */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <div className="bg-card p-10 rounded-3xl">
+          <div className="max-w-5xl mx-auto mb-24">
+            <h2 className="text-3xl font-bold mb-16 text-center">איך זה עובד?</h2>
+            <div className="grid md:grid-cols-4 gap-8">
               <h2 className="text-3xl font-bold mb-8 text-center">איך זה עובד?</h2>
               <div className="space-y-6">
                 {[
