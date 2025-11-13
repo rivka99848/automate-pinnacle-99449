@@ -12,27 +12,24 @@ const ServiceBots = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
-          <div className="text-center mb-16 animate-fade-in-up">
-            <div className="inline-block mb-4 px-6 py-2 bg-brand-green/20 border border-brand-green rounded-full">
-              <span className="text-brand-green font-semibold">02 • בוטים חכמים</span>
-            </div>
+          <div className="text-center mb-24 animate-fade-in-up">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               <span className="text-gradient">בוטים חכמים למענה אוטומטי</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
               מענה אוטומטי ללקוחות 24/7, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות ודוחות על כל השיחות. 
               הבוטים שלנו עובדים בלי הפסקה ומספקים חוויה מעולה ללקוחות.
             </p>
           </div>
 
           {/* למה בוטים? */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <div className="bg-card p-10 rounded-3xl">
-              <h2 className="text-3xl font-bold mb-8 text-center">למה בוט זה בדיוק מה שאתם צריכים?</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4">
+          <div className="max-w-5xl mx-auto mb-24">
+            <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-green/30 transition-all">
+              <h2 className="text-3xl font-bold mb-12 text-center">למה בוט זה בדיוק מה שאתם צריכים?</h2>
+              <div className="grid md:grid-cols-2 gap-12">
+                <div className="space-y-6">
                   <h3 className="text-xl font-bold text-destructive">🔴 המצב המוכר:</h3>
-                  <ul className="space-y-3 text-muted-foreground">
+                  <ul className="space-y-4 text-foreground/70">
                     <li className="flex items-start gap-3">
                       <span>•</span>
                       <span>שאלות חוזרות שלוקחות הרבה זמן</span>
@@ -51,9 +48,9 @@ const ServiceBots = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <h3 className="text-xl font-bold text-brand-green">✅ הפתרון:</h3>
-                  <ul className="space-y-3 text-muted-foreground">
+                  <ul className="space-y-4 text-foreground/70">
                     <li className="flex items-start gap-3">
                       <span>✓</span>
                       <span>מענה מיידי לכל שאלה, בכל שעה</span>
