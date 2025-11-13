@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Bot, MessageCircle, Clock, Zap, BarChart3, Sparkles } from "lucide-react";
+import botAiImage from "@/assets/bot-ai-assistant.jpg";
 
 const ServiceBots = () => {
   return (
@@ -11,15 +12,27 @@ const ServiceBots = () => {
 
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
-          {/* Hero Section */}
-          <div className="text-center mb-24 animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">בוטים חכמים למענה אוטומטי</span>
-            </h1>
-            <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-              מענה אוטומטי ללקוחות 24/7, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות ודוחות על כל השיחות. 
-              הבוטים שלנו עובדים בלי הפסקה ומספקים חוויה מעולה ללקוחות.
-            </p>
+          {/* Hero Section with Image */}
+          <div className="mb-24 animate-fade-in-up">
+            <div className="max-w-6xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden mb-12">
+                <img 
+                  src={botAiImage} 
+                  alt="AI Bots"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/50 to-transparent" />
+              </div>
+              <div className="text-center">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  <span className="text-gradient">בוטים חכמים למענה אוטומטי</span>
+                </h1>
+                <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
+                  מענה אוטומטי ללקוחות 24/7, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות ודוחות על כל השיחות. 
+                  הבוטים שלנו עובדים בלי הפסקה ומספקים חוויה מעולה ללקוחות.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* למה בוטים? */}

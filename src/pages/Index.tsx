@@ -10,8 +10,9 @@ import Testimonials from "@/components/Testimonials";
 import LogoMarquee from "@/components/LogoMarquee";
 import ServiceCard from "@/components/ServiceCard";
 
-import projectVacationBot from "@/assets/project-vacation-bot.jpg";
-import projectMedicalAutomation from "@/assets/project-medical-automation.jpg";
+import projectVacationBot from "@/assets/bot-website-widget.jpg";
+import projectMedicalAutomation from "@/assets/automation-process.jpg";
+import heroBusinessGrowth from "@/assets/hero-business-growth.jpg";
 
 const Index = () => {
   return (

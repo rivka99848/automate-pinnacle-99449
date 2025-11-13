@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { productsData } from "@/data/productsData";
-import dashboardImage from "@/assets/dashboard-screen.jpg";
 
 const Products = () => {
   return (
@@ -38,7 +37,7 @@ const Products = () => {
                       {/* Image */}
                       <div className="order-1">
                         <img
-                          src={dashboardImage}
+                          src={product.image}
                           alt={product.name}
                           className="w-full h-72 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                         />

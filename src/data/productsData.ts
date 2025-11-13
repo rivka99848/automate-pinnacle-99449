@@ -25,7 +25,7 @@ export const productsData: Product[] = [
       original: "8,000 ש\"ח",
       current: "2,400 ש\"ח",
     },
-    image: "/src/assets/dashboard-screen.jpg",
+    image: "/src/assets/product-management-system.jpg",
     features: [
       "ניהול לקוחות ולידים בממשק אחד",
       "ניהול פרויקטים ומשימות",

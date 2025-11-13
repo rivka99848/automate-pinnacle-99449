@@ -3,16 +3,16 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Database, Bot, Zap } from "lucide-react";
-import dashboardImage from "@/assets/dashboard-screen.jpg";
-import botImage from "@/assets/project-vacation-bot.jpg";
-import automationImage from "@/assets/project-medical-automation.jpg";
+import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
+import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
+import automationWorkflowImage from "@/assets/automation-workflow.jpg";
 
 const Services = () => {
   const services = [
     {
-      id: "crm",
-      icon: Database,
-      image: dashboardImage,
+    id: "crm",
+    icon: Database,
+    image: crmDashboardImage,
       title: "מערכת CRM מותאמת אישית",
       description: "מערכת CRM שמסדרת את כל המידע על הלקוחות, העסקאות והתהליכים במקום אחד. מערכת שעובדת בדיוק איך שאתם צריכים - ללא פשרות.",
       features: [
@@ -28,9 +28,9 @@ const Services = () => {
       url: "/services/crm"
     },
     {
-      id: "bots",
-      icon: Bot,
-      image: botImage,
+    id: "bots",
+    icon: Bot,
+    image: botWhatsappImage,
       title: "בוטים חכמים למענה אוטומטי",
       description: "מענה אוטומטי ללקוחות 24/7, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות ודוחות על כל השיחות. הבוטים שלנו עובדים בלי הפסקה.",
       features: [
@@ -46,9 +46,9 @@ const Services = () => {
       url: "/services/bots"
     },
     {
-      id: "automation",
-      icon: Zap,
-      image: automationImage,
+    id: "automation",
+    icon: Zap,
+    image: automationWorkflowImage,
       title: "אוטומציות עסקיות חכמות",
       description: "אוטומציה חכמה של תהליכים עסקיים שחוסכת זמן וממזערת טעויות אנוש. המערכת מטפלת בכל המשימות החוזרות במקומך - אתם פשוט תהנו מהתוצאות.",
       features: [

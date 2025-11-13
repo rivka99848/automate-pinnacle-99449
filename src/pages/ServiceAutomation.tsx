@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Zap, RefreshCw, LinkIcon, FileText, Mail, TrendingUp } from "lucide-react";
+import automationHeroImage from "@/assets/hero-automation-future.jpg";
 
 const ServiceAutomation = () => {
   return (
@@ -11,15 +12,27 @@ const ServiceAutomation = () => {
 
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
-          {/* Hero Section */}
-          <div className="text-center mb-24 animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">אוטומציות עסקיות חכמות</span>
-            </h1>
-            <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-              אוטומציה חכמה של תהליכים עסקיים שחוסכת עד 70% מהזמן וממזערת טעויות אנוש. 
-              המערכת מטפלת בכל המשימות החוזרות במקומך - אתם פשוט תהנו מהתוצאות.
-            </p>
+          {/* Hero Section with Image */}
+          <div className="mb-24 animate-fade-in-up">
+            <div className="max-w-6xl mx-auto">
+              <div className="relative rounded-3xl overflow-hidden mb-12">
+                <img 
+                  src={automationHeroImage} 
+                  alt="Business Automation"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/50 to-transparent" />
+              </div>
+              <div className="text-center">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  <span className="text-gradient">אוטומציות עסקיות חכמות</span>
+                </h1>
+                <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
+                  אוטומציה חכמה של תהליכים עסקיים שחוסכת עד 70% מהזמן וממזערת טעויות אנוש. 
+                  המערכת מטפלת בכל המשימות החוזרות במקומך - אתם פשוט תהנו מהתוצאות.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* למה אוטומציה? */}
