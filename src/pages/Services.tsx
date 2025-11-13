@@ -92,7 +92,7 @@ const Services = () => {
               return (
                 <div 
                   key={service.id}
-                  className="grid md:grid-cols-2 gap-12 items-center animate-fade-in-scale"
+                  className="grid md:grid-cols-2 gap-12 items-center animate-fade-in-up"
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   {/* Content */}

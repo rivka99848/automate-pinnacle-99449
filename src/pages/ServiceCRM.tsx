@@ -89,7 +89,7 @@ const ServiceCRM = () => {
           {/* תכונות מפורטות */}
           <div className="max-w-6xl mx-auto mb-24">
             <h2 className="text-3xl font-bold mb-16 text-center">מה כולל הפתרון?</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-scale">
               <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
                   <Users className="w-7 h-7 text-brand-blue" />
