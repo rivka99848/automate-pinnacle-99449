@@ -282,7 +282,7 @@ const Index = () => {
 
           {/* CTA Button - View All Projects */}
           <div className="text-center mt-12 animate-fade-in-up">
-            <Button asChild size="lg" className="bg-gradient-to-r from-brand-cyan to-brand-blue text-white font-semibold px-12 py-6 text-lg rounded-full hover-lift shadow-elegant">
+            <Button asChild variant="secondary" size="lg" className="rounded-full">
               <Link to="/projects">למעבר לכל הפרויקטים</Link>
             </Button>
           </div>
