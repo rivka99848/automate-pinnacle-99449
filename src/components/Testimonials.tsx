@@ -1,28 +1,38 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import logoResort from "@/assets/logo-resort.png";
+import logoMedical from "@/assets/logo-medical.png";
+import logoDesignStudio from "@/assets/logo-design-studio.png";
 
 interface Testimonial {
   quote: string;
   author: string;
   role: string;
-  image?: string;
+  logo?: string;
+  companyName?: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     quote: "המערכת שבנו עם רבקה שינתה לנו את החיים! היינו טובעים בפניות בוואטסאפ, והבוט החכם שהיא בנתה פתר לנו הכל. עכשיו הלקוחות מקבלים תשובות מיידיות והזמנות נכנסות אוטומטית למערכת. פשוט מדהים!",
     author: "יוסי כהן",
-    role: "מנהל רשת נופש יוקרתית"
+    role: "מנהל רשת נופש יוקרתית",
+    logo: logoResort,
+    companyName: "רשת נופש יוקרתית"
   },
   {
     quote: "אחרי שנים של עבודה עם טבלאות אקסל ותהליכים ידניים, סוף סוף יש לנו מערכת שעובדת בשבילנו. האוטומציות שרבקה הקימה חוסכות לנו שעות עבודה כל יום, והעסק פועל בצורה מקצועית הרבה יותר.",
     author: "ד״ר שרה לוי",
-    role: "בעלת קליניקה רפואית"
+    role: "בעלת קליניקה רפואית",
+    logo: logoMedical,
+    companyName: "קליניקה רפואית"
   },
   {
     quote: "לפני שפגשתי את רבקה, חשבתי שאוטומציה זה משהו רק לחברות גדולות. היא הוכיחה לי שגם עסק קטן כמו שלי יכול להפיק תועלת עצומה. המערכת פשוטה, יעילה, והכי חשוב - עובדת בדיוק איך שאני צריך!",
     author: "מיכל דהן",
-    role: "בעלת סטודיו לעיצוב פנים"
+    role: "בעלת סטודיו לעיצוב פנים",
+    logo: logoDesignStudio,
+    companyName: "סטודיו לעיצוב פנים"
   }
 ];
 
@@ -79,28 +89,36 @@ const Testimonials = () => {
           </button>
 
           {/* Testimonial Card */}
-          <div className="bg-brand-dark/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl border border-brand-blue/20 shadow-elegant hover-lift">
-            <div className="text-6xl text-brand-cyan mb-6 font-serif leading-none">"</div>
+          <div className="bg-brand-dark/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-elegant hover-lift">
+            {/* לוגו של הלקוח */}
+            {testimonials[currentIndex].logo && (
+              <div className="flex justify-center mb-8">
+                <img
+                  src={testimonials[currentIndex].logo}
+                  alt={testimonials[currentIndex].companyName || testimonials[currentIndex].author}
+                  className="h-16 md:h-20 w-auto object-contain opacity-80"
+                />
+              </div>
+            )}
             
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8 text-right">
+            {/* גרשיים פתיחה */}
+            <div className="text-6xl text-brand-cyan mb-4 text-right font-serif leading-none">"</div>
+            
+            {/* הציטוט */}
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-4 text-right">
               {testimonials[currentIndex].quote}
             </p>
+            
+            {/* גרשיים סגירה */}
+            <div className="text-6xl text-brand-cyan mb-8 text-left font-serif leading-none">"</div>
 
-            <div className="flex items-center justify-end gap-4">
-              {testimonials[currentIndex].image && (
-                <img
-                  src={testimonials[currentIndex].image}
-                  alt={testimonials[currentIndex].author}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-brand-blue"
-                />
-              )}
-              <div className="text-right">
-                <div className="text-lg font-bold text-foreground">
-                  {testimonials[currentIndex].author}
-                </div>
-                <div className="text-sm text-brand-cyan">
-                  {testimonials[currentIndex].role}
-                </div>
+            {/* פרטי הלקוח */}
+            <div className="text-right">
+              <div className="text-lg font-bold text-foreground">
+                {testimonials[currentIndex].author}
+              </div>
+              <div className="text-sm text-brand-cyan">
+                {testimonials[currentIndex].role}
               </div>
             </div>
           </div>
