@@ -38,7 +38,7 @@ const Services = () => {
                 ]}
                 colorClass="border-brand-blue"
                 gradientClass="from-brand-blue/5 to-brand-cyan/5"
-                links={[{ text: "למידע נוסף", url: "/products" }]}
+                links={[{ text: "לפרטים נוספים", url: "/services/crm" }]}
               />
             </div>
 
@@ -57,11 +57,7 @@ const Services = () => {
                 examples="בוט למענה אוטומטי, בוט לקבלת הזמנות, בוט לשירות לקוחות"
                 colorClass="border-brand-green"
                 gradientClass="from-brand-green/5 to-brand-cyan/5"
-                links={[
-                  { text: "בוטים לוואטסאפ", url: "/blog" },
-                  { text: "בוטים AI חכמים", url: "/blog" },
-                  { text: "בוט לאתרים (סיפור צימרים)", url: "/projects/nichuta-vacation-bot" },
-                ]}
+                links={[{ text: "לפרטים נוספים", url: "/services/bots" }]}
               />
             </div>
 
@@ -80,7 +76,7 @@ const Services = () => {
                 examples="שליחת דוא״ל אוטומטית, עדכון מלאי, יצירת דוחות, ניהול משימות"
                 colorClass="border-brand-purple"
                 gradientClass="from-brand-purple/5 to-brand-blue/5"
-                links={[{ text: "פרויקט עסק רפואי", url: "/projects/medical-automation" }]}
+                links={[{ text: "לפרטים נוספים", url: "/services/automation" }]}
               />
             </div>
           </div>

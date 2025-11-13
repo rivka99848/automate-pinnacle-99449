@@ -9,6 +9,9 @@ import ProductDetails from "./pages/ProductDetails";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Services from "./pages/Services";
+import ServiceCRM from "./pages/ServiceCRM";
+import ServiceBots from "./pages/ServiceBots";
+import ServiceAutomation from "./pages/ServiceAutomation";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -29,6 +32,9 @@ const App = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/crm" element={<ServiceCRM />} />
+          <Route path="/services/bots" element={<ServiceBots />} />
+          <Route path="/services/automation" element={<ServiceAutomation />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />

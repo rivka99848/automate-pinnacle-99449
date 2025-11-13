@@ -178,7 +178,7 @@ const Index = () => {
                 colorClass="border-brand-blue"
                 gradientClass="from-brand-blue/5 to-brand-cyan/5"
                 links={[
-                  { text: "למידע נוסף", url: "/products" }
+                  { text: "לפרטים נוספים", url: "/services/crm" }
                 ]}
               />
             </div>
@@ -192,9 +192,7 @@ const Index = () => {
                 colorClass="border-brand-green"
                 gradientClass="from-brand-green/5 to-brand-cyan/5"
                 links={[
-                  { text: "בוטים לוואטסאפ", url: "/blog" },
-                  { text: "בוטים AI חכמים", url: "/blog" },
-                  { text: "בוט לאתרים (סיפור צימרים)", url: "/projects" }
+                  { text: "לפרטים נוספים", url: "/services/bots" }
                 ]}
               />
             </div>
@@ -215,7 +213,7 @@ const Index = () => {
                 colorClass="border-brand-purple"
                 gradientClass="from-brand-purple/5 to-brand-blue/5"
                 links={[
-                  { text: "פרויקט עסק רפואי", url: "/projects" }
+                  { text: "לפרטים נוספים", url: "/services/automation" }
                 ]}
               />
             </div>
@@ -253,7 +251,7 @@ const Index = () => {
                   כששאלות כמו 'יש דיל?', 'פנוי בסופ"ש?' ו'מה המחיר?' לא הפסיקו להגיע – מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
                 </p>
                 <Button asChild variant="outline" className="w-full border-2 border-brand-cyan bg-brand-cyan/20 text-white hover:bg-brand-cyan/30 hover:border-brand-cyan rounded-full font-semibold transition-all">
-                  <Link to="/projects/nichuta-vacation-bot">קרא עוד</Link>
+                  <Link to="/projects/nichuta-vacation-bot">להמשך קריאה</Link>
                 </Button>
               </div>
             </div>
@@ -275,7 +273,7 @@ const Index = () => {
                   בעל עסק רפואי טובע בפניות, מיילים ומסמכים? גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה. טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
                 </p>
                 <Button asChild variant="outline" className="w-full border-2 border-secondary bg-secondary/20 text-white hover:bg-secondary/30 hover:border-secondary rounded-full font-semibold transition-all">
-                  <Link to="/projects/medical-automation">קרא עוד</Link>
+                  <Link to="/projects/medical-automation">להמשך קריאה</Link>
                 </Button>
               </div>
             </div>
@@ -284,7 +282,7 @@ const Index = () => {
           {/* CTA Button - View All Projects */}
           <div className="text-center mt-12 animate-fade-in-up">
             <Button asChild size="lg" className="bg-gradient-to-r from-brand-cyan to-brand-blue text-white font-semibold px-12 py-6 text-lg rounded-full hover-lift shadow-elegant">
-              <Link to="/projects">צפה בכל הפרויקטים</Link>
+              <Link to="/projects">למעבר לכל הפרויקטים</Link>
             </Button>
           </div>
         </div>
