@@ -93,7 +93,7 @@ const Testimonials = () => {
             key={currentIndex}
             className="bg-brand-dark/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-elegant hover-lift animate-fade-in"
           >
-            <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 items-start">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
               
               {/* לוגו בצד ימין */}
               {testimonials[currentIndex].logo && (
