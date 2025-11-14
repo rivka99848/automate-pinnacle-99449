@@ -61,9 +61,9 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 bg-brand-darker relative overflow-hidden">
+    <section className="py-16 bg-brand-darker relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-foreground">הלקוחות</span>{" "}
             <span className="text-gradient-accent">שלנו</span>
@@ -73,7 +73,7 @@ const Testimonials = () => {
         <div className="max-w-4xl mx-auto relative">
           {/* Navigation Buttons */}
           <button
-            onClick={goToNext}
+            onClick={goToPrevious}
             className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 z-10 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 flex items-center justify-center transition-all hover-lift"
             aria-label="Previous testimonial"
           >
@@ -81,7 +81,7 @@ const Testimonials = () => {
           </button>
 
           <button
-            onClick={goToPrevious}
+            onClick={goToNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 z-10 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 flex items-center justify-center transition-all hover-lift"
             aria-label="Next testimonial"
           >
@@ -89,37 +89,44 @@ const Testimonials = () => {
           </button>
 
           {/* Testimonial Card */}
-          <div className="bg-brand-dark/50 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-elegant hover-lift">
-            {/* לוגו של הלקוח */}
-            {testimonials[currentIndex].logo && (
-              <div className="flex justify-center mb-8">
-                <img
-                  src={testimonials[currentIndex].logo}
-                  alt={testimonials[currentIndex].companyName || testimonials[currentIndex].author}
-                  className="h-16 md:h-20 w-auto object-contain opacity-80"
-                />
-              </div>
-            )}
-            
-            {/* גרשיים פתיחה */}
-            <div className="text-6xl text-brand-cyan mb-4 text-right font-serif leading-none">"</div>
-            
-            {/* הציטוט */}
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-4 text-right">
-              {testimonials[currentIndex].quote}
-            </p>
-            
-            {/* גרשיים סגירה */}
-            <div className="text-6xl text-brand-cyan mb-8 text-left font-serif leading-none">"</div>
+          <div className="bg-brand-dark/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-elegant hover-lift">
+            <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-8 items-start">
+              
+              {/* לוגו בצד ימין */}
+              {testimonials[currentIndex].logo && (
+                <div className="flex-shrink-0 w-full md:w-32 flex justify-center md:justify-start">
+                  <img
+                    src={testimonials[currentIndex].logo}
+                    alt={testimonials[currentIndex].companyName || testimonials[currentIndex].author}
+                    className="h-16 md:h-20 w-auto object-contain opacity-80"
+                  />
+                </div>
+              )}
+              
+              {/* תוכן ההמלצה בצד שמאל */}
+              <div className="flex-1">
+                {/* גרשיים פתיחה */}
+                <div className="text-5xl md:text-6xl text-brand-cyan mb-3 text-right font-serif leading-none">"</div>
+                
+                {/* הציטוט */}
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-3 text-right">
+                  {testimonials[currentIndex].quote}
+                </p>
+                
+                {/* גרשיים סגירה */}
+                <div className="text-5xl md:text-6xl text-brand-cyan mb-6 text-left font-serif leading-none">"</div>
 
-            {/* פרטי הלקוח */}
-            <div className="text-right">
-              <div className="text-lg font-bold text-foreground">
-                {testimonials[currentIndex].author}
+                {/* פרטי הלקוח */}
+                <div className="text-right">
+                  <div className="text-base md:text-lg font-bold text-foreground">
+                    {testimonials[currentIndex].author}
+                  </div>
+                  <div className="text-sm text-brand-cyan">
+                    {testimonials[currentIndex].role}
+                  </div>
+                </div>
               </div>
-              <div className="text-sm text-brand-cyan">
-                {testimonials[currentIndex].role}
-              </div>
+              
             </div>
           </div>
 
