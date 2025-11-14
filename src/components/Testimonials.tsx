@@ -70,7 +70,7 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
+        <div className="max-w-3xl mx-auto relative">
           {/* Navigation Buttons */}
           <button
             onClick={goToPrevious}
@@ -91,7 +91,7 @@ const Testimonials = () => {
           {/* Testimonial Card */}
           <div 
             key={currentIndex}
-            className="bg-brand-dark/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl shadow-elegant hover-lift animate-fade-in"
+            className="bg-transparent p-6 md:p-8 animate-fade-in"
           >
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
               
