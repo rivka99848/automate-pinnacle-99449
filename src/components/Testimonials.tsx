@@ -83,7 +83,7 @@ const Testimonials = () => {
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index}>
-                <div className="bg-transparent p-6 md:p-8">
+                <div className="bg-transparent p-6 md:p-8 rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/10">
                   <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
                     
                     {/* לוגו בצד ימין */}
