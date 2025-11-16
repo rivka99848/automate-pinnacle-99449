@@ -1,5 +1,13 @@
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious,
+  type CarouselApi
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import logoResort from "@/assets/logo-resort.png";
 import logoMedical from "@/assets/logo-medical.png";
 import logoDesignStudio from "@/assets/logo-design-studio.png";
@@ -38,27 +46,7 @@ const testimonials: Testimonial[] = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const goToPrevious = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const goToNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  const [api, setApi] = useState<CarouselApi>();
 
   return (
     <section className="py-16 bg-brand-darker relative overflow-hidden">
@@ -70,78 +58,85 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <div className="max-w-3xl mx-auto relative">
-          {/* Navigation Buttons */}
-          <button
-            onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 lg:-translate-x-16 z-10 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 flex items-center justify-center transition-all hover-lift"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-6 h-6 text-brand-blue" />
-          </button>
+        <Carousel
+          opts={{ 
+            loop: true,
+            direction: "rtl",
+            align: "center"
+          }}
+          plugins={[
+            Autoplay({
+              delay: 5000,
+              stopOnInteraction: true,
+              stopOnMouseEnter: true
+            })
+          ]}
+          className="w-full max-w-3xl mx-auto"
+          setApi={(emblaApi) => {
+            setApi(emblaApi);
+            if (!emblaApi) return;
+            emblaApi.on("select", () => {
+              setCurrentIndex(emblaApi.selectedScrollSnap());
+            });
+          }}
+        >
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index}>
+                <div className="bg-transparent p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                    
+                    {/* לוגו בצד ימין */}
+                    {testimonial.logo && (
+                      <div className="flex-shrink-0 w-full md:w-32 flex justify-center md:justify-start">
+                        <img
+                          src={testimonial.logo}
+                          alt={testimonial.companyName || testimonial.author}
+                          className="h-16 md:h-20 w-auto object-contain opacity-80"
+                        />
+                      </div>
+                    )}
+                    
+                    {/* תוכן ההמלצה בצד שמאל */}
+                    <div className="flex-1">
+                      {/* גרשיים פתיחה */}
+                      <div className="text-5xl md:text-6xl text-brand-cyan mb-3 text-right font-serif leading-none">"</div>
+                      
+                      {/* הציטוט */}
+                      <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-3 text-right">
+                        {testimonial.quote}
+                      </p>
+                      
+                      {/* גרשיים סגירה */}
+                      <div className="text-5xl md:text-6xl text-brand-cyan mb-6 text-left font-serif leading-none">"</div>
 
-          <button
-            onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 lg:translate-x-16 z-10 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 flex items-center justify-center transition-all hover-lift"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-6 h-6 text-brand-blue" />
-          </button>
-
-          {/* Testimonial Card */}
-          <div 
-            key={currentIndex}
-            className="bg-transparent p-6 md:p-8 animate-fade-in"
-          >
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
-              
-              {/* לוגו בצד ימין */}
-              {testimonials[currentIndex].logo && (
-                <div className="flex-shrink-0 w-full md:w-32 flex justify-center md:justify-start">
-                  <img
-                    src={testimonials[currentIndex].logo}
-                    alt={testimonials[currentIndex].companyName || testimonials[currentIndex].author}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80"
-                  />
-                </div>
-              )}
-              
-              {/* תוכן ההמלצה בצד שמאל */}
-              <div className="flex-1">
-                {/* גרשיים פתיחה */}
-                <div className="text-5xl md:text-6xl text-brand-cyan mb-3 text-right font-serif leading-none">"</div>
-                
-                {/* הציטוט */}
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-3 text-right">
-                  {testimonials[currentIndex].quote}
-                </p>
-                
-                {/* גרשיים סגירה */}
-                <div className="text-5xl md:text-6xl text-brand-cyan mb-6 text-left font-serif leading-none">"</div>
-
-                {/* פרטי הלקוח */}
-                <div className="text-right">
-                  <div className="text-base md:text-lg font-bold text-foreground">
-                    {testimonials[currentIndex].author}
+                      {/* פרטי הלקוח */}
+                      <div className="text-right">
+                        <div className="text-base md:text-lg font-bold text-foreground">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-sm text-brand-cyan">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
+                    
                   </div>
-                  <div className="text-sm text-brand-cyan">
-                    {testimonials[currentIndex].role}
-                  </div>
                 </div>
-              </div>
-              
-            </div>
-          </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          {/* כפתורי ניווט - Embla מטפל ב-RTL אוטומטית */}
+          <CarouselPrevious className="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
+          <CarouselNext className="absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
 
           {/* Indicators */}
           <div className="flex justify-center gap-2 mt-8">
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  setIsAutoPlaying(false);
-                  setCurrentIndex(index);
-                }}
+                onClick={() => api?.scrollTo(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
                     ? "bg-brand-blue w-8"
@@ -151,7 +146,7 @@ const Testimonials = () => {
               />
             ))}
           </div>
-        </div>
+        </Carousel>
       </div>
     </section>
   );
