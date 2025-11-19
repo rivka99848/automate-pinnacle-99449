@@ -17,12 +17,12 @@ import {
 
 const ProductCRM = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Header />
 
       <main className="pt-20">
-        {/* Hero Section - Wave Background with Gradient */}
-        <section className="relative bg-gradient-to-br from-brand-blue via-brand-cyan to-white pt-32 pb-48 overflow-hidden">
+        {/* Hero Section */}
+        <section className="relative bg-gradient-to-b from-[#1D2F4F] via-[#121F36] to-[#121F37] pt-32 pb-48 overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-5xl mx-auto text-center animate-fade-in">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white leading-tight">
@@ -30,13 +30,12 @@ const ProductCRM = () => {
                 יותר סדר יותר זמן פנוי<br />
                 ויותר כסף בכיס!
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-[#C5D1E3] mb-8 max-w-3xl mx-auto leading-relaxed">
                 לידים נעלמים, משימות נערמות, וניהול העסק הופך למאבק מתיש?!<br />
                 <span className="font-bold">הסוף לעבודה עם טבלאות מורכבות ומערכות מרובות!</span>
               </p>
               
-              {/* Video Embed */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-12 max-w-4xl mx-auto transform hover:scale-105 transition-transform duration-300">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-12 max-w-4xl mx-auto border-2 border-[#8FADFF]/20 transform hover:scale-105 transition-all duration-300">
                 <div className="aspect-video">
                   <iframe
                     className="w-full h-full"
@@ -49,20 +48,32 @@ const ProductCRM = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="text-lg px-12 py-6 bg-white text-brand-blue hover:bg-white/90 shadow-xl">
+                <Button asChild size="lg" className="text-lg px-12 py-6 bg-[#3E6AE5] hover:bg-[#6D94FF] text-white shadow-xl transition-all duration-300">
                   <a href="#contact">רוצה להתחיל לעבוד חכם</a>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-lg px-12 py-6 border-2 border-white text-white hover:bg-white/10">
+                <Button asChild size="lg" variant="outline" className="text-lg px-12 py-6 border-2 border-[#8FADFF] text-white hover:bg-white/10 transition-all duration-300">
                   <a href="#faq">שאלות נפוצות</a>
                 </Button>
               </div>
             </div>
           </div>
 
-          {/* Wave Shape at Bottom */}
+          <div className="absolute top-32 left-10 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: 'rgba(109, 148, 255, 0.15)' }}>
+            <Database className="w-7 h-7" style={{ color: '#6D94FF' }} />
+          </div>
+          <div className="absolute top-48 right-20 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: 'rgba(182, 238, 248, 0.15)', animationDelay: '0.5s' }}>
+            <TrendingUp className="w-7 h-7" style={{ color: '#B6EEF8' }} />
+          </div>
+          <div className="absolute bottom-32 left-1/4 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: 'rgba(179, 245, 160, 0.15)', animationDelay: '1s' }}>
+            <CheckCircle2 className="w-7 h-7" style={{ color: '#B3F5A0' }} />
+          </div>
+          <div className="absolute bottom-48 right-1/3 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: 'rgba(237, 187, 158, 0.15)', animationDelay: '1.5s' }}>
+            <Mail className="w-7 h-7" style={{ color: '#EDBB9E' }} />
+          </div>
+
           <div className="absolute bottom-0 left-0 right-0">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-              <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="white"/>
+              <path d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z" fill="#FFFFFF"/>
             </svg>
           </div>
         </section>
@@ -304,31 +315,31 @@ const ProductCRM = () => {
                         <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
                         <div>
                           <h4 className="font-bold text-lg mb-1">הכול במקום אחד</h4>
-                          <p className="text-white/90">מערכת חכמה שמארגנת לכם את הלידים, הלקוחות והמשימות בצורה ברורה</p>
+                          <p>כל המידע מאורגן ונגיש בכרטיס לקוח מסודר</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-4">
                         <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
                         <div>
-                          <h4 className="font-bold text-lg mb-1">פולואפים ותזכורות אוטומטיות</h4>
-                          <p className="text-white/90">המערכת דואגת שלא תפספסו אף ליד או משימה</p>
+                          <h4 className="font-bold text-lg mb-1">תזכורות אוטומטיות</h4>
+                          <p>המערכת תזכיר לכם משימות ופעולות חשובות</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-4">
                         <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
                         <div>
-                          <h4 className="font-bold text-lg mb-1">הכול קורה לבד</h4>
-                          <p className="text-white/90">אוטומציות מתקדמות דואגות לניהול חכם בלי שתצטרכו להתעסק בזה</p>
+                          <h4 className="font-bold text-lg mb-1">אוטומציה חכמה</h4>
+                          <p>עדכונים אוטומטיים ללא צורך בתיעוד ידני</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-4">
                         <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
                         <div>
-                          <h4 className="font-bold text-lg mb-1">כרטיס לקוח מסודר</h4>
-                          <p className="text-white/90">כל המידע על כל לקוח מרוכז במקום אחד: שיחות, משימות, תשלומים ועוד</p>
+                          <h4 className="font-bold text-lg mb-1">ניהול לקוחות מקצועי</h4>
+                          <p>היסטוריה מסודרת ומעקב קל ונוח</p>
                         </div>
                       </div>
                     </div>
@@ -339,260 +350,67 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Pricing Section - Floating 3D Card */}
-        <section className="py-32 bg-gradient-to-br from-brand-cyan/20 via-white to-brand-blue/10 relative overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-12">
-                <p className="text-xl text-muted-foreground mb-2">
-                  כשבניתי מערכת כזו ללקוחה, היא שילמה 8,000 ש״ח על פיתוח אישי.
-                </p>
-                <p className="text-xl text-muted-foreground">
-                  אבל אז הבנתי – לא לכל עסק יש תקציב כזה, זה לא צריך להיות חסם!
-                </p>
-              </div>
-
-              {/* Floating Pricing Card */}
-              <div className="relative transform hover:scale-105 transition-all duration-500">
-                {/* Price Badge */}
-                <div className="absolute -top-8 -right-8 bg-red-500 text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl rotate-12 animate-pulse z-20">
-                  מבצע מוגבל! 🔥
-                </div>
-
-                <div className="bg-white rounded-[3rem] shadow-2xl p-12 border-4 border-brand-cyan relative overflow-hidden">
-                  {/* Background Decoration */}
-                  <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-brand-cyan/20 to-transparent rounded-full -translate-x-32 -translate-y-32"></div>
-                  <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-brand-blue/20 to-transparent rounded-full translate-x-32 translate-y-32"></div>
-
-                  <div className="relative z-10">
-                    <h3 className="text-3xl font-bold text-center mb-8">מה יהיה לכם עם המערכת שלנו?</h3>
-
-                    {/* Crossed-out Prices */}
-                    <div className="text-center mb-6 space-y-2">
-                      <div className="text-3xl text-muted-foreground line-through">8,000 ₪</div>
-                      <div className="text-4xl text-muted-foreground line-through">2,950 ₪</div>
-                    </div>
-
-                    {/* Final Price */}
-                    <div className="text-center mb-8">
-                      <div className="text-7xl font-bold text-gradient mb-2">2,400 ₪</div>
-                      <p className="text-xl font-bold text-brand-blue">תשלום חד-פעמי בלבד</p>
-                    </div>
-
-                    <div className="bg-muted/30 rounded-2xl p-6 mb-8">
-                      <p className="text-center leading-relaxed text-muted-foreground">
-                        זו השקעה חד-פעמית שתחסוך לכם שעות של עבודה, תמנע אובדן לידים ולקוחות
-                        ותיתן לכם שליטה מלאה על העסק כדי שתוכלו <span className="font-bold text-foreground">להרוויח יותר בפחות זמן</span>
-                      </p>
-                    </div>
-
-                    <p className="text-center text-2xl font-bold mb-6">
-                      ההזדמנות הזו לא תחזור!
-                    </p>
-
-                    <div className="text-center">
-                      <Button asChild size="lg" className="text-xl px-16 py-8 bg-gradient-to-r from-brand-blue to-brand-cyan hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                        <a href="#contact">רוצה להתחיל לעבוד חכם ולהרוויח יותר</a>
-                      </Button>
-                    </div>
-
-                    <p className="text-center text-muted-foreground mt-6">
-                      מהיום כל עסק יכול להרשות לעצמו להתקדם
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Form - Glassmorphism */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-brand-blue via-brand-cyan to-purple-600 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-2xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-lg rounded-[3rem] p-12 shadow-2xl border border-white/20">
-                <div className="text-center mb-8">
-                  <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    הגיע הזמן לעשות סדר בעסק שלכם
-                  </h2>
-                  <p className="text-xl text-white/90">
-                    רוצה להתחיל לעבוד חכם ולהרוויח יותר
-                  </p>
-                </div>
-
-                <form className="space-y-6">
-                  <div>
-                    <Input 
-                      type="text" 
-                      placeholder="שם מלא*" 
-                      className="bg-white/90 border-white/30 text-foreground placeholder:text-muted-foreground h-14 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <Input 
-                      type="tel" 
-                      placeholder="מס׳ טלפון*" 
-                      className="bg-white/90 border-white/30 text-foreground placeholder:text-muted-foreground h-14 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <Input 
-                      type="email" 
-                      placeholder="אימייל*" 
-                      className="bg-white/90 border-white/30 text-foreground placeholder:text-muted-foreground h-14 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <Input 
-                      type="text" 
-                      placeholder="תחום העסק*" 
-                      className="bg-white/90 border-white/30 text-foreground placeholder:text-muted-foreground h-14 text-lg rounded-2xl"
-                      required
-                    />
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <input 
-                      type="checkbox" 
-                      id="consent" 
-                      className="mt-1 w-5 h-5 rounded border-white/30"
-                      required
-                    />
-                    <label htmlFor="consent" className="text-white text-sm">
-                      אני מאשר/ת קבלת דיוורים*
-                    </label>
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full text-xl py-8 bg-white text-brand-blue hover:bg-white/90 rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300"
-                  >
-                    רוצה להתחיל לעבוד חכם ולהרוויח יותר
-                  </Button>
-
-                  <p className="text-center text-white text-lg font-bold">
-                    רק 2,400 ש״ח
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section - Colorful Accordion */}
+        {/* FAQ Section */}
         <section id="faq" className="py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6">
-                שאלות ותשובות
-              </h2>
-              <p className="text-xl text-center text-muted-foreground mb-16">
-                כל מה שרציתם לדעת על המערכת
-              </p>
-
-              <Accordion type="single" collapsible className="space-y-4">
-                {[
-                  {
-                    q: "מה ההבדל בין המערכת הזו לגוגל שיטס?",
-                    a: "במערכת שלנו הכל מסונכרן אוטומטית, אין צורך לעדכן ידנית או להתעסק עם נוסחאות מסובכות. יש כרטיסיית לקוח מסודרת עם כל הנתונים במקום אחד, כולל תשלומים, משימות ופרויקטים, ובנוסף – אוטומציות שמבצעות פולואפים, תזכורות וסנכרונים בלי שתצטרכו להתערב.",
-                    color: "border-r-4 border-r-blue-500"
-                  },
-                  {
-                    q: "אני משתמש/ת ברב מסר אבל מרגיש/ה שאני צריכה יותר מזה. איך המערכת שלך יכולה לעזור לי?",
-                    a: "רב מסר מצוינת לשיווק, אך היא לא מספקת פתרון לניהול העסק עצמו. המערכת שלי מרכזת את כל מה שאת/ה צריכה במקום אחד: ניהול לידים, משימות, לקוחות, פרויקטים, מעקב תשלומים וזמן עבודה – בלי לקפוץ בין כלים שונים.",
-                    color: "border-r-4 border-r-purple-500"
-                  },
-                  {
-                    q: "האם אני צריך/ה ידע טכני כדי להשתמש במערכת?",
-                    a: "ממש לא. המערכת בנויה כך שכל אחד יכול להשתמש בה בקלות. הכל ברור, נוח ומותאם לניהול העסק בלי צורך בהבנה טכנית מעמיקה.",
-                    color: "border-r-4 border-r-green-500"
-                  },
-                  {
-                    q: "האם אפשר להתאים את המערכת לצרכים שלי?",
-                    a: "בהחלט. ניתן לבצע התאמות לפי הצורך, בתוספת תשלום לפי שעות, ולהוסיף כל נתון או אוטומציה שאתם צריכים",
-                    color: "border-r-4 border-r-orange-500"
-                  },
-                  {
-                    q: "איך המערכת עוזרת לי להגדיל רווחים?",
-                    a: "היא מוודאת שאף ליד לא הולך לאיבוד, שהלקוחות נשארים מעורבים, ושאתה מתמקד בעבודה שמכניסה כסף: סגירת יותר עסקאות, לידים שמתחממים במקום שמתקררים, פחות ניהול ידני ויותר עבודה רווחית, תמחור חכם יותר עם מעקב אחרי זמן עבודה, ושליטה מלאה על הכספים.",
-                    color: "border-r-4 border-r-red-500"
-                  },
-                  {
-                    q: "האם אפשר לעבוד עם צוות בתוך המערכת?",
-                    a: "כן! אפשר להגדיר הרשאות לכל משתמש, כך שכל אחד יקבל גישה למה שהוא צריך.",
-                    color: "border-r-4 border-r-pink-500"
-                  },
-                  {
-                    q: "האם זה שירות חודשי או חד-פעמי?",
-                    a: "זו מערכת בתשלום חד-פעמי. אין צורך במנוי חודשי, משלמים פעם אחת ונשארים עם מערכת שעובדת בשבילכם לטווח ארוך.",
-                    color: "border-r-4 border-r-cyan-500"
-                  },
-                  {
-                    q: "אם אני לא רוצה שהאוטומציות יפעלו?",
-                    a: "יש אופציה לכבות ולהדליק מתי שתרצו.",
-                    color: "border-r-4 border-r-indigo-500"
-                  },
-                  {
-                    q: "באיזה פלטפורמה המערכת בנויה?",
-                    a: "המערכת בנויה בפלטפורמת Airtable.",
-                    color: "border-r-4 border-r-teal-500"
-                  },
-                  {
-                    q: "איך אפשר להצטרף למבצע?",
-                    a: "קל מאוד! המבצע תקף לזמן מוגבל. כדאי למהר ולתפוס את ההזדמנות. כל שעליכם לעשות הוא למלא את הטופס בדף זה ונחזור אליכם בהקדם.",
-                    color: "border-r-4 border-r-yellow-500"
-                  }
-                ].map((item, index) => (
-                  <AccordionItem 
-                    key={index} 
-                    value={`item-${index}`}
-                    className={`bg-muted/30 rounded-2xl px-6 border-2 border-transparent hover:border-muted ${item.color}`}
-                  >
-                    <AccordionTrigger className="text-right text-lg font-bold hover:no-underline py-6">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-right text-muted-foreground leading-relaxed pb-6">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+          <div className="container mx-auto px-4 max-w-4xl">
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-12">
+              שאלות נפוצות
+            </h2>
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>איך מתחילים להשתמש במערכת?</AccordionTrigger>
+                <AccordionContent>
+                  פשוט מאוד! פנו אלינו ונעזור לכם להגדיר את המערכת לפי הצרכים שלכם.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>האם יש תקופת ניסיון?</AccordionTrigger>
+                <AccordionContent>
+                  כן, יש תקופת ניסיון של 14 ימים ללא התחייבות.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>האם המערכת מתאימה לעסקים קטנים?</AccordionTrigger>
+                <AccordionContent>
+                  בהחלט! המערכת גמישה ומתאימה לעסקים בכל הגדלים.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-4">
+                <AccordionTrigger>איך מתבצע הסנכרון עם יומן גוגל?</AccordionTrigger>
+                <AccordionContent>
+                  הסנכרון מתבצע אוטומטית ברקע, כך שכל המשימות שלכם מתעדכנות בזמן אמת.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </section>
 
-        {/* Final CTA Section - Dramatic Gradient */}
-        <section className="py-32 bg-gradient-to-br from-brand-blue via-purple-600 to-brand-cyan relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iYSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIj48cGF0aCBkPSJNLS4wMyAyMGw0MC4wNiAwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYSkiLz48L3N2Zz4=')] opacity-20"></div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-                מוכנים לשדרג את העסק?
-              </h2>
-              <p className="text-2xl md:text-3xl text-white/90 mb-12">
-                הצטרפו עכשיו למאות עסקים שכבר עושים את זה נכון
-              </p>
-              
-              <Button 
-                asChild 
-                size="lg" 
-                className="text-2xl px-16 py-10 bg-white text-brand-blue hover:bg-white/90 rounded-full shadow-2xl transform hover:scale-110 transition-all duration-300"
-              >
-                <a href="#contact">בואו נתחיל! 🚀</a>
+        {/* Contact Section */}
+        <section id="contact" className="py-24 bg-gradient-to-br from-[#1D2F4F] via-[#121F36] to-[#121F37] text-white">
+          <div className="container mx-auto px-4 max-w-3xl">
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-12">
+              רוצה להתחיל לעבוד חכם?
+            </h2>
+            <form className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block mb-2 font-semibold">שם מלא</label>
+                <Input id="name" type="text" placeholder="הכנס את שמך" className="w-full" />
+              </div>
+              <div>
+                <label htmlFor="email" className="block mb-2 font-semibold">אימייל</label>
+                <Input id="email" type="email" placeholder="הכנס את האימייל שלך" className="w-full" />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block mb-2 font-semibold">טלפון</label>
+                <Input id="phone" type="tel" placeholder="הכנס את מספר הטלפון שלך" className="w-full" />
+              </div>
+              <Button type="submit" className="w-full bg-[#3E6AE5] hover:bg-[#6D94FF] text-white py-4 text-lg font-bold transition-all duration-300">
+                שלח
               </Button>
-            </div>
+            </form>
           </div>
         </section>
+
       </main>
 
       <Footer />
