@@ -35,7 +35,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
         >
           <CarouselContent>
             {images.map((image, index) => (
-              <CarouselItem key={index}>
+              <CarouselItem key={index} className="animate-carousel-fade">
                 <div
                   className="relative aspect-video rounded-2xl overflow-hidden cursor-pointer"
                   onClick={() => setSelectedImage(index)}
