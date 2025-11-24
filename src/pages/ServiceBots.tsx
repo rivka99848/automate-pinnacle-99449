@@ -17,21 +17,33 @@ const ServiceBots = () => {
   const successReveal = useScrollReveal({ threshold: 0.1 });
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [cardProgress, setCardProgress] = useState({ card1: 0, card2: 0, card3: 0 });
+  const [cardProgress, setCardProgress] = useState(0);
+
+  const botTypes = [
+    { 
+      icon: MessageCircle, 
+      title: "בוט WhatsApp", 
+      description: "מענה אוטומטי בוואטסאפ - השאלות הכי נפוצות, מחירונים, זמינות ועוד. הלקוחות מקבלים תשובות מיידיות."
+    },
+    { 
+      icon: Sparkles, 
+      title: "בוט AI חכם", 
+      description: "בוט מבוסס בינה מלאכותית שמבין שאלות מורכבות, לומד מהשיחות ומשתפר עם הזמן."
+    },
+    { 
+      icon: Bot, 
+      title: "בוט לאתרים", 
+      description: "צ'אט חי באתר שמשיב על שאלות, עוזר למבקרים למצוא מה שהם מחפשים ומגדיל המרות."
+    }
+  ];
 
   const handleCardScroll = useCallback(() => {
     if (!containerRef.current) return;
-    const container = containerRef.current;
-    const cards = container.querySelectorAll('[data-card]');
-    
-    cards.forEach((card, index) => {
-      const rect = card.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
-      setCardProgress(prev => ({
-        ...prev,
-        [`card${index + 1}`]: progress
-      }));
-    });
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const progress = Math.max(0, Math.min(1, -rect.top / (window.innerHeight * 0.5)));
+      setCardProgress(progress);
+    }
   }, []);
 
   useEffect(() => {
@@ -146,50 +158,77 @@ const ServiceBots = () => {
                 </h2>
               </div>
 
-              <div ref={containerRef} className="space-y-6">
-                {/* WhatsApp Bot */}
-                <div data-card="1" className="bg-gradient-to-br from-brand-green/5 to-transparent border border-brand-green/20 rounded-2xl p-8 hover:border-brand-green/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-7 h-7 text-brand-green" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">בוט WhatsApp</h3>
-                      <p className="text-foreground/70">
-                        מענה אוטומטי בוואטסאפ - השאלות הכי נפוצות, מחירונים, זמינות ועוד. הלקוחות מקבלים תשובות מיידיות.
-                      </p>
-                    </div>
-                  </div>
+              <div 
+                ref={containerRef}
+                className="relative"
+                style={{ minHeight: `${botTypes.length * 400}px` }}
+              >
+                {/* Progress Indicator */}
+                <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/10">
+                  <div 
+                    className="w-full bg-gradient-to-b from-brand-green to-brand-cyan transition-all duration-300"
+                    style={{ 
+                      height: `${Math.min(100, cardProgress * 100)}%`
+                    }}
+                  />
                 </div>
 
-                {/* AI Bot */}
-                <div data-card="2" className="bg-gradient-to-br from-brand-green/5 to-transparent border border-brand-green/20 rounded-2xl p-8 hover:border-brand-green/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
-                      <Sparkles className="w-7 h-7 text-brand-green" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">בוט AI חכם</h3>
-                      <p className="text-foreground/70">
-                        בוט מבוסס בינה מלאכותית שמבין שאלות מורכבות, לומד מהשיחות ומשתפר עם הזמן.
-                      </p>
-                    </div>
-                  </div>
+                {/* Progress Dots */}
+                <div className="absolute right-[-4px] top-0 bottom-0 flex flex-col justify-around py-8">
+                  {botTypes.map((_, index) => {
+                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.33));
+                    return (
+                      <div 
+                        key={index}
+                        className="w-3 h-3 rounded-full border-2 border-brand-green transition-all duration-300"
+                        style={{
+                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-green))' : 'transparent',
+                          transform: `scale(${0.8 + dotProgress * 0.4})`
+                        }}
+                      />
+                    );
+                  })}
                 </div>
 
-                {/* Website Bot */}
-                <div data-card="3" className="bg-gradient-to-br from-brand-green/5 to-transparent border border-brand-green/20 rounded-2xl p-8 hover:border-brand-green/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
-                      <Bot className="w-7 h-7 text-brand-green" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">בוט לאתרים</h3>
-                      <p className="text-foreground/70">
-                        צ'אט חי באתר שמשיב על שאלות, עוזר למבקרים למצוא מה שהם מחפשים ומגדיל המרות.
-                      </p>
-                    </div>
-                  </div>
+                {/* Cards */}
+                <div className="pr-8 space-y-6">
+                  {botTypes.map((bot, index) => {
+                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.33));
+                    const scale = 0.95 + cardProgressValue * 0.05;
+                    const translateY = (1 - cardProgressValue) * 20;
+                    const isEven = index % 2 === 0;
+                    
+                    return (
+                      <div
+                        key={index}
+                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
+                          isEven 
+                            ? 'bg-white text-gray-900 border-2 border-gray-200' 
+                            : 'bg-gradient-to-br from-brand-green/20 to-brand-cyan/10 border-2 border-brand-green/30'
+                        }`}
+                        style={{
+                          transform: `scale(${scale}) translateY(${translateY}px)`,
+                          opacity: 0.5 + cardProgressValue * 0.5
+                        }}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                            isEven ? 'bg-brand-green/20' : 'bg-brand-green/30'
+                          }`}>
+                            <bot.icon className={`w-7 h-7 ${isEven ? 'text-brand-green' : 'text-white'}`} />
+                          </div>
+                          <div>
+                            <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
+                              {bot.title}
+                            </h3>
+                            <p className={isEven ? 'text-gray-600' : 'text-white/80'}>
+                              {bot.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -266,59 +305,61 @@ const ServiceBots = () => {
             </div>
           </div>
 
-          {/* איך זה עובד - With Lucide Icons */}
-          <div 
-            ref={processReveal.ref}
-            className={`max-w-6xl mx-auto mb-20 transition-all duration-1000 ${
-              processReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
-              <div className="sticky top-32">
-                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  איך זה <span className="text-brand-green">עובד?</span>
-                </h2>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="border-r-4 border-brand-green/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                      <MessageCircle className="w-5 h-5 text-brand-green" />
-                    </div>
-                    <h3 className="text-xl font-bold">נפגשים ומבינים</h3>
-                  </div>
-                  <p className="text-foreground/70 mr-[52px]">מה הלקוחות שואלים? איזה תהליך יש היום? מה החזון?</p>
+          {/* איך זה עובד - With White Background */}
+          <div className="bg-white py-16 md:py-24 -mx-4 px-4">
+            <div 
+              ref={processReveal.ref}
+              className={`max-w-6xl mx-auto mb-8 transition-all duration-1000 ${
+                processReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
+              <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+                <div className="sticky top-32">
+                  <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
+                    איך זה <span className="text-brand-green">עובד?</span>
+                  </h2>
                 </div>
-
-                <div className="border-r-4 border-brand-green/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                      <Bot className="w-5 h-5 text-brand-green" />
+                
+                <div className="space-y-8">
+                  <div className="border-r-4 border-brand-green/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
+                        <MessageCircle className="w-5 h-5 text-brand-green" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">נפגשים ומבינים</h3>
                     </div>
-                    <h3 className="text-xl font-bold">בונים את הבוט</h3>
+                    <p className="text-gray-600 mr-[52px]">מה הלקוחות שואלים? איזה תהליך יש היום? מה החזון?</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">מתכננים את השיחות, מכינים תשובות ומלמדים את הבוט</p>
-                </div>
 
-                <div className="border-r-4 border-brand-green/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                      <BookOpen className="w-5 h-5 text-brand-green" />
+                  <div className="border-r-4 border-brand-green/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
+                        <Bot className="w-5 h-5 text-brand-green" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">בונים את הבוט</h3>
                     </div>
-                    <h3 className="text-xl font-bold">בדיקות ושיפורים</h3>
+                    <p className="text-gray-600 mr-[52px]">מתכננים את השיחות, מכינים תשובות ומלמדים את הבוט</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">בודקים את הבוט, משפרים ומוודאים שהוא עובד מצוין</p>
-                </div>
 
-                <div className="border-r-4 border-brand-green/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                      <Handshake className="w-5 h-5 text-brand-green" />
+                  <div className="border-r-4 border-brand-green/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
+                        <BookOpen className="w-5 h-5 text-brand-green" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">בדיקות ושיפורים</h3>
                     </div>
-                    <h3 className="text-xl font-bold">השקה ותמיכה</h3>
+                    <p className="text-gray-600 mr-[52px]">בודקים את הבוט, משפרים ומוודאים שהוא עובד מצוין</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">משיקים, עוקבים אחרי הביצועים ומשפרים לפי הצורך</p>
+
+                  <div className="border-r-4 border-brand-green/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
+                        <Handshake className="w-5 h-5 text-brand-green" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">השקה ותמיכה</h3>
+                    </div>
+                    <p className="text-gray-600 mr-[52px]">משיקים, עוקבים אחרי הביצועים ומשפרים לפי הצורך</p>
+                  </div>
                 </div>
               </div>
             </div>

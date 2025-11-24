@@ -17,21 +17,42 @@ const ServiceAutomation = () => {
   const successReveal = useScrollReveal({ threshold: 0.1 });
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const [cardProgress, setCardProgress] = useState({ card1: 0, card2: 0, card3: 0, card4: 0 });
+  const [cardProgress, setCardProgress] = useState(0);
+
+  const automationTypes = [
+    { 
+      icon: RefreshCw, 
+      title: "אוטומציה של תהליכי עבודה", 
+      description: "מקבלים פנייה? המערכת יוצרת תיקייה, שולחת מייל, מעדכנת בטבלה ומזכירה לכם במועד הנכון.",
+      example: "קבלת פנייה → פתיחת תיקייה → שליחת מייל אישור → יצירת משימה"
+    },
+    { 
+      icon: LinkIcon, 
+      title: "חיבור בין מערכות", 
+      description: "מחברים מערכות שלא מדברות אחת עם השנייה - Google Sheets, CRM, WhatsApp, מייל ועוד.",
+      example: "עדכון ב-CRM → שליחת הודעת WhatsApp → עדכון בטבלת Excel"
+    },
+    { 
+      icon: FileText, 
+      title: "יצירת דוחות אוטומטיים", 
+      description: "בסוף כל שבוע/חודש המערכת יוצרת דוח מפורט ושולחת אותו למייל - ללא מאמץ מצדכם.",
+      example: "איסוף נתונים → יצירת דוח PDF → שליחה למייל בזמן קבוע"
+    },
+    { 
+      icon: Mail, 
+      title: "ניהול תקשורת", 
+      description: "שליחת מיילים, הודעות, תזכורות והתראות אוטומטיות - בזמן הנכון, לאנשים הנכונים.",
+      example: "יום לפני פגישה → שליחת תזכורת למייל ו-SMS"
+    }
+  ];
 
   const handleCardScroll = useCallback(() => {
     if (!containerRef.current) return;
-    const container = containerRef.current;
-    const cards = container.querySelectorAll('[data-card]');
-    
-    cards.forEach((card, index) => {
-      const rect = card.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / window.innerHeight));
-      setCardProgress(prev => ({
-        ...prev,
-        [`card${index + 1}`]: progress
-      }));
-    });
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const progress = Math.max(0, Math.min(1, -rect.top / (window.innerHeight * 0.5)));
+      setCardProgress(progress);
+    }
   }, []);
 
   useEffect(() => {
@@ -146,77 +167,80 @@ const ServiceAutomation = () => {
                 </h2>
               </div>
 
-              <div ref={containerRef} className="space-y-6">
-                {/* Workflow Automation */}
-                <div data-card="1" className="bg-gradient-to-br from-brand-purple/5 to-transparent border border-brand-purple/20 rounded-2xl p-8 hover:border-brand-purple/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center flex-shrink-0">
-                      <RefreshCw className="w-7 h-7 text-brand-purple" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">אוטומציה של תהליכי עבודה</h3>
-                      <p className="text-foreground/70 mb-4">
-                        מקבלים פנייה? המערכת יוצרת תיקייה, שולחת מייל, מעדכנת בטבלה ומזכירה לכם במועד הנכון.
-                      </p>
-                      <p className="text-sm text-muted-foreground italic">
-                        דוגמה: קבלת פנייה → פתיחת תיקייה → שליחת מייל אישור → יצירת משימה
-                      </p>
-                    </div>
-                  </div>
+              <div 
+                ref={containerRef}
+                className="relative"
+                style={{ minHeight: `${automationTypes.length * 400}px` }}
+              >
+                {/* Progress Indicator */}
+                <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/10">
+                  <div 
+                    className="w-full bg-gradient-to-b from-brand-purple to-brand-blue transition-all duration-300"
+                    style={{ 
+                      height: `${Math.min(100, cardProgress * 100)}%`
+                    }}
+                  />
                 </div>
 
-                {/* System Integration */}
-                <div data-card="2" className="bg-gradient-to-br from-brand-purple/5 to-transparent border border-brand-purple/20 rounded-2xl p-8 hover:border-brand-purple/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center flex-shrink-0">
-                      <LinkIcon className="w-7 h-7 text-brand-purple" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">חיבור בין מערכות</h3>
-                      <p className="text-foreground/70 mb-4">
-                        מחברים מערכות שלא מדברות אחת עם השנייה - Google Sheets, CRM, WhatsApp, מייל ועוד.
-                      </p>
-                      <p className="text-sm text-muted-foreground italic">
-                        דוגמה: עדכון ב-CRM → שליחת הודעת WhatsApp → עדכון בטבלת Excel
-                      </p>
-                    </div>
-                  </div>
+                {/* Progress Dots */}
+                <div className="absolute right-[-4px] top-0 bottom-0 flex flex-col justify-around py-8">
+                  {automationTypes.map((_, index) => {
+                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.25));
+                    return (
+                      <div 
+                        key={index}
+                        className="w-3 h-3 rounded-full border-2 border-brand-purple transition-all duration-300"
+                        style={{
+                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-purple))' : 'transparent',
+                          transform: `scale(${0.8 + dotProgress * 0.4})`
+                        }}
+                      />
+                    );
+                  })}
                 </div>
 
-                {/* Report Generation */}
-                <div data-card="3" className="bg-gradient-to-br from-brand-purple/5 to-transparent border border-brand-purple/20 rounded-2xl p-8 hover:border-brand-purple/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-7 h-7 text-brand-purple" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">יצירת דוחות אוטומטיים</h3>
-                      <p className="text-foreground/70 mb-4">
-                        בסוף כל שבוע/חודש המערכת יוצרת דוח מפורט ושולחת אותו למייל - ללא מאמץ מצדכם.
-                      </p>
-                      <p className="text-sm text-muted-foreground italic">
-                        דוגמה: איסוף נתונים → יצירת דוח PDF → שליחה למייל בזמן קבוע
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Communication Management */}
-                <div data-card="4" className="bg-gradient-to-br from-brand-purple/5 to-transparent border border-brand-purple/20 rounded-2xl p-8 hover:border-brand-purple/40 transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-7 h-7 text-brand-purple" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold mb-3">ניהול תקשורת</h3>
-                      <p className="text-foreground/70 mb-4">
-                        שליחת מיילים, הודעות, תזכורות והתראות אוטומטיות - בזמן הנכון, לאנשים הנכונים.
-                      </p>
-                      <p className="text-sm text-muted-foreground italic">
-                        דוגמה: יום לפני פגישה → שליחת תזכורת למייל ו-SMS
-                      </p>
-                    </div>
-                  </div>
+                {/* Cards */}
+                <div className="pr-8 space-y-6">
+                  {automationTypes.map((automation, index) => {
+                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.25));
+                    const scale = 0.95 + cardProgressValue * 0.05;
+                    const translateY = (1 - cardProgressValue) * 20;
+                    const isEven = index % 2 === 0;
+                    
+                    return (
+                      <div
+                        key={index}
+                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
+                          isEven 
+                            ? 'bg-white text-gray-900 border-2 border-gray-200' 
+                            : 'bg-gradient-to-br from-brand-purple/20 to-brand-blue/10 border-2 border-brand-purple/30'
+                        }`}
+                        style={{
+                          transform: `scale(${scale}) translateY(${translateY}px)`,
+                          opacity: 0.5 + cardProgressValue * 0.5
+                        }}
+                      >
+                        <div className="flex items-start gap-4">
+                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                            isEven ? 'bg-brand-purple/20' : 'bg-brand-purple/30'
+                          }`}>
+                            <automation.icon className={`w-7 h-7 ${isEven ? 'text-brand-purple' : 'text-white'}`} />
+                          </div>
+                          <div>
+                            <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
+                              {automation.title}
+                            </h3>
+                            <p className={`mb-4 ${isEven ? 'text-gray-600' : 'text-white/80'}`}>
+                              {automation.description}
+                            </p>
+                            <p className={`text-sm italic ${isEven ? 'text-gray-500' : 'text-white/60'}`}>
+                              {automation.example}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -263,59 +287,61 @@ const ServiceAutomation = () => {
             </div>
           </div>
 
-          {/* איך זה עובד - With Lucide Icons */}
-          <div 
-            ref={processReveal.ref}
-            className={`max-w-6xl mx-auto mb-20 transition-all duration-1000 ${
-              processReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
-              <div className="sticky top-32">
-                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  איך זה <span className="text-brand-purple">עובד?</span>
-                </h2>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                      <Compass className="w-5 h-5 text-brand-purple" />
-                    </div>
-                    <h3 className="text-xl font-bold">מיפוי התהליכים</h3>
-                  </div>
-                  <p className="text-foreground/70 mr-[52px]">מבינים איך העסק עובד היום, איפה הבעיות ומה צריך לשפר</p>
+          {/* איך זה עובד - With White Background */}
+          <div className="bg-white py-16 md:py-24 -mx-4 px-4">
+            <div 
+              ref={processReveal.ref}
+              className={`max-w-6xl mx-auto mb-8 transition-all duration-1000 ${
+                processReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+            >
+              <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+                <div className="sticky top-32">
+                  <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
+                    איך זה <span className="text-brand-purple">עובד?</span>
+                  </h2>
                 </div>
-
-                <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                      <Settings className="w-5 h-5 text-brand-purple" />
+                
+                <div className="space-y-8">
+                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
+                        <Compass className="w-5 h-5 text-brand-purple" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">מיפוי התהליכים</h3>
                     </div>
-                    <h3 className="text-xl font-bold">תכנון האוטומציה</h3>
+                    <p className="text-gray-600 mr-[52px]">מבינים איך העסק עובד היום, איפה הבעיות ומה צריך לשפר</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">מתכננים את התהליך האוטומטי - מה קורה בכל שלב, מה הטריגרים ומה התוצאות</p>
-                </div>
 
-                <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                      <Rocket className="w-5 h-5 text-brand-purple" />
+                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
+                        <Settings className="w-5 h-5 text-brand-purple" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">תכנון האוטומציה</h3>
                     </div>
-                    <h3 className="text-xl font-bold">בניה והטמעה</h3>
+                    <p className="text-gray-600 mr-[52px]">מתכננים את התהליך האוטומטי - מה קורה בכל שלב, מה הטריגרים ומה התוצאות</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">בונים את האוטומציה, מחברים את המערכות ובודקים שהכול עובד מעולה</p>
-                </div>
 
-                <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                      <HeartHandshake className="w-5 h-5 text-brand-purple" />
+                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
+                        <Rocket className="w-5 h-5 text-brand-purple" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">בניה והטמעה</h3>
                     </div>
-                    <h3 className="text-xl font-bold">ניטור ושיפור</h3>
+                    <p className="text-gray-600 mr-[52px]">בונים את האוטומציה, מחברים את המערכות ובודקים שהכול עובד מעולה</p>
                   </div>
-                  <p className="text-foreground/70 mr-[52px]">עוקבים אחרי הביצועים, משפרים ומוסיפים אוטומציות נוספות לפי הצורך</p>
+
+                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
+                        <HeartHandshake className="w-5 h-5 text-brand-purple" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">ניטור ושיפור</h3>
+                    </div>
+                    <p className="text-gray-600 mr-[52px]">עוקבים אחרי הביצועים, משפרים ומוסיפים אוטומציות נוספות לפי הצורך</p>
+                  </div>
                 </div>
               </div>
             </div>
