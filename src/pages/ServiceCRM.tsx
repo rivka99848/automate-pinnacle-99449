@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle } from "lucide-react";
@@ -371,52 +372,32 @@ const ServiceCRM = () => {
             </div>
           </div>
 
-          {/* פרויקטים רלוונטיים */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-8 text-center">פרויקטים רלוונטיים</h2>
-            <div className="bg-gradient-to-br from-white/10 to-gray-100/5 backdrop-blur-xl border-2 border-white/20 p-10 rounded-3xl text-center shadow-xl">
-              <p className="text-xl text-foreground/80 mb-6">
-                בקרוב תוכלו לראות כאן פרויקטי CRM שביצענו ללקוחותינו
-              </p>
-              <Button asChild variant="outline" className="rounded-full">
-                <Link to="/projects">צפה בכל הפרויקטים</Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* מאמרים רלוונטיים */}
-          <div className="max-w-5xl mx-auto mb-20">
-            <h2 className="text-3xl font-bold mb-8 text-center">מאמרים מומלצים</h2>
-            <div className="bg-white/95 backdrop-blur-xl border-2 border-gray-200 p-10 rounded-3xl shadow-2xl">
-              <div className="flex items-start justify-between gap-6">
-                <div className="flex-1">
-                  <div className="text-brand-blue text-sm font-semibold mb-2 uppercase tracking-wide">CRM</div>
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900">מערכת CRM - המדריך המלא</h3>
-                  <p className="text-lg text-gray-600 mb-4">
-                    כל מה שצריך לדעת על מערכות CRM וכיצד לבחור את המתאימה לעסק שלכם
-                  </p>
-                  <Button asChild variant="default" className="rounded-full">
-                    <Link to="/blog/crm-guide">קרא עוד</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <div className="text-center mt-6">
-              <Button asChild variant="ghost" className="rounded-full">
-                <Link to="/blog">למאמרים נוספים ←</Link>
-              </Button>
-            </div>
-          </div>
-
           {/* CTA */}
-          <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 backdrop-blur-xl p-12 rounded-3xl border-2 border-brand-blue/40 shadow-2xl shadow-brand-blue/20">
-            <h2 className="text-3xl font-bold mb-4">מוכנים להתחיל?</h2>
-            <p className="text-xl text-foreground/90 mb-8">
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+              מוכנים להתחיל?
+            </h2>
+            <p className="text-xl md:text-2xl text-foreground/80 mb-10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               בואו נדבר על איך מערכת CRM יכולה לשדרג את העסק שלכם
             </p>
-            <Button asChild size="lg" className="rounded-full shadow-lg shadow-brand-blue/30">
-              <Link to="/contact">קבע פגישת ייעוץ</Link>
+            <Button 
+              size="lg" 
+              onClick={() => {
+                document.getElementById('contact-form')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+              className="rounded-full shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6 animate-fade-in"
+              style={{ animationDelay: "0.2s" }}
+            >
+              קבע פגישת ייעוץ ↓
             </Button>
+          </div>
+
+          {/* Contact Form Section */}
+          <div id="contact-form" className="scroll-mt-20">
+            <ContactFormSection />
           </div>
         </div>
       </main>
