@@ -358,20 +358,15 @@ const ServiceCRM = () => {
               {/* כותרת מימין - sticky */}
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  🛠️ תהליך העבודה <span className="text-brand-purple">שלנו</span>
+                  תהליך העבודה <span className="text-brand-purple">שלנו</span>
                 </h2>
                 <p className="text-xl text-foreground/70 mt-4">
-                  ארבעה שלבים לניהול עסקי מוצלח
+                  אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
                 </p>
               </div>
               
               {/* תוכן משמאל */}
               <div className="space-y-10">
-                <p className="text-xl text-foreground/80 leading-relaxed">
-                  אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
-                </p>
-                
-                <div className="h-px bg-gradient-to-l from-brand-blue/50 via-brand-cyan/30 to-transparent" />
                 
                 {/* שלב 1 */}
                 <div className="border-r-4 border-brand-blue/50 pr-6">
