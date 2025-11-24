@@ -9,6 +9,7 @@ import DecorativeLine from "@/components/DecorativeLine";
 import Testimonials from "@/components/Testimonials";
 import LogoMarquee from "@/components/LogoMarquee";
 import ServiceCard from "@/components/ServiceCard";
+import ContactFormSection from "@/components/ContactFormSection";
 
 import projectVacationBot from "@/assets/bot-website-widget.jpg";
 import projectMedicalAutomation from "@/assets/automation-process.jpg";
@@ -292,6 +293,7 @@ const Index = () => {
       <Testimonials />
       <LogoMarquee />
 
+      <ContactFormSection />
       <Footer />
     </div>
   );
