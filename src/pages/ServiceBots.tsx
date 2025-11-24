@@ -83,7 +83,7 @@ const ServiceBots = () => {
                         block: 'start'
                       });
                     }}
-                    className="rounded-full shadow-lg shadow-brand-green/30 hover:shadow-brand-green/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
+                    className="rounded-full shadow-lg shadow-secondary/30 hover:shadow-secondary/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
                   >
                     קבעו פגישת ייעוץ ↓
                   </Button>
@@ -100,73 +100,91 @@ const ServiceBots = () => {
             </div>
           </div>
 
-          {/* למה בוטים? - Two Box Style */}
+          {/* למה בוטים? - Two Box Side by Side */}
           <div 
             ref={problemsReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
               problemsReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
-              <div className="sticky top-32">
-                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  למה בוט זה בדיוק מה <span className="text-brand-green">שאתם צריכים?</span>
-                </h2>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="h-px bg-gradient-to-l from-brand-green/50 via-brand-cyan/30 to-transparent" />
-                
-                {/* Challenge Box */}
-                <div className="bg-gradient-to-br from-red-500/10 to-red-500/5 border-2 border-red-500/20 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-red-500 mb-6">המצב המוכר</h3>
-                  <div className="space-y-4">
-                    <p className="text-foreground/80">• שאלות חוזרות שלוקחות הרבה זמן</p>
-                    <p className="text-foreground/80">• פניות בשעות לא שגרתיות שאף אחד לא עונה להן</p>
-                    <p className="text-foreground/80">• לקוחות מתוסכלים שמחכים למענה</p>
-                    <p className="text-foreground/80">• הזמנות שאובדות בין ההודעות</p>
-                  </div>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                למה בוט זה בדיוק מה <span className="text-secondary">שאתם צריכים?</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Right - Mint Background - המציאות המוכרת */}
+              <div className="bg-secondary rounded-2xl p-8 border-2 border-secondary/30">
+                <h3 className="text-2xl font-bold text-secondary-foreground mb-6">המציאות המוכרת</h3>
+                <div className="space-y-4">
+                  <p className="text-secondary-foreground/90">• שאלות חוזרות שלוקחות הרבה זמן</p>
+                  <p className="text-secondary-foreground/90">• פניות בשעות לא שגרתיות שאף אחד לא עונה להן</p>
+                  <p className="text-secondary-foreground/90">• לקוחות מתוסכלים שמחכים למענה</p>
+                  <p className="text-secondary-foreground/90">• הזמנות שאובדות בין ההודעות</p>
                 </div>
+              </div>
 
-                <div className="h-px bg-gradient-to-l from-brand-green/50 via-brand-cyan/30 to-transparent" />
-
-                {/* Solution Box */}
-                <div className="bg-background/50 backdrop-blur-sm border-2 border-brand-green/20 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-brand-green mb-6">הפתרון</h3>
-                  <div className="space-y-4">
-                    <p className="text-foreground/80">• מענה מיידי לכל שאלה, בכל שעה</p>
-                    <p className="text-foreground/80">• זמינות 24/7 ללא עלות נוספת</p>
-                    <p className="text-foreground/80">• לקוחות מרוצים שמקבלים שירות מהיר</p>
-                    <p className="text-foreground/80">• כל ההזמנות מתועדות ומסודרות</p>
-                  </div>
+              {/* Left - White Background - החיים עם בוט */}
+              <div className="bg-white rounded-2xl p-8 border-2 border-gray-200">
+                <h3 className="text-2xl font-bold text-secondary mb-6">החיים עם בוט</h3>
+                <div className="space-y-4">
+                  <p className="text-gray-700">• מענה מיידי לכל שאלה, בכל שעה</p>
+                  <p className="text-gray-700">• זמינות 24/7 ללא עלות נוספת</p>
+                  <p className="text-gray-700">• לקוחות מרוצים שמקבלים שירות מהיר</p>
+                  <p className="text-gray-700">• כל ההזמנות מתועדות ומסודרות</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* סוגי בוטים - Stacked Cards */}
+          {/* סוגי בוטים - Regular Cards */}
           <div 
             ref={typesReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
               typesReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
+            <h2 className="text-3xl font-bold mb-12 text-center">
+              סוגי הבוטים <span className="text-secondary">שלנו</span>
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {botTypes.map((bot, index) => (
+                <div
+                  key={index}
+                  className="p-8 border border-white/10 rounded-2xl hover:border-secondary/50 hover:bg-white/5 transition-all"
+                >
+                  <bot.icon className="w-8 h-8 text-secondary mb-4" />
+                  <h3 className="text-xl font-bold mb-3">{bot.title}</h3>
+                  <p className="text-muted-foreground">{bot.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* מה הבוט יודע לעשות - Stacked Cards */}
+          <div 
+            ref={featuresReveal.ref}
+            className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
+              featuresReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  סוגי הבוטים <span className="text-brand-green">שלנו</span>
+                  מה הבוט <span className="text-secondary">יודע לעשות?</span>
                 </h2>
               </div>
 
               <div 
                 ref={containerRef}
                 className="relative"
-                style={{ minHeight: `${botTypes.length * 400}px` }}
+                style={{ minHeight: '2400px' }}
               >
                 {/* Progress Indicator */}
                 <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/10">
                   <div 
-                    className="w-full bg-gradient-to-b from-brand-green to-brand-cyan transition-all duration-300"
+                    className="w-full bg-gradient-to-b from-secondary to-brand-cyan transition-all duration-300"
                     style={{ 
                       height: `${Math.min(100, cardProgress * 100)}%`
                     }}
@@ -175,14 +193,14 @@ const ServiceBots = () => {
 
                 {/* Progress Dots */}
                 <div className="absolute right-[-4px] top-0 bottom-0 flex flex-col justify-around py-8">
-                  {botTypes.map((_, index) => {
-                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.33));
+                  {[0, 1, 2, 3, 4, 5].map((index) => {
+                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.17));
                     return (
                       <div 
                         key={index}
-                        className="w-3 h-3 rounded-full border-2 border-brand-green transition-all duration-300"
+                        className="w-3 h-3 rounded-full border-2 border-secondary transition-all duration-300"
                         style={{
-                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-green))' : 'transparent',
+                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--secondary))' : 'transparent',
                           transform: `scale(${0.8 + dotProgress * 0.4})`
                         }}
                       />
@@ -192,8 +210,15 @@ const ServiceBots = () => {
 
                 {/* Cards */}
                 <div className="pr-8 space-y-6">
-                  {botTypes.map((bot, index) => {
-                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.33));
+                  {[
+                    { icon: Clock, title: "זמינות 24/7", description: "הבוט לא ישן, לא לוקח חופשה ולא מחכה לחזור מהמקלחת. תמיד זמין, תמיד מוכן לענות." },
+                    { icon: Zap, title: "מענה מיידי", description: "לקוחות לא אוהבים לחכות. הבוט עונה תוך שניות ונותן בדיוק את המידע שהם צריכים." },
+                    { icon: MessageCircle, title: "שאלות מורכבות", description: "הבוט מבין שאלות בשפה טבעית, יודע להתאים את התשובות ואפילו לשאול שאלות הבהרה." },
+                    { icon: Sparkles, title: "קבלת הזמנות", description: "הבוט יכול לקבל הזמנות, לבדוק זמינות, להציע אלטרנטיבות ולסגור עסקאות." },
+                    { icon: BarChart3, title: "דוחות ומדדים", description: "לראות בדיוק כמה פניות היו, מה השאלות הכי נפוצות ואיפה אפשר לשפר." },
+                    { icon: Zap, title: "אינטגרציה", description: "חיבור למערכות קיימות - CRM, יומן, מערכת הזמנות ועוד. הכול עובד ביחד בצורה חלקה." }
+                  ].map((feature, index) => {
+                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.17));
                     const scale = 0.95 + cardProgressValue * 0.05;
                     const translateY = (1 - cardProgressValue) * 20;
                     const isEven = index % 2 === 0;
@@ -204,7 +229,7 @@ const ServiceBots = () => {
                         className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
                           isEven 
                             ? 'bg-white text-gray-900 border-2 border-gray-200' 
-                            : 'bg-gradient-to-br from-brand-green/20 to-brand-cyan/10 border-2 border-brand-green/30'
+                            : 'bg-gradient-to-br from-secondary/20 to-brand-cyan/10 border-2 border-secondary/30'
                         }`}
                         style={{
                           transform: `scale(${scale}) translateY(${translateY}px)`,
@@ -212,17 +237,13 @@ const ServiceBots = () => {
                         }}
                       >
                         <div className="flex items-start gap-4">
-                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                            isEven ? 'bg-brand-green/20' : 'bg-brand-green/30'
-                          }`}>
-                            <bot.icon className={`w-7 h-7 ${isEven ? 'text-brand-green' : 'text-white'}`} />
-                          </div>
+                          <feature.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-secondary' : 'text-white'}`} />
                           <div>
                             <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
-                              {bot.title}
+                              {feature.title}
                             </h3>
                             <p className={isEven ? 'text-gray-600' : 'text-white/80'}>
-                              {bot.description}
+                              {feature.description}
                             </p>
                           </div>
                         </div>
@@ -230,77 +251,6 @@ const ServiceBots = () => {
                     );
                   })}
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* תכונות מפורטות */}
-          <div 
-            ref={featuresReveal.ref}
-            className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
-              featuresReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <h2 className="text-3xl font-bold mb-16 text-center">מה הבוט יודע לעשות?</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <Clock className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">זמינות 24/7</h3>
-                <p className="text-muted-foreground">
-                  הבוט לא ישן, לא לוקח חופשה ולא מחכה לחזור מהמקלחת. תמיד זמין, תמיד מוכן לענות.
-                </p>
-              </div>
-
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <Zap className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">מענה מיידי</h3>
-                <p className="text-muted-foreground">
-                  לקוחות לא אוהבים לחכות. הבוט עונה תוך שניות ונותן בדיוק את המידע שהם צריכים.
-                </p>
-              </div>
-
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <MessageCircle className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">שאלות מורכבות</h3>
-                <p className="text-muted-foreground">
-                  הבוט מבין שאלות בשפה טבעית, יודע להתאים את התשובות ואפילו לשאול שאלות הבהרה.
-                </p>
-              </div>
-
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <Sparkles className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">קבלת הזמנות</h3>
-                <p className="text-muted-foreground">
-                  הבוט יכול לקבל הזמנות, לבדוק זמינות, להציע אלטרנטיבות ולסגור עסקאות.
-                </p>
-              </div>
-
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <BarChart3 className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">דוחות ומדדים</h3>
-                <p className="text-muted-foreground">
-                  לראות בדיוק כמה פניות היו, מה השאלות הכי נפוצות ואיפה אפשר לשפר.
-                </p>
-              </div>
-
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-green/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-green/20 flex items-center justify-center mb-4">
-                  <Zap className="w-7 h-7 text-brand-green" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">אינטגרציה</h3>
-                <p className="text-muted-foreground">
-                  חיבור למערכות קיימות - CRM, יומן, מערכת הזמנות ועוד. הכול עובד ביחד בצורה חלקה.
-                </p>
               </div>
             </div>
           </div>
@@ -316,49 +266,41 @@ const ServiceBots = () => {
               <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
                 <div className="sticky top-32">
                   <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
-                    איך זה <span className="text-brand-green">עובד?</span>
+                    איך זה <span className="text-secondary">עובד?</span>
                   </h2>
                 </div>
                 
                 <div className="space-y-8">
-                  <div className="border-r-4 border-brand-green/50 pr-6">
+                  <div className="border-r-4 border-secondary/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                        <MessageCircle className="w-5 h-5 text-brand-green" />
-                      </div>
+                      <MessageCircle className="w-6 h-6 text-secondary" />
                       <h3 className="text-xl font-bold text-gray-900">נפגשים ומבינים</h3>
                     </div>
-                    <p className="text-gray-600 mr-[52px]">מה הלקוחות שואלים? איזה תהליך יש היום? מה החזון?</p>
+                    <p className="text-gray-600 mr-[28px]">מה הלקוחות שואלים? איזה תהליך יש היום? מה החזון?</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-green/50 pr-6">
+                  <div className="border-r-4 border-secondary/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                        <Bot className="w-5 h-5 text-brand-green" />
-                      </div>
+                      <Bot className="w-6 h-6 text-secondary" />
                       <h3 className="text-xl font-bold text-gray-900">בונים את הבוט</h3>
                     </div>
-                    <p className="text-gray-600 mr-[52px]">מתכננים את השיחות, מכינים תשובות ומלמדים את הבוט</p>
+                    <p className="text-gray-600 mr-[28px]">מתכננים את השיחות, מכינים תשובות ומלמדים את הבוט</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-green/50 pr-6">
+                  <div className="border-r-4 border-secondary/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                        <BookOpen className="w-5 h-5 text-brand-green" />
-                      </div>
+                      <BookOpen className="w-6 h-6 text-secondary" />
                       <h3 className="text-xl font-bold text-gray-900">בדיקות ושיפורים</h3>
                     </div>
-                    <p className="text-gray-600 mr-[52px]">בודקים את הבוט, משפרים ומוודאים שהוא עובד מצוין</p>
+                    <p className="text-gray-600 mr-[28px]">בודקים את הבוט, משפרים ומוודאים שהוא עובד מצוין</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-green/50 pr-6">
+                  <div className="border-r-4 border-secondary/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center">
-                        <Handshake className="w-5 h-5 text-brand-green" />
-                      </div>
+                      <Handshake className="w-6 h-6 text-secondary" />
                       <h3 className="text-xl font-bold text-gray-900">השקה ותמיכה</h3>
                     </div>
-                    <p className="text-gray-600 mr-[52px]">משיקים, עוקבים אחרי הביצועים ומשפרים לפי הצורך</p>
+                    <p className="text-gray-600 mr-[28px]">משיקים, עוקבים אחרי הביצועים ומשפרים לפי הצורך</p>
                   </div>
                 </div>
               </div>
@@ -375,7 +317,7 @@ const ServiceBots = () => {
             <h2 className="text-3xl font-bold mb-8 text-center">סיפור הצלחה</h2>
             <div className="bg-card p-10 rounded-3xl">
               <div className="mb-6">
-                <span className="inline-block px-4 py-1 bg-brand-green/20 text-brand-green text-sm font-semibold rounded-full">
+                <span className="inline-block px-4 py-1 bg-secondary/20 text-secondary text-sm font-semibold rounded-full">
                   01 • בוט חכם
                 </span>
               </div>
