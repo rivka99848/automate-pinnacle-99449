@@ -146,29 +146,29 @@ const ServiceCRM = () => {
                 : 'opacity-0 -translate-x-20'
             }`}
           >
-            <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-blue/30 transition-all">
-              <h2 className="text-3xl font-bold mb-12 text-center">הבעיות שהפכו אתכם ללקוחות שלנו</h2>
+            <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-200">
+              <h2 className="text-3xl font-bold mb-12 text-center text-gray-900">הבעיות שהפכו אתכם ללקוחות שלנו</h2>
               <div className="grid md:grid-cols-2 gap-12">
                 <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-destructive mb-6">🔴 הבעיה (המצב הנוכחי)</h3>
-                  <ul className="space-y-4 text-foreground/70">
+                  <h3 className="text-2xl font-bold text-red-600 mb-6">🔴 הבעיה (המצב הנוכחי)</h3>
+                  <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start gap-3 animate-fade-in delay-100 hover:translate-x-2 transition-transform">
-                      <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-1" />
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
                       <span><strong>כאוס במידע:</strong> נתונים קריטיים על לקוחות ועסקאות פזורים בין וואטסאפ, אקסל ומיילים, ומובילים להחלטות שגויות.</span>
                     </li>
                     <li className="flex items-start gap-3 animate-fade-in delay-200 hover:translate-x-2 transition-transform">
-                      <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-1" />
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
                       <span><strong>איבוד לקוחות:</strong> קשה לעקוב אחרי ריבוי שיחות, פגישות ומשימות – לקוחות פשוט "נופלים" מהרדאר.</span>
                     </li>
                     <li className="flex items-start gap-3 animate-fade-in delay-300 hover:translate-x-2 transition-transform">
-                      <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-1" />
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-1" />
                       <span><strong>חוסר ודאות:</strong> אין תמונה ברורה על הביצועים, חזוי המכירות ואיפה צוואר הבקבוק נמצא.</span>
                     </li>
                   </ul>
                 </div>
                 <div className="space-y-6">
                   <h3 className="text-2xl font-bold text-brand-blue mb-6">✅ הפתרון (התוצאה שלנו)</h3>
-                  <ul className="space-y-4 text-foreground/70">
+                  <ul className="space-y-4 text-gray-700">
                     <li className="flex items-start gap-3 animate-fade-in delay-100 hover:translate-x-2 transition-transform">
                       <CheckCircle className="w-5 h-5 text-brand-blue flex-shrink-0 mt-1" />
                       <span><strong>שליטה מוחלטת:</strong> כל פיסת מידע נמצאת במקום אחד, מתויגת, מנוהלת ומאובטחת.</span>
@@ -201,7 +201,7 @@ const ServiceCRM = () => {
               className="max-w-3xl mx-auto px-4 relative"
               style={{ minHeight: `${modules.length * 400}px` }}
             >
-              <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/90 backdrop-blur-xl py-6 z-20 rounded-2xl">
+              <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/98 backdrop-blur-3xl py-6 z-20 rounded-2xl shadow-lg">
                 המודולים שישנו את צורת העבודה שלכם
               </h2>
               
@@ -246,20 +246,26 @@ const ServiceCRM = () => {
                         zIndex: modules.length - index
                       }}
                     >
-                      <div className={`p-10 border-2 border-white/10 rounded-3xl bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-2xl shadow-2xl hover:shadow-brand-blue/30 hover:scale-[1.02] hover:-translate-y-2 hover:border-brand-blue/50 transition-all duration-500`}>
-                        {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
-                        <div className="flex items-start gap-8">
-                          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-blue/40 to-brand-cyan/40 flex items-center justify-center flex-shrink-0 shadow-lg group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500">
-                            <module.icon className="w-11 h-11 text-brand-blue group-hover/card:text-brand-cyan transition-colors duration-500" />
-                          </div>
-                          
-                          <div className="flex-1">
-                            <h3 className="text-2xl font-bold mb-4 group-hover/card:text-brand-blue transition-colors duration-300">
-                              {module.title}
-                            </h3>
-                            <p className="text-foreground/80 text-lg leading-relaxed">
-                              {module.description}
-                            </p>
+                      <div className="relative p-10 border-2 border-white/10 rounded-3xl bg-brand-dark/95 overflow-hidden shadow-2xl hover:shadow-brand-blue/30 hover:scale-[1.02] hover:-translate-y-2 hover:border-brand-blue/50 transition-all duration-500">
+                        {/* שכבת gradient דקורטיבית */}
+                        <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-3xl`} />
+                        
+                        {/* התוכן */}
+                        <div className="relative z-10">
+                          {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
+                          <div className="flex items-start gap-8">
+                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-blue/40 to-brand-cyan/40 flex items-center justify-center flex-shrink-0 shadow-lg group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500">
+                              <module.icon className="w-11 h-11 text-brand-blue group-hover/card:text-brand-cyan transition-colors duration-500" />
+                            </div>
+                            
+                            <div className="flex-1">
+                              <h3 className="text-2xl font-bold mb-4 group-hover/card:text-brand-blue transition-colors duration-300">
+                                {module.title}
+                              </h3>
+                              <p className="text-foreground/80 text-lg leading-relaxed">
+                                {module.description}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -279,51 +285,53 @@ const ServiceCRM = () => {
                 : 'opacity-0 translate-x-20'
             }`}
           >
-            <h2 className="text-3xl font-bold mb-16 text-center">התהליך: משיחה ראשונה למערכת עובדת</h2>
-            <div className="relative">
-              {/* קו מחבר אנכי */}
-              <div className="absolute right-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-purple opacity-30" />
-              
-              <div className="space-y-12">
-                {[
-                  {
-                    number: "1",
-                    title: "אפיון מדויק",
-                    description: "אנחנו מקשיבים. מבינים את הצרכים, את צווארי הבקבוק ואת החזון שלכם."
-                  },
-                  {
-                    number: "2",
-                    title: "תכנון ארכיטקטוני",
-                    description: "בניית מודל נתונים, תהליכים ואוטומציות. אתם מאשרים את התוכנית לפני כל קו קוד."
-                  },
-                  {
-                    number: "3",
-                    title: "פיתוח והטמעה",
-                    description: "בניית המערכת, העברת הנתונים הקיימים (Migrating Data) והדרכה מלאה לצוותים."
-                  },
-                  {
-                    number: "4",
-                    title: "ליווי והרחבות",
-                    description: "אנחנו לא נעלמים. תמיכה שוטפת ושדרוגים עתידיים כדי שהמערכת תצמח יחד עם העסק שלכם."
-                  }
-                ].map((step, index) => (
-                  <div 
-                    key={step.number} 
-                    className="flex items-start gap-6 animate-fade-in"
-                    style={{ animationDelay: `${index * 0.15}s` }}
-                  >
-                    {/* עיגול עם מספר */}
-                    <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-blue/30 animate-pulse-glow-enhanced">
-                      <span className="font-bold text-white text-2xl animate-count" style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>{step.number}</span>
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-12 border border-white/10">
+              <h2 className="text-3xl font-bold mb-16 text-center">התהליך: משיחה ראשונה למערכת עובדת</h2>
+              <div className="relative">
+                {/* קו מחבר אנכי */}
+                <div className="absolute right-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-purple opacity-30" />
+                
+                <div className="space-y-12">
+                  {[
+                    {
+                      number: "1",
+                      title: "אפיון מדויק",
+                      description: "אנחנו מקשיבים. מבינים את הצרכים, את צווארי הבקבוק ואת החזון שלכם."
+                    },
+                    {
+                      number: "2",
+                      title: "תכנון ארכיטקטוני",
+                      description: "בניית מודל נתונים, תהליכים ואוטומציות. אתם מאשרים את התוכנית לפני כל קו קוד."
+                    },
+                    {
+                      number: "3",
+                      title: "פיתוח והטמעה",
+                      description: "בניית המערכת, העברת הנתונים הקיימים (Migrating Data) והדרכה מלאה לצוותים."
+                    },
+                    {
+                      number: "4",
+                      title: "ליווי והרחבות",
+                      description: "אנחנו לא נעלמים. תמיכה שוטפת ושדרוגים עתידיים כדי שהמערכת תצמח יחד עם העסק שלכם."
+                    }
+                  ].map((step, index) => (
+                    <div 
+                      key={step.number} 
+                      className="flex items-start gap-6 animate-fade-in"
+                      style={{ animationDelay: `${index * 0.15}s` }}
+                    >
+                      {/* עיגול עם מספר */}
+                      <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-blue/30 animate-pulse-glow-enhanced">
+                        <span className="font-bold text-white text-2xl animate-count" style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>{step.number}</span>
+                      </div>
+                      
+                      {/* תוכן */}
+                      <div className="flex-1 pt-2">
+                        <h3 className="font-bold text-2xl mb-2">{step.title}</h3>
+                        <p className="text-muted-foreground text-lg leading-relaxed">{step.description}</p>
+                      </div>
                     </div>
-                    
-                    {/* תוכן */}
-                    <div className="flex-1 pt-2">
-                      <h3 className="font-bold text-2xl mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground text-lg leading-relaxed">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -331,8 +339,8 @@ const ServiceCRM = () => {
           {/* פרויקטים רלוונטיים */}
           <div className="max-w-5xl mx-auto mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">פרויקטים רלוונטיים</h2>
-            <div className="bg-card p-10 rounded-3xl text-center">
-              <p className="text-xl text-muted-foreground mb-6">
+            <div className="bg-gradient-to-br from-white/10 to-gray-100/5 backdrop-blur-xl border-2 border-white/20 p-10 rounded-3xl text-center shadow-xl">
+              <p className="text-xl text-foreground/80 mb-6">
                 בקרוב תוכלו לראות כאן פרויקטי CRM שביצענו ללקוחותינו
               </p>
               <Button asChild variant="outline" className="rounded-full">
@@ -344,15 +352,15 @@ const ServiceCRM = () => {
           {/* מאמרים רלוונטיים */}
           <div className="max-w-5xl mx-auto mb-20">
             <h2 className="text-3xl font-bold mb-8 text-center">מאמרים מומלצים</h2>
-            <div className="bg-card p-8 rounded-3xl">
+            <div className="bg-white/95 backdrop-blur-xl border-2 border-gray-200 p-10 rounded-3xl shadow-2xl">
               <div className="flex items-start justify-between gap-6">
                 <div className="flex-1">
-                  <div className="text-brand-blue text-sm font-semibold mb-2">CRM</div>
-                  <h3 className="text-2xl font-bold mb-3">מערכת CRM - המדריך המלא</h3>
-                  <p className="text-lg text-muted-foreground mb-4">
+                  <div className="text-brand-blue text-sm font-semibold mb-2 uppercase tracking-wide">CRM</div>
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900">מערכת CRM - המדריך המלא</h3>
+                  <p className="text-lg text-gray-600 mb-4">
                     כל מה שצריך לדעת על מערכות CRM וכיצד לבחור את המתאימה לעסק שלכם
                   </p>
-                  <Button asChild variant="outline" className="rounded-full">
+                  <Button asChild variant="default" className="rounded-full">
                     <Link to="/blog/crm-guide">קרא עוד</Link>
                   </Button>
                 </div>
@@ -366,12 +374,12 @@ const ServiceCRM = () => {
           </div>
 
           {/* CTA */}
-          <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-brand-blue/10 to-brand-cyan/10 p-12 rounded-3xl border border-brand-blue/20">
+          <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 backdrop-blur-xl p-12 rounded-3xl border-2 border-brand-blue/40 shadow-2xl shadow-brand-blue/20">
             <h2 className="text-3xl font-bold mb-4">מוכנים להתחיל?</h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-foreground/90 mb-8">
               בואו נדבר על איך מערכת CRM יכולה לשדרג את העסק שלכם
             </p>
-            <Button asChild size="lg" className="rounded-full">
+            <Button asChild size="lg" className="rounded-full shadow-lg shadow-brand-blue/30">
               <Link to="/contact">קבע פגישת ייעוץ</Link>
             </Button>
           </div>
