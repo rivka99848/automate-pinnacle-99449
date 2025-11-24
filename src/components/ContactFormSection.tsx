@@ -23,7 +23,7 @@ const ContactFormSection = () => {
 
     try {
       const response = await fetch(
-        "https://hook.eu2.make.com/qfdbqgef34q4vj5lncvuiqxg41tlq1jd",
+        "https://n8n.chatnaki.co.il/webhook/website",
         {
           method: "POST",
           headers: {
