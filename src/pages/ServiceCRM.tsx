@@ -96,7 +96,7 @@ const ServiceCRM = () => {
                 </h1>
                 
                 <div className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
-                  <h2 className="text-2xl md:text-3xl font-bold text-brand-cyan mb-4">
+                  <h2 className="text-2xl md:text-3xl font-bold text-brand-purple mb-4">
                     מהו CRM (ניהול קשרי לקוחות) ומה הוא נותן לנו?
                   </h2>
                   
@@ -140,7 +140,7 @@ const ServiceCRM = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
                 💡 הופכים את הניהול ל
-                <span className="text-brand-cyan">פשוט וחכם</span>
+                <span className="text-brand-purple">פשוט וחכם</span>
               </h2>
               <p className="text-xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
                 השירות שלנו נועד לתת מענה מדויק לנקודות התורפה שמכבידות על עסקים בצמיחה. 
@@ -227,7 +227,7 @@ const ServiceCRM = () => {
               {/* כותרת מימין - sticky */}
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  מה המערכת <span className="text-brand-cyan">נותנת לכם</span>
+                  מה המערכת <span className="text-brand-purple">נותנת לכם</span>
                 </h2>
               </div>
               
@@ -358,7 +358,7 @@ const ServiceCRM = () => {
               {/* כותרת מימין - sticky */}
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  🛠️ תהליך העבודה <span className="text-brand-cyan">שלנו</span>
+                  🛠️ תהליך העבודה <span className="text-brand-purple">שלנו</span>
                 </h2>
                 <p className="text-xl text-foreground/70 mt-4">
                   ארבעה שלבים לניהול עסקי מוצלח
