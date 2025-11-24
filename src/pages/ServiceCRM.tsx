@@ -152,29 +152,29 @@ const ServiceCRM = () => {
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               
               {/* ריבוע ימני - תכלת - האתגרים */}
-              <div className="bg-brand-cyan/10 border border-brand-cyan/30 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
+              <div className="bg-brand-blue rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   🛑 האתגרים שאנו פותרים עבורך
                 </h3>
-                <p className="text-foreground/70 mb-6">
+                <p className="text-white/90 mb-6">
                   רוב העסקים מגיעים אלינו כשהם מתמודדים עם תהליכים לא יעילים:
                 </p>
                 <div className="space-y-5">
-                  <div className="border-r-4 border-red-500/50 pr-4">
+                  <div className="border-r-4 border-white/30 pr-4">
                     <h4 className="text-lg font-bold text-white mb-1">פיזור מידע מתיש:</h4>
-                    <p className="text-foreground/70 text-sm">
+                    <p className="text-white/80 text-sm">
                       נתונים חשובים מפוזרים בין מייל, אקסל ווואטסאפ.
                     </p>
                   </div>
-                  <div className="border-r-4 border-red-500/50 pr-4">
+                  <div className="border-r-4 border-white/30 pr-4">
                     <h4 className="text-lg font-bold text-white mb-1">איבוד לידים ועסקאות:</h4>
-                    <p className="text-foreground/70 text-sm">
+                    <p className="text-white/80 text-sm">
                       קשה לעקוב אחרי כל משימה ולקוח פוטנציאלי.
                     </p>
                   </div>
-                  <div className="border-r-4 border-red-500/50 pr-4">
+                  <div className="border-r-4 border-white/30 pr-4">
                     <h4 className="text-lg font-bold text-white mb-1">תמונת ביצועים מעורפלת:</h4>
-                    <p className="text-foreground/70 text-sm">
+                    <p className="text-white/80 text-sm">
                       אין ודאות על ביצועי הצוות וחזוי המכירות.
                     </p>
                   </div>
@@ -182,29 +182,29 @@ const ServiceCRM = () => {
               </div>
               
               {/* ריבוע שמאלי - לבן - הפתרונות */}
-              <div className="bg-white/10 border border-white/20 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-brand-cyan mb-6 flex items-center gap-2">
+              <div className="bg-white rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-brand-blue mb-6 flex items-center gap-2">
                   ✅ הדרך החדשה לניהול העסק
                 </h3>
-                <p className="text-foreground/70 mb-6">
+                <p className="text-gray-700 mb-6">
                   השירות שלנו מסדר את העסק שלך ומוביל לשליטה מוחלטת:
                 </p>
                 <div className="space-y-5">
-                  <div className="border-r-4 border-brand-cyan/50 pr-4">
-                    <h4 className="text-lg font-bold text-white mb-1">שליטה מלאה וריכוז נתונים:</h4>
-                    <p className="text-foreground/70 text-sm">
+                  <div className="border-r-4 border-brand-blue/30 pr-4">
+                    <h4 className="text-lg font-bold text-gray-900 mb-1">שליטה מלאה וריכוז נתונים:</h4>
+                    <p className="text-gray-700 text-sm">
                       כל המידע במקום אחד - מאורגן, מתויג ומאובטח.
                     </p>
                   </div>
-                  <div className="border-r-4 border-brand-cyan/50 pr-4">
-                    <h4 className="text-lg font-bold text-white mb-1">מנגנוני מעקב אוטומטיים:</h4>
-                    <p className="text-foreground/70 text-sm">
+                  <div className="border-r-4 border-brand-blue/30 pr-4">
+                    <h4 className="text-lg font-bold text-gray-900 mb-1">מנגנוני מעקב אוטומטיים:</h4>
+                    <p className="text-gray-700 text-sm">
                       תזכורות וניהול משימות חכם - אף לקוח לא "נופל".
                     </p>
                   </div>
-                  <div className="border-r-4 border-brand-cyan/50 pr-4">
-                    <h4 className="text-lg font-bold text-white mb-1">תובנות ניהוליות בזמן אמת:</h4>
-                    <p className="text-foreground/70 text-sm">
+                  <div className="border-r-4 border-brand-blue/30 pr-4">
+                    <h4 className="text-lg font-bold text-gray-900 mb-1">תובנות ניהוליות בזמן אמת:</h4>
+                    <p className="text-gray-700 text-sm">
                       דשבורד אינטואיטיבי עם נתונים חיים לקבלת החלטות.
                     </p>
                   </div>
