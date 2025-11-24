@@ -371,7 +371,7 @@ const ServiceCRM = () => {
                 {/* שלב 1 */}
                 <div className="border-r-4 border-brand-blue/50 pr-6">
                   <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Target className="w-6 h-6 text-white/70" />
+                    <Target className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.1s" }} />
                     צלילה לעומק הצרכים והאסטרטגיה
                   </h3>
                   <p className="text-foreground/70">
@@ -384,7 +384,7 @@ const ServiceCRM = () => {
                 {/* שלב 2 */}
                 <div className="border-r-4 border-brand-cyan/50 pr-6">
                   <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Wrench className="w-6 h-6 text-white/70" />
+                    <Wrench className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.2s" }} />
                     בניית המערכת והתאמתה
                   </h3>
                   <p className="text-foreground/70 mb-3">
@@ -401,7 +401,7 @@ const ServiceCRM = () => {
                 {/* שלב 3 */}
                 <div className="border-r-4 border-brand-purple/50 pr-6">
                   <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <BookOpen className="w-6 h-6 text-white/70" />
+                    <BookOpen className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.3s" }} />
                     הטמעה, הדרכה וספריית ידע
                   </h3>
                   <p className="text-foreground/70 mb-3">כדי להבטיח שימוש מוצלח, אנו מבצעים:</p>
@@ -416,7 +416,7 @@ const ServiceCRM = () => {
                 {/* שלב 4 */}
                 <div className="border-r-4 border-brand-blue/50 pr-6">
                   <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Handshake className="w-6 h-6 text-white/70" />
+                    <Handshake className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.4s" }} />
                     אחריות, תמיכה וליווי מתמשך
                   </h3>
                   <p className="text-foreground/70 mb-3">אנו דואגים להצלחה שלך גם לאחר ההשקה:</p>
