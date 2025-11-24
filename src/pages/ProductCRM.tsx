@@ -43,8 +43,11 @@ const ProductCRM = () => {
                 </p>
                 
                 <p className="text-lg md:text-xl text-[#C5D1E3] leading-relaxed">
-                  בלי צורך במערכת יקרה ומסובכת.<br />
-                  <span className="text-white font-semibold">עדיין מנהל את העסק שלך כאילו זה 2005?</span>
+                  בלי צורך במערכת יקרה ומסובכת.
+                </p>
+                
+                <p className="text-3xl md:text-5xl font-reisinger font-bold text-white block my-6 leading-tight">
+                  עדיין מנהל את העסק שלך כאילו זה 2005?
                 </p>
                 
                 <p className="text-lg md:text-xl text-[#C5D1E3] leading-relaxed">
