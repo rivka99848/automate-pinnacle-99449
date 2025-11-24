@@ -23,7 +23,7 @@ const Projects = () => {
           </div>
 
           {/* Projects - Minimalist Cards */}
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projectsData.map((project, index) => (
               <Link
                 key={project.id}
@@ -36,8 +36,8 @@ const Projects = () => {
                   <ProjectGallery images={project.images} projectTitle={project.title} />
                   
                   {/* Content */}
-                  <div className="p-6 space-y-3">
-                    <h2 className="text-xl font-bold">
+                  <div className="p-4 space-y-2">
+                    <h2 className="text-lg font-bold">
                       {project.title}
                     </h2>
                     <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
