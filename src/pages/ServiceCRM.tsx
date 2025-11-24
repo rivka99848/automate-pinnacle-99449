@@ -243,183 +243,226 @@ const ServiceCRM = () => {
           {/* תכונות מפורטות - Stacked Cards */}
           <div 
             ref={featuresReveal.ref}
-            className={`mb-24 transition-all duration-1000 ${
+            className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
               featuresReveal.isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <div 
-              ref={containerRef}
-              className="max-w-3xl mx-auto px-4 relative"
-              style={{ minHeight: `${modules.length * 280}px` }}
-            >
-              <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/98 backdrop-blur-3xl py-6 z-20 rounded-2xl shadow-lg">
-                אז מה המערכת נותנת לכם בפועל?
-              </h2>
-              
-              {/* Progress Indicator */}
-              <div className="fixed left-8 top-1/2 -translate-y-1/2 space-y-3 z-30 hidden lg:block">
-                {modules.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      Math.floor(cardProgress / 0.35) === index
-                        ? 'bg-brand-blue scale-150 shadow-lg shadow-brand-blue/50'
-                        : 'bg-white/30 scale-100'
-                    }`}
-                  />
-                ))}
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  מה המערכת <span className="text-brand-cyan">נותנת לכם</span>
+                </h2>
               </div>
-
-              <div className="relative space-y-6">
-                {modules.map((module, index) => {
-                  const cardOffset = Math.max(0, cardProgress - index * 0.35);
-                  const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
-                  const opacity = 1;
-                  const translateY = cardOffset * -60;
-                  
-                  // ✨ זיהוי סוג הכרטיס - זוגי = לבן, אי-זוגי = כחול
-                  const isWhiteCard = index % 2 === 0;
-                  
-                  const gradients = [
-                    'from-brand-blue/20 to-brand-cyan/10',
-                    'from-brand-cyan/20 to-brand-purple/10',
-                    'from-brand-purple/20 to-brand-blue/10',
-                    'from-brand-blue/15 to-brand-purple/15',
-                    'from-brand-cyan/15 to-brand-blue/15',
-                    'from-brand-purple/15 to-brand-cyan/15'
-                  ];
-
-                  return (
+              
+              {/* כרטיסיות משמאל */}
+              <div 
+                ref={containerRef}
+                className="relative"
+                style={{ minHeight: `${modules.length * 280}px` }}
+              >
+                {/* Progress Indicator */}
+                <div className="fixed left-8 top-1/2 -translate-y-1/2 space-y-3 z-30 hidden lg:block">
+                  {modules.map((_, index) => (
                     <div
                       key={index}
-                      className="group/card sticky transition-all duration-300 ease-out"
-                      style={{
-                        top: `${120 + index * 15}px`,
-                        transform: `scale(${scale}) translateY(${translateY}px)`,
-                        opacity: opacity,
-                        zIndex: modules.length - index
-                      }}
-                    >
-                      <div className={`
-                        relative p-10 rounded-3xl overflow-hidden shadow-2xl 
-                        transition-all duration-500
-                        ${isWhiteCard 
-                          ? 'bg-white/95 border-2 border-gray-200 hover:border-brand-blue/50 hover:shadow-brand-blue/20' 
-                          : 'bg-brand-dark/95 border-2 border-white/10 hover:border-brand-cyan/50 hover:shadow-brand-cyan/30'
-                        }
-                        hover:scale-[1.02] hover:-translate-y-2
-                      `}>
-                        {/* שכבת gradient דקורטיבית - רק לכרטיסים כחולים */}
-                        {!isWhiteCard && (
-                          <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-3xl`} />
-                        )}
-                        
-                        {/* התוכן */}
-                        <div className="relative z-10">
-                          {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
-                          <div className="flex items-start gap-8">
-                            <div className={`
-                              w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg
-                              group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500
-                              ${isWhiteCard
-                                ? 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20'
-                                : 'bg-gradient-to-br from-white/20 to-gray-100/10'
-                              }
-                            `}>
-                              <module.icon className={`
-                                w-11 h-11 transition-colors duration-500
-                                ${isWhiteCard 
-                                  ? 'text-brand-blue group-hover/card:text-brand-cyan' 
-                                  : 'text-brand-cyan group-hover/card:text-white'
-                                }
-                              `} />
-                            </div>
-                            
-                            <div className="flex-1">
-                              <h3 className={`
-                                text-2xl font-bold mb-4 transition-colors duration-300
-                                ${isWhiteCard 
-                                  ? 'text-gray-900 group-hover/card:text-brand-blue' 
-                                  : 'text-white group-hover/card:text-brand-cyan'
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        Math.floor(cardProgress / 0.35) === index
+                          ? 'bg-brand-blue scale-150 shadow-lg shadow-brand-blue/50'
+                          : 'bg-white/30 scale-100'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                <div className="relative space-y-6">
+                  {modules.map((module, index) => {
+                    const cardOffset = Math.max(0, cardProgress - index * 0.35);
+                    const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
+                    const opacity = 1;
+                    const translateY = cardOffset * -60;
+                    
+                    // ✨ זיהוי סוג הכרטיס - זוגי = לבן, אי-זוגי = כחול
+                    const isWhiteCard = index % 2 === 0;
+                    
+                    const gradients = [
+                      'from-brand-blue/20 to-brand-cyan/10',
+                      'from-brand-cyan/20 to-brand-purple/10',
+                      'from-brand-purple/20 to-brand-blue/10',
+                      'from-brand-blue/15 to-brand-purple/15',
+                      'from-brand-cyan/15 to-brand-blue/15',
+                      'from-brand-purple/15 to-brand-cyan/15'
+                    ];
+
+                    return (
+                      <div
+                        key={index}
+                        className="group/card sticky transition-all duration-300 ease-out"
+                        style={{
+                          top: `${120 + index * 15}px`,
+                          transform: `scale(${scale}) translateY(${translateY}px)`,
+                          opacity: opacity,
+                          zIndex: modules.length - index
+                        }}
+                      >
+                        <div className={`
+                          relative p-10 rounded-3xl overflow-hidden shadow-2xl 
+                          transition-all duration-500
+                          ${isWhiteCard 
+                            ? 'bg-white/95 border-2 border-gray-200 hover:border-brand-blue/50 hover:shadow-brand-blue/20' 
+                            : 'bg-brand-dark/95 border-2 border-white/10 hover:border-brand-cyan/50 hover:shadow-brand-cyan/30'
+                          }
+                          hover:scale-[1.02] hover:-translate-y-2
+                        `}>
+                          {/* שכבת gradient דקורטיבית - רק לכרטיסים כחולים */}
+                          {!isWhiteCard && (
+                            <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-3xl`} />
+                          )}
+                          
+                          {/* התוכן */}
+                          <div className="relative z-10">
+                            {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
+                            <div className="flex items-start gap-8">
+                              <div className={`
+                                w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg
+                                group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500
+                                ${isWhiteCard
+                                  ? 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20'
+                                  : 'bg-gradient-to-br from-white/20 to-gray-100/10'
                                 }
                               `}>
-                                {module.title}
-                              </h3>
-                              <p className={`
-                                text-lg leading-relaxed
-                                ${isWhiteCard ? 'text-gray-700' : 'text-foreground/80'}
-                              `}>
-                                {module.description}
-                              </p>
+                                <module.icon className={`
+                                  w-11 h-11 transition-colors duration-500
+                                  ${isWhiteCard 
+                                    ? 'text-brand-blue group-hover/card:text-brand-cyan' 
+                                    : 'text-brand-cyan group-hover/card:text-white'
+                                  }
+                                `} />
+                              </div>
+                              
+                              <div className="flex-1">
+                                <h3 className={`
+                                  text-2xl font-bold mb-4 transition-colors duration-300
+                                  ${isWhiteCard 
+                                    ? 'text-gray-900 group-hover/card:text-brand-blue' 
+                                    : 'text-white group-hover/card:text-brand-cyan'
+                                  }
+                                `}>
+                                  {module.title}
+                                </h3>
+                                <p className={`
+                                  text-lg leading-relaxed
+                                  ${isWhiteCard ? 'text-gray-700' : 'text-foreground/80'}
+                                `}>
+                                  {module.description}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* איך זה עובד */}
+          {/* תהליך העבודה */}
           <div 
             ref={processReveal.ref}
-            className={`max-w-5xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
+            className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
               processReveal.isVisible 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 translate-x-20'
             }`}
           >
-            <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-12 border border-white/10">
-              <h2 className="text-3xl font-bold mb-16 text-center">התהליך: משיחה ראשונה למערכת עובדת</h2>
-              <div className="relative">
-                {/* קו מחבר אנכי */}
-                <div className="absolute right-8 top-8 bottom-8 w-0.5 bg-gradient-to-b from-brand-blue via-brand-cyan to-brand-purple opacity-30" />
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  🛠️ תהליך העבודה <span className="text-brand-cyan">שלנו</span>
+                </h2>
+                <p className="text-xl text-foreground/70 mt-4">
+                  ארבעה שלבים לניהול עסקי מוצלח
+                </p>
+              </div>
+              
+              {/* תוכן משמאל */}
+              <div className="space-y-10">
+                <p className="text-xl text-foreground/80 leading-relaxed">
+                  אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
+                </p>
                 
-                <div className="space-y-12">
-                  {[
-                    {
-                      number: "1",
-                      title: "אפיון מדויק",
-                      description: "אנחנו מקשיבים. מבינים את הצרכים, את צווארי הבקבוק ואת החזון שלכם."
-                    },
-                    {
-                      number: "2",
-                      title: "תכנון ארכיטקטוני",
-                      description: "בניית מודל נתונים, תהליכים ואוטומציות. אתם מאשרים את התוכנית לפני כל קו קוד."
-                    },
-                    {
-                      number: "3",
-                      title: "פיתוח והטמעה",
-                      description: "בניית המערכת, העברת הנתונים הקיימים (Migrating Data) והדרכה מלאה לצוותים."
-                    },
-                    {
-                      number: "4",
-                      title: "ליווי והרחבות",
-                      description: "אנחנו לא נעלמים. תמיכה שוטפת ושדרוגים עתידיים כדי שהמערכת תצמח יחד עם העסק שלכם."
-                    }
-                  ].map((step, index) => (
-                    <div 
-                      key={step.number} 
-                      className="flex items-start gap-6 animate-fade-in"
-                      style={{ animationDelay: `${index * 0.15}s` }}
-                    >
-                      {/* עיגול עם מספר */}
-                      <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-blue/30 animate-pulse-glow-enhanced">
-                        <span className="font-bold text-white text-2xl animate-count" style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>{step.number}</span>
-                      </div>
-                      
-                      {/* תוכן */}
-                      <div className="flex-1 pt-2">
-                        <h3 className="font-bold text-2xl mb-2">{step.title}</h3>
-                        <p className="text-muted-foreground text-lg leading-relaxed">{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
+                <div className="h-px bg-gradient-to-l from-brand-blue/50 via-brand-cyan/30 to-transparent" />
+                
+                {/* שלב 1 */}
+                <div className="border-r-4 border-brand-blue/50 pr-6">
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span className="bg-brand-blue/20 px-3 py-1 rounded-lg text-brand-cyan">1</span>
+                    🎯 צלילה לעומק הצרכים והאסטרטגיה
+                  </h3>
+                  <p className="text-foreground/70">
+                    אנו מתחילים בהקשבה מעמיקה וירידה לשטח. בפגישה מקיפה, אנו מכירים לעומק את צורת העבודה, 
+                    הדפוסים הניהוליים והכשלים הקיימים בעסק שלך. המטרה היא להבין את הצרכים המדויקים, 
+                    כדי שנוכל להתאים את המערכת אליך – ולא להיפך.
+                  </p>
                 </div>
+                
+                {/* שלב 2 */}
+                <div className="border-r-4 border-brand-cyan/50 pr-6">
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span className="bg-brand-cyan/20 px-3 py-1 rounded-lg text-brand-blue">2</span>
+                    🔨 בניית המערכת והתאמתה
+                  </h3>
+                  <p className="text-foreground/70 mb-3">
+                    לאחר שהבנו את הצרכים, אנו מתרגמים אותם למבנה דיגיטלי:
+                  </p>
+                  <ul className="space-y-2 text-foreground/70 mr-4">
+                    <li>• תכנון מבנה אסטרטגי והקמת המערכת בהתאם לתהליכי העבודה שלך.</li>
+                    <li>• הטמעת אוטומציות חכמות (תזכורות, מעקבים) לחיסכון בזמן.</li>
+                    <li>• הקמה של דשבורד מנהלים אינטואיטיבי שמציג נתונים בזמן אמת.</li>
+                  </ul>
+                  <p className="text-foreground/70 mt-3">התוצאה היא מערכת מדויקת ומוכנה לפעולה.</p>
+                </div>
+                
+                {/* שלב 3 */}
+                <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span className="bg-brand-purple/20 px-3 py-1 rounded-lg text-brand-cyan">3</span>
+                    📚 הטמעה, הדרכה וספריית ידע
+                  </h3>
+                  <p className="text-foreground/70 mb-3">כדי להבטיח שימוש מוצלח, אנו מבצעים:</p>
+                  <ul className="space-y-2 text-foreground/70 mr-4">
+                    <li>• הטמעה מדורגת וחלקה במעבר למערכת.</li>
+                    <li>• הדרכות מותאמות אישית לצוותים השונים, תוך התמקדות בתפקיד כל משתמש.</li>
+                    <li>• ספריית סרטוני הדרכה זמינה לשימוש תמידי, להכשרת עובדים חדשים ולרענון ידע.</li>
+                  </ul>
+                  <p className="text-foreground/70 mt-3">שלב זה מוודא שכל משתמש מרגיש בטוח לעבוד עם הפתרון החדש.</p>
+                </div>
+                
+                {/* שלב 4 */}
+                <div className="border-r-4 border-brand-blue/50 pr-6">
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span className="bg-brand-blue/20 px-3 py-1 rounded-lg text-brand-cyan">4</span>
+                    🤝 אחריות, תמיכה וליווי מתמשך
+                  </h3>
+                  <p className="text-foreground/70 mb-3">אנו דואגים להצלחה שלך גם לאחר ההשקה:</p>
+                  <ul className="space-y-2 text-foreground/70 mr-4">
+                    <li>• אחריות מלאה לחודש הראשון לטיפול ותיקון כל כיוונון נדרש.</li>
+                    <li>• אפשרות לליווי חודשי צמוד (אופציונלי) – לתמיכה מתקדמת, שיפור מתמיד והתאמות בהתאם לצורכי העסק המשתנים.</li>
+                  </ul>
+                </div>
+                
+                <div className="h-px bg-gradient-to-l from-brand-cyan/50 via-brand-blue/30 to-transparent" />
+                
+                {/* משפט סיום */}
+                <p className="text-2xl font-bold text-brand-blue text-center pt-4">
+                  מוכנים להתחיל?
+                </p>
               </div>
             </div>
           </div>
