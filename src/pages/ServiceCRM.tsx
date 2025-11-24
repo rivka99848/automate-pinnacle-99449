@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle } from "lucide-react";
 import crmHeroImage from "@/assets/crm-hero.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const ServiceCRM = () => {
   const heroReveal = useScrollReveal({ threshold: 0.2 });
@@ -13,12 +13,39 @@ const ServiceCRM = () => {
   const featuresReveal = useScrollReveal({ threshold: 0.2 });
   const processReveal = useScrollReveal({ threshold: 0.3 });
   const [scrollY, setScrollY] = useState(0);
+  const [cardProgress, setCardProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleCardScroll = useCallback(() => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const progress = -rect.top / (window.innerHeight * 0.5);
+      setCardProgress(progress);
+    }
+  }, []);
+
+  useEffect(() => {
+    let ticking = false;
+    const scrollListener = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleCardScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', scrollListener);
+    handleCardScroll(); // Initial calculation
+    return () => window.removeEventListener('scroll', scrollListener);
+  }, [handleCardScroll]);
 
   const modules = [
     {
@@ -160,54 +187,86 @@ const ServiceCRM = () => {
             </div>
           </div>
 
-          {/* תכונות מפורטות - גלילה אופקית */}
+          {/* תכונות מפורטות - Stacked Cards */}
           <div 
             ref={featuresReveal.ref}
-            className={`mb-24 overflow-hidden transition-all duration-1000 ${
+            className={`mb-24 transition-all duration-1000 ${
               featuresReveal.isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <h2 className="text-3xl font-bold mb-8 text-center max-w-6xl mx-auto px-4">
-              המודולים שישנו את צורת העבודה שלכם
-            </h2>
-            
-            {/* Container עם גלילה אופקית */}
             <div 
-              className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-4 md:px-8 pb-4"
-              style={{ scrollPaddingRight: '2rem' }}
+              ref={containerRef}
+              className="max-w-3xl mx-auto px-4 relative"
+              style={{ minHeight: `${modules.length * 400}px` }}
             >
-              {modules.map((module, index) => (
-                <div
-                  key={index}
-                  className="group min-w-[320px] md:min-w-[380px] snap-start animate-slide-in-right"
-                  style={{
-                    animationDelay: `${index * 0.1}s`
-                  }}
-                >
-                  <div className="h-full p-8 border border-white/10 rounded-2xl bg-gradient-to-br from-white/5 to-transparent hover:border-brand-blue/50 hover:scale-105 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-500">
-                    {/* אייקון עם אנימציה */}
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-blue/30 to-brand-cyan/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                      <module.icon className="w-9 h-9 text-brand-blue" />
+              <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/90 backdrop-blur-xl py-6 z-20 rounded-2xl">
+                המודולים שישנו את צורת העבודה שלכם
+              </h2>
+              
+              {/* Progress Indicator */}
+              <div className="fixed left-8 top-1/2 -translate-y-1/2 space-y-3 z-30 hidden lg:block">
+                {modules.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      Math.floor(cardProgress / 0.35) === index
+                        ? 'bg-brand-blue scale-150 shadow-lg shadow-brand-blue/50'
+                        : 'bg-white/30 scale-100'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <div className="relative space-y-6">
+                {modules.map((module, index) => {
+                  const cardOffset = Math.max(0, cardProgress - index * 0.35);
+                  const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
+                  const opacity = 1 - Math.min(cardOffset * 0.25, 0.4);
+                  const translateY = cardOffset * -60;
+                  
+                  const gradients = [
+                    'from-brand-blue/20 to-brand-cyan/10',
+                    'from-brand-cyan/20 to-brand-purple/10',
+                    'from-brand-purple/20 to-brand-blue/10',
+                    'from-brand-blue/15 to-brand-purple/15',
+                    'from-brand-cyan/15 to-brand-blue/15',
+                    'from-brand-purple/15 to-brand-cyan/15'
+                  ];
+
+                  return (
+                    <div
+                      key={index}
+                      className="group/card sticky transition-all duration-300 ease-out"
+                      style={{
+                        top: `${120 + index * 15}px`,
+                        transform: `scale(${scale}) translateY(${translateY}px)`,
+                        opacity: opacity,
+                        zIndex: modules.length - index
+                      }}
+                    >
+                      <div className={`p-10 border-2 border-white/10 rounded-3xl bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-2xl shadow-2xl hover:shadow-brand-blue/30 hover:scale-[1.02] hover:-translate-y-2 hover:border-brand-blue/50 transition-all duration-500`}>
+                        {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
+                        <div className="flex items-start gap-8">
+                          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-blue/40 to-brand-cyan/40 flex items-center justify-center flex-shrink-0 shadow-lg group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500">
+                            <module.icon className="w-11 h-11 text-brand-blue group-hover/card:text-brand-cyan transition-colors duration-500" />
+                          </div>
+                          
+                          <div className="flex-1">
+                            <h3 className="text-2xl font-bold mb-4 group-hover/card:text-brand-blue transition-colors duration-300">
+                              {module.title}
+                            </h3>
+                            <p className="text-foreground/80 text-lg leading-relaxed">
+                              {module.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4 group-hover:text-brand-blue transition-colors">
-                      {module.title}
-                    </h3>
-                    
-                    <p className="text-foreground/70 leading-relaxed">
-                      {module.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* אינדיקטור גלילה */}
-            <div className="text-center mt-6 text-sm text-muted-foreground flex items-center justify-center gap-2">
-              <span>גלול לצדדים לעוד מודולים</span>
-              <span className="animate-bounce">←</span>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
