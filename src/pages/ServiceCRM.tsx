@@ -4,8 +4,55 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle } from "lucide-react";
 import crmHeroImage from "@/assets/crm-hero.jpg";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useState, useEffect } from "react";
 
 const ServiceCRM = () => {
+  const heroReveal = useScrollReveal({ threshold: 0.2 });
+  const problemsReveal = useScrollReveal({ threshold: 0.3 });
+  const featuresReveal = useScrollReveal({ threshold: 0.2 });
+  const processReveal = useScrollReveal({ threshold: 0.3 });
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const modules = [
+    {
+      icon: Users,
+      title: "ניהול לקוחות 360°",
+      description: "כרטיס לקוח מקיף המציג את כל ההיסטוריה – שיחות, פגישות, מסמכים והצעות מחיר. רואים את האדם, לא רק את הנתונים."
+    },
+    {
+      icon: LineChart,
+      title: "מעקב עסקאות גמיש (Pipeline)",
+      description: "בנה את שלבי המכירה שלך כפי שאתה מכיר אותם. דע בדיוק מה הסטטוס של כל עסקה ומהו הצעד הבא."
+    },
+    {
+      icon: Mail,
+      title: "סנכרון מלא ואוטומטי",
+      description: "חיבור חלק ל-Gmail, לוח שנה וכלים נוספים שאתם כבר משתמשים בהם. המידע פשוט זורם למערכת, ללא התערבות ידנית."
+    },
+    {
+      icon: Database,
+      title: "דשבורד ותחזיות",
+      description: "גרפים, דוחות ומדדים מותאמים אישית. לא רק נתונים, אלא יכולת לחזות הכנסות ולקבל החלטות אסטרטגיות."
+    },
+    {
+      icon: Calendar,
+      title: "מנגנון הרשאות מתוחכם",
+      description: "שליטה מלאה על הגישה למידע הרגיש. רק מי שצריך לראות – רואה."
+    },
+    {
+      icon: Shield,
+      title: "אבטחה וגיבויים",
+      description: "הצפנה מלאה, גיבויים אוטומטיים ויומן שינויים. המידע שלכם מוגן ומאובטח תמיד."
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -13,21 +60,47 @@ const ServiceCRM = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero Section with Image */}
-          <div className="mb-24 animate-fade-in-up">
+          <div 
+            ref={heroReveal.ref}
+            className={`mb-24 transition-all duration-1000 ${
+              heroReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
             <div className="max-w-6xl mx-auto">
               <div className="relative rounded-3xl overflow-hidden mb-12 group">
                 <img 
                   src={crmHeroImage} 
                   alt="CRM System Dashboard"
-                  className="w-full h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-[400px] object-cover transition-transform duration-100"
+                  style={{
+                    transform: `translateY(${scrollY * 0.3}px) scale(${1 + scrollY * 0.0002})`
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/50 to-transparent" />
               </div>
-              <div className="text-center animate-fade-in delay-200">
+              <div className="text-center">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="text-gradient">מערכת CRM מותאמת אישית:</span>
+                  {['מערכת', 'CRM', 'מותאמת', 'אישית:'].map((word, i) => (
+                    <span 
+                      key={i}
+                      className="inline-block animate-fade-in text-gradient"
+                      style={{ animationDelay: `${i * 0.1}s` }}
+                    >
+                      {word}{' '}
+                    </span>
+                  ))}
                   <br />
-                  <span className="text-brand-blue">סדר בעסק, צמיחה בתוצאות</span>
+                  {['סדר', 'בעסק,', 'צמיחה', 'בתוצאות'].map((word, i) => (
+                    <span 
+                      key={i}
+                      className="inline-block animate-fade-in text-brand-blue"
+                      style={{ animationDelay: `${(i + 4) * 0.1}s` }}
+                    >
+                      {word}{' '}
+                    </span>
+                  ))}
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
                   בניית מערכת ה-CRM שעובדת <strong>בדיוק</strong> בדרך שבה העסק שלך צריך לעבוד.
@@ -38,7 +111,14 @@ const ServiceCRM = () => {
           </div>
 
           {/* למה CRM? */}
-          <div className="max-w-5xl mx-auto mb-24">
+          <div 
+            ref={problemsReveal.ref}
+            className={`max-w-5xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
+              problemsReveal.isVisible 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 -translate-x-20'
+            }`}
+          >
             <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-blue/30 transition-all">
               <h2 className="text-3xl font-bold mb-12 text-center">הבעיות שהפכו אתכם ללקוחות שלנו</h2>
               <div className="grid md:grid-cols-2 gap-12">
@@ -80,77 +160,66 @@ const ServiceCRM = () => {
             </div>
           </div>
 
-          {/* תכונות מפורטות */}
-          <div className="max-w-6xl mx-auto mb-24">
-            <h2 className="text-3xl font-bold mb-16 text-center">המודולים שישנו את צורת העבודה שלכם</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Users className="w-7 h-7 text-brand-blue" />
+          {/* תכונות מפורטות - גלילה אופקית */}
+          <div 
+            ref={featuresReveal.ref}
+            className={`mb-24 overflow-hidden transition-all duration-1000 ${
+              featuresReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
+            <h2 className="text-3xl font-bold mb-8 text-center max-w-6xl mx-auto px-4">
+              המודולים שישנו את צורת העבודה שלכם
+            </h2>
+            
+            {/* Container עם גלילה אופקית */}
+            <div 
+              className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory px-4 md:px-8 pb-4"
+              style={{ scrollPaddingRight: '2rem' }}
+            >
+              {modules.map((module, index) => (
+                <div
+                  key={index}
+                  className="group min-w-[320px] md:min-w-[380px] snap-start animate-slide-in-right"
+                  style={{
+                    animationDelay: `${index * 0.1}s`
+                  }}
+                >
+                  <div className="h-full p-8 border border-white/10 rounded-2xl bg-gradient-to-br from-white/5 to-transparent hover:border-brand-blue/50 hover:scale-105 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-500">
+                    {/* אייקון עם אנימציה */}
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-blue/30 to-brand-cyan/30 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                      <module.icon className="w-9 h-9 text-brand-blue" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-4 group-hover:text-brand-blue transition-colors">
+                      {module.title}
+                    </h3>
+                    
+                    <p className="text-foreground/70 leading-relaxed">
+                      {module.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">ניהול לקוחות 360°</h3>
-                <p className="text-foreground/70">
-                  כרטיס לקוח מקיף המציג את כל ההיסטוריה – שיחות, פגישות, מסמכים והצעות מחיר. 
-                  <strong> רואים את האדם, לא רק את הנתונים.</strong>
-                </p>
-              </div>
-
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in delay-100">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <LineChart className="w-7 h-7 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">מעקב עסקאות גמיש (Pipeline)</h3>
-                <p className="text-foreground/70">
-                  בנה את שלבי המכירה שלך כפי שאתה מכיר אותם. דע בדיוק מה הסטטוס של כל עסקה ומהו הצעד הבא.
-                </p>
-              </div>
-
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in delay-200">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Mail className="w-7 h-7 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">סנכרון מלא ואוטומטי</h3>
-                <p className="text-foreground/70">
-                  חיבור חלק ל-Gmail, לוח שנה וכלים נוספים שאתם כבר משתמשים בהם. 
-                  <strong> המידע פשוט זורם למערכת, ללא התערבות ידנית.</strong>
-                </p>
-              </div>
-
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in delay-300">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Database className="w-7 h-7 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">דשבורד ותחזיות</h3>
-                <p className="text-foreground/70">
-                  גרפים, דוחות ומדדים מותאמים אישית. לא רק נתונים, אלא 
-                  <strong> יכולת לחזות הכנסות ולקבל החלטות אסטרטגיות.</strong>
-                </p>
-              </div>
-
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in delay-400">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Calendar className="w-7 h-7 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">מנגנון הרשאות מתוחכם</h3>
-                <p className="text-foreground/70">
-                  שליטה מלאה על הגישה למידע הרגיש. רק מי שצריך לראות – רואה.
-                </p>
-              </div>
-
-              <div className="group p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-blue/20 transition-all duration-300 animate-fade-in delay-500">
-                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
-                  <Shield className="w-7 h-7 text-brand-blue" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">אבטחה וגיבויים</h3>
-                <p className="text-foreground/70">
-                  הצפנה מלאה, גיבויים אוטומטיים ויומן שינויים. המידע שלכם מוגן ומאובטח תמיד.
-                </p>
-              </div>
+              ))}
+            </div>
+            
+            {/* אינדיקטור גלילה */}
+            <div className="text-center mt-6 text-sm text-muted-foreground flex items-center justify-center gap-2">
+              <span>גלול לצדדים לעוד מודולים</span>
+              <span className="animate-bounce">←</span>
             </div>
           </div>
 
           {/* איך זה עובד */}
-          <div className="max-w-5xl mx-auto mb-24">
+          <div 
+            ref={processReveal.ref}
+            className={`max-w-5xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
+              processReveal.isVisible 
+                ? 'opacity-100 translate-x-0' 
+                : 'opacity-0 translate-x-20'
+            }`}
+          >
             <h2 className="text-3xl font-bold mb-16 text-center">התהליך: משיחה ראשונה למערכת עובדת</h2>
             <div className="relative">
               {/* קו מחבר אנכי */}
@@ -181,11 +250,12 @@ const ServiceCRM = () => {
                 ].map((step, index) => (
                   <div 
                     key={step.number} 
-                    className={`flex items-start gap-6 animate-fade-in delay-${(index + 1) * 100}`}
+                    className="flex items-start gap-6 animate-fade-in"
+                    style={{ animationDelay: `${index * 0.15}s` }}
                   >
                     {/* עיגול עם מספר */}
-                    <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-blue/30 animate-pulse-glow">
-                      <span className="font-bold text-white text-2xl">{step.number}</span>
+                    <div className="relative z-10 w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center flex-shrink-0 shadow-lg shadow-brand-blue/30 animate-pulse-glow-enhanced">
+                      <span className="font-bold text-white text-2xl animate-count" style={{ animationDelay: `${index * 0.15 + 0.3}s` }}>{step.number}</span>
                     </div>
                     
                     {/* תוכן */}
