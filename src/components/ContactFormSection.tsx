@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactFormSection = () => {
@@ -67,25 +66,10 @@ const ContactFormSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-background to-brand-darker py-12 md:py-20">
+    <section className="bg-gradient-to-b from-background to-brand-darker py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto bg-background rounded-3xl p-6 md:p-12 relative shadow-2xl border border-border/50">
-          {/* כוכבית מעוצבת */}
-          <div
-            className="absolute top-4 right-4 md:top-6 md:right-6"
-            style={{
-              animation: "scale-in 0.8s ease-out forwards, spin 0.8s ease-out forwards",
-            }}
-          >
-            <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-[#8FADFF] drop-shadow-[0_0_20px_rgba(143,173,255,0.6)]" />
-          </div>
-
-          {/* כותרת */}
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-reisinger font-bold text-center mb-8 md:mb-12 text-foreground animate-fade-in pr-12 md:pr-0">
-            הגיע הזמן לעשות סדר בעסק שלכם<span className="text-[#8FADFF]">{"<<"}</span>
-          </h2>
-
-          {/* טופס */}
+        <div className="max-w-4xl mx-auto">
+          {/* טופס ישירות על הרקע */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Grid של 4 שדות */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
