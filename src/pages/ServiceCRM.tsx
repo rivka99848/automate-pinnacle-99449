@@ -96,9 +96,9 @@ const ServiceCRM = () => {
                 </h1>
                 
                 <div className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
-                  <h2 className="text-2xl md:text-3xl font-bold text-brand-purple mb-4">
-                    מהו CRM (ניהול קשרי לקוחות) ומה הוא נותן לנו?
-                  </h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-brand-blue mb-4">
+                  מהו CRM (ניהול קשרי לקוחות) ומה הוא נותן לנו?
+                </h2>
                   
                   <p>
                     <strong>CRM (Customer Relationship Management)</strong>, או בעברית: ניהול קשרי לקוחות, הוא כלי מרכזי לניהול כל הקשרים עם הלקוחות שלכם במקום אחד.
@@ -155,7 +155,7 @@ const ServiceCRM = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
                 💡 הופכים את הניהול ל
-                <span className="text-brand-purple">פשוט וחכם</span>
+                <span className="text-brand-blue">פשוט וחכם</span>
               </h2>
               <p className="text-xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
                 השירות שלנו נועד לתת מענה מדויק לנקודות התורפה שמכבידות על עסקים בצמיחה. 
@@ -242,7 +242,7 @@ const ServiceCRM = () => {
               {/* כותרת מימין - sticky */}
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  מה המערכת <span className="text-brand-purple">נותנת לכם</span>
+                  מה המערכת <span className="text-brand-blue">נותנת לכם</span>
                 </h2>
               </div>
               
@@ -278,11 +278,11 @@ const ServiceCRM = () => {
                     
                     const gradients = [
                       'from-brand-blue/20 to-brand-cyan/10',
-                      'from-brand-cyan/20 to-brand-purple/10',
-                      'from-brand-purple/20 to-brand-blue/10',
-                      'from-brand-blue/15 to-brand-purple/15',
+                      'from-brand-cyan/20 to-brand-blue/10',
+                      'from-brand-blue/20 to-brand-cyan/10',
+                      'from-brand-blue/15 to-brand-cyan/15',
                       'from-brand-cyan/15 to-brand-blue/15',
-                      'from-brand-purple/15 to-brand-cyan/15'
+                      'from-brand-blue/15 to-brand-cyan/15'
                     ];
 
                     return (
@@ -374,7 +374,7 @@ const ServiceCRM = () => {
                 {/* כותרת מימין - sticky */}
                 <div className="sticky top-32">
                   <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                    תהליך העבודה <span className="text-brand-purple">איתנו</span>
+                    תהליך העבודה <span className="text-brand-blue">איתנו</span>
                   </h2>
                   <p className="text-xl text-gray-600 mt-4">
                     אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
@@ -415,7 +415,7 @@ const ServiceCRM = () => {
                   </div>
                   
                   {/* שלב 3 */}
-                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-3">
                       <BookOpen className="w-6 h-6 text-gray-500 animate-fade-in hover:text-brand-blue hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.3s" }} />
                       הטמעה, הדרכה וספריית ידע
