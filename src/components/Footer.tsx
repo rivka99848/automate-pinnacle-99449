@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
+import ContactFormSection from "./ContactFormSection";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-brand-darker border-t border-border py-16">
+    <>
+      {/* טופס צור קשר */}
+      <ContactFormSection />
+      
+      {/* Footer מקורי */}
+      <footer className="bg-brand-darker border-t border-border py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
@@ -91,6 +97,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
