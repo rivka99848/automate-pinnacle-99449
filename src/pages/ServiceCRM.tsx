@@ -112,6 +112,21 @@ const ServiceCRM = () => {
                   <p className="text-2xl font-bold text-brand-blue mt-8">
                     המערכת עוזרת לכם להחזיר את השליטה והסדר לעסק שלכם.
                   </p>
+                  
+                  <div className="flex justify-center mt-8">
+                    <Button 
+                      size="lg" 
+                      onClick={() => {
+                        document.getElementById('contact-form')?.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start'
+                        });
+                      }}
+                      className="rounded-full shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6 animate-fade-in"
+                    >
+                      קבעו פגישת ייעוץ ↓
+                    </Button>
+                  </div>
                 </div>
               </div>
               
@@ -427,36 +442,18 @@ const ServiceCRM = () => {
                 </div>
                 
                 <div className="h-px bg-gradient-to-l from-brand-cyan/50 via-brand-blue/30 to-transparent" />
-                
-                {/* משפט סיום */}
-                <p className="text-2xl font-bold text-brand-blue text-center pt-4">
-                  מוכנים להתחיל?
-                </p>
               </div>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
               מוכנים להתחיל?
             </h2>
-            <p className="text-xl md:text-2xl text-foreground/80 mb-10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            <p className="text-xl md:text-2xl text-foreground/80 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               בואו נדבר על איך מערכת CRM יכולה לשדרג את העסק שלכם
             </p>
-            <Button 
-              size="lg" 
-              onClick={() => {
-                document.getElementById('contact-form')?.scrollIntoView({ 
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }}
-              className="rounded-full shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6 animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
-            >
-              קבע פגישת ייעוץ ↓
-            </Button>
           </div>
 
           {/* Contact Form Section */}
