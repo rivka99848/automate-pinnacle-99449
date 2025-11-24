@@ -223,7 +223,7 @@ const ServiceCRM = () => {
                 {modules.map((module, index) => {
                   const cardOffset = Math.max(0, cardProgress - index * 0.35);
                   const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
-                  const opacity = 1 - Math.min(cardOffset * 0.25, 0.4);
+                  const opacity = 1; // הכרטיסים יישארו אטומים לחלוטין
                   const translateY = cardOffset * -60;
                   
                   const gradients = [
