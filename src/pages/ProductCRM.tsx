@@ -31,10 +31,26 @@ const ProductCRM = () => {
                 יותר סדר יותר זמן פנוי<br />
                 ויותר כסף בכיס!
               </h1>
-              <p className="text-xl md:text-2xl text-[#C5D1E3] mb-8 max-w-3xl mx-auto leading-relaxed">
-                לידים נעלמים, משימות נערמות, וניהול העסק הופך למאבק מתיש?!<br />
-                <span className="font-bold text-white">הסוף לעבודה עם טבלאות מורכבות ומערכות מרובות!</span>
-              </p>
+              <div className="space-y-6 mb-10 max-w-4xl mx-auto">
+                <p className="text-xl md:text-2xl text-[#C5D1E3] leading-relaxed">
+                  לידים נעלמים, משימות נערמות, וניהול העסק הופך למאבק מתיש?!<br />
+                  <span className="font-bold text-white">הסוף לעבודה עם טבלאות מורכבות ומערכות מרובות!</span><br />
+                  זה הזמן לעבור למערכת CRM חכמה שתסדר לכם את העסק!
+                </p>
+                
+                <p className="text-xl md:text-2xl text-white font-semibold leading-relaxed">
+                  פתרון פשוט ומקדם כל בעל עסק שרוצה לשלוט בתהליכי העבודה לחסוך זמן ולהרוויח יותר
+                </p>
+                
+                <p className="text-lg md:text-xl text-[#C5D1E3] leading-relaxed">
+                  בלי צורך במערכת יקרה ומסובכת.<br />
+                  <span className="text-white font-semibold">עדיין מנהל את העסק שלך כאילו זה 2005?</span>
+                </p>
+                
+                <p className="text-lg md:text-xl text-[#C5D1E3] leading-relaxed">
+                  למה להישאר מאחור כשהעסק שלכם יכול לרוץ קדימה? העולם מתקדם, הטכנולוגיה משתפרת – והשאלה היא האם גם העסק שלכם מתקדם? ברגע שתבינו איך אוטומציה וניהול חכם יכולים לשנות את כללי המשחק, לא תבינו איך עבדתם אחרת. למה לבזבז זמן וכסף על משימות ידניות, כשאפשר לתת למערכת לעבוד בשבילכם – ולפנות לכם זמן לדברים שבאמת מקדמים את העסק?
+                </p>
+              </div>
               
               <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-12 max-w-4xl mx-auto border-2 border-[#8FADFF]/20 transform hover:scale-105 transition-all duration-300">
                 <div className="aspect-video">
