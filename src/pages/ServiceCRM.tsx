@@ -43,34 +43,34 @@ const ServiceCRM = () => {
 
   const modules = [
     {
-      icon: Users,
-      title: "ניהול לקוחות 360°",
-      description: "כרטיס לקוח מקיף המציג את כל ההיסטוריה – שיחות, פגישות, מסמכים והצעות מחיר. רואים את האדם, לא רק את הנתונים."
+      icon: Database,
+      title: "ריכוז וסדר",
+      description: "כל פרטי הלקוחות מרוכזים בצורה מסודרת. כל הנתונים החשובים יהיו ברורים ונגישים מול העיניים – בלי חוסר מעקב, בלי בלגן, ובלי בזבוז זמן."
     },
     {
-      icon: LineChart,
-      title: "מעקב עסקאות גמיש (Pipeline)",
-      description: "בנה את שלבי המכירה שלך כפי שאתה מכיר אותם. דע בדיוק מה הסטטוס של כל עסקה ומהו הצעד הבא."
+      icon: Users,
+      title: "מעקב מדויק",
+      description: "אתם יודעים בדיוק איפה כל לקוח נמצא בתהליך (התעניין? קנה? צריך חידוש?)."
     },
     {
       icon: Mail,
-      title: "סנכרון מלא ואוטומטי",
-      description: "חיבור חלק ל-Gmail, לוח שנה וכלים נוספים שאתם כבר משתמשים בהם. המידע פשוט זורם למערכת, ללא התערבות ידנית."
+      title: "שמירה על קשר אישי",
+      description: "אתם יכולים לשמור על קשר אישי בלי לזכור הכול בראש."
     },
     {
-      icon: Database,
-      title: "דשבורד ותחזיות",
-      description: "גרפים, דוחות ומדדים מותאמים אישית. לא רק נתונים, אלא יכולת לחזות הכנסות ולקבל החלטות אסטרטגיות."
+      icon: LineChart,
+      title: "שליטה מלאה והשקעה חכמה",
+      description: "המצב של העסק שלכם פרוס לכם כמו מפה ברורה. אתם יודעים מאיפה הגיע כל ליד בקלות, וכך יודעים איפה כדאי לכם להשקיע."
     },
     {
       icon: Calendar,
-      title: "מנגנון הרשאות מתוחכם",
-      description: "שליטה מלאה על הגישה למידע הרגיש. רק מי שצריך לראות – רואה."
+      title: "דאשבורד (לוח מחוונים) כוללני",
+      description: "המערכת מציגה נתונים חשובים על מצב העסק. לדוגמה, אחוז המרה מליד ללקוח, וגרפים של הכנסות לפי חודש או שנה."
     },
     {
       icon: Shield,
-      title: "אבטחה וגיבויים",
-      description: "הצפנה מלאה, גיבויים אוטומטיים ויומן שינויים. המידע שלכם מוגן ומאובטח תמיד."
+      title: "חיסכון בעלויות וסדר מנהלי",
+      description: "המערכת חוסכת לכם לא רק עלויות, אלא גם כאב ראש. היא יכולה לחסוך לכם מזכירה במיקור חוץ או פנים, כיוון שהיא שולחת חשבוניות וקבלות."
     }
   ];
 
@@ -108,41 +108,6 @@ const ServiceCRM = () => {
                     מערכת CRM שאני בונה מעניקה לכם כלים מדויקים לניהול העסק שלכם בצורה פשוטה, נוחה וחכמה יותר.
                   </p>
                   
-                  <h3 className="text-2xl font-bold text-white mt-8 mb-4">
-                    אז מה המערכת נותנת לכם בפועל?
-                  </h3>
-                  
-                  <div className="text-right space-y-4 max-w-3xl mx-auto">
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                      <strong className="text-brand-blue text-xl">1. ריכוז וסדר:</strong>
-                      <p className="mt-2">כל פרטי הלקוחות מרוכזים בצורה מסודרת. כל הנתונים החשובים יהיו ברורים ונגישים מול העיניים – בלי חוסר מעקב, בלי בלגן, ובלי בזבוז זמן.</p>
-                    </div>
-                    
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                      <strong className="text-brand-cyan text-xl">2. מעקב מדויק:</strong>
-                      <p className="mt-2">אתם יודעים בדיוק איפה כל לקוח נמצא בתהליך (התעניין? קנה? צריך חידוש?).</p>
-                    </div>
-                    
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                      <strong className="text-brand-purple text-xl">3. שמירה על קשר אישי:</strong>
-                      <p className="mt-2">אתם יכולים לשמור על קשר אישי בלי לזכור הכול בראש.</p>
-                    </div>
-                    
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                      <strong className="text-brand-blue text-xl">4. שליטה מלאה והשקעה חכמה:</strong>
-                      <p className="mt-2">המצב של העסק שלכם פרוס לכם כמו מפה ברורה. אתם יודעים מאיפה הגיע כל ליד בקלות, וכך יודעים איפה כדאי לכם להשקיע.</p>
-                    </div>
-                    
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-                      <strong className="text-brand-cyan text-xl">5. דאשבורד (לוח מחוונים) כוללני:</strong>
-                      <p className="mt-2">המערכת מציגה נתונים חשובים על מצב העסק. לדוגמה, אחוז המרה מליד ללקוח, וגרפים של הכנסות לפי חודש או שנה.</p>
-                    </div>
-                    
-                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                      <strong className="text-brand-purple text-xl">6. חיסכון בעלויות וסדר מנהלי:</strong>
-                      <p className="mt-2">המערכת חוסכת לכם לא רק עלויות, אלא גם כאב ראש. היא יכולה לחסוך לכם מזכירה במיקור חוץ או פנים, כיוון שהיא שולחת חשבוניות וקבלות.</p>
-                    </div>
-                  </div>
                   
                   <p className="text-2xl font-bold text-brand-blue mt-8">
                     המערכת עוזרת לכם להחזיר את השליטה והסדר לעסק שלכם.
@@ -227,7 +192,7 @@ const ServiceCRM = () => {
               style={{ minHeight: `${modules.length * 280}px` }}
             >
               <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/98 backdrop-blur-3xl py-6 z-20 rounded-2xl shadow-lg">
-                המודולים שישנו את צורת העבודה שלכם
+                אז מה המערכת נותנת לכם בפועל?
               </h2>
               
               {/* Progress Indicator */}
