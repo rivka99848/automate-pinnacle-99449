@@ -71,31 +71,6 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
             style={{ width: `${((currentIndex + 1) / images.length) * 100}%` }}
           />
         </div>
-
-        {/* Thumbnails */}
-        <div className="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide">
-          {images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index);
-                // Trigger carousel scroll - would need api reference
-              }}
-              className={cn(
-                "flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-300 hover:scale-110",
-                currentIndex === index
-                  ? "border-brand-blue ring-2 ring-brand-blue/30"
-                  : "border-transparent opacity-60 hover:opacity-100"
-              )}
-            >
-              <img
-                src={image}
-                alt={`תמונה ממוזערת ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Lightbox Modal */}
