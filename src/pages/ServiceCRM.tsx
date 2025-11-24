@@ -13,15 +13,8 @@ const ServiceCRM = () => {
   const problemsReveal = useScrollReveal({ threshold: 0.3 });
   const featuresReveal = useScrollReveal({ threshold: 0.2 });
   const processReveal = useScrollReveal({ threshold: 0.3 });
-  const [scrollY, setScrollY] = useState(0);
   const [cardProgress, setCardProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleCardScroll = useCallback(() => {
     if (!containerRef.current) return;
@@ -87,7 +80,7 @@ const ServiceCRM = () => {
 
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
-          {/* Hero Section with Image */}
+          {/* Hero Section */}
           <div 
             ref={heroReveal.ref}
             className={`mb-24 transition-all duration-1000 ${
@@ -97,43 +90,74 @@ const ServiceCRM = () => {
             }`}
           >
             <div className="max-w-6xl mx-auto">
-              <div className="relative rounded-3xl overflow-hidden mb-12 group">
+              <div className="text-center mb-12">
+                <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in">
+                  מערכת <span className="text-brand-blue">CRM</span>
+                </h1>
+                
+                <div className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
+                  <h2 className="text-2xl md:text-3xl font-bold text-brand-cyan mb-4">
+                    מהו CRM (ניהול קשרי לקוחות) ומה הוא נותן לנו?
+                  </h2>
+                  
+                  <p>
+                    <strong>CRM (Customer Relationship Management)</strong>, או בעברית: ניהול קשרי לקוחות, הוא כלי מרכזי לניהול כל הקשרים עם הלקוחות שלכם במקום אחד.
+                  </p>
+                  
+                  <p>
+                    מערכת CRM שאני בונה מעניקה לכם כלים מדויקים לניהול העסק שלכם בצורה פשוטה, נוחה וחכמה יותר.
+                  </p>
+                  
+                  <h3 className="text-2xl font-bold text-white mt-8 mb-4">
+                    אז מה המערכת נותנת לכם בפועל?
+                  </h3>
+                  
+                  <div className="text-right space-y-4 max-w-3xl mx-auto">
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                      <strong className="text-brand-blue text-xl">1. ריכוז וסדר:</strong>
+                      <p className="mt-2">כל פרטי הלקוחות מרוכזים בצורה מסודרת. כל הנתונים החשובים יהיו ברורים ונגישים מול העיניים – בלי חוסר מעקב, בלי בלגן, ובלי בזבוז זמן.</p>
+                    </div>
+                    
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                      <strong className="text-brand-cyan text-xl">2. מעקב מדויק:</strong>
+                      <p className="mt-2">אתם יודעים בדיוק איפה כל לקוח נמצא בתהליך (התעניין? קנה? צריך חידוש?).</p>
+                    </div>
+                    
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                      <strong className="text-brand-purple text-xl">3. שמירה על קשר אישי:</strong>
+                      <p className="mt-2">אתם יכולים לשמור על קשר אישי בלי לזכור הכול בראש.</p>
+                    </div>
+                    
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+                      <strong className="text-brand-blue text-xl">4. שליטה מלאה והשקעה חכמה:</strong>
+                      <p className="mt-2">המצב של העסק שלכם פרוס לכם כמו מפה ברורה. אתם יודעים מאיפה הגיע כל ליד בקלות, וכך יודעים איפה כדאי לכם להשקיע.</p>
+                    </div>
+                    
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+                      <strong className="text-brand-cyan text-xl">5. דאשבורד (לוח מחוונים) כוללני:</strong>
+                      <p className="mt-2">המערכת מציגה נתונים חשובים על מצב העסק. לדוגמה, אחוז המרה מליד ללקוח, וגרפים של הכנסות לפי חודש או שנה.</p>
+                    </div>
+                    
+                    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 animate-fade-in" style={{ animationDelay: "0.6s" }}>
+                      <strong className="text-brand-purple text-xl">6. חיסכון בעלויות וסדר מנהלי:</strong>
+                      <p className="mt-2">המערכת חוסכת לכם לא רק עלויות, אלא גם כאב ראש. היא יכולה לחסוך לכם מזכירה במיקור חוץ או פנים, כיוון שהיא שולחת חשבוניות וקבלות.</p>
+                    </div>
+                  </div>
+                  
+                  <p className="text-2xl font-bold text-brand-blue mt-8">
+                    המערכת עוזרת לכם להחזיר את השליטה והסדר לעסק שלכם.
+                  </p>
+                </div>
+              </div>
+              
+              {/* תמונה מתחת לטקסט */}
+              <div className="relative rounded-3xl overflow-hidden group">
                 <img 
                   src={crmHeroImage} 
                   alt="CRM System Dashboard"
-                  className="w-full h-[400px] object-cover transition-transform duration-100"
-                  style={{
-                    transform: `translateY(${scrollY * 0.3}px) scale(${1 + scrollY * 0.0002})`
-                  }}
+                  className="w-full h-[400px] object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/50 to-transparent" />
-              </div>
-              <div className="text-center">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  {['מערכת', 'CRM', 'מותאמת', 'אישית:'].map((word, i) => (
-                    <span 
-                      key={i}
-                      className="inline-block animate-fade-in text-gradient"
-                      style={{ animationDelay: `${i * 0.1}s` }}
-                    >
-                      {word}{' '}
-                    </span>
-                  ))}
-                  <br />
-                  {['סדר', 'בעסק,', 'צמיחה', 'בתוצאות'].map((word, i) => (
-                    <span 
-                      key={i}
-                      className="inline-block animate-fade-in text-brand-blue"
-                      style={{ animationDelay: `${(i + 4) * 0.1}s` }}
-                    >
-                      {word}{' '}
-                    </span>
-                  ))}
-                </h1>
-                <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
-                  בניית מערכת ה-CRM שעובדת <strong>בדיוק</strong> בדרך שבה העסק שלך צריך לעבוד.
-                  לא עוד פתרונות מדף גנריים - מערכת שנבנית מאפס כדי לשקף את תהליכי העבודה הייחודיים שלכם.
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-brand-dark/20 to-transparent" />
               </div>
             </div>
           </div>
@@ -200,7 +224,7 @@ const ServiceCRM = () => {
             <div 
               ref={containerRef}
               className="max-w-3xl mx-auto px-4 relative"
-              style={{ minHeight: `${modules.length * 400}px` }}
+              style={{ minHeight: `${modules.length * 280}px` }}
             >
               <h2 className="text-3xl font-bold mb-16 text-center sticky top-20 bg-brand-dark/98 backdrop-blur-3xl py-6 z-20 rounded-2xl shadow-lg">
                 המודולים שישנו את צורת העבודה שלכם
