@@ -92,7 +92,7 @@ const ServiceAutomation = () => {
                         block: 'start'
                       });
                     }}
-                    className="rounded-full shadow-lg shadow-brand-purple/30 hover:shadow-brand-purple/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
+                    className="rounded-full shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
                   >
                     קבעו פגישת ייעוץ ↓
                   </Button>
@@ -119,12 +119,12 @@ const ServiceAutomation = () => {
             <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  למה אוטומציה <span className="text-brand-purple">משנה את המשחק?</span>
+                  למה אוטומציה <span className="text-brand-blue">משנה את המשחק?</span>
                 </h2>
               </div>
               
               <div className="space-y-8">
-                <div className="h-px bg-gradient-to-l from-brand-purple/50 via-brand-blue/30 to-transparent" />
+                <div className="h-px bg-gradient-to-l from-brand-blue/50 via-brand-cyan/30 to-transparent" />
                 
                 {/* Challenge Box */}
                 <div className="bg-gradient-to-br from-red-500/10 to-red-500/5 border-2 border-red-500/20 rounded-2xl p-8">
@@ -137,11 +137,11 @@ const ServiceAutomation = () => {
                   </div>
                 </div>
 
-                <div className="h-px bg-gradient-to-l from-brand-purple/50 via-brand-cyan/30 to-transparent" />
+                <div className="h-px bg-gradient-to-l from-brand-blue/50 via-brand-cyan/30 to-transparent" />
 
                 {/* Solution Box */}
-                <div className="bg-background/50 backdrop-blur-sm border-2 border-brand-purple/20 rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold text-brand-purple mb-6">החיים עם אוטומציה</h3>
+                <div className="bg-background/50 backdrop-blur-sm border-2 border-brand-blue/20 rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold text-brand-blue mb-6">החיים עם אוטומציה</h3>
                   <div className="space-y-4">
                     <p className="text-foreground/80">• חיסכון של עד 70% בזמן ביצוע משימות</p>
                     <p className="text-foreground/80">• הכול עובד אוטומטית, ללא מעורבות שלכם</p>
@@ -163,7 +163,7 @@ const ServiceAutomation = () => {
             <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  מה אפשר לעשות <span className="text-brand-purple">עם אוטומציה?</span>
+                  מה אפשר לעשות <span className="text-brand-blue">עם אוטומציה?</span>
                 </h2>
               </div>
 
@@ -175,7 +175,7 @@ const ServiceAutomation = () => {
                 {/* Progress Indicator */}
                 <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/10">
                   <div 
-                    className="w-full bg-gradient-to-b from-brand-purple to-brand-blue transition-all duration-300"
+                    className="w-full bg-gradient-to-b from-brand-blue to-brand-cyan transition-all duration-300"
                     style={{ 
                       height: `${Math.min(100, cardProgress * 100)}%`
                     }}
@@ -189,9 +189,9 @@ const ServiceAutomation = () => {
                     return (
                       <div 
                         key={index}
-                        className="w-3 h-3 rounded-full border-2 border-brand-purple transition-all duration-300"
+                        className="w-3 h-3 rounded-full border-2 border-brand-blue transition-all duration-300"
                         style={{
-                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-purple))' : 'transparent',
+                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-blue))' : 'transparent',
                           transform: `scale(${0.8 + dotProgress * 0.4})`
                         }}
                       />
@@ -213,7 +213,7 @@ const ServiceAutomation = () => {
                         className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
                           isEven 
                             ? 'bg-white text-gray-900 border-2 border-gray-200' 
-                            : 'bg-gradient-to-br from-brand-purple/20 to-brand-blue/10 border-2 border-brand-purple/30'
+                            : 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/10 border-2 border-brand-blue/30'
                         }`}
                         style={{
                           transform: `scale(${scale}) translateY(${translateY}px)`,
@@ -222,9 +222,9 @@ const ServiceAutomation = () => {
                       >
                         <div className="flex items-start gap-4">
                           <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                            isEven ? 'bg-brand-purple/20' : 'bg-brand-purple/30'
+                            isEven ? 'bg-brand-blue/20' : 'bg-brand-blue/30'
                           }`}>
-                            <automation.icon className={`w-7 h-7 ${isEven ? 'text-brand-purple' : 'text-white'}`} />
+                            <automation.icon className={`w-7 h-7 ${isEven ? 'text-brand-blue' : 'text-white'}`} />
                           </div>
                           <div>
                             <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
@@ -255,9 +255,9 @@ const ServiceAutomation = () => {
           >
             <h2 className="text-3xl font-bold mb-12 text-center">דוגמאות מהחיים</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center mb-4">
-                  <Zap className="w-7 h-7 text-brand-purple" />
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
+                  <Zap className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">עסק רפואי</h3>
                 <p className="text-muted-foreground">
@@ -265,9 +265,9 @@ const ServiceAutomation = () => {
                 </p>
               </div>
 
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center mb-4">
-                  <TrendingUp className="w-7 h-7 text-brand-purple" />
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
+                  <TrendingUp className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">חנות אונליין</h3>
                 <p className="text-muted-foreground">
@@ -275,9 +275,9 @@ const ServiceAutomation = () => {
                 </p>
               </div>
 
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
-                <div className="w-14 h-14 rounded-xl bg-brand-purple/20 flex items-center justify-center mb-4">
-                  <FileText className="w-7 h-7 text-brand-purple" />
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-blue/50 hover:bg-white/5 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-brand-blue/20 flex items-center justify-center mb-4">
+                  <FileText className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">משרד שירות</h3>
                 <p className="text-muted-foreground">
@@ -298,45 +298,45 @@ const ServiceAutomation = () => {
               <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
                 <div className="sticky top-32">
                   <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
-                    איך זה <span className="text-brand-purple">עובד?</span>
+                    איך זה <span className="text-brand-blue">עובד?</span>
                   </h2>
                 </div>
                 
                 <div className="space-y-8">
-                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                        <Compass className="w-5 h-5 text-brand-purple" />
+                      <div className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                        <Compass className="w-5 h-5 text-brand-blue" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900">מיפוי התהליכים</h3>
                     </div>
                     <p className="text-gray-600 mr-[52px]">מבינים איך העסק עובד היום, איפה הבעיות ומה צריך לשפר</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                        <Settings className="w-5 h-5 text-brand-purple" />
+                      <div className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                        <Settings className="w-5 h-5 text-brand-blue" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900">תכנון האוטומציה</h3>
                     </div>
                     <p className="text-gray-600 mr-[52px]">מתכננים את התהליך האוטומטי - מה קורה בכל שלב, מה הטריגרים ומה התוצאות</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                        <Rocket className="w-5 h-5 text-brand-purple" />
+                      <div className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                        <Rocket className="w-5 h-5 text-brand-blue" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900">בניה והטמעה</h3>
                     </div>
                     <p className="text-gray-600 mr-[52px]">בונים את האוטומציה, מחברים את המערכות ובודקים שהכול עובד מעולה</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 rounded-xl bg-brand-purple/20 flex items-center justify-center">
-                        <HeartHandshake className="w-5 h-5 text-brand-purple" />
+                      <div className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center">
+                        <HeartHandshake className="w-5 h-5 text-brand-blue" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900">ניטור ושיפור</h3>
                     </div>
@@ -357,7 +357,7 @@ const ServiceAutomation = () => {
             <h2 className="text-3xl font-bold mb-8 text-center">סיפור הצלחה</h2>
             <div className="bg-card p-10 rounded-3xl">
               <div className="mb-6">
-                <span className="inline-block px-4 py-1 bg-brand-purple/20 text-brand-purple text-sm font-semibold rounded-full">
+                <span className="inline-block px-4 py-1 bg-brand-blue/20 text-brand-blue text-sm font-semibold rounded-full">
                   02 • אוטומציה מלאה
                 </span>
               </div>
