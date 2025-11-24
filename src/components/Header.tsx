@@ -1,6 +1,6 @@
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
-import smartbizLogo from "@/assets/smartbiz-logo.svg";
+import smartbizLogo from "@/assets/smartbiz-logo.gif";
 
 const Header = () => {
   return (
