@@ -2,11 +2,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Textarea } from "@/components/ui/textarea";
 import { 
   TrendingUp, Users, Clock, Target, CheckCircle2, XCircle,
   Sparkles, Zap, BarChart3, Calendar, Mail, Database,
-  FileText, Bell, Globe, Phone, User, Briefcase
+  FileText, Bell, Globe, RefreshCw, MessageSquare, FormInput,
+  ClipboardList
 } from "lucide-react";
 import {
   Accordion,
@@ -32,7 +33,7 @@ const ProductCRM = () => {
               </h1>
               <p className="text-xl md:text-2xl text-[#C5D1E3] mb-8 max-w-3xl mx-auto leading-relaxed">
                 לידים נעלמים, משימות נערמות, וניהול העסק הופך למאבק מתיש?!<br />
-                <span className="font-bold">הסוף לעבודה עם טבלאות מורכבות ומערכות מרובות!</span>
+                <span className="font-bold text-white">הסוף לעבודה עם טבלאות מורכבות ומערכות מרובות!</span>
               </p>
               
               <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-12 max-w-4xl mx-auto border-2 border-[#8FADFF]/20 transform hover:scale-105 transition-all duration-300">
@@ -78,15 +79,15 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Problem Section with Angled Cards */}
+        {/* Problem Section */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-[#121F36]">
                 למה להישאר מאחור כשהעסק שלכם<br />
-                <span className="text-gradient">יכול לרוץ קדימה?</span>
+                <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">יכול לרוץ קדימה?</span>
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-[#3D64A6]">
                 העולם מתקדם, הטכנולוגיה משתפרת – והשאלה היא האם גם העסק שלכם מתקדם?
               </p>
             </div>
@@ -100,26 +101,26 @@ const ProductCRM = () => {
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className="relative p-8 border-2 border-destructive/20 rounded-3xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="relative p-8 rounded-3xl bg-red-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
                   style={{ transform: `rotate(${index % 2 === 0 ? '-1deg' : '1deg'})` }}
                 >
-                  <item.icon className="w-12 h-12 text-destructive mb-4" />
-                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.desc}</p>
+                  <item.icon className="w-12 h-12 text-red-500 mb-4" />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">{item.title}</h3>
+                  <p className="text-[#3D64A6]">{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Solution Section - Large Circles */}
-        <section className="py-24 bg-gradient-to-b from-brand-cyan/10 to-white">
+        {/* Solution Section */}
+        <section className="py-24 bg-[#121F37]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-white">
                 איך המערכת שלנו תקל עליך?
               </h2>
-              <p className="text-xl text-center text-muted-foreground mb-16">
+              <p className="text-xl text-center text-[#C5D1E3] mb-16">
                 מאפשרת לך לעסוק בעיקר בעשייה ולא באיך לנהל את המידע!
               </p>
 
@@ -129,31 +130,41 @@ const ProductCRM = () => {
                     icon: Clock, 
                     title: "חסכון בזמן", 
                     desc: "יכולות האוטומציה של המערכת יחסכו זמן יקר כך שבקלות ובמחיר אטרקטיבי תוכלו לקבל בהירות ושליטה על תהליכים מורכבים שידחפו את העסק קדימה.",
-                    color: "from-blue-500 to-cyan-500"
+                    bgColor: "#8FADFF",
+                    iconColor: "#6D94FF"
                   },
                   { 
                     icon: Users, 
                     title: "פחות צורך בעובדים נוספים", 
                     desc: "מה שמזכירה או עוזר אדמיניסטרטיבי היו עושים – המערכת עושה עבורך, בלי עלות חודשית גבוהה.",
-                    color: "from-purple-500 to-pink-500"
+                    bgColor: "#D8FACF",
+                    iconColor: "#B3F5A0"
                   },
                   { 
                     icon: Sparkles, 
                     title: "נוחות בלי מורכבות", 
                     desc: "אנחנו שמים סוף לעבודה עם טבלאות מורכבות ומערכות מרובות.",
-                    color: "from-green-500 to-emerald-500"
+                    bgColor: "#CDF3F7",
+                    iconColor: "#B6EEF8"
                   }
                 ].map((item, index) => (
                   <div 
                     key={index}
-                    className="relative group"
+                    className="relative backdrop-blur-sm p-8 rounded-3xl hover:scale-105 transition-all duration-300"
+                    style={{ 
+                      backgroundColor: `${item.bgColor}20`,
+                      border: `2px solid ${item.bgColor}30`
+                    }}
                   >
                     <div className="flex flex-col items-center text-center">
-                      <div className={`w-40 h-40 rounded-full bg-gradient-to-br ${item.color} flex items-center justify-center mb-6 shadow-2xl group-hover:scale-110 transition-transform duration-300`}>
-                        <item.icon className="w-20 h-20 text-white" />
+                      <div 
+                        className="w-24 h-24 rounded-full flex items-center justify-center mb-6 shadow-2xl"
+                        style={{ backgroundColor: item.iconColor }}
+                      >
+                        <item.icon className="w-12 h-12 text-white" />
                       </div>
-                      <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                      <h3 className="text-2xl font-bold mb-4 text-white">{item.title}</h3>
+                      <p className="text-[#C5D1E3] leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -162,86 +173,155 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Features Grid - Bento Box Style */}
+        {/* Features Grid - Bento Box */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6">
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-[#121F36]">
                 הגיע הזמן לעבוד בצורה חכמה ויעילה<br />
-                <span className="text-gradient">והכל במערכת אחת!</span>
+                <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">והכל במערכת אחת!</span>
               </h2>
-              <p className="text-xl text-center text-muted-foreground mb-16">
+              <p className="text-xl text-center text-[#3D64A6] mb-16">
                 10 פיצ'רים שישנו לכם את העסק
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr">
-                {/* Large Feature Cards */}
-                <div className="md:col-span-2 lg:row-span-2 bg-gradient-to-br from-brand-blue to-brand-cyan p-8 rounded-3xl text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
-                  <Database className="w-16 h-16 mb-4" />
-                  <h3 className="text-3xl font-bold mb-3">ניהול לידים ולקוחות</h3>
-                  <p className="text-white/90 text-lg">כל הנתונים שמורים ומאורגנים בכרטיס לקוח מסודר</p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {/* Large Card 1 - Database */}
+                <div 
+                  className="md:col-span-2 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #8FADFF10, #6D94FF10)`,
+                    borderRight: `4px solid #6D94FF`
+                  }}
+                >
+                  <Database className="w-16 h-16 mb-4" style={{ color: '#6D94FF' }} />
+                  <h3 className="text-3xl font-bold mb-3 text-[#121F36]">ניהול לידים ולקוחות</h3>
+                  <p className="text-[#3D64A6] text-lg">כל הנתונים שמורים ומאורגנים בכרטיס לקוח מסודר</p>
                 </div>
 
-                <div className="bg-purple-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <CheckCircle2 className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">ניהול משימות ופרויקטים</h3>
-                  <p className="text-white/90">תכנון, מעקב ותזכורות חכמות</p>
+                {/* ClipboardList */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #B6EEF810, #CDF3F710)`,
+                    borderRight: `4px solid #B6EEF8`
+                  }}
+                >
+                  <ClipboardList className="w-12 h-12 mb-3" style={{ color: '#B6EEF8' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">ניהול משימות ופרויקטים</h3>
+                  <p className="text-[#3D64A6]">תכנון, מעקב ותזכורות חכמות</p>
                 </div>
 
-                <div className="bg-green-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <BarChart3 className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">ניהול הכנסות והוצאות</h3>
-                  <p className="text-white/90">סטטיסטיקות חכמות שיעזרו לכם</p>
+                {/* TrendingUp */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #B3F5A010, #D8FACF10)`,
+                    borderRight: `4px solid #B3F5A0`
+                  }}
+                >
+                  <TrendingUp className="w-12 h-12 mb-3" style={{ color: '#B3F5A0' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">ניהול הכנסות והוצאות</h3>
+                  <p className="text-[#3D64A6]">סטטיסטיקות חכמות שיעזרו לכם</p>
                 </div>
 
-                <div className="bg-orange-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <Zap className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">פתיחה אוטומטית של כרטיסיית לקוח</h3>
-                  <p className="text-white/90">ברגע שליד סוגר איתכם</p>
+                {/* FileText */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #99A3F010, #99A3F005)`,
+                    borderRight: `4px solid #99A3F0`
+                  }}
+                >
+                  <FileText className="w-12 h-12 mb-3" style={{ color: '#99A3F0' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">פתיחה אוטומטית של כרטיסיית לקוח</h3>
+                  <p className="text-[#3D64A6]">ברגע שליד סוגר איתכם</p>
                 </div>
 
-                <div className="bg-pink-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <Target className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">פולואפים אוטומטיים ללידים</h3>
-                  <p className="text-white/90">כדי שלא יפלו לכם מהידיים</p>
+                {/* Large Card 2 - Mail */}
+                <div 
+                  className="md:col-span-2 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #EDBB9E10, #FEE1D110)`,
+                    borderRight: `4px solid #EDBB9E`
+                  }}
+                >
+                  <Mail className="w-14 h-14 mb-4" style={{ color: '#EDBB9E' }} />
+                  <h3 className="text-2xl font-bold mb-3 text-[#121F36]">פולואפים אוטומטיים ללידים</h3>
+                  <p className="text-[#3D64A6] text-lg">כדי שלא יפלו לכם מהידיים</p>
                 </div>
 
-                <div className="md:col-span-2 bg-gradient-to-br from-cyan-500 to-blue-500 p-8 rounded-3xl text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
-                  <Bell className="w-14 h-14 mb-4" />
-                  <h3 className="text-2xl font-bold mb-3">יומן משימות ותזכורות יומיות</h3>
-                  <p className="text-white/90 text-lg">תקבלו תזכורות ישירות למייל כדי שלא תשכחו דבר</p>
+                {/* Calendar */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #3E6AE510, #6D94FF10)`,
+                    borderRight: `4px solid #3E6AE5`
+                  }}
+                >
+                  <Calendar className="w-12 h-12 mb-3" style={{ color: '#3E6AE5' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">יומן משימות ותזכורות</h3>
+                  <p className="text-[#3D64A6]">תקבלו תזכורות ישירות למייל</p>
                 </div>
 
-                <div className="bg-indigo-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <Calendar className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">סנכרון יומן גוגל</h3>
-                  <p className="text-white/90">המשימות מסונכרנות אוטומטי</p>
+                {/* RefreshCw */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #CDF3F710, #FFFFFF)`,
+                    borderRight: `4px solid #B6EEF8`
+                  }}
+                >
+                  <RefreshCw className="w-12 h-12 mb-3" style={{ color: '#B6EEF8' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">סנכרון יומן גוגל</h3>
+                  <p className="text-[#3D64A6]">המשימות מסונכרנות אוטומטי</p>
                 </div>
 
-                <div className="bg-teal-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <FileText className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">תיעוד שיחות עם לידים ולקוחות</h3>
-                  <p className="text-white/90">שלא תפספסו שום פרט חשוב</p>
+                {/* MessageSquare */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #D8FACF10, #FFFFFF)`,
+                    borderRight: `4px solid #B3F5A0`
+                  }}
+                >
+                  <MessageSquare className="w-12 h-12 mb-3" style={{ color: '#B3F5A0' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">תיעוד שיחות</h3>
+                  <p className="text-[#3D64A6]">שלא תפספסו שום פרט חשוב</p>
                 </div>
 
-                <div className="bg-yellow-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <TrendingUp className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">סטטיסטיקות על ביצועי העסק</h3>
-                  <p className="text-white/90">פילוחים שונים בזמן אמת</p>
+                {/* BarChart3 */}
+                <div 
+                  className="p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #99A3F010, #FFFFFF)`,
+                    borderRight: `4px solid #99A3F0`
+                  }}
+                >
+                  <BarChart3 className="w-12 h-12 mb-3" style={{ color: '#99A3F0' }} />
+                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">סטטיסטיקות ביצועים</h3>
+                  <p className="text-[#3D64A6]">פילוחים שונים בזמן אמת</p>
                 </div>
 
-                <div className="bg-red-500 p-6 rounded-3xl text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                  <Globe className="w-12 h-12 mb-3" />
-                  <h3 className="text-xl font-bold mb-2">יצירת טופס למילוי אוטומטי ללידים</h3>
-                  <p className="text-white/90">להכניס פנויות מחוץ לשעות</p>
+                {/* Large Card 3 - FormInput */}
+                <div 
+                  className="md:col-span-2 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: `linear-gradient(135deg, #FEE1D110, #FFFFFF)`,
+                    borderRight: `4px solid #EDBB9E`
+                  }}
+                >
+                  <FormInput className="w-14 h-14 mb-4" style={{ color: '#EDBB9E' }} />
+                  <h3 className="text-2xl font-bold mb-3 text-[#121F36]">טופס אוטומטי ללידים</h3>
+                  <p className="text-[#3D64A6] text-lg">להכניס פנויות מחוץ לשעות</p>
                 </div>
               </div>
 
               <div className="text-center mt-16">
-                <p className="text-2xl font-bold text-gradient mb-4">
+                <p className="text-2xl font-bold bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent mb-4">
                   אל תישארו בעבר – העתיד כבר כאן!
                 </p>
-                <p className="text-lg text-muted-foreground">
+                <p className="text-lg text-[#3D64A6]">
                   מעכשיו כל ליד שנכנס למערכת, יקבל הודעת מייל אישית
                 </p>
               </div>
@@ -249,99 +329,80 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Before/After Split Section */}
-        <section className="py-24 bg-muted/30 relative overflow-hidden">
+        {/* Before/After Section */}
+        <section className="py-24 bg-[#1D2F4F]">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-16">
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-white">
                 מה יש לכם היום vs. עם המערכת שלנו
               </h2>
 
               <div className="grid md:grid-cols-2 gap-12">
-                {/* Before - Left Side */}
+                {/* Before */}
                 <div className="relative">
-                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-destructive rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl">
+                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl z-10">
                     ❌
                   </div>
-                  <div className="bg-muted/50 backdrop-blur-sm p-8 rounded-3xl border-2 border-destructive/30 space-y-6">
-                    <h3 className="text-3xl font-bold mb-6">מה יש לכם היום?</h3>
+                  <div 
+                    className="backdrop-blur-sm p-8 rounded-3xl space-y-6"
+                    style={{ 
+                      backgroundColor: 'rgba(127, 29, 29, 0.2)',
+                      border: '2px solid rgba(239, 68, 68, 0.3)'
+                    }}
+                  >
+                    <h3 className="text-3xl font-bold mb-6 text-white">מה יש לכם היום?</h3>
                     
                     <div className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <XCircle className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">ניהול מבולגן ומסורבל</h4>
-                          <p className="text-muted-foreground">אלפי שורות בטבלה, קשה למצוא נתונים, כל המידע מפוזר</p>
+                      {[
+                        { title: "ניהול מבולגן ומסורבל", desc: "אלפי שורות בטבלה, קשה למצוא נתונים, כל המידע מפוזר" },
+                        { title: "אין תזכורות אוטומטיות", desc: "אתם שוכחים משימות, מפספסים לידים ולקוחות נעלמים" },
+                        { title: "תיעוד ידני ומתיש", desc: "אתם כל הזמן צריכים לעדכן נתונים, להוסיף נוסחאות ולוודא שהכול עובד" },
+                        { title: "בלגן בניהול לקוחות", desc: "אין היסטוריה מסודרת, כל מידע מפוזר בקבצים שונים" }
+                      ].map((item, index) => (
+                        <div key={index} className="flex items-start gap-4">
+                          <XCircle className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <h4 className="font-bold text-lg mb-1 text-white">{item.title}</h4>
+                            <p className="text-[#C5D1E3]">{item.desc}</p>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <XCircle className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">אין תזכורות אוטומטיות</h4>
-                          <p className="text-muted-foreground">אתם שוכחים משימות, מפספסים לידים ולקוחות נעלמים</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <XCircle className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">תיעוד ידני ומתיש</h4>
-                          <p className="text-muted-foreground">אתם כל הזמן צריכים לעדכן נתונים, להוסיף נוסחאות ולוודא שהכול עובד</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <XCircle className="w-6 h-6 text-destructive mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">בלגן בניהול לקוחות</h4>
-                          <p className="text-muted-foreground">אין היסטוריה מסודרת, כל מידע מפוזר בקבצים שונים</p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                {/* After - Right Side */}
+                {/* After */}
                 <div className="relative">
-                  <div className="absolute -top-6 -right-6 w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl">
+                  <div 
+                    className="absolute -top-6 -right-6 w-20 h-20 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl z-10"
+                    style={{ backgroundColor: '#B3F5A0' }}
+                  >
                     ✓
                   </div>
-                  <div className="bg-gradient-to-br from-brand-blue to-brand-cyan p-8 rounded-3xl text-white shadow-2xl space-y-6">
-                    <h3 className="text-3xl font-bold mb-6">עם המערכת שלנו:</h3>
+                  <div 
+                    className="backdrop-blur-sm p-8 rounded-3xl shadow-2xl space-y-6"
+                    style={{ 
+                      backgroundColor: '#D8FACF10',
+                      border: '2px solid #B3F5A030'
+                    }}
+                  >
+                    <h3 className="text-3xl font-bold mb-6 text-white">עם המערכת שלנו:</h3>
                     
                     <div className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">הכול במקום אחד</h4>
-                          <p>כל המידע מאורגן ונגיש בכרטיס לקוח מסודר</p>
+                      {[
+                        { title: "הכול במקום אחד", desc: "כל המידע מאורגן ונגיש בכרטיס לקוח מסודר" },
+                        { title: "תזכורות אוטומטיות", desc: "המערכת תזכיר לכם משימות ופעולות חשובות" },
+                        { title: "אוטומציה חכמה", desc: "עדכונים אוטומטיים ללא צורך בתיעוד ידני" },
+                        { title: "ניהול לקוחות מקצועי", desc: "היסטוריה מסודרת ומעקב קל ונוח" }
+                      ].map((item, index) => (
+                        <div key={index} className="flex items-start gap-4">
+                          <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#B3F5A0' }} />
+                          <div>
+                            <h4 className="font-bold text-lg mb-1 text-white">{item.title}</h4>
+                            <p className="text-[#C5D1E3]">{item.desc}</p>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">תזכורות אוטומטיות</h4>
-                          <p>המערכת תזכיר לכם משימות ופעולות חשובות</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">אוטומציה חכמה</h4>
-                          <p>עדכונים אוטומטיים ללא צורך בתיעוד ידני</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" />
-                        <div>
-                          <h4 className="font-bold text-lg mb-1">ניהול לקוחות מקצועי</h4>
-                          <p>היסטוריה מסודרת ומעקב קל ונוח</p>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -350,64 +411,206 @@ const ProductCRM = () => {
           </div>
         </section>
 
+        {/* Pricing Section */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-[#121F36]">
+                מבצע מיוחד – <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">רק עכשיו!</span>
+              </h2>
+
+              <div 
+                className="relative p-12 rounded-3xl shadow-2xl"
+                style={{ 
+                  background: `linear-gradient(135deg, #8FADFF05, #FFFFFF, #B6EEF805)`,
+                  border: `4px solid #6D94FF30`,
+                  boxShadow: `0 0 60px rgba(109, 148, 255, 0.2)`
+                }}
+              >
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl">
+                  מבצע מוגבל!
+                </div>
+
+                <div className="text-center space-y-6">
+                  <div className="space-y-2">
+                    <p className="text-2xl text-[#3D64A6] line-through">₪15,000 מחיר רגיל</p>
+                    <p className="text-7xl font-bold" style={{ color: '#3E6AE5' }}>₪7,500</p>
+                    <p className="text-xl text-[#3D64A6]">חד-פעמי + תחזוקה חודשית</p>
+                  </div>
+
+                  <div className="space-y-3 text-right max-w-md mx-auto py-8">
+                    {[
+                      "מערכת CRM מותאמת אישית",
+                      "כל הפיצ'רים שצריכים לכם",
+                      "הטמעה והדרכה מלאה",
+                      "תמיכה טכנית מתמשכת",
+                      "עדכונים ושיפורים"
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <CheckCircle2 className="w-6 h-6 flex-shrink-0" style={{ color: '#B3F5A0' }} />
+                        <span className="text-lg text-[#121F36]">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button 
+                    asChild 
+                    size="lg" 
+                    className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
+                    style={{ backgroundColor: '#3E6AE5' }}
+                  >
+                    <a href="#contact">רוצה לקבל את המבצע!</a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
-        <section id="faq" className="py-24 bg-white">
+        <section id="faq" className="py-24 bg-[#EAEAEA]">
           <div className="container mx-auto px-4 max-w-4xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-center mb-12">
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-12 text-[#121F36]">
               שאלות נפוצות
             </h2>
-            <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>איך מתחילים להשתמש במערכת?</AccordionTrigger>
-                <AccordionContent>
-                  פשוט מאוד! פנו אלינו ונעזור לכם להגדיר את המערכת לפי הצרכים שלכם.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>האם יש תקופת ניסיון?</AccordionTrigger>
-                <AccordionContent>
-                  כן, יש תקופת ניסיון של 14 ימים ללא התחייבות.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>האם המערכת מתאימה לעסקים קטנים?</AccordionTrigger>
-                <AccordionContent>
-                  בהחלט! המערכת גמישה ומתאימה לעסקים בכל הגדלים.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-4">
-                <AccordionTrigger>איך מתבצע הסנכרון עם יומן גוגל?</AccordionTrigger>
-                <AccordionContent>
-                  הסנכרון מתבצע אוטומטית ברקע, כך שכל המשימות שלכם מתעדכנות בזמן אמת.
-                </AccordionContent>
-              </AccordionItem>
+            <Accordion type="single" collapsible className="space-y-4">
+              {[
+                {
+                  q: "איך מתחילים להשתמש במערכת?",
+                  a: "פשוט מאוד! פנו אלינו ונעזור לכם להגדיר את המערכת לפי הצרכים שלכם.",
+                  color: "#6D94FF",
+                  bg: "#8FADFF"
+                },
+                {
+                  q: "האם יש תקופת ניסיון?",
+                  a: "כן, יש תקופת ניסיון של 14 ימים ללא התחייבות.",
+                  color: "#B6EEF8",
+                  bg: "#CDF3F7"
+                },
+                {
+                  q: "האם המערכת מתאימה לעסקים קטנים?",
+                  a: "בהחלט! המערכת גמישה ומתאימה לעסקים בכל הגדלים.",
+                  color: "#B3F5A0",
+                  bg: "#D8FACF"
+                },
+                {
+                  q: "איך מתבצע הסנכרון עם יומן גוגל?",
+                  a: "הסנכרון מתבצע אוטומטית ברקע, כך שכל המשימות שלכם מתעדכנות בזמן אמת.",
+                  color: "#99A3F0",
+                  bg: "#99A3F0"
+                },
+                {
+                  q: "כמה זמן לוקח ההטמעה?",
+                  a: "תהליך ההטמעה לוקח בין שבוע לשבועיים, תלוי במורכבות העסק שלכם.",
+                  color: "#EDBB9E",
+                  bg: "#FEE1D1"
+                }
+              ].map((item, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ 
+                    backgroundColor: `${item.bg}05`,
+                    borderRight: `4px solid ${item.color}`
+                  }}
+                >
+                  <AccordionTrigger className="px-6 py-4 text-right text-lg font-semibold text-[#121F36] hover:no-underline">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-4 text-right text-[#3D64A6]">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#1D2F4F] via-[#121F36] to-[#121F37] text-white">
+        <section id="contact" className="py-24 bg-gradient-to-br from-[#121F36] to-[#1D2F4F]">
           <div className="container mx-auto px-4 max-w-3xl">
-            <h2 className="text-4xl md:text-6xl font-bold text-center mb-12">
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-white">
               רוצה להתחיל לעבוד חכם?
             </h2>
-            <form className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block mb-2 font-semibold">שם מלא</label>
-                <Input id="name" type="text" placeholder="הכנס את שמך" className="w-full" />
-              </div>
-              <div>
-                <label htmlFor="email" className="block mb-2 font-semibold">אימייל</label>
-                <Input id="email" type="email" placeholder="הכנס את האימייל שלך" className="w-full" />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block mb-2 font-semibold">טלפון</label>
-                <Input id="phone" type="tel" placeholder="הכנס את מספר הטלפון שלך" className="w-full" />
-              </div>
-              <Button type="submit" className="w-full bg-[#3E6AE5] hover:bg-[#6D94FF] text-white py-4 text-lg font-bold transition-all duration-300">
-                שלח
-              </Button>
-            </form>
+            <p className="text-xl text-center text-[#C5D1E3] mb-12">
+              השאירו פרטים ונחזור אליכם בהקדם!
+            </p>
+            
+            <div 
+              className="backdrop-blur-md p-8 md:p-12 rounded-3xl"
+              style={{ 
+                backgroundColor: '#8FADFF05',
+                border: '2px solid #6D94FF20'
+              }}
+            >
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block mb-2 font-semibold text-white">שם מלא</label>
+                  <Input 
+                    id="name" 
+                    type="text" 
+                    placeholder="הכנס את שמך" 
+                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block mb-2 font-semibold text-white">אימייל</label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="example@email.com" 
+                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block mb-2 font-semibold text-white">טלפון</label>
+                  <Input 
+                    id="phone" 
+                    type="tel" 
+                    placeholder="050-1234567" 
+                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="block mb-2 font-semibold text-white">הודעה (אופציונלי)</label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="ספרו לנו על העסק שלכם..." 
+                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF] min-h-32" 
+                  />
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full py-6 text-lg font-bold transition-all duration-300 hover:scale-105"
+                  style={{ backgroundColor: '#B3F5A0', color: '#121F36' }}
+                >
+                  שלח פנייה
+                </Button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-24 bg-gradient-to-b from-[#1D2F4F] via-[#121F36] to-[#121F37] text-center">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="bg-gradient-to-l from-[#6D94FF] to-[#B6EEF8] bg-clip-text text-transparent">
+                תפסיקו לבזבז זמן על ניהול ידני
+              </span>
+            </h2>
+            <p className="text-2xl text-[#C5D1E3] mb-8 max-w-3xl mx-auto">
+              התחילו לעבוד חכם עם מערכת CRM שתשנה לכם את העסק!
+            </p>
+            <Button 
+              asChild 
+              size="lg" 
+              className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
+              style={{ backgroundColor: '#B3F5A0', color: '#121F36' }}
+            >
+              <a href="#contact">בואו נתחיל!</a>
+            </Button>
           </div>
         </section>
 
