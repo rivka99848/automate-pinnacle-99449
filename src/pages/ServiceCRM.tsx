@@ -359,89 +359,91 @@ const ServiceCRM = () => {
             </div>
           </div>
 
-          {/* תהליך העבודה */}
-          <div 
-            ref={processReveal.ref}
-            className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
-              processReveal.isVisible 
-                ? 'opacity-100 translate-x-0' 
-                : 'opacity-0 translate-x-20'
-            }`}
-          >
-            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
-              
-              {/* כותרת מימין - sticky */}
-              <div className="sticky top-32">
-                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  תהליך העבודה <span className="text-brand-purple">איתנו</span>
-                </h2>
-                <p className="text-xl text-foreground/70 mt-4">
-                  אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
-                </p>
-              </div>
-              
-              {/* תוכן משמאל */}
-              <div className="space-y-10">
+          {/* תהליך העבודה - עם רקע לבן */}
+          <div className="bg-white py-16 md:py-24 -mx-4 px-4">
+            <div 
+              ref={processReveal.ref}
+              className={`max-w-6xl mx-auto mb-8 transition-all duration-1000 delay-200 ${
+                processReveal.isVisible 
+                  ? 'opacity-100 translate-x-0' 
+                  : 'opacity-0 translate-x-20'
+              }`}
+            >
+              <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
                 
-                {/* שלב 1 */}
-                <div className="border-r-4 border-brand-blue/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Target className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.1s" }} />
-                    צלילה לעומק הצרכים והאסטרטגיה
-                  </h3>
-                  <p className="text-foreground/70">
-                    אנו מתחילים בהקשבה מעמיקה וירידה לשטח. בפגישה מקיפה, אנו מכירים לעומק את צורת העבודה, 
-                    הדפוסים הניהוליים והכשלים הקיימים בעסק שלך. המטרה היא להבין את הצרכים המדויקים, 
-                    כדי שנוכל להתאים את המערכת אליך – ולא להיפך.
+                {/* כותרת מימין - sticky */}
+                <div className="sticky top-32">
+                  <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                    תהליך העבודה <span className="text-brand-purple">איתנו</span>
+                  </h2>
+                  <p className="text-xl text-gray-600 mt-4">
+                    אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
                   </p>
                 </div>
                 
-                {/* שלב 2 */}
-                <div className="border-r-4 border-brand-cyan/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Wrench className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.2s" }} />
-                    בניית המערכת והתאמתה
-                  </h3>
-                  <p className="text-foreground/70 mb-3">
-                    לאחר שהבנו את הצרכים, אנו מתרגמים אותם למבנה דיגיטלי:
-                  </p>
-                  <ul className="space-y-2 text-foreground/70 mr-4">
-                    <li>• תכנון מבנה אסטרטגי והקמת המערכת בהתאם לתהליכי העבודה שלך.</li>
-                    <li>• הטמעת אוטומציות חכמות (תזכורות, מעקבים) לחיסכון בזמן.</li>
-                    <li>• הקמה של דשבורד מנהלים אינטואיטיבי שמציג נתונים בזמן אמת.</li>
-                  </ul>
-                  <p className="text-foreground/70 mt-3">התוצאה היא מערכת מדויקת ומוכנה לפעולה.</p>
+                {/* תוכן משמאל */}
+                <div className="space-y-10">
+                  
+                  {/* שלב 1 */}
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                      <Target className="w-6 h-6 text-gray-500 animate-fade-in hover:text-brand-blue hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.1s" }} />
+                      צלילה לעומק הצרכים והאסטרטגיה
+                    </h3>
+                    <p className="text-gray-600">
+                      אנו מתחילים בהקשבה מעמיקה וירידה לשטח. בפגישה מקיפה, אנו מכירים לעומק את צורת העבודה, 
+                      הדפוסים הניהוליים והכשלים הקיימים בעסק שלך. המטרה היא להבין את הצרכים המדויקים, 
+                      כדי שנוכל להתאים את המערכת אליך – ולא להיפך.
+                    </p>
+                  </div>
+                  
+                  {/* שלב 2 */}
+                  <div className="border-r-4 border-brand-cyan/50 pr-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                      <Wrench className="w-6 h-6 text-gray-500 animate-fade-in hover:text-brand-blue hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.2s" }} />
+                      בניית המערכת והתאמתה
+                    </h3>
+                    <p className="text-gray-600 mb-3">
+                      לאחר שהבנו את הצרכים, אנו מתרגמים אותם למבנה דיגיטלי:
+                    </p>
+                    <ul className="space-y-2 text-gray-600 mr-4">
+                      <li>• תכנון מבנה אסטרטגי והקמת המערכת בהתאם לתהליכי העבודה שלך.</li>
+                      <li>• הטמעת אוטומציות חכמות (תזכורות, מעקבים) לחיסכון בזמן.</li>
+                      <li>• הקמה של דשבורד מנהלים אינטואיטיבי שמציג נתונים בזמן אמת.</li>
+                    </ul>
+                    <p className="text-gray-600 mt-3">התוצאה היא מערכת מדויקת ומוכנה לפעולה.</p>
+                  </div>
+                  
+                  {/* שלב 3 */}
+                  <div className="border-r-4 border-brand-purple/50 pr-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                      <BookOpen className="w-6 h-6 text-gray-500 animate-fade-in hover:text-brand-blue hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.3s" }} />
+                      הטמעה, הדרכה וספריית ידע
+                    </h3>
+                    <p className="text-gray-600 mb-3">כדי להבטיח שימוש מוצלח, אנו מבצעים:</p>
+                    <ul className="space-y-2 text-gray-600 mr-4">
+                      <li>• הטמעה מדורגת וחלקה במעבר למערכת.</li>
+                      <li>• הדרכות מותאמות אישית לצוותים השונים, תוך התמקדות בתפקיד כל משתמש.</li>
+                      <li>• ספריית סרטוני הדרכה זמינה לשימוש תמידי, להכשרת עובדים חדשים ולרענון ידע.</li>
+                    </ul>
+                    <p className="text-gray-600 mt-3">שלב זה מוודא שכל משתמש מרגיש בטוח לעבוד עם הפתרון החדש.</p>
+                  </div>
+                  
+                  {/* שלב 4 */}
+                  <div className="border-r-4 border-brand-blue/50 pr-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+                      <Handshake className="w-6 h-6 text-gray-500 animate-fade-in hover:text-brand-blue hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.4s" }} />
+                      אחריות, תמיכה וליווי מתמשך
+                    </h3>
+                    <p className="text-gray-600 mb-3">אנו דואגים להצלחה שלך גם לאחר ההשקה:</p>
+                    <ul className="space-y-2 text-gray-600 mr-4">
+                      <li>• אחריות מלאה לחודש הראשון לטיפול ותיקון כל כיוונון נדרש.</li>
+                      <li>• אפשרות לליווי חודשי צמוד (אופציונלי) – לתמיכה מתקדמת, שיפור מתמיד והתאמות בהתאם לצורכי העסק המשתנים.</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="h-px bg-gradient-to-l from-brand-blue/30 via-brand-blue/20 to-transparent" />
                 </div>
-                
-                {/* שלב 3 */}
-                <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <BookOpen className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.3s" }} />
-                    הטמעה, הדרכה וספריית ידע
-                  </h3>
-                  <p className="text-foreground/70 mb-3">כדי להבטיח שימוש מוצלח, אנו מבצעים:</p>
-                  <ul className="space-y-2 text-foreground/70 mr-4">
-                    <li>• הטמעה מדורגת וחלקה במעבר למערכת.</li>
-                    <li>• הדרכות מותאמות אישית לצוותים השונים, תוך התמקדות בתפקיד כל משתמש.</li>
-                    <li>• ספריית סרטוני הדרכה זמינה לשימוש תמידי, להכשרת עובדים חדשים ולרענון ידע.</li>
-                  </ul>
-                  <p className="text-foreground/70 mt-3">שלב זה מוודא שכל משתמש מרגיש בטוח לעבוד עם הפתרון החדש.</p>
-                </div>
-                
-                {/* שלב 4 */}
-                <div className="border-r-4 border-brand-blue/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
-                    <Handshake className="w-6 h-6 text-white/70 animate-fade-in hover:text-brand-cyan hover:scale-110 transition-all duration-300" style={{ animationDelay: "0.4s" }} />
-                    אחריות, תמיכה וליווי מתמשך
-                  </h3>
-                  <p className="text-foreground/70 mb-3">אנו דואגים להצלחה שלך גם לאחר ההשקה:</p>
-                  <ul className="space-y-2 text-foreground/70 mr-4">
-                    <li>• אחריות מלאה לחודש הראשון לטיפול ותיקון כל כיוונון נדרש.</li>
-                    <li>• אפשרות לליווי חודשי צמוד (אופציונלי) – לתמיכה מתקדמת, שיפור מתמיד והתאמות בהתאם לצורכי העסק המשתנים.</li>
-                  </ul>
-                </div>
-                
-                <div className="h-px bg-gradient-to-l from-brand-cyan/50 via-brand-blue/30 to-transparent" />
               </div>
             </div>
           </div>
