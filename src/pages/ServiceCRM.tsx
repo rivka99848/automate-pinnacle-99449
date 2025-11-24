@@ -132,111 +132,85 @@ const ServiceCRM = () => {
             ref={problemsReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 delay-200 ${
               problemsReveal.isVisible 
-                ? 'opacity-100 translate-x-0' 
-                : 'opacity-0 -translate-x-20'
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-10'
             }`}
           >
-            {/* Layout: כותרת מימין, תוכן משמאל */}
-            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+            {/* כותרת ממורכזת */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
+                💡 הופכים את הניהול ל
+                <span className="text-brand-cyan">פשוט וחכם</span>
+              </h2>
+              <p className="text-xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
+                השירות שלנו נועד לתת מענה מדויק לנקודות התורפה שמכבידות על עסקים בצמיחה. 
+                אנו משנים את הדרך שבה המידע זורם בעסק, ומאפשרים לכם להתמקד בלקוחות ובמכירות.
+              </p>
+            </div>
+            
+            {/* שני ריבועים ממורכזים */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               
-              {/* צד ימין - כותרת */}
-              <div className="sticky top-32">
-                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  💡 הופכים את הניהול ל
-                  <span className="text-brand-cyan">פשוט וחכם</span>
-                </h2>
-                <p className="text-xl text-foreground/70 mt-4">
-                  כך העסק שלך עובד איתנו
+              {/* ריבוע ימני - תכלת - האתגרים */}
+              <div className="bg-brand-cyan/10 border border-brand-cyan/30 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
+                  🛑 האתגרים שאנו פותרים עבורך
+                </h3>
+                <p className="text-foreground/70 mb-6">
+                  רוב העסקים מגיעים אלינו כשהם מתמודדים עם תהליכים לא יעילים:
                 </p>
-              </div>
-              
-              {/* צד שמאל - תוכן */}
-              <div className="space-y-12">
-                
-                {/* פסקת פתיחה */}
-                <p className="text-xl text-foreground/80 leading-relaxed">
-                  השירות שלנו נועד לתת מענה מדויק לנקודות התורפה שמכבידות על עסקים בצמיחה. 
-                  אנו משנים את הדרך שבה המידע זורם בעסק, ומאפשרים לכם להתמקד בלקוחות ובמכירות.
-                </p>
-                
-                {/* קו מפריד */}
-                <div className="h-px bg-gradient-to-l from-brand-blue/50 via-brand-cyan/30 to-transparent" />
-                
-                {/* האתגרים */}
-                <div>
-                  <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
-                    🛑 האתגרים שאנו פותרים עבורך
-                  </h3>
-                  <p className="text-foreground/70 mb-6">
-                    רוב העסקים מגיעים אלינו כשהם מתמודדים עם תהליכים לא יעילים:
-                  </p>
-                  <div className="space-y-6">
-                    <div className="border-r-4 border-red-500/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">פיזור מידע מתיש:</h4>
-                      <p className="text-foreground/70">
-                        נתונים חשובים על לקוחות, שיחות ומעקבים מפוזרים בין תיבת המייל, קובצי אקסל ושיחות בוואטסאפ. 
-                        כתוצאה מכך, קשה מאוד לקבל החלטות מבוססות, וזמן יקר מתבזבז על ניסיונות איחוד ואיסוף.
-                      </p>
-                    </div>
-                    <div className="border-r-4 border-red-500/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">איבוד לידים ועסקאות:</h4>
-                      <p className="text-foreground/70">
-                        קצב העבודה המהיר גורם לכך שקל לשכוח לחזור ללקוח פוטנציאלי, לאתר הצעת מחיר שנשלחה או לעקוב אחרי משימה קריטית. 
-                        ההיעדר של מערכת מעקב מסודרת מביא לאובדן הזדמנויות עסקיות.
-                      </p>
-                    </div>
-                    <div className="border-r-4 border-red-500/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">תמונת ביצועים מעורפלת:</h4>
-                      <p className="text-foreground/70">
-                        ללא דשבורד מרכזי ועדכני, אין ודאות לגבי ביצועי הצוות, חזוי המכירות לחודש הבא, או זיהוי מדויק של החסמים בדרך לסגירת עסקה. 
-                        אתם מנהלים את העסק בלי יכולת תכנון מדויקת.
-                      </p>
-                    </div>
+                <div className="space-y-5">
+                  <div className="border-r-4 border-red-500/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">פיזור מידע מתיש:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      נתונים חשובים מפוזרים בין מייל, אקסל ווואטסאפ.
+                    </p>
+                  </div>
+                  <div className="border-r-4 border-red-500/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">איבוד לידים ועסקאות:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      קשה לעקוב אחרי כל משימה ולקוח פוטנציאלי.
+                    </p>
+                  </div>
+                  <div className="border-r-4 border-red-500/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">תמונת ביצועים מעורפלת:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      אין ודאות על ביצועי הצוות וחזוי המכירות.
+                    </p>
                   </div>
                 </div>
-                
-                {/* קו מפריד */}
-                <div className="h-px bg-gradient-to-l from-brand-cyan/50 via-brand-blue/30 to-transparent" />
-                
-                {/* הפתרונות */}
-                <div>
-                  <h3 className="text-2xl font-bold text-brand-cyan mb-6 flex items-center gap-2">
-                    ✅ הדרך החדשה לניהול העסק
-                  </h3>
-                  <p className="text-foreground/70 mb-6">
-                    השירות שלנו מסדר את העסק שלך ומוביל לשליטה מוחלטת:
-                  </p>
-                  <div className="space-y-6">
-                    <div className="border-r-4 border-brand-cyan/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">שליטה מלאה וריכוז נתונים:</h4>
-                      <p className="text-foreground/70">
-                        אנו יוצרים מרכז ידע אחד, שבו כל פיסת מידע – משיחה ראשונה ועד חשבונית סופית – מאורגנת, מתויגת ומאובטחת. 
-                        זה מאפשר לכם גישה מהירה וקלה לנתונים, וקבלת החלטות מבוססות ומדויקות.
-                      </p>
-                    </div>
-                    <div className="border-r-4 border-brand-cyan/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">מנגנוני מעקב אוטומטיים:</h4>
-                      <p className="text-foreground/70">
-                        המערכת מטפלת באופן אוטומטי בתזכורות, ניהול משימות חכם ומעקב אחרי כל נקודת מגע עם הלקוח. 
-                        תהליכי העבודה הופכים לשיטתיים ואף לקוח או משימה לא "נופלים" בדרך.
-                      </p>
-                    </div>
-                    <div className="border-r-4 border-brand-cyan/50 pr-6">
-                      <h4 className="text-lg font-bold text-white mb-2">תובנות ניהוליות בזמן אמת:</h4>
-                      <p className="text-foreground/70">
-                        אנו מספקים לך דשבורד מנהלים אינטואיטיבי המציג נתונים חיים על הביצועים. 
-                        כך ניתן לזהות הזדמנויות, לטפל בחסמים באופן מיידי, ולתכנן את העתיד של העסק בבהירות וביטחון.
-                      </p>
-                    </div>
+              </div>
+              
+              {/* ריבוע שמאלי - לבן - הפתרונות */}
+              <div className="bg-white/10 border border-white/20 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-brand-cyan mb-6 flex items-center gap-2">
+                  ✅ הדרך החדשה לניהול העסק
+                </h3>
+                <p className="text-foreground/70 mb-6">
+                  השירות שלנו מסדר את העסק שלך ומוביל לשליטה מוחלטת:
+                </p>
+                <div className="space-y-5">
+                  <div className="border-r-4 border-brand-cyan/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">שליטה מלאה וריכוז נתונים:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      כל המידע במקום אחד - מאורגן, מתויג ומאובטח.
+                    </p>
+                  </div>
+                  <div className="border-r-4 border-brand-cyan/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">מנגנוני מעקב אוטומטיים:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      תזכורות וניהול משימות חכם - אף לקוח לא "נופל".
+                    </p>
+                  </div>
+                  <div className="border-r-4 border-brand-cyan/50 pr-4">
+                    <h4 className="text-lg font-bold text-white mb-1">תובנות ניהוליות בזמן אמת:</h4>
+                    <p className="text-foreground/70 text-sm">
+                      דשבורד אינטואיטיבי עם נתונים חיים לקבלת החלטות.
+                    </p>
                   </div>
                 </div>
-                
-                {/* משפט סיום */}
-                <p className="text-2xl font-bold text-brand-blue text-center pt-8">
-                  מוכנים להפוך את הניהול לכלי הצמיחה העיקרי שלכם?
-                </p>
-                
               </div>
+              
             </div>
           </div>
 
