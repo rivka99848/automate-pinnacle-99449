@@ -36,51 +36,61 @@ const ServiceBots = () => {
           </div>
 
           {/* למה בוטים? */}
-          <div className="max-w-5xl mx-auto mb-24">
-            <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-green/30 transition-all">
-              <h2 className="text-3xl font-bold mb-12 text-center">למה בוט זה בדיוק מה שאתם צריכים?</h2>
-              <div className="grid md:grid-cols-2 gap-12">
-                <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-destructive">🔴 המצב המוכר:</h3>
-                  <ul className="space-y-4 text-foreground/70">
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>שאלות חוזרות שלוקחות הרבה זמן</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>פניות בשעות לא שגרתיות שאף אחד לא עונה להן</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>לקוחות מתוסכלים שמחכים למענה</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>הזמנות שאובדות בין ההודעות</span>
-                    </li>
-                  </ul>
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  למה בוט זה בדיוק מה <span className="text-brand-green">שאתם צריכים?</span>
+                </h2>
+              </div>
+              
+              {/* תוכן משמאל */}
+              <div className="space-y-10">
+                <div className="h-px bg-gradient-to-l from-brand-green/50 via-brand-cyan/30 to-transparent" />
+                
+                {/* המצב המוכר */}
+                <div>
+                  <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
+                    🔴 המצב המוכר
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">שאלות חוזרות שלוקחות הרבה זמן</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">פניות בשעות לא שגרתיות שאף אחד לא עונה להן</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">לקוחות מתוסכלים שמחכים למענה</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">הזמנות שאובדות בין ההודעות</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-brand-green">✅ הפתרון:</h3>
-                  <ul className="space-y-4 text-foreground/70">
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>מענה מיידי לכל שאלה, בכל שעה</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>זמינות 24/7 ללא עלות נוספת</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>לקוחות מרוצים שמקבלים שירות מהיר</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>כל ההזמנות מתועדות ומסודרות</span>
-                    </li>
-                  </ul>
+                
+                <div className="h-px bg-gradient-to-l from-brand-green/50 via-brand-cyan/30 to-transparent" />
+                
+                {/* הפתרון */}
+                <div>
+                  <h3 className="text-2xl font-bold text-brand-green mb-6 flex items-center gap-2">
+                    ✅ הפתרון
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="border-r-4 border-brand-green/50 pr-6">
+                      <p className="text-foreground/70">מענה מיידי לכל שאלה, בכל שעה</p>
+                    </div>
+                    <div className="border-r-4 border-brand-green/50 pr-6">
+                      <p className="text-foreground/70">זמינות 24/7 ללא עלות נוספת</p>
+                    </div>
+                    <div className="border-r-4 border-brand-green/50 pr-6">
+                      <p className="text-foreground/70">לקוחות מרוצים שמקבלים שירות מהיר</p>
+                    </div>
+                    <div className="border-r-4 border-brand-green/50 pr-6">
+                      <p className="text-foreground/70">כל ההזמנות מתועדות ומסודרות</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -189,10 +199,17 @@ const ServiceBots = () => {
           </div>
 
           {/* איך זה עובד */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <div className="bg-card p-10 rounded-3xl">
-              <h2 className="text-3xl font-bold mb-8 text-center">איך זה עובד?</h2>
-              <div className="space-y-6">
+          <div className="max-w-6xl mx-auto mb-20">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  איך זה <span className="text-brand-green">עובד?</span>
+                </h2>
+              </div>
+              
+              {/* תוכן משמאל */}
+              <div className="space-y-8">
                 {[
                   {
                     number: "1",
@@ -214,15 +231,13 @@ const ServiceBots = () => {
                     title: "השקה ותמיכה",
                     description: "משיקים, עוקבים אחרי הביצועים ומשפרים לפי הצורך"
                   }
-                ].map((step) => (
-                  <div key={step.number} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-green/20 flex items-center justify-center flex-shrink-0">
-                      <span className="font-bold text-brand-green text-lg">{step.number}</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground">{step.description}</p>
-                    </div>
+                ].map((step, index) => (
+                  <div key={step.number} className="border-r-4 border-brand-green/50 pr-6">
+                    <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                      <span className="bg-brand-green/20 px-3 py-1 rounded-lg text-brand-green">{step.number}</span>
+                      {step.title}
+                    </h3>
+                    <p className="text-foreground/70">{step.description}</p>
                   </div>
                 ))}
               </div>
