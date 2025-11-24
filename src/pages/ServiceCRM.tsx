@@ -251,7 +251,7 @@ const ServiceCRM = () => {
                   ))}
                 </div>
 
-                <div className="relative space-y-6">
+                <div className="relative">
                   {modules.map((module, index) => {
                     const cardOffset = Math.max(0, cardProgress - index * 0.35);
                     const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
@@ -275,10 +275,10 @@ const ServiceCRM = () => {
                         key={index}
                         className="group/card sticky transition-all duration-300 ease-out"
                         style={{
-                          top: `${120 + index * 15}px`,
+                          top: '150px',
                           transform: `scale(${scale}) translateY(${translateY}px)`,
                           opacity: opacity,
-                          zIndex: modules.length - index
+                          zIndex: index + 1
                         }}
                       >
                         <div className={`
