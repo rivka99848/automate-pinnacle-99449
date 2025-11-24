@@ -1,8 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Bot, Zap } from "lucide-react";
+import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users } from "lucide-react";
 import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
 import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
 import automationWorkflowImage from "@/assets/automation-workflow.jpg";
@@ -155,38 +156,43 @@ const Services = () => {
             </h2>
             <div className="grid md:grid-cols-4 gap-8">
               {[
-                { num: "1", title: "פגישת ייעוץ", desc: "נפגשים ומבינים את הצרכים שלכם" },
-                { num: "2", title: "תכנון מותאם", desc: "מעצבים את הפתרון בדיוק בשבילכם" },
-                { num: "3", title: "פיתוח ובנייה", desc: "בונים ומחברים למערכות הקיימות" },
-                { num: "4", title: "ליווי ותמיכה", desc: "מלווים אתכם כל הדרך" }
-              ].map((step) => (
-                <div key={step.num} className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-primary/30">
-                    <span className="text-2xl font-bold text-primary">{step.num}</span>
+                { icon: MessageSquare, title: "פגישת ייעוץ", desc: "נפגשים ומבינים את הצרכים שלכם" },
+                { icon: Puzzle, title: "תכנון מותאם", desc: "מעצבים את הפתרון בדיוק בשבילכם" },
+                { icon: Code, title: "פיתוח ובנייה", desc: "בונים ומחברים למערכות הקיימות" },
+                { icon: Users, title: "ליווי ותמיכה", desc: "מלווים אתכם כל הדרך" }
+              ].map((step) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.title} className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-primary/30">
+                      <Icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-bold text-lg mb-2 text-gray-900">{step.title}</h3>
+                    <p className="text-sm text-gray-600">{step.desc}</p>
                   </div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900">{step.title}</h3>
-                  <p className="text-sm text-gray-600">{step.desc}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Dark Background */}
+      {/* CTA Section */}
       <section className="bg-gradient-to-br from-background to-brand-darker py-24">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            <span className="text-gradient">מוכנים להתחיל?</span>
-          </h2>
-          <p className="text-xl text-foreground/70 mb-10 max-w-2xl mx-auto leading-relaxed">
-            בואו נדבר על איך אנחנו יכולים לעזור לעסק שלכם לצמוח ולהשתפר
-          </p>
-          <Link to="/contact">
-            <Button size="lg" className="rounded-full text-lg px-8 py-6">
-              קבע פגישת ייעוץ חינם
-            </Button>
-          </Link>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+              מוכנים להתחיל?
+            </h2>
+            <p className="text-xl md:text-2xl text-foreground/80 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              בואו נדבר על איך אנחנו יכולים לעזור לעסק שלכם
+            </p>
+          </div>
+
+          {/* Contact Form Section */}
+          <div id="contact-form" className="scroll-mt-20">
+            <ContactFormSection />
+          </div>
         </div>
       </section>
 

@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Sparkles } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -51,26 +50,19 @@ const Contact = () => {
       <Header />
 
       <main className="pt-32 pb-24">
-        <div className="container mx-auto px-4">
-          {/* Contact Form */}
-          <div className="max-w-6xl mx-auto">
-            <div className="bg-background rounded-3xl p-6 md:p-12 relative shadow-2xl border border-border/50">
-              {/* כוכבית מעוצבת */}
-              <div
-                className="absolute top-4 right-4 md:top-6 md:right-6"
-                style={{
-                  animation: "scale-in 0.8s ease-out forwards, spin 0.8s ease-out forwards",
-                }}
-              >
-                <Sparkles className="w-12 h-12 md:w-16 md:h-16 text-[#8FADFF] drop-shadow-[0_0_20px_rgba(143,173,255,0.6)]" />
-              </div>
-
-              {/* כותרת */}
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-reisinger font-bold text-center mb-8 md:mb-12 text-foreground animate-fade-in pr-12 md:pr-0">
-                הגיע הזמן לעשות סדר בעסק שלכם<span className="text-[#8FADFF]">{"<<"}</span>
+        <section className="bg-gradient-to-b from-background to-brand-darker py-8 md:py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+                מוכנים להתחיל?
               </h1>
+              <p className="text-xl md:text-2xl text-foreground/80 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+                בואו נדבר על איך אנחנו יכולים לעזור לעסק שלכם
+              </p>
+            </div>
 
-              {/* טופס */}
+            <div className="max-w-4xl mx-auto">
+              {/* טופס ישירות על הרקע */}
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Grid של 4 שדות */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -194,25 +186,22 @@ const Contact = () => {
                   </Button>
                 </div>
               </form>
-            </div>
 
-            {/* Additional Info */}
-            <div className="mt-12 text-center">
-              <p className="text-lg text-muted-foreground mb-4">
-                או שלח לנו הודעה ישירות בוואטסאפ
-              </p>
-              <Button asChild variant="outline" size="lg" className="rounded-full">
-                <a
-                  href="https://wa.me/972501234567"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {/* WhatsApp Alternative */}
+              <div className="mt-12 text-center">
+                <p className="text-lg text-foreground/80 mb-4">או שלח לנו הודעה ישירות בוואטסאפ</p>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full"
+                  onClick={() => window.open('https://wa.me/972501234567', '_blank')}
                 >
                   פתח שיחה בוואטסאפ
-                </a>
-              </Button>
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </main>
 
       <Footer />
