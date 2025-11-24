@@ -40,7 +40,7 @@ const ProductCRM = () => {
                 <div className="aspect-video">
                   <iframe
                     className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    src="https://www.youtube.com/embed/PcqIpmv66wM"
                     title="מערכת CRM - סרטון הדגמה"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
