@@ -223,8 +223,11 @@ const ServiceCRM = () => {
                 {modules.map((module, index) => {
                   const cardOffset = Math.max(0, cardProgress - index * 0.35);
                   const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
-                  const opacity = 1; // הכרטיסים יישארו אטומים לחלוטין
+                  const opacity = 1;
                   const translateY = cardOffset * -60;
+                  
+                  // ✨ זיהוי סוג הכרטיס - זוגי = לבן, אי-זוגי = כחול
+                  const isWhiteCard = index % 2 === 0;
                   
                   const gradients = [
                     'from-brand-blue/20 to-brand-cyan/10',
@@ -246,23 +249,55 @@ const ServiceCRM = () => {
                         zIndex: modules.length - index
                       }}
                     >
-                      <div className="relative p-10 border-2 border-white/10 rounded-3xl bg-brand-dark/95 overflow-hidden shadow-2xl hover:shadow-brand-blue/30 hover:scale-[1.02] hover:-translate-y-2 hover:border-brand-blue/50 transition-all duration-500">
-                        {/* שכבת gradient דקורטיבית */}
-                        <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-3xl`} />
+                      <div className={`
+                        relative p-10 rounded-3xl overflow-hidden shadow-2xl 
+                        transition-all duration-500
+                        ${isWhiteCard 
+                          ? 'bg-white/95 border-2 border-gray-200 hover:border-brand-blue/50 hover:shadow-brand-blue/20' 
+                          : 'bg-brand-dark/95 border-2 border-white/10 hover:border-brand-cyan/50 hover:shadow-brand-cyan/30'
+                        }
+                        hover:scale-[1.02] hover:-translate-y-2
+                      `}>
+                        {/* שכבת gradient דקורטיבית - רק לכרטיסים כחולים */}
+                        {!isWhiteCard && (
+                          <div className={`absolute inset-0 -z-10 bg-gradient-to-br ${gradients[index % gradients.length]} backdrop-blur-3xl`} />
+                        )}
                         
                         {/* התוכן */}
                         <div className="relative z-10">
                           {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
                           <div className="flex items-start gap-8">
-                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-blue/40 to-brand-cyan/40 flex items-center justify-center flex-shrink-0 shadow-lg group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500">
-                              <module.icon className="w-11 h-11 text-brand-blue group-hover/card:text-brand-cyan transition-colors duration-500" />
+                            <div className={`
+                              w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg
+                              group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500
+                              ${isWhiteCard
+                                ? 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20'
+                                : 'bg-gradient-to-br from-white/20 to-gray-100/10'
+                              }
+                            `}>
+                              <module.icon className={`
+                                w-11 h-11 transition-colors duration-500
+                                ${isWhiteCard 
+                                  ? 'text-brand-blue group-hover/card:text-brand-cyan' 
+                                  : 'text-brand-cyan group-hover/card:text-white'
+                                }
+                              `} />
                             </div>
                             
                             <div className="flex-1">
-                              <h3 className="text-2xl font-bold mb-4 group-hover/card:text-brand-blue transition-colors duration-300">
+                              <h3 className={`
+                                text-2xl font-bold mb-4 transition-colors duration-300
+                                ${isWhiteCard 
+                                  ? 'text-gray-900 group-hover/card:text-brand-blue' 
+                                  : 'text-white group-hover/card:text-brand-cyan'
+                                }
+                              `}>
                                 {module.title}
                               </h3>
-                              <p className="text-foreground/80 text-lg leading-relaxed">
+                              <p className={`
+                                text-lg leading-relaxed
+                                ${isWhiteCard ? 'text-gray-700' : 'text-foreground/80'}
+                              `}>
                                 {module.description}
                               </p>
                             </div>
