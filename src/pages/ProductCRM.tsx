@@ -46,7 +46,7 @@ const ProductCRM = () => {
                   בלי צורך במערכת יקרה ומסובכת.
                 </p>
                 
-                <p className="text-3xl md:text-5xl font-reisinger font-bold text-white block my-6 leading-tight">
+                <p className="text-3xl md:text-5xl font-reisinger font-bold text-white block my-6 leading-tight animate-fade-in-up" style={{ animationDelay: '0.4s', animationFillMode: 'both' }}>
                   עדיין מנהל את העסק שלך כאילו זה 2005?
                 </p>
                 
