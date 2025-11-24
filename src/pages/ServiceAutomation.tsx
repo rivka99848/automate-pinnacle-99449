@@ -36,51 +36,61 @@ const ServiceAutomation = () => {
           </div>
 
           {/* למה אוטומציה? */}
-          <div className="max-w-5xl mx-auto mb-24">
-            <div className="p-12 border border-white/10 rounded-3xl hover:border-brand-purple/30 transition-all">
-              <h2 className="text-3xl font-bold mb-12 text-center">למה אוטומציה משנה את המשחק?</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-destructive">🔴 המציאות המוכרת:</h3>
-                  <ul className="space-y-3 text-foreground/70">
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>משימות חוזרות שגוזלות שעות כל יום</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>העתקת מידע בין מערכות שונות ידנית</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>טעויות אנוש שעולות כסף</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>•</span>
-                      <span>דברים שנופלים בין הכיסאות</span>
-                    </li>
-                  </ul>
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  למה אוטומציה <span className="text-brand-purple">משנה את המשחק?</span>
+                </h2>
+              </div>
+              
+              {/* תוכן משמאל */}
+              <div className="space-y-10">
+                <div className="h-px bg-gradient-to-l from-brand-purple/50 via-brand-blue/30 to-transparent" />
+                
+                {/* המציאות המוכרת */}
+                <div>
+                  <h3 className="text-2xl font-bold text-red-500 mb-6 flex items-center gap-2">
+                    🔴 המציאות המוכרת
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">משימות חוזרות שגוזלות שעות כל יום</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">העתקת מידע בין מערכות שונות ידנית</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">טעויות אנוש שעולות כסף</p>
+                    </div>
+                    <div className="border-r-4 border-red-500/50 pr-6">
+                      <p className="text-foreground/70">דברים שנופלים בין הכיסאות</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-brand-purple">✅ החיים עם אוטומציה:</h3>
-                  <ul className="space-y-3 text-foreground/70">
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>חיסכון של עד 70% בזמן ביצוע משימות</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>הכול עובד אוטומטית, ללא מעורבות שלכם</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>דיוק מלא - אפס טעויות</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span>✓</span>
-                      <span>שום דבר לא יפול - הכול מתועד</span>
-                    </li>
-                  </ul>
+                
+                <div className="h-px bg-gradient-to-l from-brand-purple/50 via-brand-cyan/30 to-transparent" />
+                
+                {/* החיים עם אוטומציה */}
+                <div>
+                  <h3 className="text-2xl font-bold text-brand-purple mb-6 flex items-center gap-2">
+                    ✅ החיים עם אוטומציה
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="border-r-4 border-brand-purple/50 pr-6">
+                      <p className="text-foreground/70">חיסכון של עד 70% בזמן ביצוע משימות</p>
+                    </div>
+                    <div className="border-r-4 border-brand-purple/50 pr-6">
+                      <p className="text-foreground/70">הכול עובד אוטומטית, ללא מעורבות שלכם</p>
+                    </div>
+                    <div className="border-r-4 border-brand-purple/50 pr-6">
+                      <p className="text-foreground/70">דיוק מלא - אפס טעויות</p>
+                    </div>
+                    <div className="border-r-4 border-brand-purple/50 pr-6">
+                      <p className="text-foreground/70">שום דבר לא יפול - הכול מתועד</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -181,10 +191,17 @@ const ServiceAutomation = () => {
           </div>
 
           {/* איך זה עובד */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <div className="bg-card p-10 rounded-3xl">
-              <h2 className="text-3xl font-bold mb-8 text-center">איך זה עובד?</h2>
-              <div className="space-y-6">
+          <div className="max-w-6xl mx-auto mb-20">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+              {/* כותרת מימין - sticky */}
+              <div className="sticky top-32">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  איך זה <span className="text-brand-purple">עובד?</span>
+                </h2>
+              </div>
+              
+              {/* תוכן משמאל */}
+              <div className="space-y-8">
                 {[
                   {
                     number: "1",
@@ -206,15 +223,13 @@ const ServiceAutomation = () => {
                     title: "ניטור ושיפור",
                     description: "עוקבים אחרי הביצועים, משפרים ומוסיפים אוטומציות נוספות לפי הצורך"
                   }
-                ].map((step) => (
-                  <div key={step.number} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-purple/20 flex items-center justify-center flex-shrink-0">
-                      <span className="font-bold text-brand-purple text-lg">{step.number}</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground">{step.description}</p>
-                    </div>
+                ].map((step, index) => (
+                  <div key={step.number} className="border-r-4 border-brand-purple/50 pr-6">
+                    <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                      <span className="bg-brand-purple/20 px-3 py-1 rounded-lg text-brand-purple">{step.number}</span>
+                      {step.title}
+                    </h3>
+                    <p className="text-foreground/70">{step.description}</p>
                   </div>
                 ))}
               </div>
