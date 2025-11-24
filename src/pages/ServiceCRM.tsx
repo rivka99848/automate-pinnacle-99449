@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle } from "lucide-react";
+import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle, Target, Wrench, BookOpen, Handshake } from "lucide-react";
 import crmHeroImage from "@/assets/crm-hero.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -358,7 +358,7 @@ const ServiceCRM = () => {
               {/* כותרת מימין - sticky */}
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  תהליך העבודה <span className="text-brand-purple">שלנו</span>
+                  תהליך העבודה <span className="text-brand-purple">איתנו</span>
                 </h2>
                 <p className="text-xl text-foreground/70 mt-4">
                   אנו מלווים אותך בתהליך ממוקד וברור, המבטיח שמערכת הניהול תותאם באופן מושלם לצרכים שלך ותעבוד ביעילות מרבית מהיום הראשון.
@@ -370,9 +370,9 @@ const ServiceCRM = () => {
                 
                 {/* שלב 1 */}
                 <div className="border-r-4 border-brand-blue/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="bg-brand-blue/20 px-3 py-1 rounded-lg text-brand-cyan">1</span>
-                    🎯 צלילה לעומק הצרכים והאסטרטגיה
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <Target className="w-6 h-6 text-white/70" />
+                    צלילה לעומק הצרכים והאסטרטגיה
                   </h3>
                   <p className="text-foreground/70">
                     אנו מתחילים בהקשבה מעמיקה וירידה לשטח. בפגישה מקיפה, אנו מכירים לעומק את צורת העבודה, 
@@ -383,9 +383,9 @@ const ServiceCRM = () => {
                 
                 {/* שלב 2 */}
                 <div className="border-r-4 border-brand-cyan/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="bg-brand-cyan/20 px-3 py-1 rounded-lg text-brand-blue">2</span>
-                    🔨 בניית המערכת והתאמתה
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <Wrench className="w-6 h-6 text-white/70" />
+                    בניית המערכת והתאמתה
                   </h3>
                   <p className="text-foreground/70 mb-3">
                     לאחר שהבנו את הצרכים, אנו מתרגמים אותם למבנה דיגיטלי:
@@ -400,9 +400,9 @@ const ServiceCRM = () => {
                 
                 {/* שלב 3 */}
                 <div className="border-r-4 border-brand-purple/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="bg-brand-purple/20 px-3 py-1 rounded-lg text-brand-cyan">3</span>
-                    📚 הטמעה, הדרכה וספריית ידע
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <BookOpen className="w-6 h-6 text-white/70" />
+                    הטמעה, הדרכה וספריית ידע
                   </h3>
                   <p className="text-foreground/70 mb-3">כדי להבטיח שימוש מוצלח, אנו מבצעים:</p>
                   <ul className="space-y-2 text-foreground/70 mr-4">
@@ -415,9 +415,9 @@ const ServiceCRM = () => {
                 
                 {/* שלב 4 */}
                 <div className="border-r-4 border-brand-blue/50 pr-6">
-                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    <span className="bg-brand-blue/20 px-3 py-1 rounded-lg text-brand-cyan">4</span>
-                    🤝 אחריות, תמיכה וליווי מתמשך
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-3">
+                    <Handshake className="w-6 h-6 text-white/70" />
+                    אחריות, תמיכה וליווי מתמשך
                   </h3>
                   <p className="text-foreground/70 mb-3">אנו דואגים להצלחה שלך גם לאחר ההשקה:</p>
                   <ul className="space-y-2 text-foreground/70 mr-4">
