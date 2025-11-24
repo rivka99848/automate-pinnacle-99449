@@ -167,8 +167,11 @@ const ProductCRM = () => {
                   >
                     {/* כוכבית עם אנימציה */}
                     <div 
-                      className="flex-shrink-0 animate-[scale-in_0.6s_ease-out_forwards]"
-                      style={{ animationDelay: item.delay }}
+                      className="flex-shrink-0"
+                      style={{ 
+                        animation: 'scale-in 0.6s ease-out forwards, spin 0.6s ease-out forwards',
+                        animationDelay: item.delay 
+                      }}
                     >
                       <Sparkles 
                         className="w-12 h-12 md:w-16 md:h-16 text-[#8FADFF] drop-shadow-[0_0_15px_rgba(143,173,255,0.5)]" 
