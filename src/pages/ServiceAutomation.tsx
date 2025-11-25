@@ -194,7 +194,7 @@ const ServiceAutomation = () => {
                 </div>
 
                 {/* Cards */}
-                <div className="pr-8 space-y-6">
+                <div className="pr-8 relative">
                   {automationTypes.map((automation, index) => {
                     const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.25));
                     const scale = 0.95 + cardProgressValue * 0.05;
@@ -204,22 +204,22 @@ const ServiceAutomation = () => {
                     return (
                       <div
                         key={index}
-                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
+                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 relative ${
                           isEven 
                             ? 'bg-white text-gray-900 border-2 border-gray-200' 
-                            : 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/10 border-2 border-brand-blue/30'
+                            : 'bg-brand-dark/95 border-2 border-white/10'
                         }`}
                         style={{
                           transform: `scale(${scale}) translateY(${translateY}px)`,
-                          opacity: 0.5 + cardProgressValue * 0.5
+                          opacity: 1,
+                          zIndex: index + 1
                         }}
                       >
+                        {!isEven && (
+                          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-blue/20 to-brand-cyan/10 backdrop-blur-3xl rounded-2xl" />
+                        )}
                         <div className="flex items-start gap-4">
-                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                            isEven ? 'bg-brand-blue/20' : 'bg-brand-blue/30'
-                          }`}>
-                            <automation.icon className={`w-7 h-7 ${isEven ? 'text-brand-blue' : 'text-white'}`} />
-                          </div>
+                          <automation.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-brand-blue' : 'text-white'}`} />
                           <div>
                             <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
                               {automation.title}

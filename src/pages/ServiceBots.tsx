@@ -209,7 +209,7 @@ const ServiceBots = () => {
                 </div>
 
                 {/* Cards */}
-                <div className="pr-8 space-y-6">
+                <div className="pr-8 relative">
                   {[
                     { icon: Clock, title: "זמינות 24/7", description: "הבוט לא ישן, לא לוקח חופשה ולא מחכה לחזור מהמקלחת. תמיד זמין, תמיד מוכן לענות." },
                     { icon: Zap, title: "מענה מיידי", description: "לקוחות לא אוהבים לחכות. הבוט עונה תוך שניות ונותן בדיוק את המידע שהם צריכים." },
@@ -226,16 +226,20 @@ const ServiceBots = () => {
                     return (
                       <div
                         key={index}
-                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 ${
+                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 relative ${
                           isEven 
                             ? 'bg-white text-gray-900 border-2 border-gray-200' 
-                            : 'bg-gradient-to-br from-secondary/20 to-brand-cyan/10 border-2 border-secondary/30'
+                            : 'bg-brand-dark/95 border-2 border-white/10'
                         }`}
                         style={{
                           transform: `scale(${scale}) translateY(${translateY}px)`,
-                          opacity: 0.5 + cardProgressValue * 0.5
+                          opacity: 1,
+                          zIndex: index + 1
                         }}
                       >
+                        {!isEven && (
+                          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-secondary/20 to-brand-cyan/10 backdrop-blur-3xl rounded-2xl" />
+                        )}
                         <div className="flex items-start gap-4">
                           <feature.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-secondary' : 'text-white'}`} />
                           <div>
