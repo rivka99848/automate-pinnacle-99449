@@ -179,10 +179,9 @@ const ServiceBots = () => {
               <div 
                 ref={containerRef}
                 className="relative"
-                style={{ minHeight: '2400px' }}
               >
                 {/* Progress Indicator */}
-                <div className="absolute right-0 top-0 bottom-0 w-1 bg-white/10">
+                <div className="absolute right-0 top-0 w-1 bg-white/10" style={{ height: '100%' }}>
                   <div 
                     className="w-full bg-gradient-to-b from-secondary to-brand-cyan transition-all duration-300"
                     style={{ 
@@ -192,7 +191,7 @@ const ServiceBots = () => {
                 </div>
 
                 {/* Progress Dots */}
-                <div className="absolute right-[-4px] top-0 bottom-0 flex flex-col justify-around py-8">
+                <div className="absolute right-[-4px] top-0 flex flex-col justify-around py-8" style={{ height: '100%' }}>
                   {[0, 1, 2, 3, 4, 5].map((index) => {
                     const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.17));
                     return (
@@ -226,7 +225,7 @@ const ServiceBots = () => {
                     return (
                       <div
                         key={index}
-                        className={`sticky top-32 rounded-2xl p-8 transition-all duration-500 relative ${
+                        className={`sticky top-32 rounded-2xl p-8 mb-6 transition-all duration-500 relative ${
                           isEven 
                             ? 'bg-white text-gray-900 border-2 border-gray-200' 
                             : 'bg-brand-dark/95 border-2 border-white/10'
