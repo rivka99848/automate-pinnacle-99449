@@ -14,7 +14,6 @@ import ServiceCRM from "./pages/ServiceCRM";
 import ServiceBots from "./pages/ServiceBots";
 import ServiceAutomation from "./pages/ServiceAutomation";
 import ProductCRM from "./pages/ProductCRM";
-import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -40,8 +39,6 @@ const App = () => (
           <Route path="/services/bots" element={<ServiceBots />} />
           <Route path="/services/automation" element={<ServiceAutomation />} />
           <Route path="/product-crm" element={<ProductCRM />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

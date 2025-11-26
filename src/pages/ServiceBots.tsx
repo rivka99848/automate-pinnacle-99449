@@ -310,44 +310,6 @@ const ServiceBots = () => {
             </div>
           </div>
 
-          {/* פרויקט רלוונטי */}
-          <div 
-            ref={successReveal.ref}
-            className={`max-w-5xl mx-auto mb-20 transition-all duration-1000 ${
-              successReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <h2 className="text-3xl font-bold mb-8 text-center">סיפור הצלחה</h2>
-            <div className="bg-card p-10 rounded-3xl">
-              <div className="mb-6">
-                <span className="inline-block px-4 py-1 bg-secondary/20 text-secondary text-sm font-semibold rounded-full">
-                  01 • בוט חכם
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">
-                🏝 ניהול פניות אוטומטי לרשת נופש יוקרתית
-              </h3>
-              <p className="text-lg text-muted-foreground mb-6">
-                כששאלות כמו "יש דיל?", "פנוי בסופ״ש?" ו״מה המחיר?" לא הפסיקו להגיע – 
-                מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI 
-                שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
-              </p>
-              <div className="flex gap-4">
-                <Button asChild className="rounded-full">
-                  <Link to="/projects/nichuta-vacation-bot">צפה בפרויקט המלא</Link>
-                </Button>
-                <Button asChild variant="outline" className="rounded-full">
-                  <Link to="/blog/nichuta-bot">קרא את הסיפור</Link>
-                </Button>
-              </div>
-            </div>
-            <div className="text-center mt-6">
-              <Button asChild variant="ghost" className="rounded-full">
-                <Link to="/projects">צפה בכל הפרויקטים ←</Link>
-              </Button>
-            </div>
-          </div>
-
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center mb-8">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">

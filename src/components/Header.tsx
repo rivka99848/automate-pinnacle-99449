@@ -42,13 +42,6 @@ const Header = () => {
             >
               פרויקטים
             </NavLink>
-            <NavLink 
-              to="/blog" 
-              className="text-foreground/70 hover:text-primary transition-colors font-medium"
-              activeClassName="!text-primary font-bold border-b-2 border-primary pb-1"
-            >
-              בלוג
-            </NavLink>
           </div>
 
           {/* CTA Button - Left side */}
