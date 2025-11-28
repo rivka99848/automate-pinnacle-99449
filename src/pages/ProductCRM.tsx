@@ -98,36 +98,67 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Problem Section */}
+        {/* How We Help Section */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto text-center mb-16">
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-[#121F36]">
-                למה להישאר מאחור כשהעסק שלכם<br />
-                <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">יכול לרוץ קדימה?</span>
-              </h2>
-              <p className="text-xl text-[#3D64A6]">
-                העולם מתקדם, הטכנולוגיה משתפרת – והשאלה היא האם גם העסק שלכם מתקדם?
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {[
-                { icon: XCircle, title: "ניהול מבולגן ומסורבל", desc: "אלפי שורות בטבלה, קשה למצוא נתונים, כל המידע מפוזר" },
-                { icon: XCircle, title: "אין תזכורות אוטומטיות", desc: "אתם שוכחים משימות, מפספסים לידים ולקוחות נעלמים" },
-                { icon: XCircle, title: "תיעוד ידני ומתיש", desc: "אתם כל הזמן צריכים לעדכן נתונים, להוסיף נוסחאות ולוודא שהכול עובד" },
-                { icon: XCircle, title: "בלגן בניהול לקוחות", desc: "אין היסטוריה מסודרת, כל מידע מפוזר בקבצים שונים" }
-              ].map((item, index) => (
-                <div 
-                  key={index}
-                  className="relative p-8 rounded-3xl bg-red-50 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-                  style={{ transform: `rotate(${index % 2 === 0 ? '-1deg' : '1deg'})` }}
-                >
-                  <item.icon className="w-12 h-12 text-red-500 mb-4" />
-                  <h3 className="text-xl font-bold mb-2 text-[#121F36]">{item.title}</h3>
-                  <p className="text-[#3D64A6]">{item.desc}</p>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-start">
+                {/* Right Side - Header */}
+                <div className="text-right">
+                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#121F36] leading-tight">
+                    אז איך המערכת שלנו <br />
+                    <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">תקל עליך?</span>
+                  </h2>
+                  <p className="text-xl md:text-2xl text-[#3D64A6] leading-relaxed">
+                    מאפשרת לך לעסוק בעיקר בעשייה ולא באיך לנהל את המידע!
+                  </p>
                 </div>
-              ))}
+
+                {/* Left Side - Benefits */}
+                <div className="space-y-8">
+                  {[
+                    { 
+                      icon: Clock, 
+                      title: "חסכון בזמן", 
+                      desc: "יכולות האוטומציה של המערכת יחסכו זמן יקר כך שבקלות ובמחיר אטרקטיבי תוכלו לקבל בהירות ושליטה על תהליכים מורכבים שידחפו את העסק קדימה.",
+                      delay: "0s"
+                    },
+                    { 
+                      icon: Users, 
+                      title: "פחות צורך בעובדים נוספים", 
+                      desc: "מה שמזכירה או עוזר אדמיניסטרטיבי היו עושים – המערכת עושה עבורך, בלי עלות חודשית גבוהה.",
+                      delay: "0.15s"
+                    },
+                    { 
+                      icon: Sparkles, 
+                      title: "נוחות בלי מורכבות", 
+                      desc: "אנחנו שמים סוף לעבודה עם טבלאות מורכבות ומערכות מרובות.",
+                      delay: "0.3s"
+                    }
+                  ].map((item, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-start gap-5 group animate-fade-in opacity-0"
+                      style={{ 
+                        animationDelay: item.delay,
+                        animationFillMode: 'forwards'
+                      }}
+                    >
+                      <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#3E6AE5]/10 to-[#6D94FF]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-7 h-7 text-[#3E6AE5]" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-bold mb-2 text-[#121F36]">
+                          {item.title}
+                        </h3>
+                        <p className="text-[#3D64A6] leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
