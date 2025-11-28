@@ -102,9 +102,9 @@ const ProductCRM = () => {
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-start">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Right Side - Header */}
-                <div className="text-right">
+                <div className="text-right order-1 md:order-2">
                   <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#121F36] leading-tight">
                     אז איך המערכת שלנו <br />
                     <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">תקל עליך?</span>
@@ -115,22 +115,22 @@ const ProductCRM = () => {
                 </div>
 
                 {/* Left Side - Benefits */}
-                <div className="space-y-8">
+                <div className="space-y-6 order-2 md:order-1">
                   {[
                     { 
-                      icon: Clock, 
+                      icon: Zap, 
                       title: "חסכון בזמן", 
                       desc: "יכולות האוטומציה של המערכת יחסכו זמן יקר כך שבקלות ובמחיר אטרקטיבי תוכלו לקבל בהירות ושליטה על תהליכים מורכבים שידחפו את העסק קדימה.",
                       delay: "0s"
                     },
                     { 
-                      icon: Users, 
+                      icon: Target, 
                       title: "פחות צורך בעובדים נוספים", 
                       desc: "מה שמזכירה או עוזר אדמיניסטרטיבי היו עושים – המערכת עושה עבורך, בלי עלות חודשית גבוהה.",
                       delay: "0.15s"
                     },
                     { 
-                      icon: Sparkles, 
+                      icon: CheckCircle2, 
                       title: "נוחות בלי מורכבות", 
                       desc: "אנחנו שמים סוף לעבודה עם טבלאות מורכבות ומערכות מרובות.",
                       delay: "0.3s"
@@ -138,104 +138,26 @@ const ProductCRM = () => {
                   ].map((item, index) => (
                     <div 
                       key={index}
-                      className="flex items-start gap-5 group animate-fade-in opacity-0"
+                      className="flex items-start gap-4 group animate-fade-in opacity-0"
                       style={{ 
                         animationDelay: item.delay,
                         animationFillMode: 'forwards'
                       }}
                     >
-                      <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-[#3E6AE5]/10 to-[#6D94FF]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="w-7 h-7 text-[#3E6AE5]" />
+                      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-[#3E6AE5]/10 to-[#6D94FF]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-5 h-5 text-[#3E6AE5]" />
                       </div>
                       <div>
-                        <h3 className="text-xl md:text-2xl font-bold mb-2 text-[#121F36]">
+                        <h3 className="text-lg font-bold mb-1 text-[#121F36]">
                           {item.title}
                         </h3>
-                        <p className="text-[#3D64A6] leading-relaxed">
+                        <p className="text-sm text-[#3D64A6] leading-relaxed">
                           {item.desc}
                         </p>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Solution Section */}
-        <section className="py-24 bg-[#121F37]">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              {/* כותרת "קודם כל" בצד ימין */}
-              <h2 className="text-5xl md:text-7xl font-reisinger font-bold text-right mb-16 text-white">
-                קודם כל
-              </h2>
-
-              {/* תועלות עם כוכביות ואנימציה מדורגת */}
-              <div className="space-y-12 mb-16">
-                {[
-                  {
-                    title: "חסכון בזמן",
-                    desc: "יכולות האוטומציה של המערכת יחסכו זמן יקר כך שבקלות ובמחיר אטרקטיבי תוכלו לקבל בהירות ושליטה על תהליכים מורכבים שידחפו את העסק קדימה.",
-                    delay: "0.2s"
-                  },
-                  {
-                    title: "פחות צורך בעובדים נוספים",
-                    desc: "מה שמזכירה או עוזר אדמיניסטרטיבי היו עושים – המערכת עושה עבורך, בלי עלות חודשית גבוהה.",
-                    delay: "0.4s"
-                  },
-                  {
-                    title: "נוחות בלי מורכבות",
-                    desc: "אנחנו שמים סוף לעבודה עם טבלאות מורכבות ומערכות מרובות.",
-                    delay: "0.6s"
-                  }
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-6 group"
-                    style={{ animationDelay: item.delay, animationFillMode: 'both' }}
-                  >
-                    {/* כוכבית עם אנימציה */}
-                    <div 
-                      className="flex-shrink-0"
-                      style={{ 
-                        animation: 'scale-in 0.6s ease-out forwards, spin 0.6s ease-out forwards',
-                        animationDelay: item.delay 
-                      }}
-                    >
-                      <Sparkles 
-                        className="w-12 h-12 md:w-16 md:h-16 text-[#8FADFF] drop-shadow-[0_0_15px_rgba(143,173,255,0.5)]" 
-                      />
-                    </div>
-                    
-                    {/* תוכן התועלת */}
-                    <div 
-                      className="flex-1 animate-fade-in"
-                      style={{ 
-                        animationDelay: `calc(${item.delay} + 0.2s)`,
-                        animationFillMode: 'both'
-                      }}
-                    >
-                      <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-lg md:text-xl text-[#C5D1E3] leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* שאלה ותשובה */}
-              <div className="text-center space-y-4 pt-8 border-t border-white/10">
-                <h3 className="text-3xl md:text-4xl font-bold text-white">
-                  אז איך המערכת שלנו תקל עליך?
-                </h3>
-                <p className="text-xl md:text-2xl text-[#8FADFF] font-semibold">
-                  מאפשרת לך לעסוק בעיקר בעשייה ולא באיך לנהל את המידע!
-                </p>
               </div>
             </div>
           </div>
