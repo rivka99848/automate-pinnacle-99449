@@ -104,7 +104,7 @@ const ProductCRM = () => {
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Right Side - Header */}
-                <div className="text-right order-1 md:order-2">
+                <div className="text-right order-1 md:order-1">
                   <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-[#121F36] leading-tight">
                     אז איך המערכת שלנו <br />
                     <span className="bg-gradient-to-l from-[#3E6AE5] to-[#6D94FF] bg-clip-text text-transparent">תקל עליך?</span>
@@ -115,7 +115,7 @@ const ProductCRM = () => {
                 </div>
 
                 {/* Left Side - Benefits */}
-                <div className="space-y-6 order-2 md:order-1">
+                <div className="space-y-6 order-2 md:order-2">
                   {[
                     { 
                       icon: Zap, 
