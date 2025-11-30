@@ -165,120 +165,111 @@ const ProductCRM = () => {
         {/* Features Section - Scroll Cards */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-[#121F36]">
-                מה יש במערכת?
-              </h2>
-              <p className="text-xl text-center text-[#3D64A6] mb-20">
-                כל מה שאתם צריכים לניהול העסק במקום אחד
-              </p>
+            <div className="max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-start">
+                {/* Right Side - Sticky Header */}
+                <div className="md:sticky md:top-32 order-1 md:order-1 text-right">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[#121F36]">
+                    מה יש במערכת?
+                  </h2>
+                  <p className="text-xl text-[#3D64A6] leading-relaxed">
+                    כל מה שאתם צריכים לניהול העסק במקום אחד
+                  </p>
+                </div>
 
-              <div className="space-y-12">
-                {[
-                  { 
-                    num: "01", 
-                    title: "ניהול לידים ולקוחות", 
-                    desc: "כל הנתונים שמורים ומאורגנים בכרטיס לקוח מסודר – שם, טלפון, מייל, סטטוס, תאריך יצירה וכל מה שצריך.",
-                    bg: "#6D94FF",
-                    icon: Database
-                  },
-                  { 
-                    num: "02", 
-                    title: "ניהול משימות ופרויקטים", 
-                    desc: "תכנון, מעקב ותזכורות חכמות – כך שלא תפספסו שום משימה חשובה.",
-                    bg: "#B6EEF8",
-                    icon: ClipboardList
-                  },
-                  { 
-                    num: "03", 
-                    title: "ניהול הכנסות והוצאות", 
-                    desc: "סטטיסטיקות חכמות שיעזרו לכם להבין איפה הכסף נכנס ויוצא ואיך לשפר את הרווחיות.",
-                    bg: "#B3F5A0",
-                    icon: TrendingUp
-                  },
-                  { 
-                    num: "04", 
-                    title: "פתיחה אוטומטית של כרטיסיית לקוח", 
-                    desc: "ברגע שליד סוגר איתכם – המערכת פותחת כרטיס לקוח אוטומטית ושומרת את כל המידע.",
-                    bg: "#99A3F0",
-                    icon: FileText
-                  },
-                  { 
-                    num: "05", 
-                    title: "פולואפים אוטומטיים ללידים", 
-                    desc: "כדי שלא יפלו לכם מהידיים – המערכת שולחת תזכורות ופולואפים אוטומטיים.",
-                    bg: "#EDBB9E",
-                    icon: Mail
-                  },
-                  { 
-                    num: "06", 
-                    title: "יומן משימות ותזכורות יומיות", 
-                    desc: "תקבלו תזכורות ישירות למייל על כל המשימות שצריך לעשות היום.",
-                    bg: "#3E6AE5",
-                    icon: Calendar
-                  },
-                  { 
-                    num: "07", 
-                    title: "סנכרון יומן גוגל", 
-                    desc: "כל המשימות שלכם מסונכרנות אוטומטית עם יומן גוגל – אז תמיד תדעו מה עומד לכם.",
-                    bg: "#B6EEF8",
-                    icon: RefreshCw
-                  },
-                  { 
-                    num: "08", 
-                    title: "תיעוד שיחות עם לידים ולקוחות", 
-                    desc: "רשמו הערות, תיעדו שיחות ושמרו את כל המידע במקום אחד – שלא תפספסו שום פרט חשוב.",
-                    bg: "#B3F5A0",
-                    icon: MessageSquare
-                  },
-                  { 
-                    num: "09", 
-                    title: "סטטיסטיקות על ביצועי העסק", 
-                    desc: "ראו בזמן אמת כמה לידים נכנסו, כמה עסקאות נסגרו, כמה כסף הרווחתם – הכל בפילוחים שונים.",
-                    bg: "#99A3F0",
-                    icon: BarChart3
-                  },
-                  { 
-                    num: "10", 
-                    title: "יצירת טופס למילוי אוטומטי ללידים", 
-                    desc: "תוכלו ליצור טופס שלידים ימלאו ישירות, והמידע יכנס אוטומטית למערכת – גם מחוץ לשעות העבודה שלכם.",
-                    bg: "#FEE1D1",
-                    icon: FormInput
-                  }
-                ].map((feature, index) => (
-                  <div 
-                    key={index}
-                    className="relative p-10 md:p-12 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 animate-fade-in"
-                    style={{ 
-                      backgroundColor: `${feature.bg}15`,
-                      borderRight: `6px solid ${feature.bg}`,
-                      animationDelay: `${index * 0.1}s`
-                    }}
-                  >
-                    <div className="flex flex-col md:flex-row items-start gap-6">
-                      <div 
-                        className="text-7xl md:text-8xl font-bold opacity-20 leading-none"
-                        style={{ color: feature.bg }}
-                      >
-                        {feature.num}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-start gap-4 mb-4">
+                {/* Left Side - Scrolling Cards */}
+                <div className="space-y-6 order-2 md:order-2">
+                  {[
+                    { 
+                      title: "ניהול לידים ולקוחות", 
+                      desc: "כל הנתונים שמורים ומאורגנים בכרטיס לקוח מסודר – שם, טלפון, מייל, סטטוס, תאריך יצירה וכל מה שצריך.",
+                      bg: "#6D94FF",
+                      icon: Database
+                    },
+                    { 
+                      title: "ניהול משימות ופרויקטים", 
+                      desc: "תכנון, מעקב ותזכורות חכמות – כך שלא תפספסו שום משימה חשובה.",
+                      bg: "#B6EEF8",
+                      icon: ClipboardList
+                    },
+                    { 
+                      title: "ניהול הכנסות והוצאות", 
+                      desc: "סטטיסטיקות חכמות שיעזרו לכם להבין איפה הכסף נכנס ויוצא ואיך לשפר את הרווחיות.",
+                      bg: "#B3F5A0",
+                      icon: TrendingUp
+                    },
+                    { 
+                      title: "פתיחה אוטומטית של כרטיסיית לקוח", 
+                      desc: "ברגע שליד סוגר איתכם – המערכת פותחת כרטיס לקוח אוטומטית ושומרת את כל המידע.",
+                      bg: "#99A3F0",
+                      icon: FileText
+                    },
+                    { 
+                      title: "פולואפים אוטומטיים ללידים", 
+                      desc: "כדי שלא יפלו לכם מהידיים – המערכת שולחת תזכורות ופולואפים אוטומטיים.",
+                      bg: "#EDBB9E",
+                      icon: Mail
+                    },
+                    { 
+                      title: "יומן משימות ותזכורות יומיות", 
+                      desc: "תקבלו תזכורות ישירות למייל על כל המשימות שצריך לעשות היום.",
+                      bg: "#3E6AE5",
+                      icon: Calendar
+                    },
+                    { 
+                      title: "סנכרון יומן גוגל", 
+                      desc: "כל המשימות שלכם מסונכרנות אוטומטית עם יומן גוגל – אז תמיד תדעו מה עומד לכם.",
+                      bg: "#B6EEF8",
+                      icon: RefreshCw
+                    },
+                    { 
+                      title: "תיעוד שיחות עם לידים ולקוחות", 
+                      desc: "רשמו הערות, תיעדו שיחות ושמרו את כל המידע במקום אחד – שלא תפספסו שום פרט חשוב.",
+                      bg: "#B3F5A0",
+                      icon: MessageSquare
+                    },
+                    { 
+                      title: "סטטיסטיקות על ביצועי העסק", 
+                      desc: "ראו בזמן אמת כמה לידים נכנסו, כמה עסקאות נסגרו, כמה כסף הרווחתם – הכל בפילוחים שונים.",
+                      bg: "#99A3F0",
+                      icon: BarChart3
+                    },
+                    { 
+                      title: "יצירת טופס למילוי אוטומטי ללידים", 
+                      desc: "תוכלו ליצור טופס שלידים ימלאו ישירות, והמידע יכנס אוטומטית למערכת – גם מחוץ לשעות העבודה שלכם.",
+                      bg: "#FEE1D1",
+                      icon: FormInput
+                    }
+                  ].map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="relative p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-r-4"
+                      style={{ 
+                        borderRightColor: feature.bg
+                      }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                          style={{ backgroundColor: `${feature.bg}20` }}
+                        >
                           <feature.icon 
-                            className="w-10 h-10 flex-shrink-0 mt-1" 
+                            className="w-6 h-6" 
                             style={{ color: feature.bg }}
                           />
-                          <h3 className="text-2xl md:text-3xl font-bold text-[#121F36]">
+                        </div>
+                        <div className="flex-1 text-right">
+                          <h3 className="text-xl font-bold text-[#121F36] mb-2">
                             {feature.title}
                           </h3>
+                          <p className="text-[#3D64A6] leading-relaxed">
+                            {feature.desc}
+                          </p>
                         </div>
-                        <p className="text-lg text-[#3D64A6] leading-relaxed">
-                          {feature.desc}
-                        </p>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
