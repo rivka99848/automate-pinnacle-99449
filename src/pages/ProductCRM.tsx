@@ -138,10 +138,9 @@ const ProductCRM = () => {
                   ].map((item, index) => (
                     <div 
                       key={index}
-                      className="flex items-start gap-4 group animate-fade-in opacity-0"
+                      className="flex items-start gap-4 group animate-fade-in"
                       style={{ 
-                        animationDelay: item.delay,
-                        animationFillMode: 'forwards'
+                        animationDelay: item.delay
                       }}
                     >
                       <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-br from-[#3E6AE5]/10 to-[#6D94FF]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
