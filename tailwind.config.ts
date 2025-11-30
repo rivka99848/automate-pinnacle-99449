@@ -131,6 +131,10 @@ export default {
           "0%": { opacity: "0", transform: "scale(0.9)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         "starburst-spin": {
           "0%": { transform: "rotate(0deg) scale(1)", opacity: "0.7" },
           "50%": { transform: "rotate(180deg) scale(1.1)", opacity: "1" },
@@ -151,6 +155,7 @@ export default {
         "float-orbital": "float-orbital 8s linear infinite",
         "fade-in-up": "fade-in-up 0.8s ease-out forwards",
         "fade-in-scale": "fade-in-scale 0.6s ease-out forwards",
+        "fade-in": "fade-in 0.6s ease-out forwards",
         "starburst-spin": "starburst-spin 20s linear infinite",
         "marquee-rtl": "marquee-rtl 40s linear infinite",
       },
