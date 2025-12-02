@@ -178,7 +178,7 @@ const ProductCRM = () => {
                 </div>
 
                 {/* Left Side - Scrolling Cards */}
-                <div className="space-y-6 order-2 md:order-2">
+                <div className="space-y-8 order-2 md:order-2">
                   {[
                     { 
                       title: "ניהול לידים ולקוחות", 
@@ -243,19 +243,20 @@ const ProductCRM = () => {
                   ].map((feature, index) => (
                     <div 
                       key={index}
-                      className="relative p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-r-4"
+                      className="sticky p-6 md:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-r-4"
                       style={{ 
-                        borderRightColor: feature.bg
+                        borderRightColor: feature.bg,
+                        top: `${8 + index * 2}rem`
                       }}
                     >
                       <div className="flex items-start gap-4">
                         <div 
-                          className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                          style={{ backgroundColor: `${feature.bg}20` }}
+                          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md"
+                          style={{ backgroundColor: feature.bg }}
                         >
                           <feature.icon 
-                            className="w-6 h-6" 
-                            style={{ color: feature.bg }}
+                            className="w-7 h-7" 
+                            style={{ color: '#FFFFFF' }}
                           />
                         </div>
                         <div className="flex-1 text-right">
