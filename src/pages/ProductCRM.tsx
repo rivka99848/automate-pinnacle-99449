@@ -276,6 +276,79 @@ const ProductCRM = () => {
           </div>
         </section>
 
+        {/* Future is Here Section */}
+        <section className="py-24 bg-gradient-to-b from-white to-[#F5F5F5]">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-8 text-[#121F36]">
+                אל תישארו בעבר - העתיד כבר כאן!
+              </h2>
+              
+              <p className="text-base md:text-lg text-[#3D64A6] leading-relaxed mb-16 text-center max-w-4xl mx-auto">
+                מעכשיו כל ליד שנכנס למערכת, יקבל הודעת מייל אישית שמטרתה לחמם את הליד, ליצור קשר ראשוני ולוודא רלוונטיות. ובמקביל אתה תקבל למייל האישי שלך תזכורת לחזרה ללידים, וכן מקום תיעוד מפורט מה היה בשיחה עם הלידים כדי שתמיד תהיה מוכן לשיחה הבאה עם הליד, כל הפעולות האלו יגרמו לכמה דברים שבדיוק בשבילם הקמנו את הפלטפורמה הזו: לחסוך לכם זמן, כסף, לדאוג שהליד לא יברח למתחרים שלכם ולשפר את אחוזי ההמרה בעסק. <span className="text-xl">(וכל זה רק בעניין הלידים...😜)</span>
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* מה יש לכם היום */}
+                <div 
+                  className="p-8 rounded-3xl shadow-xl"
+                  style={{
+                    background: 'linear-gradient(135deg, #EF444410, #FFFFFF)',
+                    border: '3px solid #EF4444'
+                  }}
+                >
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#121F36] mb-6 text-right">
+                    מה יש לכם היום
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      "לידים נעלמים בלי מעקב",
+                      "תיעוד ידני ומתיש",
+                      "שכחת משימות חשובות",
+                      "בלגן בניהול לקוחות",
+                      "אין שליטה על התהליכים",
+                      "בזבוז זמן על עבודה מינהלית"
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <XCircle className="w-5 h-5 text-red-500 mt-1 flex-shrink-0" />
+                        <p className="text-[#121F36] text-right">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* מה יהיה לכם עם המערכת שלנו */}
+                <div 
+                  className="p-8 rounded-3xl shadow-xl"
+                  style={{
+                    background: 'linear-gradient(135deg, #B3F5A010, #FFFFFF)',
+                    border: '3px solid #B3F5A0'
+                  }}
+                >
+                  <h3 className="text-2xl md:text-3xl font-bold text-[#121F36] mb-6 text-right">
+                    מה יהיה לכם עם המערכת שלנו
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      "מעקב אוטומטי אחרי כל ליד",
+                      "תיעוד חכם ואוטומטי",
+                      "תזכורות שלא מאפשרות לפספס",
+                      "ניהול לקוחות מסודר ונגיש",
+                      "שליטה מלאה על כל התהליכים",
+                      "חיסכון של שעות עבודה כל שבוע"
+                    ].map((item, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 flex-shrink-0 mt-1" style={{ color: '#B3F5A0' }} />
+                        <p className="text-[#121F36] text-right">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Before Section */}
         <section className="py-24 bg-[#1D2F4F]">
           <div className="container mx-auto px-4">
