@@ -293,11 +293,10 @@ const ProductCRM = () => {
                 <div 
                   className="p-8 rounded-3xl shadow-xl"
                   style={{
-                    background: 'linear-gradient(135deg, #EF444410, #FFFFFF)',
-                    border: '3px solid #EF4444'
+                    backgroundColor: '#3E6AE5'
                   }}
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#121F36] mb-6 text-right">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 text-right">
                     מה יש לכם היום
                   </h3>
                   <div className="space-y-4">
@@ -310,8 +309,8 @@ const ProductCRM = () => {
                       "בזבוז זמן על עבודה מינהלית"
                     ].map((item, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <XCircle className="w-5 h-5 text-red-500 mt-1 flex-shrink-0" />
-                        <p className="text-[#121F36] text-right">{item}</p>
+                        <XCircle className="w-5 h-5 text-red-300 mt-1 flex-shrink-0" />
+                        <p className="text-white text-right">{item}</p>
                       </div>
                     ))}
                   </div>
@@ -319,11 +318,7 @@ const ProductCRM = () => {
 
                 {/* מה יהיה לכם עם המערכת שלנו */}
                 <div 
-                  className="p-8 rounded-3xl shadow-xl"
-                  style={{
-                    background: 'linear-gradient(135deg, #B3F5A010, #FFFFFF)',
-                    border: '3px solid #B3F5A0'
-                  }}
+                  className="p-8 rounded-3xl shadow-xl bg-white"
                 >
                   <h3 className="text-2xl md:text-3xl font-bold text-[#121F36] mb-6 text-right">
                     מה יהיה לכם עם המערכת שלנו
@@ -349,111 +344,7 @@ const ProductCRM = () => {
           </div>
         </section>
 
-        {/* Before Section */}
-        <section className="py-24 bg-[#1D2F4F]">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-white">
-                מה יש לכם היום?
-              </h2>
-              <p className="text-xl text-center text-[#C5D1E3] mb-12">
-                רוב העסקים מתמודדים עם האתגרים האלה
-              </p>
 
-              <div className="space-y-6">
-                {[
-                  "ניהול מבולגן ומסורבל – אלפי שורות בטבלה, קשה למצוא נתונים, כל המידע מפוזר",
-                  "אין תזכורות אוטומטיות – אתם שוכחים משימות, מפספסים לידים ולקוחות נעלמים",
-                  "תיעוד ידני ומתיש – אתם כל הזמן צריכים לעדכן נתונים, להוסיף נוסחאות ולוודא שהכול עובד",
-                  "בלגן בניהול לקוחות – אין היסטוריה מסודרת, כל מידע מפוזר בקבצים שונים"
-                ].map((item, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-start gap-4 p-6 rounded-2xl"
-                    style={{ 
-                      backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                      borderRight: '4px solid #EF4444'
-                    }}
-                  >
-                    <XCircle className="w-6 h-6 text-red-400 mt-1 flex-shrink-0" />
-                    <p className="text-lg text-white">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* After Section */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-[#121F36]">
-                עם המערכת שלנו:
-              </h2>
-              <p className="text-xl text-center text-[#3D64A6] mb-12">
-                הפתרון לכל הבעיות שציינתם
-              </p>
-
-              <div className="space-y-6">
-                {[
-                  "הכול במקום אחד – כל המידע מאורגן ונגיש בכרטיס לקוח מסודר",
-                  "תזכורות אוטומטיות – המערכת תזכיר לכם משימות ופעולות חשובות",
-                  "אוטומציה חכמה – עדכונים אוטומטיים ללא צורך בתיעוד ידני",
-                  "ניהול לקוחות מקצועי – היסטוריה מסודרת ומעקב קל ונוח"
-                ].map((item, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-start gap-4 p-6 rounded-2xl"
-                    style={{ 
-                      backgroundColor: '#B3F5A015',
-                      borderRight: '4px solid #B3F5A0'
-                    }}
-                  >
-                    <CheckCircle2 className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#B3F5A0' }} />
-                    <p className="text-lg text-[#121F36]">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* What You Will Have Section */}
-        <section className="py-24 bg-[#EAEAEA]">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-6 text-[#121F36]">
-                מה יהיה לכם עם המערכת שלנו?
-              </h2>
-              <p className="text-xl text-center text-[#3D64A6] mb-12">
-                התוצאות שתראו מיד
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {[
-                  { icon: Target, text: "חיסכון של שעות עבודה כל שבוע" },
-                  { icon: TrendingUp, text: "יותר לידים שהופכים ללקוחות" },
-                  { icon: Zap, text: "אוטומציות שעובדות בשבילכם 24/7" },
-                  { icon: CheckCircle2, text: "סדר ושליטה מלאה על העסק" }
-                ].map((item, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center gap-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    <div 
-                      className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#3E6AE5' }}
-                    >
-                      <item.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <p className="text-lg font-semibold text-[#121F36]">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Pricing Section */}
         <section className="py-24 bg-white">
@@ -467,59 +358,46 @@ const ProductCRM = () => {
                 <br />אבל אני רוצה שזה יהיה נגיש יותר, אז אני מציע לכם משהו מיוחד.
               </p>
 
-              <div 
-                className="relative p-12 rounded-3xl shadow-2xl"
-                style={{ 
-                  background: `linear-gradient(135deg, #8FADFF05, #FFFFFF, #B6EEF805)`,
-                  border: `4px solid #6D94FF30`,
-                  boxShadow: `0 0 60px rgba(109, 148, 255, 0.2)`
-                }}
-              >
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl">
-                  מבצע מיוחד!
+              <div className="text-center space-y-8">
+                <div className="space-y-4">
+                  <p className="text-2xl text-[#3D64A6] line-through">₪8,000 מחיר רגיל</p>
+                  <div className="space-y-2">
+                    <p className="text-6xl md:text-7xl font-bold" style={{ color: '#3E6AE5' }}>₪2,950</p>
+                    <p className="text-xl text-[#3D64A6] font-semibold">תשלום חד-פעמי בלבד</p>
+                  </div>
+                  <p className="text-lg text-[#3D64A6] max-w-2xl mx-auto leading-relaxed">
+                    וזה הכול! אין תשלומים חודשיים, אין עלויות נסתרות. המערכת שלכם – ואתם לא צריכים לשלם עוד שקל.
+                  </p>
                 </div>
 
-                <div className="text-center space-y-8">
-                  <div className="space-y-4">
-                    <p className="text-2xl text-[#3D64A6] line-through">₪8,000 מחיר רגיל</p>
-                    <div className="space-y-2">
-                      <p className="text-6xl md:text-7xl font-bold" style={{ color: '#3E6AE5' }}>₪2,950</p>
-                      <p className="text-xl text-[#3D64A6] font-semibold">תשלום חד-פעמי בלבד</p>
+                <div className="space-y-3 text-right max-w-md mx-auto py-6">
+                  <p className="text-center font-bold text-xl text-[#121F36] mb-4">מה כלול במחיר?</p>
+                  {[
+                    "מערכת CRM מותאמת אישית לצרכים שלכם",
+                    "כל 10 הפיצ'רים שראיתם למעלה",
+                    "הטמעה והדרכה מלאה",
+                    "תמיכה טכנית למשך חודש",
+                    "אפשרות לשדרוגים עתידיים במחיר מוזל"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-6 h-6 flex-shrink-0" style={{ color: '#B3F5A0' }} />
+                      <span className="text-lg text-[#121F36]">{item}</span>
                     </div>
-                    <p className="text-lg text-[#3D64A6] max-w-2xl mx-auto leading-relaxed">
-                      וזה הכול! אין תשלומים חודשיים, אין עלויות נסתרות. המערכת שלכם – ואתם לא צריכים לשלם עוד שקל.
-                    </p>
-                  </div>
+                  ))}
+                </div>
 
-                  <div className="space-y-3 text-right max-w-md mx-auto py-6">
-                    <p className="text-center font-bold text-xl text-[#121F36] mb-4">מה כלול במחיר?</p>
-                    {[
-                      "מערכת CRM מותאמת אישית לצרכים שלכם",
-                      "כל 10 הפיצ'רים שראיתם למעלה",
-                      "הטמעה והדרכה מלאה",
-                      "תמיכה טכנית למשך חודש",
-                      "אפשרות לשדרוגים עתידיים במחיר מוזל"
-                    ].map((item, index) => (
-                      <div key={index} className="flex items-center gap-3">
-                        <CheckCircle2 className="w-6 h-6 flex-shrink-0" style={{ color: '#B3F5A0' }} />
-                        <span className="text-lg text-[#121F36]">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-6">
-                    <p className="text-2xl font-bold mb-6" style={{ color: '#3E6AE5' }}>
-                      המבצע הזה תקף רק ל-5 הלקוחות הראשונים!
-                    </p>
-                    <Button 
-                      asChild 
-                      size="lg" 
-                      className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
-                      style={{ backgroundColor: '#3E6AE5' }}
-                    >
-                      <a href="#contact">רוצה לקבל את המבצע!</a>
-                    </Button>
-                  </div>
+                <div className="pt-6">
+                  <p className="text-2xl font-bold mb-6" style={{ color: '#3E6AE5' }}>
+                    המבצע הזה תקף רק ל-5 הלקוחות הראשונים!
+                  </p>
+                  <Button 
+                    asChild 
+                    size="lg" 
+                    className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
+                    style={{ backgroundColor: '#3E6AE5' }}
+                  >
+                    <a href="#contact">רוצה לקבל את המבצע!</a>
+                  </Button>
                 </div>
               </div>
             </div>
