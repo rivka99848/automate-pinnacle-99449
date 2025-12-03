@@ -258,7 +258,7 @@ const Index = () => {
                 <p className="text-lg text-muted-foreground mb-6 flex-1">
                   כששאלות כמו 'יש דיל?', 'פנוי בסופ"ש?' ו'מה המחיר?' לא הפסיקו להגיע – מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
                 </p>
-                <Button asChild variant="outline" className="w-full border-2 border-brand-cyan bg-brand-cyan/20 text-white hover:bg-brand-cyan/30 hover:border-brand-cyan rounded-full font-semibold transition-all">
+                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
                   <Link to="/projects/nichuta-vacation-bot">להמשך קריאה</Link>
                 </Button>
               </div>
@@ -280,7 +280,7 @@ const Index = () => {
                 <p className="text-lg text-muted-foreground mb-6 flex-1">
                   בעל עסק רפואי טובע בפניות, מיילים ומסמכים? גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה. טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
                 </p>
-                <Button asChild variant="outline" className="w-full border-2 border-secondary bg-secondary/20 text-white hover:bg-secondary/30 hover:border-secondary rounded-full font-semibold transition-all">
+                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
                   <Link to="/projects/medical-automation">להמשך קריאה</Link>
                 </Button>
               </div>
