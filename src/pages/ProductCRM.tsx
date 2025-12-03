@@ -494,83 +494,52 @@ const ProductCRM = () => {
               השאירו פרטים ונחזור אליכם תוך 24 שעות!
             </p>
             
-            <div 
-              className="backdrop-blur-md p-8 md:p-12 rounded-3xl"
-              style={{ 
-                backgroundColor: '#8FADFF05',
-                border: '2px solid #6D94FF20'
-              }}
-            >
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block mb-2 font-semibold text-white">שם מלא</label>
-                    <Input 
-                      id="name" 
-                      type="text" 
-                      placeholder="הכנס את שמך" 
-                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block mb-2 font-semibold text-white">אימייל</label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="example@email.com" 
-                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block mb-2 font-semibold text-white">טלפון</label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="050-1234567" 
-                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                    />
-                  </div>
-                </div>
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                  <label htmlFor="message" className="block mb-2 font-semibold text-white">הודעה (אופציונלי)</label>
-                  <Textarea 
-                    id="message" 
-                    placeholder="ספרו לנו על העסק שלכם..." 
-                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF] min-h-32" 
+                  <label htmlFor="name" className="block mb-2 font-semibold text-white">שם מלא</label>
+                  <Input 
+                    id="name" 
+                    type="text" 
+                    placeholder="הכנס את שמך" 
+                    className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
                   />
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full py-6 text-lg font-bold transition-all duration-300 hover:scale-105"
-                  style={{ backgroundColor: '#B3F5A0', color: '#121F36' }}
-                >
-                  שלח פנייה
-                </Button>
-              </form>
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-24 bg-gradient-to-b from-[#1D2F4F] via-[#121F36] to-[#121F37] text-center">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-l from-[#6D94FF] to-[#B6EEF8] bg-clip-text text-transparent">
-                הגיע הזמן לעשות סדר בעסק שלכם
-              </span>
-            </h2>
-            <p className="text-2xl text-[#C5D1E3] mb-8 max-w-3xl mx-auto leading-relaxed">
-              תפסיקו לאבד זמן, לידים וכסף. התחילו לעבוד עם מערכת שתעשה את העבודה בשבילכם – 
-              <br />ותיתן לכם יותר זמן פנוי, יותר לקוחות, ויותר רווחים.
-            </p>
-            <Button 
-              asChild 
-              size="lg" 
-              className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
-              style={{ backgroundColor: '#B3F5A0', color: '#121F36' }}
-            >
-              <a href="#contact">בואו נתחיל!</a>
-            </Button>
+                <div>
+                  <label htmlFor="email" className="block mb-2 font-semibold text-white">אימייל</label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="example@email.com" 
+                    className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block mb-2 font-semibold text-white">טלפון</label>
+                  <Input 
+                    id="phone" 
+                    type="tel" 
+                    placeholder="050-1234567" 
+                    className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="message" className="block mb-2 font-semibold text-white">הודעה (אופציונלי)</label>
+                <Textarea 
+                  id="message" 
+                  placeholder="ספרו לנו על העסק שלכם..." 
+                  className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF] min-h-32" 
+                />
+              </div>
+              <Button 
+                type="submit" 
+                variant="secondary"
+                className="w-full py-6 text-lg font-bold transition-all duration-300 hover:scale-105"
+              >
+                שלח פנייה
+              </Button>
+            </form>
           </div>
         </section>
 
