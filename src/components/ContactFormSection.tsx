@@ -171,7 +171,8 @@ const ContactFormSection = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full h-14 md:h-16 text-base md:text-lg font-bold rounded-full bg-[#4A90E2] hover:bg-[#357ABD] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                variant="secondary"
+                className="w-full h-14 md:h-16 text-base md:text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
                 {isSubmitting ? "שולח..." : "רוצה להתחיל לעבוד חכם ולהרוויח יותר"}
               </Button>
