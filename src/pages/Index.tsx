@@ -287,6 +287,12 @@ const Index = () => {
             </div>
           </div>
 
+          <div className="text-center mt-12">
+            <Button asChild variant="outline" size="lg" className="rounded-full border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all">
+              <Link to="/projects">לכל הפרויקטים</Link>
+            </Button>
+          </div>
+
         </div>
       </section>
 
