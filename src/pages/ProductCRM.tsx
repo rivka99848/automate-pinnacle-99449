@@ -502,32 +502,34 @@ const ProductCRM = () => {
               }}
             >
               <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2 font-semibold text-white">שם מלא</label>
-                  <Input 
-                    id="name" 
-                    type="text" 
-                    placeholder="הכנס את שמך" 
-                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block mb-2 font-semibold text-white">אימייל</label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="example@email.com" 
-                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block mb-2 font-semibold text-white">טלפון</label>
-                  <Input 
-                    id="phone" 
-                    type="tel" 
-                    placeholder="050-1234567" 
-                    className="w-full bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block mb-2 font-semibold text-white">שם מלא</label>
+                    <Input 
+                      id="name" 
+                      type="text" 
+                      placeholder="הכנס את שמך" 
+                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block mb-2 font-semibold text-white">אימייל</label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="example@email.com" 
+                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block mb-2 font-semibold text-white">טלפון</label>
+                    <Input 
+                      id="phone" 
+                      type="tel" 
+                      placeholder="050-1234567" 
+                      className="w-full h-12 bg-white/10 border-[#C5D1E3]/20 text-white placeholder:text-[#C5D1E3]/60 focus:border-[#6D94FF] focus:ring-[#6D94FF]" 
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="message" className="block mb-2 font-semibold text-white">הודעה (אופציונלי)</label>
