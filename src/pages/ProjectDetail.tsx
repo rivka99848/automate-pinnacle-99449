@@ -40,7 +40,7 @@ const ProjectDetail = () => {
                   <h1 className="text-4xl md:text-5xl font-bold mb-4">
                     {project.title}
                   </h1>
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-xl text-muted-foreground leading-relaxed whitespace-pre-line">
                     {project.description}
                   </p>
                 </div>
@@ -70,7 +70,7 @@ const ProjectDetail = () => {
 
               {/* Quote */}
               <blockquote
-                className={`border-r-4 border-brand-${project.color} pr-6 py-4 mt-10 italic text-lg text-gray-700`}
+                className={`border-r-4 border-brand-${project.color} pr-6 py-4 mt-10 italic text-lg text-gray-700 whitespace-pre-line`}
               >
                 "{project.quote}"
                 <footer className="text-gray-500 mt-2 not-italic">– {project.author}</footer>
