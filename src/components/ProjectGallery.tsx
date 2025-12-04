@@ -16,7 +16,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
   return (
     <>
       {/* Main Gallery */}
-      <div className="relative group mb-8">
+      <div className="relative group mb-8 max-w-3xl mx-auto">
         <Carousel
           opts={{ loop: true, direction: "rtl" }}
           plugins={[
