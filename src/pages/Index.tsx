@@ -251,11 +251,11 @@ const Index = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-6 flex flex-col h-full">
+              <div className="p-6">
                 <h3 className="text-2xl font-semibold mb-4">
                   🏝 ניהול פניות אוטומטי לרשת נופש יוקרתית
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6 flex-1">
+                <p className="text-lg text-muted-foreground mb-6">
                   כששאלות כמו 'יש דיל?', 'פנוי בסופ"ש?' ו'מה המחיר?' לא הפסיקו להגיע – מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
                 </p>
                 <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
@@ -273,11 +273,11 @@ const Index = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-6 flex flex-col h-full">
+              <div className="p-6">
                 <h3 className="text-2xl font-semibold mb-4">
                   💼 אוטומציה מלאה לעסק רפואי עמוס בפניות
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6 flex-1">
+                <p className="text-lg text-muted-foreground mb-6">
                   בעל עסק רפואי טובע בפניות, מיילים ומסמכים? גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה. טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
                 </p>
                 <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
