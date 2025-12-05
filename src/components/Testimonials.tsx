@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
   type CarouselApi
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+
 import logoResort from "@/assets/logo-resort.png";
 import logoMedical from "@/assets/logo-medical.png";
 import logoDesignStudio from "@/assets/logo-design-studio.png";
@@ -64,13 +64,6 @@ const Testimonials = () => {
             direction: "rtl",
             align: "center"
           }}
-          plugins={[
-            Autoplay({
-              delay: 5000,
-              stopOnInteraction: true,
-              stopOnMouseEnter: true
-            })
-          ]}
           className="w-full max-w-3xl mx-auto"
           setApi={(emblaApi) => {
             setApi(emblaApi);
