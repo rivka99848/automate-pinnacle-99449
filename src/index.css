@@ -284,7 +284,7 @@ All colors MUST be HSL.
   @keyframes slide-in-right {
     from {
       opacity: 0;
-      transform: translateX(-60px);
+      transform: translateX(60px);
     }
     to {
       opacity: 1;
@@ -295,7 +295,7 @@ All colors MUST be HSL.
   @keyframes slide-in-left {
     from {
       opacity: 0;
-      transform: translateX(60px);
+      transform: translateX(-60px);
     }
     to {
       opacity: 1;

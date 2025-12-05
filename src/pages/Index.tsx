@@ -49,7 +49,7 @@ const Index = () => {
       </section>
 
       {/* How Automation Changes the Game */}
-      <section className="py-24 bg-brand-darker">
+      <section className="py-12 bg-brand-darker">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in delay-100">
