@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import Autoplay from "embla-carousel-autoplay";
+
 
 interface ProjectGalleryProps {
   images: string[];
@@ -19,12 +19,6 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
       <div className="relative group mb-8 max-w-3xl mx-auto">
         <Carousel
           opts={{ loop: true, direction: "rtl" }}
-          plugins={[
-            Autoplay({
-              delay: 5000,
-              stopOnInteraction: true,
-            }),
-          ]}
           className="w-full"
           setApi={(api) => {
             if (!api) return;
