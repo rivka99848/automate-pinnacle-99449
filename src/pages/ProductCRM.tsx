@@ -351,22 +351,32 @@ const ProductCRM = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-6xl font-bold text-center mb-8 text-[#121F36]">
-                כמה זה עולה?
+                מהיום כל עסק יכול להרשות לעצמו להתקדם
               </h2>
-              <p className="text-xl text-center text-[#3D64A6] mb-12 leading-relaxed">
-                כשבניתי מערכת כזו ללקוחה, היא שילמה <span className="font-bold">8,000 ש״ח</span> – וזה היה כדאי לה פי כמה וכמה!
-                <br />אבל אני רוצה שזה יהיה נגיש יותר, אז אני מציע לכם משהו מיוחד.
-              </p>
+              
+              <div className="text-xl text-center text-[#3D64A6] mb-12 leading-relaxed space-y-4">
+                <p>
+                  כשבניתי מערכת כזו ללקוחה, היא שילמה <span className="font-bold">8,000 ש״ח</span> על פיתוח אישי.
+                </p>
+                <p>
+                  אבל אז הבנתי – לא לכל עסק יש תקציב כזה, זה לא צריך להיות חסם!
+                </p>
+                <p>
+                  אז שדרגתי את המערכת, הפכתי אותה למותאמת לכל עסק,
+                  <br />ועכשיו גם אתם יכולים לנהל את העסק בצורה מסודרת, חכמה ורווחית – בלי לקרוע את הכיס.
+                </p>
+              </div>
 
               <div className="text-center space-y-8">
                 <div className="space-y-4">
                   <p className="text-2xl text-[#3D64A6] line-through">₪8,000 מחיר רגיל</p>
                   <div className="space-y-2">
-                    <p className="text-6xl md:text-7xl font-bold" style={{ color: '#3E6AE5' }}>₪2,950</p>
-                    <p className="text-xl text-[#3D64A6] font-semibold">תשלום חד-פעמי בלבד</p>
+                    <p className="text-5xl md:text-6xl font-bold" style={{ color: '#3E6AE5' }}>200 ש״ח X 12</p>
+                    <p className="text-xl text-[#3D64A6] font-semibold">תשלומים נוחים</p>
                   </div>
                   <p className="text-lg text-[#3D64A6] max-w-2xl mx-auto leading-relaxed">
-                    וזה הכול! אין תשלומים חודשיים, אין עלויות נסתרות. המערכת שלכם – ואתם לא צריכים לשלם עוד שקל.
+                    זו השקעה שתחסוך לכם שעות של עבודה, תמנע אובדן לידים ולקוחות
+                    <br />ותיתן לכם שליטה מלאה על העסק כדי שתוכלו להרוויח יותר בפחות זמן.
                   </p>
                 </div>
 
@@ -387,16 +397,13 @@ const ProductCRM = () => {
                 </div>
 
                 <div className="pt-6">
-                  <p className="text-2xl font-bold mb-6" style={{ color: '#3E6AE5' }}>
-                    המבצע הזה תקף רק ל-5 הלקוחות הראשונים!
-                  </p>
                   <Button 
                     asChild 
                     size="lg" 
                     className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
                     style={{ backgroundColor: '#3E6AE5' }}
                   >
-                    <a href="#contact">רוצה לקבל את המבצע!</a>
+                    <a href="#contact">השאירו פרטים עכשיו ותתחילו לעבוד חכם יותר!</a>
                   </Button>
                 </div>
               </div>
