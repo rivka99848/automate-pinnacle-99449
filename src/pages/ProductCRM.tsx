@@ -7,7 +7,7 @@ import {
   TrendingUp, Users, Clock, Target, CheckCircle2, XCircle,
   Sparkles, Zap, BarChart3, Calendar, Mail, Database,
   FileText, Bell, Globe, RefreshCw, MessageSquare, FormInput,
-  ClipboardList
+  ClipboardList, Package, Video, Gift
 } from "lucide-react";
 import {
   Accordion,
@@ -346,67 +346,127 @@ const ProductCRM = () => {
 
 
 
-        {/* Pricing Section */}
-        <section className="py-24 bg-white">
+        {/* Pricing Section - Dark Theme */}
+        <section className="py-24 bg-[#121F37]">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-8 text-[#121F36]">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl md:text-6xl font-bold mb-12 text-white">
                 מהיום כל עסק יכול להרשות לעצמו להתקדם
               </h2>
               
-              <div className="text-xl text-center text-[#3D64A6] mb-12 leading-relaxed space-y-4">
+              <div className="text-xl text-white/80 mb-12 leading-relaxed space-y-3">
                 <p>
-                  כשבניתי מערכת כזו ללקוחה, היא שילמה <span className="font-bold">8,000 ש״ח</span> על פיתוח אישי.
+                  כשבניתי מערכת כזו ללקוחה, היא שילמה
+                </p>
+                <p className="text-2xl font-bold text-white">
+                  8,000 ש״ח על פיתוח אישי.
                 </p>
                 <p>
                   אבל אז הבנתי – לא לכל עסק יש תקציב כזה, זה לא צריך להיות חסם!
                 </p>
                 <p>
                   אז שדרגתי את המערכת, הפכתי אותה למותאמת לכל עסק,
-                  <br />ועכשיו גם אתם יכולים לנהל את העסק בצורה מסודרת, חכמה ורווחית – בלי לקרוע את הכיס.
+                </p>
+                <p className="text-[#B3F5A0] font-semibold text-2xl">
+                  ועכשיו גם אתם יכולים לנהל את העסק בצורה מסודרת, חכמה ורווחית – בלי לקרוע את הכיס.
                 </p>
               </div>
 
-              <div className="text-center space-y-8">
-                <div className="space-y-4">
-                  <p className="text-2xl text-[#3D64A6] line-through">₪8,000 מחיר רגיל</p>
-                  <div className="space-y-2">
-                    <p className="text-5xl md:text-6xl font-bold" style={{ color: '#3E6AE5' }}>200 ש״ח X 12</p>
-                    <p className="text-xl text-[#3D64A6] font-semibold">תשלומים נוחים</p>
-                  </div>
-                  <p className="text-lg text-[#3D64A6] max-w-2xl mx-auto leading-relaxed">
-                    זו השקעה שתחסוך לכם שעות של עבודה, תמנע אובדן לידים ולקוחות
-                    <br />ותיתן לכם שליטה מלאה על העסק כדי שתוכלו להרוויח יותר בפחות זמן.
-                  </p>
-                </div>
+              {/* Price comparison */}
+              <div className="mb-8">
+                <p className="text-2xl text-white mb-4">
+                  <span className="text-white/60 line-through">במקום 8,000 ש״ח</span>
+                  <span className="mx-3">-</span>
+                  <span className="text-[#6D94FF] font-bold border-2 border-[#6D94FF] rounded-full px-4 py-1">רק 2,950 ש״ח!</span>
+                </p>
+              </div>
 
-                <div className="space-y-3 text-right max-w-md mx-auto py-6">
-                  <p className="text-center font-bold text-xl text-[#121F36] mb-4">מה כלול במחיר?</p>
-                  {[
-                    "מערכת CRM מותאמת אישית לצרכים שלכם",
-                    "כל 10 הפיצ'רים שראיתם למעלה",
-                    "הטמעה והדרכה מלאה",
-                    "תמיכה טכנית למשך חודש",
-                    "אפשרות לשדרוגים עתידיים במחיר מוזל"
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-6 h-6 flex-shrink-0" style={{ color: '#B3F5A0' }} />
-                      <span className="text-lg text-[#121F36]">{item}</span>
-                    </div>
-                  ))}
-                </div>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed mb-8">
+                זו השקעה חד-פעמית שתחסוך לכם שעות של עבודה, תמנע אובדן לידים ולקוחות
+                <br />ותיתן לכם שליטה מלאה על העסק כדי שתוכלו להרוויח יותר בפחות זמן.
+              </p>
 
-                <div className="pt-6">
-                  <Button 
-                    asChild 
-                    size="lg" 
-                    className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105"
-                    style={{ backgroundColor: '#3E6AE5' }}
-                  >
-                    <a href="#contact">השאירו פרטים עכשיו ותתחילו לעבוד חכם יותר!</a>
-                  </Button>
+              {/* Special offer */}
+              <div className="mb-8">
+                <p className="text-2xl font-bold text-white mb-2">אבל חכו! זה לא המחיר הסופי</p>
+                <p className="text-xl text-white/80 mb-6">ההזדמנות הזו לא תחזור</p>
+                <div className="inline-block bg-[#B3F5A0] rounded-full px-8 py-4">
+                  <p className="text-4xl md:text-5xl font-bold text-[#121F37]">2,400 ש״ח בלבד!</p>
                 </div>
               </div>
+
+              <div className="pt-6">
+                <Button 
+                  asChild 
+                  size="lg" 
+                  className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105 bg-[#3E6AE5] hover:bg-[#3E6AE5]/90"
+                >
+                  <a href="#contact">השאירו פרטים עכשיו ותתחילו לעבוד חכם יותר!</a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How It Works Section */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-[#121F36]">
+              אז איך זה באמת עובד?
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
+              {[
+                {
+                  icon: Package,
+                  title: "קבלת המערכת",
+                  description: "תוך 24 שעות מהתשלום, המערכת תותקן אצלכם ותהיה מוכנה לשימוש.",
+                  color: "#6D94FF"
+                },
+                {
+                  icon: Video,
+                  title: "הדרכה",
+                  description: "קבלו סרטון הדרכה מפורט שיראה לכם איך להשתמש במערכת בצורה הכי פשוטה ויעילה.",
+                  color: "#B3F5A0"
+                },
+                {
+                  icon: Mail,
+                  title: "חיבור המייל והאוטומציות",
+                  description: "סרטון הסבר - איך לחבר את המייל לאוטומציות של הפולואפים והתזכורות ואיך מכבים ומדליקים את האוטומציות.",
+                  color: "#B6EEF8"
+                },
+                {
+                  icon: Gift,
+                  title: "בונוס",
+                  description: "תלמדו איך ליצור אוטומציות בקלות בתוך המערכת ולהפוך את העסק לאוטומטי ומותאם יותר לצרכים שלכם.",
+                  color: "#EDBB9E"
+                }
+              ].map((step, index) => (
+                <div 
+                  key={index} 
+                  className="bg-[#121F37] rounded-2xl p-6 text-center transition-transform duration-300 hover:scale-105"
+                >
+                  <div 
+                    className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    style={{ backgroundColor: step.color }}
+                  >
+                    <step.icon className="w-8 h-8 text-[#121F37]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-white/70 leading-relaxed">{step.description}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <div className="text-center">
+              <Button 
+                asChild 
+                size="lg" 
+                className="text-xl px-16 py-8 font-bold shadow-xl transition-all duration-300 hover:scale-105 bg-[#3E6AE5] hover:bg-[#3E6AE5]/90"
+              >
+                <a href="#contact">רוצה להתחיל עכשיו!</a>
+              </Button>
             </div>
           </div>
         </section>
