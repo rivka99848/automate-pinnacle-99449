@@ -142,6 +142,51 @@ const ServiceCRM = () => {
             </div>
           </div>
 
+          {/* Statistics Section */}
+          <section className="mb-24 py-16 -mx-4 px-4 bg-[#E8EAED]">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-end">
+                {[
+                  {
+                    stat: "50k",
+                    height: "h-48 md:h-64",
+                    text: "עסקים שמשתמשים במערכת CRM מנהלים בממוצע 50K לקוחות ויותר בצורה מסודרת ויעילה"
+                  },
+                  {
+                    stat: "3m",
+                    height: "h-56 md:h-72",
+                    text: "עסקים מדווחים על שיפור בפרודוקטיביות תוך 3-6 חודשים מהטמעת מערכת CRM."
+                  },
+                  {
+                    stat: "6.5H",
+                    height: "h-64 md:h-80",
+                    text: "מערכת CRM יכולה לחסוך עד 6.5 שעות בשבוע לכל נציג מכירות, זה כמעט יום עבודה שלם שנחסך."
+                  },
+                  {
+                    stat: "75%",
+                    height: "h-48 md:h-64",
+                    text: "מהעסקים שמטמיעים מערכת CRM מדווחים על שיפור משמעותי במערכות היחסים עם הלקוחות"
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex flex-col items-center">
+                    <div className="relative w-full">
+                      {/* Stat badge */}
+                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 bg-brand-blue px-4 py-2 rounded-lg">
+                        <span className="text-2xl md:text-4xl font-bold text-white">{item.stat}</span>
+                      </div>
+                      {/* Card */}
+                      <div className={`w-full ${item.height} bg-[#121F37] rounded-2xl`}></div>
+                    </div>
+                    {/* Text below */}
+                    <p className="text-center text-sm md:text-base text-gray-700 mt-4 leading-relaxed">
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* הופכים את הניהול לפשוט וחכם */}
           <div 
             ref={problemsReveal.ref}
