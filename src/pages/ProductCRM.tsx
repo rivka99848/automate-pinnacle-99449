@@ -391,7 +391,7 @@ const ProductCRM = () => {
                 <p className="text-2xl font-bold text-white mb-2">אבל חכו! זה לא המחיר הסופי</p>
                 <p className="text-xl text-white/80 mb-6">ההזדמנות הזו לא תחזור</p>
                 <div className="inline-block bg-[#B3F5A0] rounded-full px-8 py-4">
-                  <p className="text-4xl md:text-5xl font-bold text-[#121F37]">2,400 ש״ח בלבד!</p>
+                  <p className="text-4xl md:text-5xl font-bold text-[#121F37]">240 X 10 ש״ח</p>
                 </div>
               </div>
 
