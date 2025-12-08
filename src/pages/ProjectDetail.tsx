@@ -87,19 +87,9 @@ const ProjectDetail = () => {
               <p className="text-lg text-muted-foreground mb-8">
                 בואו נדבר על איך אפשר ליישם את זה גם בעסק שלכם
               </p>
-              <div className="flex gap-4 justify-center">
-                <Button asChild variant="secondary" size="lg" className="rounded-full">
-                  <Link to="/contact">צרו קשר</Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-full"
-                >
-                  <Link to={project.blogLink}>קרא את הסיפור המלא</Link>
-                </Button>
-              </div>
+              <Button asChild variant="secondary" size="lg" className="rounded-full">
+                <Link to="/contact">צרו קשר</Link>
+              </Button>
             </div>
           </div>
         </div>
