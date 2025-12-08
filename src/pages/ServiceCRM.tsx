@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle, Target, Wrench, BookOpen, Handshake } from "lucide-react";
+import { Database, Users, LineChart, Calendar, Mail, Shield, AlertCircle, CheckCircle, Target, Wrench, BookOpen, Handshake, Lightbulb } from "lucide-react";
 import crmHeroImage from "@/assets/crm-hero.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState, useEffect, useRef, useCallback } from "react";
@@ -153,8 +153,9 @@ const ServiceCRM = () => {
           >
             {/* כותרת ממורכזת */}
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
-                💡 הופכים את הניהול ל
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6 flex items-center justify-center gap-3">
+                <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-brand-blue" strokeWidth={1.5} />
+                הופכים את הניהול ל
                 <span className="text-brand-blue">פשוט וחכם</span>
               </h2>
               <p className="text-xl text-foreground/80 leading-relaxed max-w-3xl mx-auto">
