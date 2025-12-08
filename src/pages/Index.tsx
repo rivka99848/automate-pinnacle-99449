@@ -170,7 +170,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-brand-dark animate-fade-in-up">
-              <span className="inline-block animate-fade-in delay-100">💡</span>{" "}
+              <Lightbulb className="inline-block w-10 h-10 md:w-12 md:h-12 text-brand-blue animate-fade-in delay-100" strokeWidth={1.5} />{" "}
               <span className="text-brand-dark inline-block animate-fade-in delay-200">מה אנחנו</span>{" "}
               <span className="text-brand-blue inline-block animate-scale-in delay-400">עושים</span>
             </h2>
