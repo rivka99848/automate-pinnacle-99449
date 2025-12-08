@@ -418,7 +418,7 @@ const ServiceCRM = () => {
                 
                 {/* כותרת מימין - sticky */}
                 <div className="sticky top-32">
-                  <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  <h2 className="text-3xl md:text-4xl font-bold leading-tight text-[#121F37]">
                     תהליך העבודה <span className="text-brand-blue">איתנו</span>
                   </h2>
                   <p className="text-xl text-gray-600 mt-4">
