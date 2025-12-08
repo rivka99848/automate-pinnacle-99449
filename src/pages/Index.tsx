@@ -241,7 +241,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Project 1 */}
             <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-brand-cyan/10 animate-fade-in-scale delay-200 group">
               <div className="overflow-hidden">
