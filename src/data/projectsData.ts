@@ -174,6 +174,6 @@ export const projectsData: Project[] = [
     author: "ישרי לב",
     blogLink: "/blog/yisharilev-bot",
     color: "cyan",
-    externalLink: "https://yisharilev.co.il",
+    externalLink: "https://bina.chatnaki.co.il",
   },
 ];
