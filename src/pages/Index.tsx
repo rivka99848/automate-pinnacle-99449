@@ -243,7 +243,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Project 1 */}
-            <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-brand-cyan/10 animate-fade-in-scale delay-200 group">
+            <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-brand-cyan/10 animate-fade-in-scale delay-200 group flex flex-col">
               <div className="overflow-hidden">
                 <img
                   src={projectVacationBot}
@@ -251,21 +251,21 @@ const Index = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-2xl font-semibold mb-4">
                   🏝 ניהול פניות אוטומטי לרשת נופש יוקרתית
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-lg text-muted-foreground mb-6 flex-grow">
                   כששאלות כמו 'יש דיל?', 'פנוי בסופ"ש?' ו'מה המחיר?' לא הפסיקו להגיע – מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
                 </p>
-                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
+                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all mt-auto">
                   <Link to="/projects/nichuta-vacation-bot">להמשך קריאה</Link>
                 </Button>
               </div>
             </div>
 
             {/* Project 2 */}
-            <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-secondary/10 animate-fade-in-scale delay-400 group">
+            <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-secondary/10 animate-fade-in-scale delay-400 group flex flex-col">
               <div className="overflow-hidden">
                 <img
                   src={projectMedicalAutomation}
@@ -273,14 +273,14 @@ const Index = () => {
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-2xl font-semibold mb-4">
                   💼 אוטומציה מלאה לעסק רפואי עמוס בפניות
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-lg text-muted-foreground mb-6 flex-grow">
                   בעל עסק רפואי טובע בפניות, מיילים ומסמכים? גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה. טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
                 </p>
-                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all">
+                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all mt-auto">
                   <Link to="/projects/medical-automation">להמשך קריאה</Link>
                 </Button>
               </div>
