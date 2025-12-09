@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Sparkles, DollarSign, Lightbulb, TrendingUp, Clock, Target, Eye, Database, Bot, Zap } from "lucide-react";
+import { Sparkles, DollarSign, Lightbulb, TrendingUp, Clock, Target, Eye, Database, Bot, Zap, Palmtree, Briefcase, Cpu } from "lucide-react";
 import FloatingIcon from "@/components/FloatingIcon";
 import StarburstIcon from "@/components/StarburstIcon";
 import DecorativeLine from "@/components/DecorativeLine";
@@ -13,6 +13,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 
 import projectVacationBot from "@/assets/bot-website-widget.jpg";
 import projectMedicalAutomation from "@/assets/automation-process.jpg";
+import projectYisharilevBot from "@/assets/project-yisharilev-bot.jpg";
 import heroBusinessGrowth from "@/assets/hero-business-growth.jpg";
 
 const Index = () => {
@@ -241,7 +242,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Project 1 */}
             <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-brand-cyan/10 animate-fade-in-scale delay-200 group flex flex-col">
               <div className="overflow-hidden">
@@ -252,11 +253,12 @@ const Index = () => {
                 />
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-2xl font-semibold mb-4">
-                  🏝 ניהול פניות אוטומטי לרשת נופש יוקרתית
+                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <Palmtree className="w-5 h-5 text-brand-cyan" />
+                  ניהול פניות אוטומטי לרשת נופש
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6 flex-grow">
-                  כששאלות כמו 'יש דיל?', 'פנוי בסופ"ש?' ו'מה המחיר?' לא הפסיקו להגיע – מנהל רשת ניחותא מצא את עצמו קבור בהתכתבויות. הפתרון? בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
+                <p className="text-muted-foreground mb-6 flex-grow">
+                  בוט חכם עם סוכן AI שמנהל את כל התקשורת עם הלקוחות – מהבירור ועד לסגירה.
                 </p>
                 <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all mt-auto">
                   <Link to="/projects/nichuta-vacation-bot">להמשך קריאה</Link>
@@ -274,14 +276,38 @@ const Index = () => {
                 />
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-2xl font-semibold mb-4">
-                  💼 אוטומציה מלאה לעסק רפואי עמוס בפניות
+                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-secondary" />
+                  אוטומציה מלאה לעסק רפואי
                 </h3>
-                <p className="text-lg text-muted-foreground mb-6 flex-grow">
-                  בעל עסק רפואי טובע בפניות, מיילים ומסמכים? גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה. טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
+                <p className="text-muted-foreground mb-6 flex-grow">
+                  טופס חכם, תיקיות אוטומטיות, ניהול משימות והתראות – הכול רץ לבד.
                 </p>
                 <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all mt-auto">
                   <Link to="/projects/medical-automation">להמשך קריאה</Link>
+                </Button>
+              </div>
+            </div>
+
+            {/* Project 3 */}
+            <div className="bg-card rounded-3xl overflow-hidden hover-lift shadow-elegant border border-brand-blue/10 animate-fade-in-scale delay-600 group flex flex-col">
+              <div className="overflow-hidden">
+                <img
+                  src={projectYisharilevBot}
+                  alt="Yisharilev AI Bot - בוט AI מתקדם"
+                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                  <Cpu className="w-5 h-5 text-brand-blue" />
+                  בוט AI מתקדם לעבודה מקצועית
+                </h3>
+                <p className="text-muted-foreground mb-6 flex-grow">
+                  מערכת AI מסוננת ומאובטחת למקצוענים עם יכולות ניתוח תמונות, כתיבת קוד ותמלול.
+                </p>
+                <Button asChild variant="secondary" className="w-full rounded-full font-semibold transition-all mt-auto">
+                  <Link to="/projects/yisharilev-ai-bot">להמשך קריאה</Link>
                 </Button>
               </div>
             </div>

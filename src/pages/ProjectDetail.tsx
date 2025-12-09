@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import ProjectGallery from "@/components/ProjectGallery";
 import { projectsData } from "@/data/projectsData";
+import { ExternalLink, MessageCircle, Image, Calendar, Tag, FolderOpen, Mail, Bell, FileSpreadsheet, Filter, Code, FileText, CreditCard, History } from "lucide-react";
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -67,6 +68,18 @@ const ProjectDetail = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* External Link Button */}
+              {project.externalLink && (
+                <div className="mt-8">
+                  <Button asChild variant="outline" size="lg" className="rounded-full">
+                    <a href={project.externalLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      לצפייה בפרויקט
+                    </a>
+                  </Button>
+                </div>
+              )}
 
               {/* Quote */}
               <blockquote
