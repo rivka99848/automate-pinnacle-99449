@@ -50,7 +50,7 @@ const LogoMarquee = () => {
           {logos.map((logoUrl, index) => (
             <div
               key={`first-${index}`}
-              className="flex-shrink-0 flex items-center justify-center px-8 py-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all shadow-lg"
+              className="flex-shrink-0 flex items-center justify-center hover:scale-110 transition-transform"
             >
               <img 
                 src={logoUrl} 
@@ -63,7 +63,7 @@ const LogoMarquee = () => {
           {logos.map((logoUrl, index) => (
             <div
               key={`second-${index}`}
-              className="flex-shrink-0 flex items-center justify-center px-8 py-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all shadow-lg"
+              className="flex-shrink-0 flex items-center justify-center hover:scale-110 transition-transform"
             >
               <img 
                 src={logoUrl} 
