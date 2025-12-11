@@ -50,12 +50,12 @@ const LogoMarquee = () => {
           {logos.map((logoUrl, index) => (
             <div
               key={`first-${index}`}
-              className="flex-shrink-0 flex items-center justify-center px-6 py-4 rounded-2xl bg-brand-dark/50 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all"
+              className="flex-shrink-0 flex items-center justify-center px-8 py-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all shadow-lg"
             >
               <img 
                 src={logoUrl} 
                 alt={`לוגו לקוח ${index + 1}`}
-                className="h-12 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
           ))}
@@ -63,12 +63,12 @@ const LogoMarquee = () => {
           {logos.map((logoUrl, index) => (
             <div
               key={`second-${index}`}
-              className="flex-shrink-0 flex items-center justify-center px-6 py-4 rounded-2xl bg-brand-dark/50 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all"
+              className="flex-shrink-0 flex items-center justify-center px-8 py-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-brand-blue/20 hover:border-brand-blue/40 hover:scale-110 transition-all shadow-lg"
             >
               <img 
                 src={logoUrl} 
                 alt={`לוגו לקוח ${index + 1}`}
-                className="h-12 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
           ))}
