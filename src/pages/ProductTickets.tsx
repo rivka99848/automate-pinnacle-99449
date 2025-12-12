@@ -368,27 +368,27 @@ const ProductTickets = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
               {[
                 {
-                  icon: Package,
-                  title: "קבלת המערכת",
-                  description: "המערכת מותאמת אישית לאולמות ולסגנון שלכם ומוכנה לשימוש.",
+                  icon: Users,
+                  title: "פגישה והתאמת המערכת",
+                  description: "נפגשים להבנת הצרכים שלכם ומתאימים את המערכת לאולמות ולסגנון שלכם.",
                   color: colors.primary
                 },
                 {
-                  icon: Video,
-                  title: "הדרכה מלאה",
-                  description: "סרטוני הדרכה מפורטים + ליווי אישי להתחלה מהירה.",
-                  color: colors.accentLight
-                },
-                {
-                  icon: Mail,
+                  icon: CreditCard,
                   title: "חיבור הסליקה",
                   description: "חיבור למסופי הסליקה שלכם להפקדה ישירה לחשבון.",
                   color: colors.accent
                 },
                 {
-                  icon: Gift,
-                  title: "התחילו למכור!",
-                  description: "פרסמו את ההופעות והתחילו לקבל הזמנות מיד.",
+                  icon: Package,
+                  title: "קבלת המערכת והרצה ראשונה",
+                  description: "המערכת מותקנת ומוכנה לשימוש עם הרצה ראשונה משותפת.",
+                  color: colors.accentLight
+                },
+                {
+                  icon: Video,
+                  title: "הדרכה מלאה והתחילו למכור!",
+                  description: "סרטוני הדרכה מפורטים + ליווי אישי, ומתחילים לקבל הזמנות.",
                   color: colors.textMuted
                 }
               ].map((step, index) => (
