@@ -3,10 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
-import { Code, Lightbulb, Users, Zap, Settings, CheckCircle, Rocket, HeartHandshake, MessageCircle, Wrench } from "lucide-react";
+import { HeartHandshake, Shield, RefreshCw, BarChart3, Clock, Zap, MessageCircle, Settings, Rocket, CheckCircle } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const ServiceCustomProducts = () => {
+const ServiceSupport = () => {
   const heroReveal = useScrollReveal({ threshold: 0.1 });
   const audienceReveal = useScrollReveal({ threshold: 0.1 });
   const includesReveal = useScrollReveal({ threshold: 0.1 });
@@ -18,24 +18,24 @@ const ServiceCustomProducts = () => {
 
   const serviceIncludes = [
     { 
-      icon: Code, 
-      title: "פיתוח מותאם אישית", 
-      description: "בניית מערכות ואפליקציות שמותאמות בדיוק למה שאתם צריכים - לא פתרון גנרי, אלא כלי שנבנה במיוחד עבורכם."
+      icon: Clock, 
+      title: "תמיכה טכנית זמינה", 
+      description: "צוות תמיכה זמין לכל שאלה או בעיה. לא צריך להתמודד לבד עם תקלות או שאלות טכניות."
     },
     { 
-      icon: Zap, 
-      title: "פונקציונליות ואוטומציה", 
-      description: "פתרונות חכמים שחוסכים זמן ומייעלים תהליכים. המערכת עושה את העבודה במקומכם."
+      icon: RefreshCw, 
+      title: "עדכונים ותחזוקה שוטפת", 
+      description: "עדכונים שוטפים, תיקוני באגים ושיפורי ביצועים - המערכות שלך תמיד מעודכנות ועובדות חלק."
     },
     { 
-      icon: Settings, 
-      title: "בדיקות והתאמות", 
-      description: "בודקים שהמערכת עובדת כמו שצריך, עם אפשרות לבצע שינויים והתאמות לפי הצורך."
+      icon: BarChart3, 
+      title: "ייעוץ ואופטימיזציה", 
+      description: "ייעוץ שוטף לשיפור התהליכים והמערכות. נזהה הזדמנויות לייעול ונעזור לך לנצל את המערכות בצורה מיטבית."
     },
     { 
-      icon: HeartHandshake, 
-      title: "תמיכה ראשונית", 
-      description: "הדרכה על השימוש במערכת ותמיכה לחודש הראשון - אתם לא לבד בתהליך."
+      icon: Shield, 
+      title: "גיבויים ואבטחה", 
+      description: "גיבויים קבועים של הנתונים ומעקב אחרי אבטחת המידע. שקט נפשי שהמידע שלך מוגן."
     }
   ];
 
@@ -70,13 +70,13 @@ const ServiceCustomProducts = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="text-brand-teal">הפוך את הרעיון שלך</span>
+                  <span className="text-brand-orange">תמיכה חודשית</span>
                   <br />
-                  <span className="text-foreground">למוצר או מערכת מותאמת אישית</span>
+                  <span className="text-foreground">לאורך כל השנה</span>
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-8">
-                  חלום שיש לך? רעיון שיכול לשנות את העסק שלך? אנחנו מממשים אותו.
-                  אני לוקחת את הרעיון שלך – קטן או גדול – והופכת אותו למערכת או מוצר עובד שמשרת בדיוק את הצרכים שלך.
+                  לא צריך להתמודד לבד - צוות שמלווה אותך כל הדרך.
+                  תמיכה טכנית, עדכונים, תחזוקה ושיפורים שוטפים למערכות שלך.
                 </p>
                 <div className="flex justify-center">
                   <Button 
@@ -87,16 +87,16 @@ const ServiceCustomProducts = () => {
                         block: 'start'
                       });
                     }}
-                    className="rounded-full bg-brand-teal hover:bg-brand-teal/90 shadow-lg shadow-brand-teal/30 hover:shadow-brand-teal/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
+                    className="rounded-full bg-brand-orange hover:bg-brand-orange/90 shadow-lg shadow-brand-orange/30 hover:shadow-brand-orange/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
                   >
                     קבעו פגישת ייעוץ ↓
                   </Button>
                 </div>
               </div>
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-brand-teal/20 to-brand-cyan/10 h-[400px] flex items-center justify-center">
+              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-brand-orange/20 to-brand-pink/10 h-[400px] flex items-center justify-center">
                 <div className="text-center">
-                  <Lightbulb className="w-32 h-32 text-brand-teal mx-auto mb-6 animate-float" />
-                  <p className="text-2xl font-bold text-brand-teal">מהרעיון למציאות</p>
+                  <HeartHandshake className="w-32 h-32 text-brand-orange mx-auto mb-6 animate-float" />
+                  <p className="text-2xl font-bold text-brand-orange">ליווי מקצועי לאורך כל הדרך</p>
                 </div>
               </div>
             </div>
@@ -111,36 +111,36 @@ const ServiceCustomProducts = () => {
           >
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                למי השירות <span className="text-brand-teal">מתאים?</span>
+                למי השירות <span className="text-brand-orange">מתאים?</span>
               </h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Right - Teal Background - הרעיון שלך */}
-              <div className="bg-brand-teal rounded-2xl p-8 border-2 border-brand-teal/30">
-                <h3 className="text-2xl font-bold text-white mb-6">יש לך רעיון?</h3>
+              {/* Right - Orange Background */}
+              <div className="bg-brand-orange rounded-2xl p-8 border-2 border-brand-orange/30">
+                <h3 className="text-2xl font-bold text-white mb-6">המציאות המוכרת</h3>
                 <div className="space-y-4">
-                  <p className="text-white/90">• יזמים שרוצים להוציא רעיון לפועל</p>
-                  <p className="text-white/90">• בעלי עסקים שצריכים פתרון דיגיטלי ייחודי</p>
-                  <p className="text-white/90">• צוותים שמחפשים אוטומציה מותאמת</p>
-                  <p className="text-white/90">• כל מי שרוצה מערכת שתעבוד בדיוק כמו שהוא צריך</p>
+                  <p className="text-white/90">• בעיות טכניות שמעכבות את העבודה</p>
+                  <p className="text-white/90">• מערכות שלא מעודכנות ולא עובדות כמו שצריך</p>
+                  <p className="text-white/90">• חוסר ידע לנצל את מלוא הפוטנציאל</p>
+                  <p className="text-white/90">• דאגה לאבטחת המידע והגיבויים</p>
                 </div>
               </div>
 
-              {/* Left - White Background - התוצאה */}
+              {/* Left - White Background */}
               <div className="bg-white rounded-2xl p-8 border-2 border-gray-200">
-                <h3 className="text-2xl font-bold text-brand-teal mb-6">התוצאה</h3>
+                <h3 className="text-2xl font-bold text-brand-orange mb-6">החיים עם תמיכה</h3>
                 <div className="space-y-4">
-                  <p className="text-gray-700">• מערכת או מוצר שעובדים בשבילך</p>
-                  <p className="text-gray-700">• חסכון משמעותי בזמן ובמשאבים</p>
-                  <p className="text-gray-700">• פתרון שמשרת את הצרכים המדויקים שלך</p>
-                  <p className="text-gray-700">• אוטומציה שמייעלת תהליכים קיימים</p>
+                  <p className="text-gray-700">• צוות זמין שפותר בעיות במהירות</p>
+                  <p className="text-gray-700">• מערכות מעודכנות ועובדות חלק</p>
+                  <p className="text-gray-700">• ייעוץ שוטף לשיפור ואופטימיזציה</p>
+                  <p className="text-gray-700">• שקט נפשי - המידע מגובה ומאובטח</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* מה השירות כולל - Regular Cards */}
+          {/* מה השירות כולל - Regular Cards with Animations */}
           <div 
             ref={includesReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
@@ -148,16 +148,16 @@ const ServiceCustomProducts = () => {
             }`}
           >
             <h2 className="text-3xl font-bold mb-12 text-center">
-              מה השירות <span className="text-brand-teal">כולל?</span>
+              מה השירות <span className="text-brand-orange">כולל?</span>
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {serviceIncludes.map((item, index) => (
                 <div
                   key={index}
-                  className="p-8 border border-white/10 rounded-2xl hover:border-brand-teal/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in"
+                  className="p-8 border border-white/10 rounded-2xl hover:border-brand-orange/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <item.icon className="w-8 h-8 text-brand-teal mb-4" />
+                  <item.icon className="w-8 h-8 text-brand-orange mb-4" />
                   <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
                 </div>
@@ -170,7 +170,7 @@ const ServiceCustomProducts = () => {
             <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
               <div className="sticky top-32">
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                  איך זה <span className="text-brand-teal">עובד?</span>
+                  איך זה <span className="text-brand-orange">עובד?</span>
                 </h2>
               </div>
 
@@ -181,7 +181,7 @@ const ServiceCustomProducts = () => {
                 {/* Progress Indicator */}
                 <div className="absolute right-0 top-0 w-1 bg-white/10" style={{ height: '100%' }}>
                   <div 
-                    className="w-full bg-gradient-to-b from-brand-teal to-brand-cyan transition-all duration-300"
+                    className="w-full bg-gradient-to-b from-brand-orange to-brand-pink transition-all duration-300"
                     style={{ 
                       height: `${Math.min(100, cardProgress * 100)}%`
                     }}
@@ -190,14 +190,14 @@ const ServiceCustomProducts = () => {
 
                 {/* Progress Dots */}
                 <div className="absolute right-[-4px] top-0 flex flex-col justify-around py-8" style={{ height: '100%' }}>
-                  {[0, 1, 2, 3, 4].map((index) => {
-                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.2));
+                  {[0, 1, 2, 3].map((index) => {
+                    const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.25));
                     return (
                       <div 
                         key={index}
-                        className="w-3 h-3 rounded-full border-2 border-brand-teal transition-all duration-300"
+                        className="w-3 h-3 rounded-full border-2 border-brand-orange transition-all duration-300"
                         style={{
-                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-teal))' : 'transparent',
+                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-orange))' : 'transparent',
                           transform: `scale(${0.8 + dotProgress * 0.4})`
                         }}
                       />
@@ -208,13 +208,12 @@ const ServiceCustomProducts = () => {
                 {/* Cards */}
                 <div className="pr-8 relative">
                   {[
-                    { icon: MessageCircle, title: "שיחה ראשונית / אפיון", description: "בודקים את הרעיון, מבינים את המטרות ומגדירים את הצרכים המדויקים. השלב הזה קריטי להצלחת הפרויקט." },
-                    { icon: Lightbulb, title: "תכנון הפתרון", description: "מפה של המערכת או המוצר, כולל פונקציות, אוטומציות וזרימת העבודה. תוכנית ברורה לפני שמתחילים לבנות." },
-                    { icon: Wrench, title: "פיתוח ובנייה", description: "הפיכת הרעיון למוצר או מערכת עובדת, חיבור למערכות קיימות אם צריך. הקסם קורה כאן." },
-                    { icon: CheckCircle, title: "בדיקה והתאמות", description: "ווידוא שהכול עובד מצוין, עם אפשרות לבצע שינויים אחרונים ולהתאים את המוצר לצרכים המדויקים." },
-                    { icon: Rocket, title: "מסירה ותמיכה", description: "המוצר מוכן לעבודה! הדרכה קצרה ותמיכה ראשונית כדי להבטיח שאתם יודעים להשתמש בכלי החדש." }
+                    { icon: MessageCircle, title: "הערכת מערכות קיימות", description: "סוקרים את המערכות שלכם, מזהים נקודות חולשה והזדמנויות לשיפור. מבינים מה צריך תמיכה ומה צריך שדרוג." },
+                    { icon: Settings, title: "תוכנית תמיכה מותאמת", description: "בונים תוכנית תמיכה שמתאימה בדיוק לצרכים שלכם - מה צריך מעקב שוטף, מה צריך בדיקות תקופתיות, ומה צריך שיפורים." },
+                    { icon: Zap, title: "ליווי שוטף ותחזוקה", description: "תמיכה טכנית זמינה, עדכונים שוטפים, תיקוני באגים ושיפורי ביצועים. המערכות שלכם תמיד בכושר מלא." },
+                    { icon: BarChart3, title: "דיווחים ועדכונים חודשיים", description: "דו\"ח חודשי על מצב המערכות, פעולות שבוצעו והמלצות לשיפור. תמיד תדעו מה קורה ולאן הולכים." }
                   ].map((step, index) => {
-                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.2));
+                    const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.25));
                     const scale = 0.95 + cardProgressValue * 0.05;
                     const translateY = (1 - cardProgressValue) * 20;
                     const isEven = index % 2 === 0;
@@ -234,10 +233,10 @@ const ServiceCustomProducts = () => {
                         }}
                       >
                         {!isEven && (
-                          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-teal/20 to-brand-cyan/10 backdrop-blur-3xl rounded-2xl" />
+                          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-orange/20 to-brand-pink/10 backdrop-blur-3xl rounded-2xl" />
                         )}
                         <div className="flex items-start gap-4">
-                          <step.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-brand-teal' : 'text-white'}`} />
+                          <step.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-brand-orange' : 'text-white'}`} />
                           <div>
                             <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
                               {step.title}
@@ -266,41 +265,41 @@ const ServiceCustomProducts = () => {
               <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
                 <div className="sticky top-32">
                   <h2 className="text-3xl md:text-4xl font-bold leading-tight text-gray-900">
-                    התוצאה <span className="text-brand-teal">עבורך</span>
+                    התוצאה <span className="text-brand-orange">עבורך</span>
                   </h2>
                 </div>
                 
                 <div className="space-y-8">
-                  <div className="border-r-4 border-brand-teal/50 pr-6">
+                  <div className="border-r-4 border-brand-orange/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <CheckCircle className="w-6 h-6 text-brand-teal" />
-                      <h3 className="text-xl font-bold text-gray-900">מערכת שעובדת בשבילך</h3>
+                      <CheckCircle className="w-6 h-6 text-brand-orange" />
+                      <h3 className="text-xl font-bold text-gray-900">שקט נפשי</h3>
                     </div>
-                    <p className="text-gray-600 mr-[28px]">לא עוד פתרונות גנריים - מוצר שנבנה במיוחד לצרכים שלך</p>
+                    <p className="text-gray-600 mr-[28px]">יודעים שיש מי שדואג למערכות - אפשר להתמקד בעסק</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-teal/50 pr-6">
+                  <div className="border-r-4 border-brand-orange/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <Zap className="w-6 h-6 text-brand-teal" />
-                      <h3 className="text-xl font-bold text-gray-900">חסכון בזמן</h3>
+                      <Zap className="w-6 h-6 text-brand-orange" />
+                      <h3 className="text-xl font-bold text-gray-900">מערכות שעובדות</h3>
                     </div>
-                    <p className="text-gray-600 mr-[28px]">אוטומציה שמייעלת תהליכים וחוסכת שעות עבודה יקרות</p>
+                    <p className="text-gray-600 mr-[28px]">מערכות מעודכנות, מהירות ואמינות - בלי הפתעות</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-teal/50 pr-6">
+                  <div className="border-r-4 border-brand-orange/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <Settings className="w-6 h-6 text-brand-teal" />
-                      <h3 className="text-xl font-bold text-gray-900">ייעול תהליכים</h3>
+                      <Shield className="w-6 h-6 text-brand-orange" />
+                      <h3 className="text-xl font-bold text-gray-900">מידע מוגן</h3>
                     </div>
-                    <p className="text-gray-600 mr-[28px]">המערכת עובדת בצורה חלקה ומאפשרת לך להתמקד במה שחשוב</p>
+                    <p className="text-gray-600 mr-[28px]">גיבויים קבועים ואבטחה שוטפת - המידע שלכם בטוח</p>
                   </div>
 
-                  <div className="border-r-4 border-brand-teal/50 pr-6">
+                  <div className="border-r-4 border-brand-orange/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
-                      <Rocket className="w-6 h-6 text-brand-teal" />
-                      <h3 className="text-xl font-bold text-gray-900">מהרעיון למציאות</h3>
+                      <Rocket className="w-6 h-6 text-brand-orange" />
+                      <h3 className="text-xl font-bold text-gray-900">שיפור מתמיד</h3>
                     </div>
-                    <p className="text-gray-600 mr-[28px]">הרעיון שלך הופך למוצר אמיתי שאפשר להשתמש בו ולהרוויח ממנו</p>
+                    <p className="text-gray-600 mr-[28px]">ייעוץ ואופטימיזציה שוטפת - המערכות שלכם רק משתפרות</p>
                   </div>
                 </div>
               </div>
@@ -313,13 +312,13 @@ const ServiceCustomProducts = () => {
               מוכנים להתחיל?
             </h2>
             <p className="text-xl md:text-2xl text-foreground/80 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              בואו נדבר על איך להפוך את הרעיון שלכם למציאות
+              בואו נדבר על תמיכה שמלווה אתכם כל השנה
             </p>
           </div>
 
           {/* Contact Form Section */}
           <div id="contact-form" className="scroll-mt-20">
-            <ContactFormSection buttonColor="teal" />
+            <ContactFormSection buttonColor="orange" />
           </div>
         </div>
       </main>
@@ -329,4 +328,4 @@ const ServiceCustomProducts = () => {
   );
 };
 
-export default ServiceCustomProducts;
+export default ServiceSupport;

@@ -248,7 +248,7 @@ const ServiceAutomation = () => {
           >
             <h2 className="text-3xl font-bold mb-12 text-center">דוגמאות מהחיים</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in" style={{ animationDelay: '0s' }}>
                 <Zap className="w-8 h-8 text-brand-purple mb-4" />
                 <h3 className="text-xl font-bold mb-3">עסק רפואי</h3>
                 <p className="text-muted-foreground">
@@ -256,7 +256,7 @@ const ServiceAutomation = () => {
                 </p>
               </div>
 
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.1s' }}>
                 <TrendingUp className="w-8 h-8 text-brand-purple mb-4" />
                 <h3 className="text-xl font-bold mb-3">חנות אונליין</h3>
                 <p className="text-muted-foreground">
@@ -264,7 +264,7 @@ const ServiceAutomation = () => {
                 </p>
               </div>
 
-              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 transition-all">
+              <div className="p-8 border border-white/10 rounded-2xl hover:border-brand-purple/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                 <FileText className="w-8 h-8 text-brand-purple mb-4" />
                 <h3 className="text-xl font-bold mb-3">משרד שירות</h3>
                 <p className="text-muted-foreground">

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit, Lightbulb } from "lucide-react";
+import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit, Lightbulb, HeartHandshake } from "lucide-react";
 import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
 import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
 import automationWorkflowImage from "@/assets/automation-workflow.jpg";
@@ -27,6 +27,7 @@ const Services = () => {
       colorTo: "to-brand-cyan/30",
       iconColor: "text-brand-blue",
       badgeColor: "bg-brand-blue/10 text-brand-blue",
+      buttonClass: "bg-brand-blue hover:bg-brand-blue/90",
       url: "/services/crm"
     },
     {
@@ -45,6 +46,7 @@ const Services = () => {
       colorTo: "to-brand-cyan/30",
       iconColor: "text-brand-green",
       badgeColor: "bg-brand-green/10 text-brand-green",
+      buttonClass: "bg-secondary hover:bg-secondary/90",
       url: "/services/bots"
     },
     {
@@ -63,6 +65,7 @@ const Services = () => {
       colorTo: "to-brand-cyan/30",
       iconColor: "text-brand-purple",
       badgeColor: "bg-brand-purple/10 text-brand-purple",
+      buttonClass: "bg-brand-purple hover:bg-brand-purple/90",
       url: "/services/automation"
     },
     {
@@ -81,6 +84,7 @@ const Services = () => {
       colorTo: "to-brand-purple/30",
       iconColor: "text-brand-pink",
       badgeColor: "bg-brand-pink/10 text-brand-pink",
+      buttonClass: "bg-brand-pink hover:bg-brand-pink/90",
       url: "/services/forms"
     },
     {
@@ -99,7 +103,27 @@ const Services = () => {
       colorTo: "to-brand-cyan/30",
       iconColor: "text-brand-teal",
       badgeColor: "bg-brand-teal/10 text-brand-teal",
+      buttonClass: "bg-brand-teal hover:bg-brand-teal/90",
       url: "/services/custom-products"
+    },
+    {
+    id: "support",
+    icon: HeartHandshake,
+    image: null,
+      title: "תמיכה חודשית לאורך כל השנה",
+      description: "לא צריך להתמודד לבד - צוות שמלווה אותך כל הדרך. תמיכה טכנית, עדכונים, תחזוקה ושיפורים שוטפים למערכות שלך.",
+      features: [
+        "תמיכה טכנית זמינה",
+        "עדכונים ותחזוקה שוטפת",
+        "ייעוץ ואופטימיזציה",
+        "גיבויים ואבטחה"
+      ],
+      colorFrom: "from-brand-orange/30",
+      colorTo: "to-brand-pink/30",
+      iconColor: "text-brand-orange",
+      badgeColor: "bg-brand-orange/10 text-brand-orange",
+      buttonClass: "bg-brand-orange hover:bg-brand-orange/90",
+      url: "/services/support"
     }
   ];
 
@@ -160,7 +184,7 @@ const Services = () => {
                     </div>
                     
                     <Link to={service.url}>
-                      <Button size="lg" className="rounded-full">
+                      <Button size="lg" className={`rounded-full ${(service as any).buttonClass || ''}`}>
                         לפרטים מלאים
                       </Button>
                     </Link>

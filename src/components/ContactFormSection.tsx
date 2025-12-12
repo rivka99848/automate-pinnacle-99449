@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
-type ButtonColor = "secondary" | "blue" | "pink" | "purple" | "teal";
+type ButtonColor = "secondary" | "blue" | "pink" | "purple" | "teal" | "orange";
 
 interface ContactFormSectionProps {
   buttonColor?: ButtonColor;
@@ -23,6 +23,8 @@ const getButtonClasses = (color: ButtonColor): string => {
       return `${baseClasses} bg-brand-purple hover:bg-brand-purple/90 text-white`;
     case "teal":
       return `${baseClasses} bg-brand-teal hover:bg-brand-teal/90 text-white`;
+    case "orange":
+      return `${baseClasses} bg-brand-orange hover:bg-brand-orange/90 text-white`;
     case "secondary":
     default:
       return baseClasses;
