@@ -3,10 +3,11 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users } from "lucide-react";
+import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit } from "lucide-react";
 import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
 import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
 import automationWorkflowImage from "@/assets/automation-workflow.jpg";
+import formsHeroImage from "@/assets/digital-forms-hero.jpg";
 
 const Services = () => {
   const services = [
@@ -63,6 +64,24 @@ const Services = () => {
       iconColor: "text-brand-purple",
       badgeColor: "bg-brand-purple/10 text-brand-purple",
       url: "/services/automation"
+    },
+    {
+    id: "forms",
+    icon: FileEdit,
+    image: formsHeroImage,
+      title: "טפסים דיגיטליים חכמים",
+      description: "טפסים אוטומטיים שמחליפים את הנייר, אוספים מידע ומעבירים אותו ישירות למערכות שלכם. חתימה דיגיטלית, תזכורות אוטומטיות ודוחות בזמן אמת.",
+      features: [
+        "עיצוב מותאם למותג שלכם",
+        "חתימה דיגיטלית מאובטחת",
+        "שליחה אוטומטית למערכות",
+        "דוחות וסטטיסטיקות בזמן אמת"
+      ],
+      colorFrom: "from-brand-pink/30",
+      colorTo: "to-brand-purple/30",
+      iconColor: "text-brand-pink",
+      badgeColor: "bg-brand-pink/10 text-brand-pink",
+      url: "/services/forms"
     }
   ];
 
