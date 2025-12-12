@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit, Lightbulb, HeartHandshake } from "lucide-react";
+import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit, Lightbulb } from "lucide-react";
 import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
 import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
 import automationWorkflowImage from "@/assets/automation-workflow.jpg";
@@ -106,25 +106,6 @@ const Services = () => {
       buttonClass: "bg-brand-teal hover:bg-brand-teal/90",
       url: "/services/custom-products"
     },
-    {
-    id: "support",
-    icon: HeartHandshake,
-    image: null,
-      title: "תמיכה חודשית לאורך כל השנה",
-      description: "לא צריך להתמודד לבד - צוות שמלווה אותך כל הדרך. תמיכה טכנית, עדכונים, תחזוקה ושיפורים שוטפים למערכות שלך.",
-      features: [
-        "תמיכה טכנית זמינה",
-        "עדכונים ותחזוקה שוטפת",
-        "ייעוץ ואופטימיזציה",
-        "גיבויים ואבטחה"
-      ],
-      colorFrom: "from-brand-orange/30",
-      colorTo: "to-brand-pink/30",
-      iconColor: "text-brand-orange",
-      badgeColor: "bg-brand-orange/10 text-brand-orange",
-      buttonClass: "bg-brand-orange hover:bg-brand-orange/90",
-      url: "/services/support"
-    }
   ];
 
   return (
