@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Zap, RefreshCw, LinkIcon, FileText, Mail, TrendingUp, Compass, Settings, Rocket, HeartHandshake } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import automationHeroImage from "@/assets/hero-automation-future.jpg";
+import { projectsData } from "@/data/projectsData";
 
 const ServiceAutomation = () => {
   const heroReveal = useScrollReveal({ threshold: 0.1 });
@@ -325,6 +326,45 @@ const ServiceAutomation = () => {
               </div>
             </div>
           </div>
+
+          {/* Related Projects Section */}
+          <section className="py-16 md:py-24 -mx-4 px-4 bg-white">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+                פרויקטי <span className="text-brand-purple">אוטומציה</span> שביצענו
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {projectsData
+                  .filter(p => p.serviceType === "automation")
+                  .map((project, index) => (
+                    <Link
+                      key={project.id}
+                      to={`/projects/${project.slug}`}
+                      className="group animate-fade-in"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-brand-purple/50 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl">
+                        <div className="aspect-video overflow-hidden">
+                          <img
+                            src={project.images[0]}
+                            alt={project.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-purple transition-colors duration-300 mb-2">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-600 line-clamp-2">
+                            {project.description.split('\n')[0]}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          </section>
 
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center mb-8">
