@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit } from "lucide-react";
+import { Database, Bot, Zap, MessageSquare, Puzzle, Code, Users, FileEdit, Lightbulb } from "lucide-react";
 import crmDashboardImage from "@/assets/crm-dashboard-modern.jpg";
 import botWhatsappImage from "@/assets/bot-whatsapp-chat.jpg";
 import automationWorkflowImage from "@/assets/automation-workflow.jpg";
@@ -82,6 +82,24 @@ const Services = () => {
       iconColor: "text-brand-pink",
       badgeColor: "bg-brand-pink/10 text-brand-pink",
       url: "/services/forms"
+    },
+    {
+    id: "custom-products",
+    icon: Lightbulb,
+    image: null,
+      title: "פיתוח מוצרים מותאמים אישית",
+      description: "הפיכת הרעיון שלך למוצר או מערכת עובדת. פיתוח מותאם אישית של מערכות ואפליקציות שמשרתות בדיוק את הצרכים שלך.",
+      features: [
+        "פיתוח מותאם אישית לצרכים שלכם",
+        "פונקציונליות ואוטומציה חכמה",
+        "בדיקות, התאמות ותמיכה",
+        "הדרכה ותמיכה לחודש הראשון"
+      ],
+      colorFrom: "from-brand-teal/30",
+      colorTo: "to-brand-cyan/30",
+      iconColor: "text-brand-teal",
+      badgeColor: "bg-brand-teal/10 text-brand-teal",
+      url: "/services/custom-products"
     }
   ];
 
@@ -151,12 +169,20 @@ const Services = () => {
                   {/* Image with Overlay */}
                   <div className={isEven ? "order-2" : "order-2 md:order-1"}>
                     <div className="relative rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-500">
-                      <img 
-                        src={service.image} 
-                        alt={service.title}
-                        className="w-full h-full object-cover aspect-square"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-br ${service.colorFrom} ${service.colorTo} mix-blend-multiply`} />
+                      {service.image ? (
+                        <>
+                          <img 
+                            src={service.image} 
+                            alt={service.title}
+                            className="w-full h-full object-cover aspect-square"
+                          />
+                          <div className={`absolute inset-0 bg-gradient-to-br ${service.colorFrom} ${service.colorTo} mix-blend-multiply`} />
+                        </>
+                      ) : (
+                        <div className={`w-full aspect-square bg-gradient-to-br ${service.colorFrom} ${service.colorTo} flex items-center justify-center`}>
+                          <Icon className={`w-24 h-24 ${service.iconColor}`} />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

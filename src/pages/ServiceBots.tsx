@@ -322,7 +322,7 @@ const ServiceBots = () => {
 
           {/* Contact Form Section */}
           <div id="contact-form" className="scroll-mt-20">
-            <ContactFormSection />
+            <ContactFormSection buttonColor="secondary" />
           </div>
         </div>
       </main>

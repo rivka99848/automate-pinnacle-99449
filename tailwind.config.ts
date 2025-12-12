@@ -68,6 +68,7 @@ export default {
           orange: "hsl(var(--brand-orange))",
           purple: "hsl(var(--brand-purple))",
           pink: "hsl(var(--brand-pink))",
+          teal: "hsl(var(--brand-teal))",
         },
       },
       fontFamily: {

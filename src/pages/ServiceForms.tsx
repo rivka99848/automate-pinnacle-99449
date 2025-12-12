@@ -325,7 +325,7 @@ const ServiceForms = () => {
 
           {/* Contact Form Section */}
           <div id="contact-form" className="scroll-mt-20">
-            <ContactFormSection />
+            <ContactFormSection buttonColor="pink" />
           </div>
         </div>
       </main>

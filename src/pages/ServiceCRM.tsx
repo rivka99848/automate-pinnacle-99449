@@ -511,7 +511,7 @@ const ServiceCRM = () => {
 
           {/* Contact Form Section */}
           <div id="contact-form" className="scroll-mt-20">
-            <ContactFormSection />
+            <ContactFormSection buttonColor="blue" />
           </div>
         </div>
       </main>
