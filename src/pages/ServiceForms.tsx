@@ -155,7 +155,8 @@ const ServiceForms = () => {
               {formTypes.map((form, index) => (
                 <div
                   key={index}
-                  className="p-8 border border-white/10 rounded-2xl hover:border-brand-pink/50 hover:bg-white/5 transition-all"
+                  className="p-8 border border-white/10 rounded-2xl hover:border-brand-pink/50 hover:bg-white/5 hover:scale-105 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <form.icon className="w-8 h-8 text-brand-pink mb-4" />
                   <h3 className="text-xl font-bold mb-3">{form.title}</h3>
