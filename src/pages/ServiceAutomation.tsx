@@ -338,7 +338,7 @@ const ServiceAutomation = () => {
 
           {/* Contact Form Section */}
           <div id="contact-form" className="scroll-mt-20">
-            <ContactFormSection />
+            <ContactFormSection buttonColor="purple" />
           </div>
         </div>
       </main>

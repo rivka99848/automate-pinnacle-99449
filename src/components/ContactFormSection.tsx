@@ -5,7 +5,31 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
-const ContactFormSection = () => {
+type ButtonColor = "secondary" | "blue" | "pink" | "purple" | "teal";
+
+interface ContactFormSectionProps {
+  buttonColor?: ButtonColor;
+}
+
+const getButtonClasses = (color: ButtonColor): string => {
+  const baseClasses = "w-full h-14 md:h-16 text-base md:text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]";
+  
+  switch (color) {
+    case "blue":
+      return `${baseClasses} bg-brand-blue hover:bg-brand-blue/90 text-white`;
+    case "pink":
+      return `${baseClasses} bg-brand-pink hover:bg-brand-pink/90 text-white`;
+    case "purple":
+      return `${baseClasses} bg-brand-purple hover:bg-brand-purple/90 text-white`;
+    case "teal":
+      return `${baseClasses} bg-brand-teal hover:bg-brand-teal/90 text-white`;
+    case "secondary":
+    default:
+      return baseClasses;
+  }
+};
+
+const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -171,8 +195,8 @@ const ContactFormSection = () => {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                variant="secondary"
-                className="w-full h-14 md:h-16 text-base md:text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                variant={buttonColor === "secondary" ? "secondary" : undefined}
+                className={getButtonClasses(buttonColor)}
               >
                 {isSubmitting ? "שולח..." : "רוצה להתחיל לעבוד חכם ולהרוויח יותר"}
               </Button>
