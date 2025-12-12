@@ -55,7 +55,7 @@ const LogoMarquee = () => {
               <img 
                 src={logoUrl} 
                 alt={`לוגו לקוח ${index + 1}`}
-                className="h-16 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </div>
           ))}
@@ -68,7 +68,7 @@ const LogoMarquee = () => {
               <img 
                 src={logoUrl} 
                 alt={`לוגו לקוח ${index + 1}`}
-                className="h-16 w-auto object-contain"
+                className="h-10 w-auto object-contain"
               />
             </div>
           ))}
