@@ -26,7 +26,7 @@ const Products = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto space-y-12">
             {productsData.map((product, index) => {
-              const isBurgundy = product.slug === "ticket-system";
+              const isTicketSystem = product.slug === "ticket-system";
               
               return (
                 <div 
@@ -35,10 +35,8 @@ const Products = () => {
                   style={{ animationDelay: `${index * 0.15}s` }}
                 >
                   <Link to={`/products/${product.slug}`} className="block group">
-                    <div className={`rounded-3xl p-8 md:p-12 shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                      isBurgundy 
-                        ? 'bg-gradient-to-br from-[#2D1518] to-[#3D2023] text-white' 
-                        : 'bg-white'
+                    <div className={`rounded-3xl p-8 md:p-12 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white ${
+                      isTicketSystem ? 'border-2 border-[#722F37]/20' : ''
                     }`}>
                       <div className="grid md:grid-cols-2 gap-10 items-center">
                         {/* Image */}
@@ -53,20 +51,18 @@ const Products = () => {
                         {/* Content */}
                         <div className="order-2 space-y-5">
                           <h2 className={`text-3xl md:text-4xl font-bold transition-colors ${
-                            isBurgundy 
-                              ? 'text-white group-hover:text-[#D4A574]' 
+                            isTicketSystem 
+                              ? 'text-[#722F37] group-hover:text-[#8B4049]' 
                               : 'text-gray-900 group-hover:text-primary'
                           }`}>
                             {product.name}
                           </h2>
-                          <p className={`text-lg leading-relaxed ${
-                            isBurgundy ? 'text-gray-300' : 'text-gray-700'
-                          }`}>
+                          <p className="text-lg leading-relaxed text-gray-700">
                             {product.shortDescription}
                           </p>
                           
                           {/* Price - Hidden for ticket-system */}
-                          {!isBurgundy && (
+                          {!isTicketSystem && (
                             <div className="flex items-center gap-4">
                               <span className="text-gray-500 line-through text-xl">
                                 {product.price.original}
@@ -80,7 +76,7 @@ const Products = () => {
                           <Button 
                             size="lg" 
                             className={`rounded-full mt-4 ${
-                              isBurgundy 
+                              isTicketSystem 
                                 ? 'bg-[#722F37] hover:bg-[#8B4049] text-white' 
                                 : ''
                             }`}
