@@ -31,14 +31,7 @@ const LogoMarquee = () => {
   }
 
   return (
-    <section className="py-16 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-center">
-          <span className="text-gray-900">עם מי</span>{" "}
-          <span className="text-primary">אנחנו עובדים</span>
-        </h2>
-      </div>
-
+    <section className="py-12 bg-white overflow-hidden">
       <div className="relative">
         {/* Gradient overlays for fade effect */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-l from-transparent to-white z-10" />
