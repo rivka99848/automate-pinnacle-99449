@@ -36,7 +36,7 @@ const Products = () => {
                 >
                   <Link to={`/products/${product.slug}`} className="block group">
                     <div className={`rounded-3xl p-8 md:p-12 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white ${
-                      isTicketSystem ? 'border-2 border-[#722F37]/20' : ''
+                      isTicketSystem ? 'border-2 border-[#722F37]' : ''
                     }`}>
                       <div className="grid md:grid-cols-2 gap-10 items-center">
                         {/* Image */}
