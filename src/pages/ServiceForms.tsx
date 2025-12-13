@@ -318,12 +318,12 @@ const ServiceForms = () => {
 
           {/* Related Projects Section */}
           {projectsData.filter(p => p.serviceTypes.includes("forms")).length > 0 && (
-            <section className="py-16 md:py-24 -mx-4 px-4 bg-white">
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-                  פרויקטי <span className="text-brand-pink">טפסים</span> שביצענו
+            <section className="py-12 md:py-16 -mx-4 px-4 bg-gray-50">
+              <div className="max-w-5xl mx-auto">
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
+                  פרויקטים בתחום
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                   {projectsData
                     .filter(p => p.serviceTypes.includes("forms"))
                     .map((project, index) => (
@@ -333,21 +333,18 @@ const ServiceForms = () => {
                         className="group animate-fade-in"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-brand-pink/50 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 hover:shadow-xl">
-                          <div className="aspect-video overflow-hidden">
+                        <div className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-brand-pink/50 transition-all duration-300 hover:shadow-lg">
+                          <div className="aspect-[4/3] overflow-hidden">
                             <img
                               src={project.images[0]}
                               alt={project.title}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
-                          <div className="p-6">
-                            <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-pink transition-colors duration-300 mb-2">
+                          <div className="p-3 md:p-4">
+                            <h3 className="text-sm md:text-base font-semibold text-gray-900 group-hover:text-brand-pink transition-colors duration-300 line-clamp-1">
                               {project.title}
                             </h3>
-                            <p className="text-gray-600 line-clamp-2">
-                              {project.description.split('\n')[0]}
-                            </p>
                           </div>
                         </div>
                       </Link>
