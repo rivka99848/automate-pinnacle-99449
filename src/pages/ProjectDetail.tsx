@@ -28,7 +28,7 @@ const ProjectDetail = () => {
     return <Navigate to="/projects" replace />;
   }
 
-  const colorClass = getColorClass(project.serviceType);
+  const colorClass = getColorClass(project.serviceTypes[0]);
 
   return (
     <div className="min-h-screen">
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
               <h3 
                 className="text-2xl font-bold mb-8 text-gray-900 animate-fade-in"
               >
-                {project.serviceType === "crm" ? "הפתרון שבנינו:" : "המערכת כוללת:"}
+                {project.serviceTypes.includes("crm") ? "הפתרון שבנינו:" : "המערכת כוללת:"}
               </h3>
               <ul className="space-y-4">
                 {project.features.map((feature, i) => {
@@ -151,7 +151,7 @@ const ProjectDetail = () => {
                 {projectsData
                   .filter((p) => p.id !== project.id)
                   .map((relatedProject, index) => {
-                    const relatedColorClass = getColorClass(relatedProject.serviceType);
+                    const relatedColorClass = getColorClass(relatedProject.serviceTypes[0]);
                     return (
                       <Link
                         key={relatedProject.id}

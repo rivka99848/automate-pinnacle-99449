@@ -16,7 +16,7 @@ export interface Project {
   blogLink: string;
   slug: string;
   externalLink?: string;
-  serviceType: "bots" | "automation" | "crm";
+  serviceTypes: ("bots" | "automation" | "crm" | "forms" | "custom-products")[];
 }
 
 export const projectsData: Project[] = [
@@ -24,7 +24,7 @@ export const projectsData: Project[] = [
     id: 1,
     title: "ניהול פניות בלי לאבד את הראש – מקרה אמיתי",
     slug: "nichuta-vacation-bot",
-    serviceType: "bots",
+    serviceTypes: ["bots"],
     description: `שאלות כמו "מה המחיר?", "יש תמונות?", "פנוי בסופ"ש?", "יש דיל?"
 נשמעות מוכרות?
 
@@ -79,7 +79,7 @@ export const projectsData: Project[] = [
     id: 2,
     title: "אוטומציה מלאה לעסק רפואי עמוס בפניות",
     slug: "medical-automation",
-    serviceType: "automation",
+    serviceTypes: ["automation", "forms"],
     description: `בעל עסק רפואי טובע בפניות, מיילים ומסמכים?
 גם הלקוח שלנו היה שם – עד שהמערכת שבנינו עשתה מהפכה.
 
@@ -154,7 +154,7 @@ export const projectsData: Project[] = [
     id: 3,
     title: "בוט AI מתקדם לעבודה מקצועית מאובטחת",
     slug: "yisharilev-ai-bot",
-    serviceType: "crm",
+    serviceTypes: ["custom-products"],
     description: `הלקוח ביקש לתת לעובדים ומקצוענים גישה לבוט AI מתקדם לצרכי עבודה, בלי חשש לפרצות או מידע לא רלוונטי.
 
 המטרה הייתה ליצור פתרון חכם, מאובטח וממוקד מקצוע בתחומים כמו תכנות, אדריכלות, עיצוב, גרפיקה וניסוח תוכן.
@@ -216,7 +216,7 @@ export const projectsData: Project[] = [
     id: 4,
     title: "מערכת CRM ואוטומציה לניהול בית ספר לבלט",
     slug: "ballet-school-crm",
-    serviceType: "crm",
+    serviceTypes: ["crm"],
     description: `בית ספר לבלט מנהל עשרות חוגים בכמה סניפים.
 עד היום, הניהול היה כמעט כולו ידני, מה שגרם לכאבי ראש משמעותיים:
 

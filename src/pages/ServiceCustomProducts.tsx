@@ -3,7 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { Code, Lightbulb, Users, Zap, Settings, CheckCircle, Rocket, HeartHandshake, MessageCircle, Wrench } from "lucide-react";
+import { projectsData } from "@/data/projectsData";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const ServiceCustomProducts = () => {
@@ -306,6 +308,36 @@ const ServiceCustomProducts = () => {
               </div>
             </div>
           </div>
+
+          {/* Related Projects Section */}
+          {projectsData.filter(p => p.serviceTypes.includes("custom-products")).length > 0 && (
+            <div className="max-w-6xl mx-auto mb-24">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+                פרויקטי <span className="text-brand-teal">פיתוח מותאם</span> שביצענו
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {projectsData
+                  .filter(p => p.serviceTypes.includes("custom-products"))
+                  .map((project, index) => (
+                    <Link
+                      key={project.id}
+                      to={`/projects/${project.slug}`}
+                      className="group animate-fade-in"
+                      style={{ animationDelay: `${index * 0.1}s` }}
+                    >
+                      <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-brand-teal/20 hover:border-brand-teal/50">
+                        <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand-teal transition-colors mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-600 line-clamp-2">
+                          {project.description.split('\n')[0]}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          )}
 
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center mb-8 pt-16">

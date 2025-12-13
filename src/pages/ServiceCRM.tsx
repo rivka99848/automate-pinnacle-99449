@@ -513,7 +513,7 @@ const ServiceCRM = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projectsData
-                  .filter(p => p.serviceType === "crm")
+                  .filter(p => p.serviceTypes.includes("crm"))
                   .map((project, index) => (
                     <Link
                       key={project.id}
