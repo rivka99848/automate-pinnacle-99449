@@ -321,7 +321,7 @@ const ServiceBots = () => {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {projectsData
-                  .filter(p => p.serviceType === "bots")
+                  .filter(p => p.serviceTypes.includes("bots"))
                   .map((project, index) => (
                     <Link
                       key={project.id}
