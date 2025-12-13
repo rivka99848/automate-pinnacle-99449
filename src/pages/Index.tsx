@@ -25,9 +25,9 @@ const Index = () => {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark to-brand-darker" />
         
-        {/* Floating Icons - Only 2 in Hero */}
-        <FloatingIcon icon={Sparkles} className="top-16 left-[10%] animate-float-drift" color="brand-blue" strokeWidth={1.5} />
-        <FloatingIcon icon={DollarSign} className="bottom-20 right-[10%] animate-float-sway" color="secondary" strokeWidth={1.5} />
+        {/* Floating Icons - Only 2 in Hero, positioned away from content */}
+        <FloatingIcon icon={Sparkles} className="top-40 left-[3%] animate-float-drift" color="brand-blue" strokeWidth={1.5} />
+        <FloatingIcon icon={DollarSign} className="bottom-8 right-[3%] animate-float-sway" color="secondary" strokeWidth={1.5} />
         
         {/* Decorative Lines */}
         <DecorativeLine className="top-0 left-0 w-96 h-96 opacity-40" color="hsl(var(--secondary))" />
@@ -49,9 +49,9 @@ const Index = () => {
 
       {/* How Automation Changes the Game */}
       <section className="py-8 bg-brand-darker relative overflow-hidden">
-        {/* Floating Icons - 2 icons in this section */}
-        <FloatingIcon icon={Lightbulb} className="top-20 right-[8%] animate-float-bounce" color="brand-cyan" strokeWidth={1.5} />
-        <FloatingIcon icon={Zap} className="bottom-16 left-[8%] animate-float-orbital" color="brand-coral" strokeWidth={1.5} />
+        {/* Floating Icons - positioned in corners away from content boxes */}
+        <FloatingIcon icon={Lightbulb} className="top-8 right-[2%] animate-float-bounce" color="brand-cyan" strokeWidth={1.5} />
+        <FloatingIcon icon={Zap} className="bottom-8 left-[2%] animate-float-orbital" color="brand-coral" strokeWidth={1.5} />
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in delay-100">
