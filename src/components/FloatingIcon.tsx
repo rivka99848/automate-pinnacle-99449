@@ -9,7 +9,7 @@ interface FloatingIconProps {
 
 const FloatingIcon = ({ icon: Icon, className = "", color = "brand-blue", strokeWidth = 1.5 }: FloatingIconProps) => {
   return (
-    <div className={`absolute ${className} group`}>
+    <div className={`absolute z-0 pointer-events-none ${className} group`}>
       <div
         className="w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm transition-all relative"
         style={{
