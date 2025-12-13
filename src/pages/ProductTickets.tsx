@@ -15,17 +15,19 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-// Burgundy color palette
+// Blue backgrounds with burgundy accents
 const colors = {
+  // Accent colors (burgundy/brown)
   primary: "#722F37",      // Main burgundy
   primaryLight: "#8B4049", // Lighter burgundy
-  primaryDark: "#4A1D24",  // Darker burgundy
+  primaryDark: "#5A252B",  // Darker burgundy
   accent: "#D4A574",       // Warm brown/gold accent
   accentLight: "#E8C9A8",  // Light cream accent
   textMuted: "#8B6B6E",    // Muted burgundy text
-  bgDark: "#2D1518",       // Dark burgundy background
-  bgMedium: "#3D2023",     // Medium burgundy background
-  bgLight: "#FDF8F5",      // Light cream background
+  // Background colors (blue)
+  bgDark: "#121F36",       // Dark blue background
+  bgMedium: "#1D2F4F",     // Medium blue background
+  bgLight: "#F0F4F8",      // Light blue background
 };
 
 const ProductTickets = () => {
@@ -35,12 +37,12 @@ const ProductTickets = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-48 overflow-hidden" style={{ background: `linear-gradient(to bottom, ${colors.primary}, ${colors.primaryDark}, ${colors.bgDark})` }}>
+        <section className="relative pt-32 pb-48 overflow-hidden" style={{ background: `linear-gradient(to bottom, ${colors.bgMedium}, ${colors.bgDark})` }}>
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-5xl mx-auto text-center animate-fade-in">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white leading-tight">
                 מערכת מכירת כרטיסים <br className="hidden md:block" />
-                <span style={{ color: colors.accent }}>עם בחירת מושבים</span>
+                <span style={{ color: colors.primary }}>עם בחירת מושבים</span>
               </h1>
               <div className="space-y-6 mb-10 max-w-4xl mx-auto">
                 <p className="text-xl md:text-2xl leading-relaxed" style={{ color: colors.accentLight }}>
@@ -58,10 +60,10 @@ const ProductTickets = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="text-lg px-12 py-6 text-white shadow-xl transition-all duration-300 hover:opacity-90" style={{ backgroundColor: colors.primaryLight }}>
+                <Button asChild size="lg" className="text-lg px-12 py-6 text-white shadow-xl transition-all duration-300 hover:opacity-90" style={{ backgroundColor: colors.primary }}>
                   <a href="#contact">רוצה להתחיל למכור כרטיסים</a>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-lg px-12 py-6 border-2 text-white hover:bg-white/10 transition-all duration-300" style={{ borderColor: colors.accent }}>
+                <Button asChild size="lg" variant="outline" className="text-lg px-12 py-6 border-2 text-white hover:bg-white/10 transition-all duration-300" style={{ borderColor: colors.primary }}>
                   <a href="#faq">שאלות נפוצות</a>
                 </Button>
               </div>
@@ -70,16 +72,16 @@ const ProductTickets = () => {
 
           {/* Floating Icons */}
           <div className="absolute top-32 left-10 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}33` }}>
-            <Ticket className="w-7 h-7" style={{ color: colors.accent }} />
+            <Ticket className="w-7 h-7" style={{ color: colors.primary }} />
           </div>
-          <div className="absolute top-48 right-20 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}26`, animationDelay: '0.5s' }}>
-            <Theater className="w-7 h-7" style={{ color: colors.accent }} />
+          <div className="absolute top-48 right-20 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}26`, animationDelay: '0.5s' }}>
+            <Theater className="w-7 h-7" style={{ color: colors.primary }} />
           </div>
-          <div className="absolute bottom-32 left-1/4 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accentLight}26`, animationDelay: '1s' }}>
-            <MapPin className="w-7 h-7" style={{ color: colors.accentLight }} />
+          <div className="absolute bottom-32 left-1/4 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}26`, animationDelay: '1s' }}>
+            <MapPin className="w-7 h-7" style={{ color: colors.accent }} />
           </div>
           <div className="absolute bottom-48 right-1/3 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}26`, animationDelay: '1.5s' }}>
-            <BarChart3 className="w-7 h-7" style={{ color: colors.accent }} />
+            <BarChart3 className="w-7 h-7" style={{ color: colors.primary }} />
           </div>
 
           {/* Wave */}
@@ -152,8 +154,8 @@ const ProductTickets = () => {
         <section className="py-24" style={{ backgroundColor: colors.bgLight }}>
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16" style={{ color: colors.bgDark }}>
-                חוויה ללקוח <span style={{ color: colors.primary }}>הקונה</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16" style={{ color: colors.primary }}>
+                חוויה ללקוח <span className="text-gray-900">הקונה</span>
               </h2>
               
               <div className="grid md:grid-cols-5 gap-6">
@@ -189,8 +191,8 @@ const ProductTickets = () => {
               <div className="grid md:grid-cols-2 gap-12 items-start">
                 {/* Right Side - Sticky Header */}
                 <div className="md:sticky md:top-32 order-1 md:order-1 text-right">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: colors.bgDark }}>
-                    ניהול עבור <span style={{ color: colors.primary }}>המפיק</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: colors.primary }}>
+                    ניהול עבור <span className="text-gray-900">המפיק</span>
                   </h2>
                   <p className="text-xl leading-relaxed" style={{ color: colors.textMuted }}>
                     כל הכלים שאתם צריכים לניהול מושלם של ההופעות שלכם
@@ -263,7 +265,7 @@ const ProductTickets = () => {
         <section className="py-24" style={{ background: `linear-gradient(to bottom, white, ${colors.bgLight})` }}>
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.bgDark }}>
+              <h2 className="text-4xl md:text-6xl font-bold text-center mb-8" style={{ color: colors.primary }}>
                 מה ההבדל?
               </h2>
               
@@ -321,7 +323,7 @@ const ProductTickets = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
-                תועלות <span style={{ color: colors.accent }}>עיקריות</span>
+                תועלות <span style={{ color: colors.primary }}>עיקריות</span>
               </h2>
               
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -361,7 +363,7 @@ const ProductTickets = () => {
         {/* How It Works */}
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-4xl md:text-6xl font-bold text-center mb-16" style={{ color: colors.bgDark }}>
+            <h2 className="text-4xl md:text-6xl font-bold text-center mb-16" style={{ color: colors.primary }}>
               איך זה עובד?
             </h2>
             
@@ -377,25 +379,25 @@ const ProductTickets = () => {
                   icon: CreditCard,
                   title: "חיבור הסליקה",
                   description: "חיבור למסופי הסליקה שלכם להפקדה ישירה לחשבון.",
-                  color: colors.accent
+                  color: colors.primaryLight
                 },
                 {
                   icon: Package,
                   title: "קבלת המערכת והרצה ראשונה",
                   description: "המערכת מותקנת ומוכנה לשימוש עם הרצה ראשונה משותפת.",
-                  color: colors.accentLight
+                  color: colors.accent
                 },
                 {
                   icon: Video,
                   title: "הדרכה מלאה והתחילו למכור!",
                   description: "סרטוני הדרכה מפורטים + ליווי אישי, ומתחילים לקבל הזמנות.",
-                  color: colors.textMuted
+                  color: colors.primary
                 }
               ].map((step, index) => (
                 <div 
                   key={index} 
                   className="rounded-2xl p-6 text-center transition-transform duration-300 hover:scale-105"
-                  style={{ backgroundColor: colors.bgDark }}
+                  style={{ backgroundColor: colors.bgMedium }}
                 >
                   <div 
                     className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -483,7 +485,7 @@ const ProductTickets = () => {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-24" style={{ background: `linear-gradient(to bottom right, ${colors.bgMedium}, ${colors.primary})` }}>
+        <section id="contact" className="py-24" style={{ background: `linear-gradient(to bottom right, ${colors.bgMedium}, ${colors.bgDark})` }}>
           <div className="container mx-auto px-4 max-w-3xl">
             <h2 className="text-4xl md:text-6xl font-bold text-center mb-6 text-white">
               רוצים להתחיל למכור כרטיסים?
@@ -537,7 +539,7 @@ const ProductTickets = () => {
               <Button 
                 type="submit" 
                 className="w-full py-6 text-lg font-bold transition-all duration-300 hover:scale-105 text-white"
-                style={{ backgroundColor: colors.primaryLight }}
+                style={{ backgroundColor: colors.primary }}
               >
                 שלח פנייה
               </Button>
