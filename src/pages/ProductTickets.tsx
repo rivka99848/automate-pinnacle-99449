@@ -42,15 +42,15 @@ const ProductTickets = () => {
             <div className="max-w-5xl mx-auto text-center animate-fade-in">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-white leading-tight">
                 מערכת מכירת כרטיסים <br className="hidden md:block" />
-                <span style={{ color: colors.primary }}>עם בחירת מושבים</span>
+                <span style={{ color: colors.accent }}>עם בחירת מושבים</span>
               </h1>
               <div className="space-y-6 mb-10 max-w-4xl mx-auto">
                 <p className="text-xl md:text-2xl leading-relaxed" style={{ color: colors.accentLight }}>
                   נגמרה התלות בחברות חיצוניות!<br />
-                  <span className="font-bold text-white">שליטה מלאה על כל הופעה, כל כרטיס וכל אולם – תחת המיתוג שלכם.</span>
+                  <span className="font-bold" style={{ color: colors.accent }}>שליטה מלאה על כל הופעה, כל כרטיס וכל אולם – תחת המיתוג שלכם.</span>
                 </p>
                 
-                <p className="text-xl md:text-2xl text-white font-semibold leading-relaxed">
+                <p className="text-xl md:text-2xl font-semibold leading-relaxed" style={{ color: colors.accentLight }}>
                   פתרון מושלם למפיקים, מתנסים ובעלי אולמות שרוצים לנהל הכל בעצמם
                 </p>
                 
@@ -71,17 +71,17 @@ const ProductTickets = () => {
           </div>
 
           {/* Floating Icons */}
-          <div className="absolute top-32 left-10 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}33` }}>
-            <Ticket className="w-7 h-7" style={{ color: colors.primary }} />
+          <div className="absolute top-32 left-10 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}33` }}>
+            <Ticket className="w-7 h-7" style={{ color: colors.accent }} />
           </div>
-          <div className="absolute top-48 right-20 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}26`, animationDelay: '0.5s' }}>
-            <Theater className="w-7 h-7" style={{ color: colors.primary }} />
+          <div className="absolute top-48 right-20 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}26`, animationDelay: '0.5s' }}>
+            <Theater className="w-7 h-7" style={{ color: colors.accent }} />
           </div>
           <div className="absolute bottom-32 left-1/4 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}26`, animationDelay: '1s' }}>
             <MapPin className="w-7 h-7" style={{ color: colors.accent }} />
           </div>
-          <div className="absolute bottom-48 right-1/3 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.primary}26`, animationDelay: '1.5s' }}>
-            <BarChart3 className="w-7 h-7" style={{ color: colors.primary }} />
+          <div className="absolute bottom-48 right-1/3 w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm animate-float" style={{ backgroundColor: `${colors.accent}26`, animationDelay: '1.5s' }}>
+            <BarChart3 className="w-7 h-7" style={{ color: colors.accent }} />
           </div>
 
           {/* Wave */}
@@ -99,7 +99,7 @@ const ProductTickets = () => {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 {/* Right Side - Header */}
                 <div className="text-right order-1 md:order-1">
-                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" style={{ color: colors.bgDark }}>
+                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" style={{ color: colors.primary }}>
                     למה לשלוט <br />
                     <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(to left, ${colors.primary}, ${colors.accent})` }}>במכירות שלכם?</span>
                   </h2>
@@ -155,7 +155,7 @@ const ProductTickets = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16" style={{ color: colors.primary }}>
-                חוויה ללקוח <span className="text-gray-900">הקונה</span>
+                חוויה ללקוח <span style={{ color: colors.accent }}>הקונה</span>
               </h2>
               
               <div className="grid md:grid-cols-5 gap-6">
@@ -192,7 +192,7 @@ const ProductTickets = () => {
                 {/* Right Side - Sticky Header */}
                 <div className="md:sticky md:top-32 order-1 md:order-1 text-right">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6" style={{ color: colors.primary }}>
-                    ניהול עבור <span className="text-gray-900">המפיק</span>
+                    ניהול עבור <span style={{ color: colors.accent }}>המפיק</span>
                   </h2>
                   <p className="text-xl leading-relaxed" style={{ color: colors.textMuted }}>
                     כל הכלים שאתם צריכים לניהול מושלם של ההופעות שלכם
@@ -323,7 +323,7 @@ const ProductTickets = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
-                תועלות <span style={{ color: colors.primary }}>עיקריות</span>
+                תועלות <span style={{ color: colors.accent }}>עיקריות</span>
               </h2>
               
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
