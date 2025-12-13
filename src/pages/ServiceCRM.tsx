@@ -98,7 +98,7 @@ const ServiceCRM = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in">
-                  מערכת <span className="text-brand-blue">CRM</span>
+                  <span className="text-white">מערכת</span> <span className="text-brand-blue">CRM</span>
                 </h1>
                 
                 <div className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
@@ -128,7 +128,7 @@ const ServiceCRM = () => {
                           block: 'start'
                         });
                       }}
-                      className="rounded-full shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6 animate-fade-in"
+                      className="rounded-full bg-brand-blue hover:bg-brand-blue/90 shadow-lg shadow-brand-blue/30 hover:shadow-brand-blue/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6 animate-fade-in"
                     >
                       קבעו פגישת ייעוץ ↓
                     </Button>

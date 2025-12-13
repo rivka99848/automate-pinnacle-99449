@@ -70,9 +70,9 @@ const ServiceCustomProducts = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="text-brand-teal">הפוך את הרעיון שלך</span>
+                  <span className="text-white">הפוך את הרעיון שלך</span>
                   <br />
-                  <span className="text-foreground">למוצר או מערכת מותאמת אישית</span>
+                  <span className="text-white">למוצר או מערכת מותאמת אישית</span>
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-8">
                   חלום שיש לך? רעיון שיכול לשנות את העסק שלך? אנחנו מממשים אותו.

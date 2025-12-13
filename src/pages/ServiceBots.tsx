@@ -69,7 +69,7 @@ const ServiceBots = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="text-gradient">בוטים חכמים למענה אוטומטי</span>
+                  <span className="text-white">בוטים חכמים למענה אוטומטי</span>
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-8">
                   מענה אוטומטי ללקוחות 24/7, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות ודוחות על כל השיחות. 
@@ -78,6 +78,7 @@ const ServiceBots = () => {
                 <div className="flex justify-center">
                   <Button 
                     size="lg" 
+                    variant="secondary"
                     onClick={() => {
                       document.getElementById('contact-form')?.scrollIntoView({ 
                         behavior: 'smooth',

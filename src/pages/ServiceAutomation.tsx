@@ -78,7 +78,7 @@ const ServiceAutomation = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                  <span className="text-brand-purple">אוטומציות עסקיות חכמות</span>
+                  <span className="text-white">אוטומציות עסקיות חכמות</span>
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-8">
                   אוטומציה חכמה של תהליכים עסקיים שחוסכת עד 70% מהזמן וממזערת טעויות אנוש. 
