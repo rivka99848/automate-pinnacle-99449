@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Sparkles, DollarSign, Lightbulb, TrendingUp, Clock, Target, Eye, Database, Bot, Zap, Palmtree, Briefcase, Cpu } from "lucide-react";
+import { Sparkles, DollarSign, Lightbulb, TrendingUp, Clock, Target, Eye, Database, Bot, Zap, Palmtree, Briefcase, Cpu, FileEdit, Code, HeartHandshake } from "lucide-react";
 import FloatingIcon from "@/components/FloatingIcon";
 import StarburstIcon from "@/components/StarburstIcon";
 import DecorativeLine from "@/components/DecorativeLine";
@@ -177,55 +177,54 @@ const Index = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
-            <div className="animate-fade-in-scale delay-100 h-full">
-              <ServiceCard
-                number="01"
-                icon={Database}
-                title="מערכת CRM"
-                description="בניית מערכות CRM מותאמות אישית שמסדרות את כל המידע על הלקוחות, העסקאות והתהליכים במקום אחד. מערכת שעובדת בדיוק איך שאתם צריכים."
-                colorClass="border-brand-blue"
-                gradientClass="from-brand-blue/5 to-brand-cyan/5"
-                links={[
-                  { text: "לפרטים נוספים", url: "/services/crm" }
-                ]}
-              />
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-7xl mx-auto">
+            {/* CRM - Blue */}
+            <Link to="/services/crm" className="group animate-fade-in-scale delay-100">
+              <div className="bg-white border-2 border-brand-blue rounded-2xl p-4 text-center hover:bg-brand-blue/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <Database className="w-8 h-8 text-brand-blue group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-brand-blue">מערכת CRM</h3>
+              </div>
+            </Link>
 
-            <div className="animate-fade-in-scale delay-300 h-full">
-              <ServiceCard
-                number="02"
-                icon={Bot}
-                title="בוטים חכמים"
-                description="מענה אוטומטי ללקוחות, קבלת הזמנות ושאילתות, אינטגרציה עם מערכות קיימות, ודוחות על כל השיחות. הבוטים שלנו עובדים 24/7 ומספקים חוויה מעולה ללקוחות."
-                colorClass="border-brand-green"
-                gradientClass="from-brand-green/5 to-brand-cyan/5"
-                links={[
-                  { text: "לפרטים נוספים", url: "/services/bots" }
-                ]}
-              />
-            </div>
+            {/* Bots - Green/Mint */}
+            <Link to="/services/bots" className="group animate-fade-in-scale delay-150">
+              <div className="bg-white border-2 border-secondary rounded-2xl p-4 text-center hover:bg-secondary/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <Bot className="w-8 h-8 text-secondary group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-secondary">בוטים חכמים</h3>
+              </div>
+            </Link>
 
-            <div className="animate-fade-in-scale delay-500 h-full">
-              <ServiceCard
-                number="03"
-                icon={Zap}
-                title="אוטומציות"
-                description="אוטומציה חכמה של תהליכים עסקיים שחוסכת זמן וממזערת טעויות אנוש. המערכת מטפלת בכל המשימות החוזרות במקומך."
-                features={[
-                  "אוטומציה של תהליכי עבודה מורכבים",
-                  "חיבור בין מערכות שונות",
-                  "חסכון של עד 70% בזמן ביצוע משימות",
-                  "ניטור וביצוע אוטומטי של משימות"
-                ]}
-                examples="שליחת דוא״ל אוטומטית, עדכון מלאי, יצירת דוחות"
-                colorClass="border-brand-purple"
-                gradientClass="from-brand-purple/5 to-brand-blue/5"
-                links={[
-                  { text: "לפרטים נוספים", url: "/services/automation" }
-                ]}
-              />
-            </div>
+            {/* Automation - Purple */}
+            <Link to="/services/automation" className="group animate-fade-in-scale delay-200">
+              <div className="bg-white border-2 border-brand-purple rounded-2xl p-4 text-center hover:bg-brand-purple/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <Zap className="w-8 h-8 text-brand-purple group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-brand-purple">אוטומציות</h3>
+              </div>
+            </Link>
+
+            {/* Forms - Pink */}
+            <Link to="/services/forms" className="group animate-fade-in-scale delay-250">
+              <div className="bg-white border-2 border-brand-pink rounded-2xl p-4 text-center hover:bg-brand-pink/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <FileEdit className="w-8 h-8 text-brand-pink group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-brand-pink">טפסים דיגיטליים</h3>
+              </div>
+            </Link>
+
+            {/* Custom Products - Teal */}
+            <Link to="/services/custom-products" className="group animate-fade-in-scale delay-300">
+              <div className="bg-white border-2 border-brand-teal rounded-2xl p-4 text-center hover:bg-brand-teal/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <Code className="w-8 h-8 text-brand-teal group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-brand-teal">פיתוח מותאם</h3>
+              </div>
+            </Link>
+
+            {/* Monthly Support - Orange */}
+            <Link to="/services" className="group animate-fade-in-scale delay-350">
+              <div className="bg-white border-2 border-brand-orange rounded-2xl p-4 text-center hover:bg-brand-orange/5 hover:shadow-lg transition-all duration-300 h-full flex flex-col items-center justify-center gap-3">
+                <HeartHandshake className="w-8 h-8 text-brand-orange group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="text-sm font-semibold text-brand-orange">תמיכה חודשית</h3>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
