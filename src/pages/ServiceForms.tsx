@@ -3,7 +3,19 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { Button } from "@/components/ui/button";
-import { FileEdit, ClipboardCheck, Send, BarChart3, PenTool, Bell, Shield, Zap, MessageCircle, BookOpen, Handshake } from "lucide-react";
+import {
+  FileEdit,
+  ClipboardCheck,
+  Send,
+  BarChart3,
+  PenTool,
+  Bell,
+  Shield,
+  Zap,
+  MessageCircle,
+  BookOpen,
+  Handshake,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -20,26 +32,26 @@ const ServiceForms = () => {
   const [cardProgress, setCardProgress] = useState(0);
 
   const formTypes = [
-    { 
-      icon: ClipboardCheck, 
-      title: "טפסי הרשמה ופניות", 
-      description: "טפסים לאיסוף פרטי לקוחות, הרשמה לאירועים, פניות שירות ובקשות מידע. הכול מסודר ומתועד אוטומטית."
+    {
+      icon: ClipboardCheck,
+      title: "טפסי הרשמה ופניות",
+      description: "טפסים לאיסוף פרטי לקוחות, הרשמה לאירועים, פניות שירות ובקשות מידע. הכול מסודר ומתועד אוטומטית.",
     },
-    { 
-      icon: BarChart3, 
-      title: "סקרים ומשובים", 
-      description: "סקרי שביעות רצון, משובי עובדים ולקוחות, שאלוני בדיקה - עם דוחות וניתוח תוצאות אוטומטי."
+    {
+      icon: BarChart3,
+      title: "סקרים ומשובים",
+      description: "סקרי שביעות רצון, משובי עובדים ולקוחות, שאלוני בדיקה - עם דוחות וניתוח תוצאות אוטומטי.",
     },
-    { 
-      icon: FileEdit, 
-      title: "טפסי הזמנות", 
-      description: "טפסי הזמנה מותאמים עם חישוב מחירים, בחירת מוצרים ואפשרויות תשלום מובנות."
+    {
+      icon: FileEdit,
+      title: "טפסי הזמנות",
+      description: "טפסי הזמנה מותאמים עם חישוב מחירים, בחירת מוצרים ואפשרויות תשלום מובנות.",
     },
-    { 
-      icon: Send, 
-      title: "טפסי דיווח ובקשות", 
-      description: "דיווחי שעות, בקשות חופשה, דיווחי תקלות - הכול מועבר אוטומטית לגורם המטפל."
-    }
+    {
+      icon: Send,
+      title: "טפסי דיווח ובקשות",
+      description: "דיווחי שעות, בקשות חופשה, דיווחי תקלות - הכול מועבר אוטומטית לגורם המטפל.",
+    },
   ];
 
   const handleCardScroll = useCallback(() => {
@@ -52,9 +64,9 @@ const ServiceForms = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleCardScroll);
+    window.addEventListener("scroll", handleCardScroll);
     handleCardScroll();
-    return () => window.removeEventListener('scroll', handleCardScroll);
+    return () => window.removeEventListener("scroll", handleCardScroll);
   }, [handleCardScroll]);
 
   return (
@@ -64,10 +76,10 @@ const ServiceForms = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto px-4">
           {/* Hero Section */}
-          <div 
+          <div
             ref={heroReveal.ref}
             className={`mb-24 transition-all duration-1000 ${
-              heroReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              heroReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <div className="max-w-6xl mx-auto">
@@ -76,16 +88,16 @@ const ServiceForms = () => {
                   <span className="text-white">טפסים דיגיטליים חכמים</span>
                 </h1>
                 <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed mb-8">
-                  טפסים אוטומטיים שמחליפים את הנייר, אוספים מידע ומעבירים אותו ישירות למערכות שלכם. 
-                  חתימה דיגיטלית, תזכורות אוטומטיות ודוחות בזמן אמת.
+                  עזבו את עומס הניירת והמיילים- תנו למידע להיאסף אוטומטית ולעבור ישירות למערכות שלכם, חתימה
+                  דיגיטילית תזכורות ודוחות בזמן אמת. מה שיתן ללקוחות ולכם יעילות מהירות ומקצועיות..
                 </p>
                 <div className="flex justify-center">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     onClick={() => {
-                      document.getElementById('contact-form')?.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
+                      document.getElementById("contact-form")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
                       });
                     }}
                     className="rounded-full bg-brand-pink hover:bg-brand-pink/90 shadow-lg shadow-brand-pink/30 hover:shadow-brand-pink/50 hover:scale-105 transition-all duration-300 text-lg px-8 py-6"
@@ -95,21 +107,17 @@ const ServiceForms = () => {
                 </div>
               </div>
               <div className="relative rounded-3xl overflow-hidden">
-                <img 
-                  src={formsHeroImage} 
-                  alt="טפסים דיגיטליים"
-                  className="w-full h-[400px] object-cover"
-                />
+                <img src={formsHeroImage} alt="טפסים דיגיטליים" className="w-full h-[400px] object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/50 to-transparent" />
               </div>
             </div>
           </div>
 
           {/* למה טפסים דיגיטליים? - Two Box Side by Side */}
-          <div 
+          <div
             ref={problemsReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
-              problemsReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              problemsReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <div className="text-center mb-12">
@@ -144,10 +152,10 @@ const ServiceForms = () => {
           </div>
 
           {/* סוגי טפסים - Regular Cards */}
-          <div 
+          <div
             ref={typesReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
-              typesReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              typesReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <h2 className="text-3xl font-bold mb-12 text-center">
@@ -169,10 +177,10 @@ const ServiceForms = () => {
           </div>
 
           {/* מה הטפסים יודעים לעשות - Stacked Cards */}
-          <div 
+          <div
             ref={featuresReveal.ref}
             className={`max-w-6xl mx-auto mb-24 transition-all duration-1000 ${
-              featuresReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              featuresReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
             <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
@@ -182,31 +190,31 @@ const ServiceForms = () => {
                 </h2>
               </div>
 
-              <div 
-                ref={containerRef}
-                className="relative"
-              >
+              <div ref={containerRef} className="relative">
                 {/* Progress Indicator */}
-                <div className="absolute right-0 top-0 w-1 bg-white/10" style={{ height: '100%' }}>
-                  <div 
+                <div className="absolute right-0 top-0 w-1 bg-white/10" style={{ height: "100%" }}>
+                  <div
                     className="w-full bg-gradient-to-b from-brand-pink to-brand-purple transition-all duration-300"
-                    style={{ 
-                      height: `${Math.min(100, cardProgress * 100)}%`
+                    style={{
+                      height: `${Math.min(100, cardProgress * 100)}%`,
                     }}
                   />
                 </div>
 
                 {/* Progress Dots */}
-                <div className="absolute right-[-4px] top-0 flex flex-col justify-around py-8" style={{ height: '100%' }}>
+                <div
+                  className="absolute right-[-4px] top-0 flex flex-col justify-around py-8"
+                  style={{ height: "100%" }}
+                >
                   {[0, 1, 2, 3, 4, 5].map((index) => {
                     const dotProgress = Math.max(0, Math.min(1, cardProgress - index * 0.17));
                     return (
-                      <div 
+                      <div
                         key={index}
                         className="w-3 h-3 rounded-full border-2 border-brand-pink transition-all duration-300"
                         style={{
-                          backgroundColor: dotProgress > 0.5 ? 'hsl(var(--brand-pink))' : 'transparent',
-                          transform: `scale(${0.8 + dotProgress * 0.4})`
+                          backgroundColor: dotProgress > 0.5 ? "hsl(var(--brand-pink))" : "transparent",
+                          transform: `scale(${0.8 + dotProgress * 0.4})`,
                         }}
                       />
                     );
@@ -216,44 +224,71 @@ const ServiceForms = () => {
                 {/* Cards */}
                 <div className="pr-8 relative">
                   {[
-                    { icon: PenTool, title: "עיצוב מותאם אישית", description: "טפסים בעיצוב שמתאים למותג שלכם - לוגו, צבעים ופונטים. הטופס נראה כחלק אינטגרלי מהעסק." },
-                    { icon: Send, title: "שליחה אוטומטית למערכות", description: "המידע מהטופס מועבר אוטומטית ל-CRM, אקסל, Google Sheets או כל מערכת אחרת שאתם משתמשים בה." },
-                    { icon: Bell, title: "תזכורות אוטומטיות", description: "תזכורות למילוי טפסים, התראות כשטופס ממתין לאישור, ועדכונים אוטומטיים לכל הגורמים הרלוונטיים." },
-                    { icon: BarChart3, title: "דוחות וסטטיסטיקות", description: "לראות בדיוק כמה טפסים התקבלו, מה הממוצעים, ולקבל תובנות על הנתונים שנאספו." },
-                    { icon: Shield, title: "אימות נתונים", description: "בדיקות אוטומטיות שמוודאות שהמידע שהוזן תקין - מייל, טלפון, תעודת זהות ועוד." },
-                    { icon: FileEdit, title: "חתימה דיגיטלית", description: "חתימה דיגיטלית מאובטחת על טפסים - חוזים, הסכמות ואישורים ללא צורך בפגישה פיזית." }
+                    {
+                      icon: PenTool,
+                      title: "עיצוב מותאם אישית",
+                      description:
+                        "טפסים בעיצוב שמתאים למותג שלכם - לוגו, צבעים ופונטים. הטופס נראה כחלק אינטגרלי מהעסק.",
+                    },
+                    {
+                      icon: Send,
+                      title: "שליחה אוטומטית למערכות",
+                      description:
+                        "המידע מהטופס מועבר אוטומטית ל-CRM, אקסל, Google Sheets או כל מערכת אחרת שאתם משתמשים בה.",
+                    },
+                    {
+                      icon: Bell,
+                      title: "תזכורות אוטומטיות",
+                      description:
+                        "תזכורות למילוי טפסים, התראות כשטופס ממתין לאישור, ועדכונים אוטומטיים לכל הגורמים הרלוונטיים.",
+                    },
+                    {
+                      icon: BarChart3,
+                      title: "דוחות וסטטיסטיקות",
+                      description: "לראות בדיוק כמה טפסים התקבלו, מה הממוצעים, ולקבל תובנות על הנתונים שנאספו.",
+                    },
+                    {
+                      icon: Shield,
+                      title: "אימות נתונים",
+                      description: "בדיקות אוטומטיות שמוודאות שהמידע שהוזן תקין - מייל, טלפון, תעודת זהות ועוד.",
+                    },
+                    {
+                      icon: FileEdit,
+                      title: "חתימה דיגיטלית",
+                      description: "חתימה דיגיטלית מאובטחת על טפסים - חוזים, הסכמות ואישורים ללא צורך בפגישה פיזית.",
+                    },
                   ].map((feature, index) => {
                     const cardProgressValue = Math.max(0, Math.min(1, cardProgress - index * 0.17));
                     const scale = 0.95 + cardProgressValue * 0.05;
                     const translateY = (1 - cardProgressValue) * 20;
                     const isEven = index % 2 === 0;
-                    
+
                     return (
                       <div
                         key={index}
                         className={`sticky top-32 rounded-2xl p-8 mb-6 transition-all duration-500 relative ${
-                          isEven 
-                            ? 'bg-white text-gray-900 border-2 border-gray-200' 
-                            : 'bg-brand-dark/95 border-2 border-white/10'
+                          isEven
+                            ? "bg-white text-gray-900 border-2 border-gray-200"
+                            : "bg-brand-dark/95 border-2 border-white/10"
                         }`}
                         style={{
                           transform: `scale(${scale}) translateY(${translateY}px)`,
                           opacity: 1,
-                          zIndex: index + 1
+                          zIndex: index + 1,
                         }}
                       >
                         {!isEven && (
                           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-pink/20 to-brand-purple/10 backdrop-blur-3xl rounded-2xl" />
                         )}
                         <div className="flex items-start gap-4">
-                          <feature.icon className={`w-8 h-8 flex-shrink-0 ${isEven ? 'text-brand-pink' : 'text-white'}`} />
+                          <feature.icon
+                            className={`w-8 h-8 flex-shrink-0 ${isEven ? "text-brand-pink" : "text-white"}`}
+                          />
                           <div>
-                            <h3 className={`text-xl font-bold mb-3 ${isEven ? 'text-gray-900' : 'text-white'}`}>
+                            <h3 className={`text-xl font-bold mb-3 ${isEven ? "text-gray-900" : "text-white"}`}>
                               {feature.title}
                             </h3>
-                            <p className={isEven ? 'text-gray-600' : 'text-white/80'}>
-                              {feature.description}
-                            </p>
+                            <p className={isEven ? "text-gray-600" : "text-white/80"}>{feature.description}</p>
                           </div>
                         </div>
                       </div>
@@ -266,10 +301,10 @@ const ServiceForms = () => {
 
           {/* איך זה עובד - With White Background */}
           <div className="bg-white py-16 md:py-24 -mx-4 px-4">
-            <div 
+            <div
               ref={processReveal.ref}
               className={`max-w-6xl mx-auto mb-8 transition-all duration-1000 ${
-                processReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                processReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
               <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
@@ -278,7 +313,7 @@ const ServiceForms = () => {
                     איך זה <span className="text-brand-pink">עובד?</span>
                   </h2>
                 </div>
-                
+
                 <div className="space-y-8">
                   <div className="border-r-4 border-brand-pink/50 pr-6">
                     <div className="flex items-center gap-3 mb-2">
@@ -317,15 +352,13 @@ const ServiceForms = () => {
           </div>
 
           {/* Related Projects Section */}
-          {projectsData.filter(p => p.serviceTypes.includes("forms")).length > 0 && (
+          {projectsData.filter((p) => p.serviceTypes.includes("forms")).length > 0 && (
             <section className="py-12 md:py-16 -mx-4 px-4 bg-gray-50">
               <div className="max-w-5xl mx-auto">
-                <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
-                  פרויקטים בתחום
-                </h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">פרויקטים בתחום</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                   {projectsData
-                    .filter(p => p.serviceTypes.includes("forms"))
+                    .filter((p) => p.serviceTypes.includes("forms"))
                     .map((project, index) => (
                       <Link
                         key={project.id}
@@ -356,9 +389,7 @@ const ServiceForms = () => {
 
           {/* CTA */}
           <div className="max-w-3xl mx-auto text-center mb-8 pt-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-              מוכנים להתחיל?
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">מוכנים להתחיל?</h2>
             <p className="text-xl md:text-2xl text-foreground/80 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               בואו נדבר על איך טפסים דיגיטליים יכולים לייעל את העסק שלכם
             </p>
