@@ -322,39 +322,47 @@ const ProductTickets = () => {
         <section className="py-24" style={{ backgroundColor: colors.bgDark }}>
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">
-                תועלות <span style={{ color: colors.accent }}>עיקריות</span>
-              </h2>
-              
-              <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {[
-                  { icon: Shield, text: "שליטה מלאה על תהליך המכירה", color: colors.primary },
-                  { icon: Ticket, text: "מיתוג אישי על כרטיסים וקבלות", color: colors.accent },
-                  { icon: MapPin, text: "מפת אולם אינטראקטיבית", color: colors.accentLight },
-                  { icon: MousePointerClick, text: "חווית רכישה נוחה ללקוחות", color: colors.primary },
-                  { icon: Theater, text: "ניהול אולמות והופעות חכם", color: colors.accent },
-                  { icon: LayoutDashboard, text: "דשבורד מתקדם לכל הופעה", color: colors.accentLight },
-                  { icon: Receipt, text: "קבלות וכרטיסים דיגיטליים", color: colors.primary },
-                  { icon: BarChart3, text: "דוחות וסטטיסטיקות בזמן אמת", color: colors.accent }
-                ].map((item, index) => (
+              <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+                {/* Right side - Title */}
+                <div className="lg:w-1/3 lg:sticky lg:top-32 lg:self-start text-center lg:text-right">
+                  <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                    תועלות
+                    <br />
+                    <span style={{ color: colors.accent }}>עיקריות</span>
+                  </h2>
                   <div 
-                    key={index}
-                    className="backdrop-blur-sm rounded-2xl p-6 text-center border transition-all duration-300 hover:scale-105 animate-fade-in"
-                    style={{ 
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      borderColor: `${colors.accent}33`,
-                      animationDelay: `${index * 0.1}s`
-                    }}
-                  >
-                    <div 
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                      style={{ backgroundColor: item.color }}
-                    >
-                      <item.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <p className="text-white font-semibold">{item.text}</p>
+                    className="w-20 h-1 mt-6 mx-auto lg:mr-0 lg:ml-auto rounded-full"
+                    style={{ backgroundColor: colors.accent }}
+                  />
+                </div>
+                
+                {/* Left side - Benefits grid */}
+                <div className="lg:w-2/3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {[
+                      { icon: Shield, text: "שליטה מלאה על תהליך המכירה", color: colors.primary },
+                      { icon: Ticket, text: "מיתוג אישי על כרטיסים וקבלות", color: colors.accent },
+                      { icon: MapPin, text: "מפת אולם אינטראקטיבית", color: colors.accentLight },
+                      { icon: MousePointerClick, text: "חווית רכישה נוחה ללקוחות", color: colors.primary },
+                      { icon: Theater, text: "ניהול אולמות והופעות חכם", color: colors.accent },
+                      { icon: LayoutDashboard, text: "דשבורד מתקדם לכל הופעה", color: colors.accentLight },
+                      { icon: Receipt, text: "קבלות וכרטיסים דיגיטליים", color: colors.primary },
+                      { icon: BarChart3, text: "דוחות וסטטיסטיקות בזמן אמת", color: colors.accent }
+                    ].map((item, index) => (
+                      <div 
+                        key={index}
+                        className="flex items-center gap-4 py-4 animate-fade-in"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <item.icon 
+                          className="w-8 h-8 flex-shrink-0" 
+                          style={{ color: item.color }}
+                        />
+                        <p className="text-white font-medium text-lg">{item.text}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           </div>
