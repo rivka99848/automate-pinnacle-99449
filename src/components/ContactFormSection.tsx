@@ -101,7 +101,7 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* שם מלא */}
               <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-                <Label htmlFor="fullName" className="text-sm md:text-base">
+                <Label htmlFor="fullName" className="text-sm md:text-base text-gray-700">
                   שם מלא
                 </Label>
                 <Input
@@ -113,13 +113,13 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                     setFormData({ ...formData, fullName: e.target.value })
                   }
                   required
-                  className="h-12"
+                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
                 />
               </div>
 
               {/* מספר טלפון */}
               <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-                <Label htmlFor="phone" className="text-sm md:text-base">
+                <Label htmlFor="phone" className="text-sm md:text-base text-gray-700">
                   מספר טלפון
                 </Label>
                 <Input
@@ -131,13 +131,13 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                     setFormData({ ...formData, phone: e.target.value })
                   }
                   required
-                  className="h-12"
+                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
                 />
               </div>
 
               {/* אימייל */}
               <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                <Label htmlFor="email" className="text-sm md:text-base">
+                <Label htmlFor="email" className="text-sm md:text-base text-gray-700">
                   אימייל
                 </Label>
                 <Input
@@ -149,13 +149,13 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="h-12"
+                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
                 />
               </div>
 
               {/* תחום עיסוק */}
               <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-                <Label htmlFor="business" className="text-sm md:text-base">
+                <Label htmlFor="business" className="text-sm md:text-base text-gray-700">
                   תחום העיסוק
                 </Label>
                 <Input
@@ -167,7 +167,7 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                     setFormData({ ...formData, business: e.target.value })
                   }
                   required
-                  className="h-12"
+                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
                 />
               </div>
             </div>
@@ -186,7 +186,7 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
               />
               <Label
                 htmlFor="newsletter"
-                className="text-sm md:text-base cursor-pointer"
+                className="text-sm md:text-base cursor-pointer text-gray-700"
               >
                 אני מאשר/ת קבלת דיוורים ועדכונים
               </Label>
