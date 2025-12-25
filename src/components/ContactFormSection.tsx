@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { User, Phone, Mail, Briefcase } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type ButtonColor = "secondary" | "blue" | "pink" | "purple" | "teal" | "orange";
@@ -104,17 +105,20 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                 <Label htmlFor="fullName" className="text-sm md:text-base text-gray-700">
                   שם מלא
                 </Label>
-                <Input
-                  id="fullName"
-                  type="text"
-                  placeholder="הכנס שם מלא"
-                  value={formData.fullName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, fullName: e.target.value })
-                  }
-                  required
-                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
-                />
+                <div className="relative">
+                  <User className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Input
+                    id="fullName"
+                    type="text"
+                    placeholder="הכנס שם מלא"
+                    value={formData.fullName}
+                    onChange={(e) =>
+                      setFormData({ ...formData, fullName: e.target.value })
+                    }
+                    required
+                    className="h-12 pr-10 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
+                  />
+                </div>
               </div>
 
               {/* מספר טלפון */}
@@ -122,17 +126,20 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                 <Label htmlFor="phone" className="text-sm md:text-base text-gray-700">
                   מספר טלפון
                 </Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="050-1234567"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  required
-                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
-                />
+                <div className="relative">
+                  <Phone className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="050-1234567"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    required
+                    className="h-12 pr-10 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
+                  />
+                </div>
               </div>
 
               {/* אימייל */}
@@ -140,17 +147,20 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                 <Label htmlFor="email" className="text-sm md:text-base text-gray-700">
                   אימייל
                 </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="example@email.com"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  required
-                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
-                />
+                <div className="relative">
+                  <Mail className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="example@email.com"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                    className="h-12 pr-10 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
+                  />
+                </div>
               </div>
 
               {/* תחום עיסוק */}
@@ -158,17 +168,20 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                 <Label htmlFor="business" className="text-sm md:text-base text-gray-700">
                   תחום העיסוק
                 </Label>
-                <Input
-                  id="business"
-                  type="text"
-                  placeholder="למשל: מסעדה, מכירות"
-                  value={formData.business}
-                  onChange={(e) =>
-                    setFormData({ ...formData, business: e.target.value })
-                  }
-                  required
-                  className="h-12 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
-                />
+                <div className="relative">
+                  <Briefcase className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Input
+                    id="business"
+                    type="text"
+                    placeholder="למשל: מסעדה, מכירות"
+                    value={formData.business}
+                    onChange={(e) =>
+                      setFormData({ ...formData, business: e.target.value })
+                    }
+                    required
+                    className="h-12 pr-10 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
+                  />
+                </div>
               </div>
             </div>
 
