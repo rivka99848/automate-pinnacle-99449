@@ -6,9 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -31,15 +33,8 @@ const Contact = () => {
         body: JSON.stringify(formData),
       });
       
-      toast.success("תודה! ניצור איתך קשר בהקדם");
-      setFormData({
-        name: "",
-        phone: "",
-        email: "",
-        business: "",
-        message: "",
-        newsletter: false,
-      });
+      // Navigate to thank you page
+      navigate("/thank-you");
     } catch (error) {
       toast.error("אירעה שגיאה, אנא נסה שוב");
     }
@@ -123,7 +118,7 @@ const Contact = () => {
                   {/* תחום עיסוק */}
                   <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
                     <Label htmlFor="business" className="text-sm md:text-base">
-                      תחום העיסוק
+                      תחום העיסוק (אופציונלי)
                     </Label>
                     <Input
                       id="business"
@@ -133,7 +128,6 @@ const Contact = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, business: e.target.value })
                       }
-                      required
                       className="h-12"
                     />
                   </div>

@@ -18,6 +18,7 @@ import ServiceCustomProducts from "./pages/ServiceCustomProducts";
 import ProductCRM from "./pages/ProductCRM";
 import ProductTickets from "./pages/ProductTickets";
 import Contact from "./pages/Contact";
+import ThankYou from "./pages/ThankYou";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,7 +47,7 @@ const App = () => (
           <Route path="/product-crm" element={<ProductCRM />} />
           <Route path="/products/ticket-system" element={<ProductTickets />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/thank-you" element={<ThankYou />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

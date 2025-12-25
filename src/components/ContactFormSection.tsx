@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,6 +34,7 @@ const getButtonClasses = (color: ButtonColor): string => {
 };
 
 const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionProps) => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -67,17 +69,8 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
       );
 
       if (response.ok) {
-        toast({
-          title: "הפנייה נשלחה בהצלחה!",
-          description: "ניצור איתך קשר בהקדם",
-        });
-        setFormData({
-          fullName: "",
-          phone: "",
-          email: "",
-          business: "",
-          newsletter: false,
-        });
+        // Navigate to thank you page
+        navigate("/thank-you");
       } else {
         throw new Error("Failed to send");
       }
@@ -166,7 +159,7 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
               {/* תחום עיסוק */}
               <div className="space-y-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
                 <Label htmlFor="business" className="text-sm md:text-base text-gray-700">
-                  תחום העיסוק
+                  תחום העיסוק (אופציונלי)
                 </Label>
                 <div className="relative">
                   <Briefcase className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -178,7 +171,6 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
                     onChange={(e) =>
                       setFormData({ ...formData, business: e.target.value })
                     }
-                    required
                     className="h-12 pr-10 bg-transparent border border-gray-300 text-gray-900 placeholder:text-gray-400"
                   />
                 </div>
