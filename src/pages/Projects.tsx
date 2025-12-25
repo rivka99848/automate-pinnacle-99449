@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ProjectGallery from "@/components/ProjectGallery";
-import { useProjects } from "@/hooks/useProjects";
+import { useProjects, hasRealImages } from "@/hooks/useProjects";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Projects = () => {
@@ -51,9 +51,9 @@ const Projects = () => {
                   className="block hover-lift animate-fade-in-scale"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-colors">
-                    {/* Project Image - only show if has images */}
-                    {project.images && project.images.length > 0 ? (
+                    <div className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-colors">
+                    {/* Project Image - only show if has real images */}
+                    {hasRealImages(project.images) ? (
                       <ProjectGallery images={project.images} projectTitle={project.title} />
                     ) : (
                       <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">

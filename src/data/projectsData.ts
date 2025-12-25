@@ -17,6 +17,7 @@ export interface Project {
   slug: string;
   externalLink?: string;
   serviceTypes: ("bots" | "automation" | "crm" | "forms" | "custom-products")[];
+  recommendationImages?: string[];
 }
 
 export const projectsData: Project[] = [

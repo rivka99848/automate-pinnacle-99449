@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
-
+import { hasRealImages } from "@/hooks/useProjects";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -13,8 +12,10 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Don't render if no images
-  if (!images || images.length === 0) {
+  // Filter out placeholder images and don't render if no real images
+  const realImages = (images || []).filter(img => img && img.trim() !== "" && !img.includes("placeholder"));
+  
+  if (!hasRealImages(images)) {
     return null;
   }
 
@@ -33,7 +34,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
           }}
         >
           <CarouselContent>
-            {images.map((image, index) => (
+            {realImages.map((image, index) => (
               <CarouselItem key={index} className="animate-carousel-fade">
                 <div
                   className="relative aspect-video rounded-2xl overflow-hidden cursor-pointer"
@@ -51,7 +52,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
                   
                   {/* Image Counter */}
                   <div className="absolute bottom-4 right-4 bg-background/90 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium z-20">
-                    {index + 1} / {images.length}
+                    {index + 1} / {realImages.length}
                   </div>
                 </div>
               </CarouselItem>
@@ -67,7 +68,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
         <div className="w-full h-1 bg-muted/30 rounded-full mt-4 overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-brand-blue via-brand-purple to-brand-green transition-all duration-500 ease-out"
-            style={{ width: `${((currentIndex + 1) / images.length) * 100}%` }}
+            style={{ width: `${((currentIndex + 1) / realImages.length) * 100}%` }}
           />
         </div>
       </div>
@@ -77,7 +78,7 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
         <DialogContent className="max-w-7xl w-full p-0 bg-transparent border-none">
           <div className="relative">
             <img
-              src={selectedImage !== null ? images[selectedImage] : ""}
+              src={selectedImage !== null ? realImages[selectedImage] : ""}
               alt={`${projectTitle} - תצוגה מלאה`}
               className="w-full h-auto max-h-[90vh] object-contain rounded-xl animate-scale-in"
             />
