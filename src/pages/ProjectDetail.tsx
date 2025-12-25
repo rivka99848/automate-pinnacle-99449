@@ -197,10 +197,12 @@ const ProjectDetail = () => {
                   </p>
                 </div>
 
-                {/* Project Gallery */}
-                <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-                  <ProjectGallery images={project.images} projectTitle={project.title} />
-                </div>
+                {/* Project Gallery - only show if has images */}
+                {project.images && project.images.length > 0 && (
+                  <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
+                    <ProjectGallery images={project.images} projectTitle={project.title} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -331,7 +333,7 @@ const ProjectDetail = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">פרויקטים נוספים</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {projects
-                  .filter((p) => p.id !== project.id)
+                  .filter((p) => p.id !== project.id && p.images && p.images.length > 0)
                   .slice(0, 4)
                   .map((relatedProject, index) => {
                     const relatedColorClass = getColorClass(relatedProject.serviceTypes[0]);

@@ -52,8 +52,14 @@ const Projects = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-colors">
-                    {/* Project Image */}
-                    <ProjectGallery images={project.images} projectTitle={project.title} />
+                    {/* Project Image - only show if has images */}
+                    {project.images && project.images.length > 0 ? (
+                      <ProjectGallery images={project.images} projectTitle={project.title} />
+                    ) : (
+                      <div className="aspect-video bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                        <span className="text-4xl font-bold text-primary/30">{project.title.charAt(0)}</span>
+                      </div>
+                    )}
                     
                     {/* Content */}
                     <div className="p-4 space-y-2">
