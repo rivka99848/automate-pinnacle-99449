@@ -92,7 +92,7 @@ const ContactFormSection = ({ buttonColor = "secondary" }: ContactFormSectionPro
   };
 
   return (
-    <section className="bg-gradient-to-b from-background to-brand-darker py-8 md:py-12">
+    <section className="bg-white py-8 md:py-12">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* טופס ישירות על הרקע */}
