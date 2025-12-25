@@ -1,32 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCachedData } from "@/hooks/useCachedData";
 
 interface WebhookData {
   allLogos: string[];
 }
 
+const fetchLogos = async (): Promise<string[]> => {
+  const response = await fetch("https://n8n.chatnaki.co.il/webhook/site");
+  const data: WebhookData[] = await response.json();
+  if (data && data[0]?.allLogos) {
+    return data[0].allLogos;
+  }
+  return [];
+};
+
 const LogoMarquee = () => {
-  const [logos, setLogos] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: logos, loading } = useCachedData<string[]>(
+    "logos_cache",
+    fetchLogos,
+    { cacheDurationHours: 4 }
+  );
 
-  useEffect(() => {
-    const fetchLogos = async () => {
-      try {
-        const response = await fetch("https://n8n.chatnaki.co.il/webhook/site");
-        const data: WebhookData[] = await response.json();
-        if (data && data[0]?.allLogos) {
-          setLogos(data[0].allLogos);
-        }
-      } catch (error) {
-        console.error("Failed to fetch logos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLogos();
-  }, []);
-
-  if (loading || logos.length === 0) {
+  if (loading || !logos || logos.length === 0) {
     return null;
   }
 

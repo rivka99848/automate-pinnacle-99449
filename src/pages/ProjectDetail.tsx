@@ -3,8 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import ProjectGallery from "@/components/ProjectGallery";
-import { projectsData } from "@/data/projectsData";
+import { useProjects } from "@/hooks/useProjects";
 import { ExternalLink, Quote } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Color mapping based on serviceType
 const getColorClass = (serviceType: string) => {
@@ -128,7 +129,30 @@ const parseDescription = (description: string, colorClass: string) => {
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const project = projectsData.find((p) => p.slug === slug);
+  const { findProjectBySlug, projects, loading } = useProjects();
+  
+  const project = findProjectBySlug(slug || "");
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <Header />
+        <main className="pt-32">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <Skeleton className="h-10 w-48 mb-8" />
+              <Skeleton className="h-16 w-3/4 mb-8" />
+              <Skeleton className="h-6 w-full mb-4" />
+              <Skeleton className="h-6 w-2/3 mb-8" />
+              <Skeleton className="aspect-video w-full rounded-2xl" />
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!project) {
     return <Navigate to="/projects" replace />;
@@ -306,8 +330,9 @@ const ProjectDetail = () => {
             <div className="max-w-5xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">פרויקטים נוספים</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {projectsData
+                {projects
                   .filter((p) => p.id !== project.id)
+                  .slice(0, 4)
                   .map((relatedProject, index) => {
                     const relatedColorClass = getColorClass(relatedProject.serviceTypes[0]);
                     return (

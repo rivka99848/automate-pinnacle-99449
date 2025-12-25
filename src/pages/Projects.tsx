@@ -3,9 +3,12 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import ProjectGallery from "@/components/ProjectGallery";
-import { projectsData } from "@/data/projectsData";
+import { useProjects } from "@/hooks/useProjects";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Projects = () => {
+  const { projects, loading } = useProjects();
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -27,7 +30,21 @@ const Projects = () => {
         <div className="bg-white py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projectsData.map((project, index) => (
+              {loading ? (
+                // Loading skeletons
+                Array.from({ length: 6 }).map((_, index) => (
+                  <div key={index} className="bg-gray-50 rounded-3xl overflow-hidden border border-gray-200">
+                    <Skeleton className="aspect-video w-full" />
+                    <div className="p-4 space-y-2">
+                      <Skeleton className="h-6 w-3/4" />
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-2/3" />
+                      <Skeleton className="h-9 w-full rounded-full" />
+                    </div>
+                  </div>
+                ))
+              ) : (
+              projects.map((project, index) => (
                 <Link
                   key={project.id}
                   to={`/projects/${project.slug}`}
@@ -52,7 +69,8 @@ const Projects = () => {
                     </div>
                   </div>
                 </Link>
-              ))}
+              ))
+              )}
             </div>
           </div>
         </div>

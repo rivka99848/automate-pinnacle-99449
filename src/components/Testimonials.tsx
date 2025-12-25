@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -9,35 +9,31 @@ import {
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
 import Autoplay from "embla-carousel-autoplay";
+import { useCachedData } from "@/hooks/useCachedData";
 
 interface TestimonialImage {
   id: string;
   url: string;
 }
 
+const fetchTestimonials = async (): Promise<TestimonialImage[]> => {
+  const response = await fetch("https://n8n.chatnaki.co.il/webhook/31bbce57-f725-4bb9-b7c1-8a8161aaff31");
+  const data: TestimonialImage[] = await response.json();
+  if (data && Array.isArray(data)) {
+    return data;
+  }
+  return [];
+};
+
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [testimonials, setTestimonials] = useState<TestimonialImage[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await fetch("https://n8n.chatnaki.co.il/webhook/31bbce57-f725-4bb9-b7c1-8a8161aaff31");
-        const data: TestimonialImage[] = await response.json();
-        if (data && Array.isArray(data)) {
-          setTestimonials(data);
-        }
-      } catch (error) {
-        console.error("Error fetching testimonials:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
+  
+  const { data: testimonials, loading } = useCachedData<TestimonialImage[]>(
+    "testimonials_cache",
+    fetchTestimonials,
+    { cacheDurationHours: 4 }
+  );
 
   // Skeleton loading state
   if (loading) {
@@ -67,7 +63,7 @@ const Testimonials = () => {
     );
   }
 
-  if (testimonials.length === 0) {
+  if (!testimonials || testimonials.length === 0) {
     return null;
   }
 
