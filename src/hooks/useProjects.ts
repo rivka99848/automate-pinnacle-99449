@@ -34,8 +34,14 @@ const WEBHOOK_NAME_TO_EXISTING_SLUG: Record<string, string> = {
   "בוט AI": "yisharilev-ai-bot",
   "ישרי לב": "yisharilev-ai-bot",
   "בוט בינה מלאכותית מסונן": "yisharilev-ai-bot",
+  "בוט AI מתקדם לעבודה מקצועית מאובטחת": "yisharilev-ai-bot",
   "אוטומציה רפואית": "medical-automation",
   "אוטומציה מלאה לעסק רפואי עמוס בפניות": "medical-automation",
+};
+
+// מיפוי לפי Airtable ID - עבור מקרים שבהם השם הוא "No Name"
+const WEBHOOK_ID_TO_EXISTING_SLUG: Record<string, string> = {
+  "recAhlIcq7K6G45Z0": "yisharilev-ai-bot",  // בוט AI מסונן
 };
 
 // Default features for projects without detailed content
@@ -101,11 +107,14 @@ const extractProjectName = (wp: NormalizedWebhookProject): string => {
     return wp.name.trim();
   }
   
-  // Try to extract from content first line
+  // Try to extract from content - skip empty lines
   if (wp.content) {
-    const firstLine = wp.content.split('\n')[0].trim();
-    if (firstLine.length > 0 && firstLine.length <= 60) {
-      return firstLine;
+    const lines = wp.content.split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.length > 0 && trimmed.length <= 60) {
+        return trimmed;
+      }
     }
   }
   
@@ -114,8 +123,15 @@ const extractProjectName = (wp: NormalizedWebhookProject): string => {
 };
 
 // Find matching existing project slug
-const findMatchingExistingSlug = (webhookName: string): string | null => {
-  const normalizedName = webhookName.trim();
+const findMatchingExistingSlug = (wp: NormalizedWebhookProject): string | null => {
+  // בדיקה ראשונה - לפי Airtable ID
+  if (WEBHOOK_ID_TO_EXISTING_SLUG[wp.id]) {
+    return WEBHOOK_ID_TO_EXISTING_SLUG[wp.id];
+  }
+  
+  // בדיקה שנייה - לפי שם
+  const projectName = extractProjectName(wp);
+  const normalizedName = projectName.trim();
   
   // Check exact match first
   if (WEBHOOK_NAME_TO_EXISTING_SLUG[normalizedName]) {
@@ -221,7 +237,7 @@ export function useProjects() {
     const mergedExisting = projectsData.map(existing => {
       // Check if any webhook project matches this existing project
       const matchingWebhook = webhookProjects.find(wp => {
-        const matchSlug = findMatchingExistingSlug(wp.name);
+        const matchSlug = findMatchingExistingSlug(wp);
         return matchSlug === existing.slug;
       });
       
@@ -237,7 +253,7 @@ export function useProjects() {
         // Must have content/images to show
         if (!shouldShowAsNewProject(wp)) return false;
         // Filter out those that match existing projects
-        const matchSlug = findMatchingExistingSlug(wp.name);
+        const matchSlug = findMatchingExistingSlug(wp);
         return matchSlug === null;
       })
       .map((wp, index) => mapWebhookProject(wp, index));
@@ -254,7 +270,7 @@ export function useProjects() {
     // Check if slug matches a webhook project ID
     const webhookProject = webhookProjects.find(wp => wp.id === slug);
     if (webhookProject) {
-      const matchSlug = findMatchingExistingSlug(webhookProject.name);
+      const matchSlug = findMatchingExistingSlug(webhookProject);
       if (matchSlug) {
         return allProjects.find(p => p.slug === matchSlug);
       }
