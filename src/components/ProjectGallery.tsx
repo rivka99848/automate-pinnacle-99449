@@ -13,6 +13,11 @@ const ProjectGallery = ({ images, projectTitle }: ProjectGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Don't render if no images
+  if (!images || images.length === 0) {
+    return null;
+  }
+
   return (
     <>
       {/* Main Gallery */}
