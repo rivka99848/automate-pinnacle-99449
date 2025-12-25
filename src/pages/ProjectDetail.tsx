@@ -3,9 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import ProjectGallery from "@/components/ProjectGallery";
-import { useProjects } from "@/hooks/useProjects";
-import { ExternalLink, Quote } from "lucide-react";
+import { useProjects, hasRealImages } from "@/hooks/useProjects";
+import { ExternalLink, Quote, Star } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 // Color mapping based on serviceType
 const getColorClass = (serviceType: string) => {
@@ -197,8 +198,8 @@ const ProjectDetail = () => {
                   </p>
                 </div>
 
-                {/* Project Gallery - only show if has images */}
-                {project.images && project.images.length > 0 && (
+                {/* Project Gallery - only show if has real images */}
+                {hasRealImages(project.images) && (
                   <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
                     <ProjectGallery images={project.images} projectTitle={project.title} />
                   </div>
@@ -326,6 +327,44 @@ const ProjectDetail = () => {
           </div>
         </div>
 
+        {/* Recommendation Images Section */}
+        {hasRealImages(project.recommendationImages) && (
+          <div className={`py-20 bg-gradient-to-b from-${colorClass}/5 to-transparent`}>
+            <div className="container mx-auto px-4">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-12">
+                  <div className="flex items-center justify-center gap-2 mb-4">
+                    <Star className={`w-6 h-6 text-${colorClass} fill-${colorClass}`} />
+                    <h2 className={`text-3xl md:text-4xl font-bold text-${colorClass}`}>המלצות</h2>
+                    <Star className={`w-6 h-6 text-${colorClass} fill-${colorClass}`} />
+                  </div>
+                  <p className="text-lg text-muted-foreground">מה הלקוחות אומרים עלינו</p>
+                </div>
+                
+                <Carousel opts={{ loop: true, direction: "rtl" }} className="w-full">
+                  <CarouselContent>
+                    {project.recommendationImages!.map((img, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                        <div className="p-2">
+                          <div className="rounded-2xl overflow-hidden border border-border/50 shadow-lg hover:shadow-xl transition-shadow">
+                            <img
+                              src={img}
+                              alt={`המלצה ${index + 1}`}
+                              className="w-full h-auto object-cover"
+                            />
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="right-4 left-auto" />
+                  <CarouselNext className="left-4 right-auto" />
+                </Carousel>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Related Projects Strip */}
         <div className="bg-card py-16 border-t border-border/50">
           <div className="container mx-auto px-4">
@@ -333,10 +372,11 @@ const ProjectDetail = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">פרויקטים נוספים</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {projects
-                  .filter((p) => p.id !== project.id && p.images && p.images.length > 0)
+                  .filter((p) => p.id !== project.id && hasRealImages(p.images))
                   .slice(0, 4)
                   .map((relatedProject, index) => {
                     const relatedColorClass = getColorClass(relatedProject.serviceTypes[0]);
+                    const firstRealImage = relatedProject.images.find(img => img && !img.includes("placeholder"));
                     return (
                       <Link
                         key={relatedProject.id}
@@ -347,7 +387,7 @@ const ProjectDetail = () => {
                         <div className="bg-background rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-xl">
                           <div className="aspect-video overflow-hidden">
                             <img
-                              src={relatedProject.images[0]}
+                              src={firstRealImage || relatedProject.images[0]}
                               alt={relatedProject.title}
                               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />

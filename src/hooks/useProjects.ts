@@ -2,32 +2,40 @@ import { useCachedData } from "./useCachedData";
 import { projectsData, type Project } from "@/data/projectsData";
 import { Sparkles, LayoutDashboard, MessageCircle, Shield } from "lucide-react";
 
-interface WebhookProjectImage {
-  url: string;
-  filename: string;
-  width: number;
-  height: number;
-  type: string;
+// Raw webhook response format (new format)
+interface RawWebhookProject {
+  projectName?: string;
+  name?: string;
+  id?: string;
+  content?: string;
+  images?: string[] | { url: string }[];
+  recommendationImages?: string[];
 }
 
-interface WebhookProject {
+// Normalized internal format
+interface NormalizedWebhookProject {
   id: string;
   name: string;
-  createdTime: string;
-  images: WebhookProjectImage[];
-  content?: string;
+  content: string;
+  images: string[];
+  recommendationImages: string[];
 }
 
 const WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/project";
 
-// Map webhook project names to existing project slugs (for merging duplicates)
+// Map webhook project names to existing project slugs
 const WEBHOOK_NAME_TO_EXISTING_SLUG: Record<string, string> = {
   "ניחותא": "nichuta-vacation-bot",
+  "ניהול פניות בלי לאבד את הראש – מקרה אמיתי": "nichuta-vacation-bot",
+  "ניהול פניות בלי לאבד את הראש": "nichuta-vacation-bot",
   "בית ספר לריקוד": "ballet-school-crm",
   "בית ספר לבלט": "ballet-school-crm",
+  "מערכת CRM ואוטומציה לניהול בית ספר לבלט": "ballet-school-crm",
   "בוט AI": "yisharilev-ai-bot",
   "ישרי לב": "yisharilev-ai-bot",
+  "בוט בינה מלאכותית מסונן": "yisharilev-ai-bot",
   "אוטומציה רפואית": "medical-automation",
+  "אוטומציה מלאה לעסק רפואי עמוס בפניות": "medical-automation",
 };
 
 // Default features for projects without detailed content
@@ -38,18 +46,90 @@ const getDefaultFeatures = () => [
   { text: "אבטחה מתקדמת", icon: Shield },
 ];
 
-// Check if webhook project name matches an existing project
-const findMatchingExistingSlug = (webhookName: string): string | null => {
-  // Check exact match first
-  if (WEBHOOK_NAME_TO_EXISTING_SLUG[webhookName]) {
-    return WEBHOOK_NAME_TO_EXISTING_SLUG[webhookName];
+// Generate stable slug from project name
+const generateSlug = (name: string): string => {
+  // Simple hash function for stable ID
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    const char = name.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return `project-${Math.abs(hash).toString(36)}`;
+};
+
+// Normalize webhook project to consistent format
+const normalizeWebhookProject = (raw: RawWebhookProject): NormalizedWebhookProject => {
+  // Get name from projectName or name field
+  const rawName = raw.projectName || raw.name || "";
+  
+  // Normalize images - handle both string[] and {url: string}[] formats
+  const normalizedImages: string[] = [];
+  if (raw.images && Array.isArray(raw.images)) {
+    for (const img of raw.images) {
+      if (typeof img === "string" && img.trim()) {
+        normalizedImages.push(img);
+      } else if (typeof img === "object" && img.url && img.url.trim()) {
+        normalizedImages.push(img.url);
+      }
+    }
   }
   
-  // Check if any key is included in the webhook name or vice versa
-  const normalizedName = webhookName.trim().toLowerCase();
+  // Normalize recommendation images
+  const normalizedRecImages: string[] = [];
+  if (raw.recommendationImages && Array.isArray(raw.recommendationImages)) {
+    for (const img of raw.recommendationImages) {
+      if (typeof img === "string" && img.trim()) {
+        normalizedRecImages.push(img);
+      }
+    }
+  }
+  
+  return {
+    id: raw.id || generateSlug(rawName),
+    name: rawName,
+    content: raw.content || "",
+    images: normalizedImages,
+    recommendationImages: normalizedRecImages,
+  };
+};
+
+// Extract project name - use content first line if name is empty/generic
+const extractProjectName = (wp: NormalizedWebhookProject): string => {
+  // If we have a valid name, use it
+  if (wp.name && wp.name.trim() !== "" && wp.name !== "No Name") {
+    return wp.name.trim();
+  }
+  
+  // Try to extract from content first line
+  if (wp.content) {
+    const firstLine = wp.content.split('\n')[0].trim();
+    if (firstLine.length > 0 && firstLine.length <= 60) {
+      return firstLine;
+    }
+  }
+  
+  // Fallback with ID
+  return `פרויקט ${wp.id.slice(-6)}`;
+};
+
+// Find matching existing project slug
+const findMatchingExistingSlug = (webhookName: string): string | null => {
+  const normalizedName = webhookName.trim();
+  
+  // Check exact match first
+  if (WEBHOOK_NAME_TO_EXISTING_SLUG[normalizedName]) {
+    return WEBHOOK_NAME_TO_EXISTING_SLUG[normalizedName];
+  }
+  
+  // Check lowercase match
+  const lowerName = normalizedName.toLowerCase();
   for (const [key, slug] of Object.entries(WEBHOOK_NAME_TO_EXISTING_SLUG)) {
-    const normalizedKey = key.toLowerCase();
-    if (normalizedName.includes(normalizedKey) || normalizedKey.includes(normalizedName)) {
+    if (key.toLowerCase() === lowerName) {
+      return slug;
+    }
+    // Check if key is included in name or vice versa
+    if (lowerName.includes(key.toLowerCase()) || key.toLowerCase().includes(lowerName)) {
       return slug;
     }
   }
@@ -57,61 +137,66 @@ const findMatchingExistingSlug = (webhookName: string): string | null => {
   return null;
 };
 
-// Check if a webhook project should be shown (filter empty/invalid projects)
-const shouldShowProject = (wp: WebhookProject): boolean => {
-  // Filter out empty or "No Name" projects
-  if (!wp.name || wp.name.trim() === "" || wp.name === "No Name") {
-    return false;
-  }
+// Check if a webhook project should be shown as NEW project
+const shouldShowAsNewProject = (wp: NormalizedWebhookProject): boolean => {
+  const hasContent = wp.content.trim().length > 0;
+  const hasImages = wp.images.length > 0;
+  const hasRecImages = wp.recommendationImages.length > 0;
   
-  // Filter out projects with no content AND no images
-  const hasContent = wp.content && wp.content.trim().length > 0;
-  const hasImages = wp.images && wp.images.length > 0;
-  
-  if (!hasContent && !hasImages) {
-    return false;
-  }
-  
-  return true;
+  // Must have at least content OR images OR recommendation images
+  return hasContent || hasImages || hasRecImages;
 };
 
-// Convert webhook project to Project format (for new projects only)
-const mapWebhookProject = (webhookProject: WebhookProject, index: number): Project => {
-  const hasContent = webhookProject.content && webhookProject.content.trim().length > 0;
+// Check if images are real (not placeholders)
+export const hasRealImages = (images: string[] | undefined): boolean => {
+  if (!images || images.length === 0) return false;
+  return images.some(img => img && img.trim() !== "" && !img.includes("placeholder"));
+};
+
+// Convert webhook project to Project format
+const mapWebhookProject = (wp: NormalizedWebhookProject, index: number): Project => {
+  const projectName = extractProjectName(wp);
+  const hasContent = wp.content.trim().length > 0;
   
   return {
     id: 1000 + index,
-    title: webhookProject.name,
-    slug: webhookProject.id,
+    title: projectName,
+    slug: wp.id,
     description: hasContent 
-      ? webhookProject.content 
-      : `פרויקט ${webhookProject.name}\n\nפרויקט זה נבנה במיוחד עבור הלקוח ומותאם לצרכיו הייחודיים.`,
-    images: webhookProject.images.map(img => img.url), // No placeholder - empty array if no images
+      ? wp.content 
+      : `פרויקט ${projectName}\n\nפרויקט זה נבנה במיוחד עבור הלקוח ומותאם לצרכיו הייחודיים.`,
+    images: wp.images,
     features: getDefaultFeatures(),
     quote: "פרויקט מוצלח שנבנה בהתאמה מלאה לצרכי הלקוח.",
     author: "SmartBiz",
     blogLink: "",
     serviceTypes: ["custom-products"],
+    recommendationImages: wp.recommendationImages.length > 0 ? wp.recommendationImages : undefined,
   };
 };
 
 // Merge webhook data into an existing project
-const mergeWithExisting = (existing: Project, webhook: WebhookProject): Project => {
-  const hasWebhookContent = webhook.content && webhook.content.trim().length > 0;
-  const hasWebhookImages = webhook.images && webhook.images.length > 0;
+const mergeWithExisting = (existing: Project, wp: NormalizedWebhookProject): Project => {
+  const hasWebhookContent = wp.content.trim().length > 0;
+  const hasWebhookImages = wp.images.length > 0;
+  const hasWebhookRecImages = wp.recommendationImages.length > 0;
   
   return {
     ...existing,
-    // Use webhook description if available and existing is placeholder-like
-    description: hasWebhookContent ? webhook.content : existing.description,
-    // Use webhook images if available and existing uses placeholders
+    // Use webhook content if available
+    description: hasWebhookContent ? wp.content : existing.description,
+    // Use webhook images if available, otherwise keep existing (filter placeholders)
     images: hasWebhookImages 
-      ? webhook.images.map(img => img.url)
-      : existing.images.filter(img => img !== "/placeholder.svg"),
+      ? wp.images
+      : existing.images.filter(img => !img.includes("placeholder")),
+    // Add recommendation images if available
+    recommendationImages: hasWebhookRecImages 
+      ? wp.recommendationImages 
+      : existing.recommendationImages,
   };
 };
 
-const fetchProjectsFromWebhook = async (): Promise<WebhookProject[]> => {
+const fetchProjectsFromWebhook = async (): Promise<RawWebhookProject[]> => {
   const response = await fetch(WEBHOOK_URL);
   if (!response.ok) {
     throw new Error(`Failed to fetch projects: ${response.status}`);
@@ -121,18 +206,21 @@ const fetchProjectsFromWebhook = async (): Promise<WebhookProject[]> => {
 };
 
 export function useProjects() {
-  const { data: webhookProjects, loading, error, refetch } = useCachedData<WebhookProject[]>(
-    "projects_cache",
+  const { data: rawWebhookProjects, loading, error, refetch } = useCachedData<RawWebhookProject[]>(
+    "projects_cache_v2", // New cache key to avoid old format issues
     fetchProjectsFromWebhook,
     { cacheDurationHours: 4 }
   );
+
+  // Normalize webhook projects
+  const webhookProjects = (rawWebhookProjects || []).map(normalizeWebhookProject);
 
   // Build merged projects list
   const allProjects: Project[] = (() => {
     // Start with existing projects (possibly merged with webhook data)
     const mergedExisting = projectsData.map(existing => {
       // Check if any webhook project matches this existing project
-      const matchingWebhook = (webhookProjects || []).find(wp => {
+      const matchingWebhook = webhookProjects.find(wp => {
         const matchSlug = findMatchingExistingSlug(wp.name);
         return matchSlug === existing.slug;
       });
@@ -144,10 +232,10 @@ export function useProjects() {
     });
     
     // Add new webhook projects (those that don't match existing)
-    const newWebhookProjects = (webhookProjects || [])
+    const newWebhookProjects = webhookProjects
       .filter(wp => {
-        // Filter out invalid/empty projects
-        if (!shouldShowProject(wp)) return false;
+        // Must have content/images to show
+        if (!shouldShowAsNewProject(wp)) return false;
         // Filter out those that match existing projects
         const matchSlug = findMatchingExistingSlug(wp.name);
         return matchSlug === null;
@@ -157,26 +245,22 @@ export function useProjects() {
     return [...mergedExisting, ...newWebhookProjects];
   })();
 
-  // Find project by slug (check both existing and webhook projects)
+  // Find project by slug
   const findProjectBySlug = (slug: string): Project | undefined => {
-    // First check in allProjects (includes merged existing)
+    // First check in allProjects
     const found = allProjects.find(p => p.slug === slug);
     if (found) return found;
 
-    // Check if slug is an Airtable ID that matches an existing project
-    if (webhookProjects) {
-      const webhookProject = webhookProjects.find(wp => wp.id === slug);
-      if (webhookProject) {
-        const matchSlug = findMatchingExistingSlug(webhookProject.name);
-        if (matchSlug) {
-          // Return the merged existing project
-          return allProjects.find(p => p.slug === matchSlug);
-        }
-        // Return as new project if valid
-        if (shouldShowProject(webhookProject)) {
-          const index = webhookProjects.indexOf(webhookProject);
-          return mapWebhookProject(webhookProject, index);
-        }
+    // Check if slug matches a webhook project ID
+    const webhookProject = webhookProjects.find(wp => wp.id === slug);
+    if (webhookProject) {
+      const matchSlug = findMatchingExistingSlug(webhookProject.name);
+      if (matchSlug) {
+        return allProjects.find(p => p.slug === matchSlug);
+      }
+      if (shouldShowAsNewProject(webhookProject)) {
+        const index = webhookProjects.indexOf(webhookProject);
+        return mapWebhookProject(webhookProject, index);
       }
     }
 
