@@ -50,12 +50,16 @@ const Testimonials = () => {
             </h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            <Skeleton className="w-full h-64 md:h-80 rounded-2xl bg-brand-blue/10" />
+            <Skeleton className="w-full h-72 md:h-80 lg:h-96 rounded-2xl bg-brand-blue/10" />
           </div>
-          <div className="flex justify-center gap-2 mt-8">
-            {[1, 2, 3].map((_, index) => (
-              <Skeleton key={index} className="w-2 h-2 rounded-full bg-brand-blue/20" />
-            ))}
+          <div className="flex justify-center items-center gap-6 mt-8">
+            <Skeleton className="w-12 h-12 rounded-full bg-brand-blue/20" />
+            <div className="flex gap-2">
+              {[1, 2, 3].map((_, index) => (
+                <Skeleton key={index} className="w-2 h-2 rounded-full bg-brand-blue/20" />
+              ))}
+            </div>
+            <Skeleton className="w-12 h-12 rounded-full bg-brand-blue/20" />
           </div>
         </div>
       </section>
@@ -94,33 +98,34 @@ const Testimonials = () => {
           <CarouselContent>
             {testimonials.map((testimonial) => (
               <CarouselItem key={testimonial.id}>
-                <div className="p-2">
+                <div className="p-2 h-72 md:h-80 lg:h-96 flex items-center justify-center">
                   <img
                     src={testimonial.url}
                     alt="המלצת לקוח"
-                    className="w-full h-auto rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
+                    className="max-w-full max-h-full object-contain rounded-2xl shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-brand-blue/20"
                   />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
-          <CarouselNext className="absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
-
-          <div className="flex justify-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? "bg-brand-blue w-8"
-                    : "bg-brand-blue/30 hover:bg-brand-blue/50"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+          <div className="flex justify-center items-center gap-6 mt-8">
+            <CarouselPrevious className="static translate-y-0 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
+            <div className="flex gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentIndex
+                      ? "bg-brand-blue w-8"
+                      : "bg-brand-blue/30 hover:bg-brand-blue/50"
+                  }`}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                />
+              ))}
+            </div>
+            <CarouselNext className="static translate-y-0 w-12 h-12 rounded-full bg-brand-blue/20 hover:bg-brand-blue/30 backdrop-blur-sm border border-brand-blue/30 transition-all hover-lift" />
           </div>
         </Carousel>
       </div>
