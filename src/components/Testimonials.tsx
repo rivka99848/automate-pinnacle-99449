@@ -8,6 +8,7 @@ import {
   type CarouselApi
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
+import Autoplay from "embla-carousel-autoplay";
 
 interface TestimonialImage {
   id: string;
@@ -81,6 +82,13 @@ const Testimonials = () => {
         </div>
 
         <Carousel
+          plugins={[
+            Autoplay({
+              delay: 4000,
+              stopOnInteraction: true,
+              stopOnMouseEnter: true,
+            }),
+          ]}
           opts={{ 
             loop: true,
             direction: "rtl",
