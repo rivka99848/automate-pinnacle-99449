@@ -197,8 +197,15 @@ const mergeWithExisting = (existing: Project, wp: NormalizedWebhookProject): Pro
   const hasWebhookImages = wp.images.length > 0;
   const hasWebhookRecImages = wp.recommendationImages.length > 0;
   
+  // השתמש בשם מהוובהוק אם הוא תקין
+  const webhookName = wp.name && wp.name.trim() !== "" && wp.name !== "No Name" 
+    ? wp.name.trim() 
+    : null;
+  
   return {
     ...existing,
+    // אם יש שם תקין מהוובהוק - להשתמש בו
+    title: webhookName || existing.title,
     // Use webhook content if available
     description: hasWebhookContent ? wp.content : existing.description,
     // Use webhook images if available, otherwise keep existing (filter placeholders)
