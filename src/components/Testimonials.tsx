@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -8,10 +8,6 @@ import {
   type CarouselApi
 } from "@/components/ui/carousel";
 
-import logoResort from "@/assets/logo-resort.png";
-import logoMedical from "@/assets/logo-medical.png";
-import logoDesignStudio from "@/assets/logo-design-studio.png";
-
 interface Testimonial {
   quote: string;
   author: string;
@@ -20,33 +16,37 @@ interface Testimonial {
   companyName?: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    quote: "המערכת שבנו עם רבקה שינתה לנו את החיים! היינו טובעים בפניות בוואטסאפ, והבוט החכם שהיא בנתה פתר לנו הכל. עכשיו הלקוחות מקבלים תשובות מיידיות והזמנות נכנסות אוטומטית למערכת. פשוט מדהים!",
-    author: "יוסי כהן",
-    role: "מנהל רשת נופש יוקרתית",
-    logo: logoResort,
-    companyName: "רשת נופש יוקרתית"
-  },
-  {
-    quote: "אחרי שנים של עבודה עם טבלאות אקסל ותהליכים ידניים, סוף סוף יש לנו מערכת שעובדת בשבילנו. האוטומציות שרבקה הקימה חוסכות לנו שעות עבודה כל יום, והעסק פועל בצורה מקצועית הרבה יותר.",
-    author: "ד״ר שרה לוי",
-    role: "בעלת קליניקה רפואית",
-    logo: logoMedical,
-    companyName: "קליניקה רפואית"
-  },
-  {
-    quote: "לפני שפגשתי את רבקה, חשבתי שאוטומציה זה משהו רק לחברות גדולות. היא הוכיחה לי שגם עסק קטן כמו שלי יכול להפיק תועלת עצומה. המערכת פשוטה, יעילה, והכי חשוב - עובדת בדיוק איך שאני צריך!",
-    author: "מיכל דהן",
-    role: "בעלת סטודיו לעיצוב פנים",
-    logo: logoDesignStudio,
-    companyName: "סטודיו לעיצוב פנים"
-  }
-];
+interface WebhookData {
+  allTestimonials: Testimonial[];
+}
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const response = await fetch("https://n8n.chatnaki.co.il/webhook/31bbce57-f725-4bb9-b7c1-8a8161aaff31");
+        const data: WebhookData[] = await response.json();
+        if (data && data[0]?.allTestimonials) {
+          setTestimonials(data[0].allTestimonials);
+        }
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  if (loading || testimonials.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-16 bg-brand-darker relative overflow-hidden">
