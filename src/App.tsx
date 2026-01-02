@@ -19,6 +19,10 @@ import ProductCRM from "./pages/ProductCRM";
 import ProductTickets from "./pages/ProductTickets";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
+import SupportCreate from "./pages/SupportCreate";
+import SupportMyTickets from "./pages/SupportMyTickets";
+import SupportTicketDetail from "./pages/SupportTicketDetail";
+import SupportThankYou from "./pages/SupportThankYou";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +52,10 @@ const App = () => (
           <Route path="/products/ticket-system" element={<ProductTickets />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/support" element={<SupportCreate />} />
+          <Route path="/support/my-tickets" element={<SupportMyTickets />} />
+          <Route path="/support/ticket" element={<SupportTicketDetail />} />
+          <Route path="/support/thank-you" element={<SupportThankYou />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
