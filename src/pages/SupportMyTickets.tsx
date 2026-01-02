@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -14,15 +14,31 @@ interface Ticket {
   created_at: string;
 }
 
+const STORAGE_KEY = "support_customer_email";
+
 const SupportMyTickets = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Load email from URL params or localStorage on mount
+  useEffect(() => {
+    const urlEmail = searchParams.get("email");
+    const savedEmail = localStorage.getItem(STORAGE_KEY);
+    
+    if (urlEmail) {
+      setEmail(urlEmail);
+      // Auto-search if email is in URL
+      fetchTickets(urlEmail);
+    } else if (savedEmail) {
+      setEmail(savedEmail);
+    }
+  }, [searchParams]);
+
+  const fetchTickets = async (searchEmail: string) => {
     setIsLoading(true);
     setHasSearched(true);
 
@@ -30,12 +46,14 @@ const SupportMyTickets = () => {
       const response = await fetch("https://n8n.chatnaki.co.il/webhook/ticket-list", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email: searchEmail })
       });
 
       if (response.ok) {
         const data = await response.json();
         setTickets(Array.isArray(data) ? data : []);
+        // Save email to localStorage on successful search
+        localStorage.setItem(STORAGE_KEY, searchEmail);
       } else {
         toast.error("שגיאה בטעינת הפניות. נסה שוב.");
         setTickets([]);
@@ -47,6 +65,11 @@ const SupportMyTickets = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchTickets(email);
   };
 
   const getStatusIcon = (status: string) => {
