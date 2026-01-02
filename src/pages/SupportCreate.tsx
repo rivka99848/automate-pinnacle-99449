@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Send, Paperclip, X, FileText, Image } from "lucide-react";
+import { Send, Paperclip, X, FileText, Image, Mail, MessageSquare, HelpCircle, Upload } from "lucide-react";
 
 interface Attachment {
   filename: string;
@@ -103,140 +103,175 @@ const SupportCreate = () => {
 
   const getFileIcon = (contentType: string) => {
     if (contentType.startsWith("image/")) {
-      return <Image className="w-4 h-4" />;
+      return <Image className="w-4 h-4 text-brand-blue" />;
     }
-    return <FileText className="w-4 h-4" />;
+    return <FileText className="w-4 h-4 text-brand-purple" />;
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col" dir="rtl">
       <Header />
       
-      <main className="flex-1 py-20">
+      <main className="flex-1 py-16 md:py-24">
         <div className="container mx-auto px-4 max-w-2xl">
-          <div className="text-center mb-12">
+          {/* Hero Section */}
+          <div className="text-center mb-12 animate-fade-in-up">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 mb-6">
+              <HelpCircle className="w-10 h-10 text-primary" />
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               פתיחת פנייה חדשה
             </h1>
-            <p className="text-lg text-muted-foreground">
-              מלא את הפרטים ונחזור אליך בהקדם
+            <p className="text-lg text-muted-foreground max-w-md mx-auto">
+              מלא את הפרטים ונחזור אליך בהקדם האפשרי
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                אימייל *
-              </label>
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="your@email.com"
-                required
-                className="h-12"
-                dir="ltr"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                נושא הפנייה *
-              </label>
-              <Input
-                type="text"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                placeholder="במה נוכל לעזור?"
-                required
-                className="h-12"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                תיאור הפנייה *
-              </label>
-              <Textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="פרט את הבעיה או הבקשה שלך..."
-                required
-                className="min-h-[150px]"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">
-                קבצים מצורפים (אופציונלי)
-              </label>
-              <div className="border-2 border-dashed border-border rounded-lg p-6 text-center">
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  onChange={handleFileChange}
-                  accept="image/*,application/pdf"
-                  multiple
-                  className="hidden"
-                  id="file-upload"
-                />
-                <label
-                  htmlFor="file-upload"
-                  className="cursor-pointer flex flex-col items-center gap-2"
-                >
-                  <Paperclip className="w-8 h-8 text-muted-foreground" />
-                  <span className="text-muted-foreground">
-                    לחץ להעלאת קבצים (תמונות או PDF, עד 1.5MB)
-                  </span>
+          {/* Form Card */}
+          <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 md:p-8 shadow-lg animate-fade-in-up delay-100">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email Field */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+                  <Mail className="w-4 h-4 text-primary" />
+                  אימייל
+                  <span className="text-destructive">*</span>
                 </label>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  required
+                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  dir="ltr"
+                />
               </div>
 
-              {attachments.length > 0 && (
-                <div className="mt-4 space-y-2">
-                  {attachments.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between bg-muted/50 rounded-lg p-3"
-                    >
-                      <div className="flex items-center gap-2">
-                        {getFileIcon(file.content_type)}
-                        <span className="text-sm">{file.filename}</span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => removeAttachment(index)}
-                        className="text-destructive hover:text-destructive/80"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
+              {/* Subject Field */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+                  <MessageSquare className="w-4 h-4 text-primary" />
+                  נושא הפנייה
+                  <span className="text-destructive">*</span>
+                </label>
+                <Input
+                  type="text"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  placeholder="במה נוכל לעזור?"
+                  required
+                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                />
+              </div>
+
+              {/* Message Field */}
+              <div className="space-y-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+                  <FileText className="w-4 h-4 text-primary" />
+                  תיאור הפנייה
+                  <span className="text-destructive">*</span>
+                </label>
+                <Textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="פרט את הבעיה או הבקשה שלך בצורה מפורטת..."
+                  required
+                  className="min-h-[150px] bg-background/50 border-border/50 focus:border-primary transition-colors resize-none"
+                />
+              </div>
+
+              {/* File Upload */}
+              <div className="space-y-3">
+                <label className="flex items-center gap-2 text-sm font-medium text-foreground">
+                  <Paperclip className="w-4 h-4 text-primary" />
+                  קבצים מצורפים
+                  <span className="text-muted-foreground font-normal">(אופציונלי)</span>
+                </label>
+                <div 
+                  className="border-2 border-dashed border-border/50 hover:border-primary/50 rounded-xl p-8 text-center transition-all duration-300 hover:bg-primary/5 cursor-pointer group"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    onChange={handleFileChange}
+                    accept="image/*,application/pdf"
+                    multiple
+                    className="hidden"
+                  />
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <Upload className="w-7 h-7 text-primary" />
                     </div>
-                  ))}
+                    <div>
+                      <p className="text-foreground font-medium mb-1">
+                        לחץ להעלאת קבצים
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        תמונות או PDF, עד 1.5MB לקובץ
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full h-12 text-lg bg-primary hover:bg-primary/90"
-            >
-              {isSubmitting ? (
-                "שולח..."
-              ) : (
-                <>
-                  <Send className="w-5 h-5 ml-2" />
-                  שלח פנייה
-                </>
-              )}
-            </Button>
-          </form>
+                {/* Attached Files */}
+                {attachments.length > 0 && (
+                  <div className="space-y-2 mt-4">
+                    {attachments.map((file, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between bg-background/70 border border-border/30 rounded-lg p-3 group hover:border-primary/30 transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            {getFileIcon(file.content_type)}
+                          </div>
+                          <span className="text-sm text-foreground truncate max-w-[200px]">
+                            {file.filename}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeAttachment(index)}
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-          <div className="mt-8 text-center">
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-14 text-lg font-medium bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    שולח...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    <Send className="w-5 h-5" />
+                    שלח פנייה
+                  </span>
+                )}
+              </Button>
+            </form>
+          </div>
+
+          {/* Bottom Link */}
+          <div className="mt-8 text-center animate-fade-in-up delay-200">
             <p className="text-muted-foreground">
               כבר פתחת פנייה?{" "}
               <a
                 href="/support/my-tickets"
-                className="text-primary hover:underline"
+                className="text-primary hover:text-primary/80 font-medium transition-colors hover:underline"
               >
                 צפה בפניות שלך
               </a>
