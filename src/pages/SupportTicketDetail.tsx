@@ -33,10 +33,24 @@ interface TicketDetails {
   replies: Reply[];
 }
 
+const STORAGE_KEY = "support_customer_email";
+
 const SupportTicketDetail = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const ticketId = searchParams.get("ticket_id");
+  const emailFromUrl = searchParams.get("email");
+  
+  // Get email from URL or localStorage
+  const customerEmail = emailFromUrl || localStorage.getItem(STORAGE_KEY) || "";
+  
+  const navigateToMyTickets = () => {
+    if (customerEmail) {
+      navigate(`/support/my-tickets?email=${encodeURIComponent(customerEmail)}`);
+    } else {
+      navigate("/support/my-tickets");
+    }
+  };
 
   const [ticket, setTicket] = useState<TicketDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -157,7 +171,7 @@ const SupportTicketDetail = () => {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <p className="text-xl text-muted-foreground mb-4">הפנייה לא נמצאה</p>
-            <Button onClick={() => navigate("/support/my-tickets")}>
+            <Button onClick={navigateToMyTickets}>
               חזרה לפניות שלי
             </Button>
           </div>
@@ -176,7 +190,7 @@ const SupportTicketDetail = () => {
           {/* Back Button */}
           <Button
             variant="ghost"
-            onClick={() => navigate("/support/my-tickets")}
+            onClick={navigateToMyTickets}
             className="mb-6"
           >
             <ArrowRight className="w-4 h-4 ml-2" />

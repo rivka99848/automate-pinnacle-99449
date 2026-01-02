@@ -195,7 +195,7 @@ const SupportMyTickets = () => {
                         <div className="flex items-center gap-3">
                           {getStatusIcon(ticket.status)}
                           <Button
-                            onClick={() => navigate(`/support/ticket?ticket_id=${ticket.ticket_id}`)}
+                            onClick={() => navigate(`/support/ticket?ticket_id=${ticket.ticket_id}&email=${encodeURIComponent(email)}`)}
                             variant="outline"
                             size="sm"
                           >
