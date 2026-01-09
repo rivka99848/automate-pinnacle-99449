@@ -65,7 +65,7 @@ const SupportTicketDetail = () => {
     }
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/ticket-view", {
+      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support2", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ticket_id: ticketId })
@@ -97,7 +97,7 @@ const SupportTicketDetail = () => {
     setIsSendingReply(true);
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/ticket-reply", {
+      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support3", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
