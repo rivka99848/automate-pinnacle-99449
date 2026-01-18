@@ -18,16 +18,15 @@ const CodeBlock = ({ code, language = "bash" }: { code: string; language?: strin
 
   return (
     <div className="relative group my-4" dir="ltr">
-      <pre className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 pr-16 overflow-x-auto text-sm text-zinc-100 font-mono">
+      <pre className="bg-gray-200 border border-gray-300 rounded-lg p-4 pr-12 overflow-x-auto text-sm text-gray-800 font-mono">
         <code>{code}</code>
       </pre>
-      <Button
-        size="sm"
+      <button
         onClick={handleCopy}
-        className="absolute top-2 right-2 bg-primary hover:bg-primary/80 text-primary-foreground shadow-lg"
+        className="absolute top-3 right-3 p-1.5 rounded hover:bg-gray-300 transition-colors text-gray-600 hover:text-gray-800"
       >
         {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-      </Button>
+      </button>
     </div>
   );
 };
@@ -88,8 +87,8 @@ const Section = ({
         className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 transition-colors text-right"
       >
         <div className="flex items-center gap-3">
-          <Icon className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold text-gray-900">{title}</span>
+          <Icon className="h-6 w-6 text-blue-900" />
+          <span className="text-lg font-bold text-blue-900">{title}</span>
         </div>
         {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
       </button>
@@ -149,8 +148,8 @@ const DockerGuide = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-l from-primary to-primary/60 bg-clip-text text-transparent">
-              מדריך מלא: הקמת פרויקט Docker על שרת עם aaPanel
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
+              מדריך להקמת פרויקט Docker על שרת
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               מדריך שלב-אחר-שלב עם פקודות מוכנות להעתקה
@@ -159,15 +158,23 @@ const DockerGuide = () => {
 
           {/* Important Notes */}
           <div className="bg-gray-100 border border-gray-300 rounded-xl p-6 mb-8">
-            <h3 className="text-lg font-bold mb-4 text-primary">הערות חשובות לפני שמתחילים:</h3>
+            <h3 className="text-lg font-bold mb-4 text-blue-900">הערות חשובות לפני שמתחילים:</h3>
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="text-primary">🔹</span>
+                <span className="text-blue-900">🔹</span>
                 <span>כל מה שמופיע בתוך <code className="bg-gray-200 px-2 py-1 rounded text-gray-800">&lt;PROJECT_NAME&gt;</code> – להחליף בשם הפרויקט שלך</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-primary">🔹</span>
+                <span className="text-blue-900">🔹</span>
                 <span>כל הפקודות רצות כ־root או משתמש עם sudo</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-900">1️⃣</span>
+                <span>ייתכן שכבר קיימים קונטיינרים שרצים על השרת – זה טבעי. לפני שמריצים קונטיינר חדש, <strong>ודאו שהפורט פנוי</strong></span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-blue-900">2️⃣</span>
+                <span>אם הפורט תפוס, בחרי פורט אחר או עצרי את הקונטיינר שתופס אותו</span>
               </li>
             </ul>
           </div>
@@ -182,8 +189,8 @@ const DockerGuide = () => {
                   href={`#${item.id}`}
                   className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-900"
                 >
-                  <item.icon className="h-4 w-4 text-primary" />
-                  <span className="text-primary/70">{index + 1}.</span>
+                  <item.icon className="h-4 w-4 text-blue-900" />
+                  <span className="text-blue-900/70">{index + 1}.</span>
                   <span>{item.title}</span>
                 </a>
               ))}
@@ -241,13 +248,6 @@ const DockerGuide = () => {
             
             <p className="text-gray-600 mb-4">בדיקת זיכרון:</p>
             <CodeBlock code="free -h" />
-            
-            <p className="text-gray-600 mb-4">בדיקה שיש חיבור לאינטרנט:</p>
-            <CodeBlock code="ping -c 3 google.com" />
-            
-            <ExpectedOutput>
-              <p>שורות עם זמני תגובה מ-google.com</p>
-            </ExpectedOutput>
           </Section>
 
           {/* Step 2 */}
@@ -276,20 +276,18 @@ systemctl enable docker`} />
 
           {/* Step 3 */}
           <Section id="step3" title="שלב 3 – בדיקה והתקנה של Docker Compose" icon={Package}>
-            <CodeBlock code="docker compose version" />
-            
-            <p className="text-gray-600 mb-4">אם אין:</p>
-            <CodeBlock code={`mkdir -p /usr/local/lib/docker/cli-plugins
-curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 \\
--o /usr/local/lib/docker/cli-plugins/docker-compose
-chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
-            
             <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code="docker compose version" />
             
             <ExpectedOutput>
               <code dir="ltr">Docker Compose version v2.27.0</code>
             </ExpectedOutput>
+            
+            <p className="text-gray-600 mb-4">אם אין – התקנה:</p>
+            <CodeBlock code={`mkdir -p /usr/local/lib/docker/cli-plugins
+curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 \\
+-o /usr/local/lib/docker/cli-plugins/docker-compose
+chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
           </Section>
 
           {/* Step 4 */}
@@ -298,18 +296,14 @@ chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
             <CodeBlock code={`node -v
 npm -v`} />
             
-            <p className="text-gray-600 mb-4">אם אין:</p>
-            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt install -y nodejs`} />
-            
-            <p className="text-gray-600 mb-4">בדיקה:</p>
-            <CodeBlock code={`node -v
-npm -v`} />
-            
             <ExpectedOutput>
               <code dir="ltr">v20.x.x</code><br/>
               <code dir="ltr">10.x.x</code>
             </ExpectedOutput>
+            
+            <p className="text-gray-600 mb-4">אם אין – התקנה:</p>
+            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs`} />
           </Section>
 
           {/* Step 5 */}
@@ -420,7 +414,7 @@ services:
 
           {/* GitHub Section */}
           <div className="mt-12 mb-8">
-            <h2 className="text-2xl font-bold text-primary mb-6">חיבור ל-GitHub</h2>
+            <h2 className="text-2xl font-bold text-blue-900 mb-6">חיבור ל-GitHub</h2>
           </div>
 
           <Section id="github" title="חיבור השרת ל-GitHub (SSH + Clone)" icon={GitBranch}>
