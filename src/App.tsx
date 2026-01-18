@@ -23,6 +23,7 @@ import SupportCreate from "./pages/SupportCreate";
 import SupportMyTickets from "./pages/SupportMyTickets";
 import SupportTicketDetail from "./pages/SupportTicketDetail";
 import SupportThankYou from "./pages/SupportThankYou";
+import DockerGuide from "./pages/DockerGuide";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
           <Route path="/support/my-tickets" element={<SupportMyTickets />} />
           <Route path="/support/ticket" element={<SupportTicketDetail />} />
           <Route path="/support/thank-you" element={<SupportThankYou />} />
+          <Route path="/guides/docker-aapanel" element={<DockerGuide />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
