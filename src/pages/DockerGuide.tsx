@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -18,16 +18,15 @@ const CodeBlock = ({ code, language = "bash" }: { code: string; language?: strin
 
   return (
     <div className="relative group my-4" dir="ltr">
-      <pre className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 overflow-x-auto text-sm text-zinc-100 font-mono">
+      <pre className="bg-zinc-900 border border-zinc-700 rounded-lg p-4 pr-16 overflow-x-auto text-sm text-zinc-100 font-mono">
         <code>{code}</code>
       </pre>
       <Button
         size="sm"
-        variant="ghost"
         onClick={handleCopy}
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+        className="absolute top-2 right-2 bg-primary hover:bg-primary/80 text-primary-foreground shadow-lg"
       >
-        {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </Button>
     </div>
   );
@@ -35,34 +34,34 @@ const CodeBlock = ({ code, language = "bash" }: { code: string; language?: strin
 
 // Expected output box
 const ExpectedOutput = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-green-900/20 border-r-4 border-green-500 p-4 rounded-lg my-4">
-    <div className="flex items-center gap-2 mb-2 text-green-400 font-bold">
+  <div className="bg-green-100 border-r-4 border-green-500 p-4 rounded-lg my-4">
+    <div className="flex items-center gap-2 mb-2 text-green-700 font-bold">
       <CheckCircle2 className="h-5 w-5" />
       <span>מה אמור לחזור?</span>
     </div>
-    <div className="text-zinc-300">{children}</div>
+    <div className="text-green-900">{children}</div>
   </div>
 );
 
 // Warning box
 const WarningBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-yellow-900/20 border-r-4 border-yellow-500 p-4 rounded-lg my-4">
-    <div className="flex items-center gap-2 mb-2 text-yellow-400 font-bold">
+  <div className="bg-yellow-100 border-r-4 border-yellow-500 p-4 rounded-lg my-4">
+    <div className="flex items-center gap-2 mb-2 text-yellow-700 font-bold">
       <AlertTriangle className="h-5 w-5" />
       <span>שים לב!</span>
     </div>
-    <div className="text-zinc-300">{children}</div>
+    <div className="text-yellow-900">{children}</div>
   </div>
 );
 
 // Change note box
 const ChangeNote = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-blue-900/20 border-r-4 border-blue-500 p-4 rounded-lg my-4">
-    <div className="flex items-center gap-2 mb-2 text-blue-400 font-bold">
+  <div className="bg-blue-100 border-r-4 border-blue-500 p-4 rounded-lg my-4">
+    <div className="flex items-center gap-2 mb-2 text-blue-700 font-bold">
       <Wrench className="h-5 w-5" />
       <span>מה לשנות:</span>
     </div>
-    <div className="text-zinc-300">{children}</div>
+    <div className="text-blue-900">{children}</div>
   </div>
 );
 
@@ -83,23 +82,23 @@ const Section = ({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div id={id} className="border border-zinc-700 rounded-xl overflow-hidden mb-4">
+    <div id={id} className="border border-gray-300 rounded-xl overflow-hidden mb-4 shadow-sm">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 bg-zinc-800/50 hover:bg-zinc-800 transition-colors text-right"
+        className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 transition-colors text-right"
       >
         <div className="flex items-center gap-3">
           <Icon className="h-6 w-6 text-primary" />
-          <span className="text-lg font-bold text-foreground">{title}</span>
+          <span className="text-lg font-bold text-gray-900">{title}</span>
         </div>
-        {isOpen ? <ChevronUp className="h-5 w-5 text-zinc-400" /> : <ChevronDown className="h-5 w-5 text-zinc-400" />}
+        {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
       </button>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="p-6 bg-zinc-900/30"
+          className="p-6 bg-white"
         >
           {children}
         </motion.div>
@@ -108,8 +107,20 @@ const Section = ({
   );
 };
 
+// Iron rule box
+const IronRuleBox = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-400 p-6 rounded-xl my-6 shadow-md">
+    <div className="flex items-center gap-3 mb-4 text-amber-700 font-bold text-xl">
+      <FolderCheck className="h-7 w-7" />
+      <span>💡 תמיד בדקי איפה את נמצאת!</span>
+    </div>
+    <div className="text-amber-900">{children}</div>
+  </div>
+);
+
 const DockerGuide = () => {
   const tableOfContents = [
+    { id: "iron-rule", title: "חוק ברזל - בדיקת תיקייה", icon: FolderCheck },
     { id: "step1", title: "בדיקה בסיסית של השרת", icon: Server },
     { id: "step2", title: "התקנת Docker", icon: Package },
     { id: "step3", title: "התקנת Docker Compose", icon: Package },
@@ -126,11 +137,11 @@ const DockerGuide = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="rtl">
+    <div className="min-h-screen bg-white text-gray-900" dir="rtl">
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4">
+      <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -141,18 +152,18 @@ const DockerGuide = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-l from-primary to-primary/60 bg-clip-text text-transparent">
               מדריך מלא: הקמת פרויקט Docker על שרת עם aaPanel
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-gray-600 mb-8">
               מדריך שלב-אחר-שלב עם פקודות מוכנות להעתקה
             </p>
           </motion.div>
 
           {/* Important Notes */}
-          <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-6 mb-8">
+          <div className="bg-gray-100 border border-gray-300 rounded-xl p-6 mb-8">
             <h3 className="text-lg font-bold mb-4 text-primary">הערות חשובות לפני שמתחילים:</h3>
-            <ul className="space-y-2 text-muted-foreground">
+            <ul className="space-y-2 text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-primary">🔹</span>
-                <span>כל מה שמופיע בתוך <code className="bg-zinc-700 px-2 py-1 rounded text-zinc-200">&lt;PROJECT_NAME&gt;</code> – להחליף בשם הפרויקט שלך</span>
+                <span>כל מה שמופיע בתוך <code className="bg-gray-200 px-2 py-1 rounded text-gray-800">&lt;PROJECT_NAME&gt;</code> – להחליף בשם הפרויקט שלך</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary">🔹</span>
@@ -162,14 +173,14 @@ const DockerGuide = () => {
           </div>
 
           {/* Table of Contents */}
-          <div className="bg-zinc-800/30 border border-zinc-700 rounded-xl p-6 mb-12">
-            <h3 className="text-lg font-bold mb-4">תוכן עניינים:</h3>
+          <div className="bg-gray-50 border border-gray-300 rounded-xl p-6 mb-12">
+            <h3 className="text-lg font-bold mb-4 text-gray-900">תוכן עניינים:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               {tableOfContents.map((item, index) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-zinc-700/50 transition-colors text-muted-foreground hover:text-foreground"
+                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-900"
                 >
                   <item.icon className="h-4 w-4 text-primary" />
                   <span className="text-primary/70">{index + 1}.</span>
@@ -185,18 +196,53 @@ const DockerGuide = () => {
       <section className="pb-20 px-4">
         <div className="container mx-auto max-w-4xl">
           
+          {/* Iron Rule - Check Directory */}
+          <div id="iron-rule">
+            <IronRuleBox>
+              <p className="mb-4 text-lg">לפני שמתחילים לעבוד עם Docker או Git, ודאו שאתם נמצאות בתיקייה של הפרויקט!</p>
+              <p className="mb-4 font-medium">כל הפקודות חייבות לרוץ מתוך תיקיית האתר.</p>
+              
+              <p className="text-amber-800 mb-2 font-medium">בדיקה:</p>
+              <CodeBlock code="pwd" />
+              
+              <ExpectedOutput>
+                <p>הפלט צריך להראות את הנתיב לתיקיית הפרויקט, למשל:</p>
+                <code dir="ltr" className="block mt-2">/home/PROJECT_NAME</code>
+                <p className="mt-2">או:</p>
+                <code dir="ltr" className="block mt-2">/var/www/PROJECT_NAME</code>
+              </ExpectedOutput>
+              
+              <p className="text-amber-800 mb-2 font-medium mt-4">כדי לעבור לתיקייה:</p>
+              <CodeBlock code="cd /נתיב/אל/הפרויקט" />
+              
+              <p className="text-amber-800 mb-2 font-medium mt-4">לאחר מכן תמיד לבדוק:</p>
+              <CodeBlock code="ls" />
+              
+              <p className="text-amber-800 mb-2 font-medium mt-4">כדי לוודא שיש את הקבצים:</p>
+              <ul className="list-disc list-inside space-y-1 mr-4 text-amber-900">
+                <li><code className="bg-amber-200 px-1 rounded">Dockerfile</code></li>
+                <li><code className="bg-amber-200 px-1 rounded">docker-compose.yml</code> (אם קיים)</li>
+                <li><code className="bg-amber-200 px-1 rounded">package.json</code></li>
+              </ul>
+              
+              <WarningBox>
+                <p>❌ אם לא מופיעים — אתן לא בתיקייה הנכונה, אל תריצו שום פקודה!</p>
+              </WarningBox>
+            </IronRuleBox>
+          </div>
+
           {/* Step 1 */}
           <Section id="step1" title="שלב 1 – בדיקה בסיסית של השרת" icon={Server} defaultOpen>
-            <p className="text-muted-foreground mb-4">בדיקת מערכת ההפעלה:</p>
+            <p className="text-gray-600 mb-4">בדיקת מערכת ההפעלה:</p>
             <CodeBlock code="uname -a" />
             
-            <p className="text-muted-foreground mb-4">בדיקת נפח דיסק:</p>
+            <p className="text-gray-600 mb-4">בדיקת נפח דיסק:</p>
             <CodeBlock code="df -h" />
             
-            <p className="text-muted-foreground mb-4">בדיקת זיכרון:</p>
+            <p className="text-gray-600 mb-4">בדיקת זיכרון:</p>
             <CodeBlock code="free -h" />
             
-            <p className="text-muted-foreground mb-4">בדיקה שיש חיבור לאינטרנט:</p>
+            <p className="text-gray-600 mb-4">בדיקה שיש חיבור לאינטרנט:</p>
             <CodeBlock code="ping -c 3 google.com" />
             
             <ExpectedOutput>
@@ -206,21 +252,21 @@ const DockerGuide = () => {
 
           {/* Step 2 */}
           <Section id="step2" title="שלב 2 – בדיקה והתקנה של Docker" icon={Package}>
-            <p className="text-muted-foreground mb-4">בדיקה אם Docker קיים:</p>
+            <p className="text-gray-600 mb-4">בדיקה אם Docker קיים:</p>
             <CodeBlock code="docker -v" />
             
             <ExpectedOutput>
               <code dir="ltr">Docker version 24.x.x, build xxxxxxx</code>
             </ExpectedOutput>
             
-            <p className="text-muted-foreground mb-4">אם אין – התקנה:</p>
+            <p className="text-gray-600 mb-4">אם אין – התקנה:</p>
             <CodeBlock code="curl -fsSL https://get.docker.com | sh" />
             
-            <p className="text-muted-foreground mb-4">הפעלת Docker והגדרה ל-auto start:</p>
+            <p className="text-gray-600 mb-4">הפעלת Docker והגדרה ל-auto start:</p>
             <CodeBlock code={`systemctl start docker
 systemctl enable docker`} />
             
-            <p className="text-muted-foreground mb-4">בדיקה:</p>
+            <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code="docker ps" />
             
             <ExpectedOutput>
@@ -232,13 +278,13 @@ systemctl enable docker`} />
           <Section id="step3" title="שלב 3 – בדיקה והתקנה של Docker Compose" icon={Package}>
             <CodeBlock code="docker compose version" />
             
-            <p className="text-muted-foreground mb-4">אם אין:</p>
+            <p className="text-gray-600 mb-4">אם אין:</p>
             <CodeBlock code={`mkdir -p /usr/local/lib/docker/cli-plugins
 curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 \\
 -o /usr/local/lib/docker/cli-plugins/docker-compose
 chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
             
-            <p className="text-muted-foreground mb-4">בדיקה:</p>
+            <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code="docker compose version" />
             
             <ExpectedOutput>
@@ -248,15 +294,15 @@ chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
 
           {/* Step 4 */}
           <Section id="step4" title="שלב 4 – בדיקה והתקנה של Node.js ו-NPM" icon={Terminal}>
-            <p className="text-muted-foreground mb-4">בדיקה:</p>
+            <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code={`node -v
 npm -v`} />
             
-            <p className="text-muted-foreground mb-4">אם אין:</p>
+            <p className="text-gray-600 mb-4">אם אין:</p>
             <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs`} />
             
-            <p className="text-muted-foreground mb-4">בדיקה:</p>
+            <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code={`node -v
 npm -v`} />
             
@@ -273,7 +319,7 @@ mkdir <PROJECT_NAME>
 cd <PROJECT_NAME>`} />
             
             <ChangeNote>
-              <p>החלף את <code className="bg-zinc-700 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט שלך</p>
+              <p>החלף את <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט שלך</p>
             </ChangeNote>
           </Section>
 
@@ -281,7 +327,7 @@ cd <PROJECT_NAME>`} />
           <Section id="step6" title="שלב 6 – יצירת Dockerfile (לא לדלג! ❗)" icon={Terminal}>
             <CodeBlock code="nano Dockerfile" />
             
-            <p className="text-muted-foreground mb-4">הדבקה לדוגמה (React / Next / Frontend כללי):</p>
+            <p className="text-gray-600 mb-4">הדבקה לדוגמה (React / Next / Frontend כללי):</p>
             <CodeBlock code={`FROM node:20-alpine
 
 WORKDIR /app
@@ -316,10 +362,10 @@ services:
       - "3000:3000"`} language="yaml" />
             
             <ChangeNote>
-              <p>החלף את <code className="bg-zinc-700 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט שלך</p>
+              <p>החלף את <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט שלך</p>
             </ChangeNote>
             
-            <p className="text-muted-foreground">שמירה ויציאה.</p>
+            <p className="text-gray-600">שמירה ויציאה.</p>
           </Section>
 
           {/* Step 8 */}
@@ -327,7 +373,7 @@ services:
             <CodeBlock code="docker compose build" />
             <CodeBlock code="docker compose up -d" />
             
-            <p className="text-muted-foreground mb-4">בדיקה:</p>
+            <p className="text-gray-600 mb-4">בדיקה:</p>
             <CodeBlock code="docker ps" />
             
             <ExpectedOutput>
@@ -339,7 +385,7 @@ services:
           <Section id="step9" title="שלב 9 – בדיקת לוגים (חובה אם משהו לא עולה)" icon={Terminal}>
             <CodeBlock code="docker logs <PROJECT_NAME>" />
             
-            <p className="text-muted-foreground mb-4">או:</p>
+            <p className="text-gray-600 mb-4">או:</p>
             <CodeBlock code="docker compose logs -f" />
             
             <WarningBox>
@@ -349,12 +395,12 @@ services:
 
           {/* Step 10 */}
           <Section id="step10" title="שלב 10 – חיבור לדומיין דרך aaPanel" icon={Globe}>
-            <div className="space-y-4 text-muted-foreground">
+            <div className="space-y-4 text-gray-600">
               <p>1. פתח את aaPanel → Website</p>
               <p>2. Add site → הכנס את הדומיין</p>
               <p>3. Proxy / Reverse Proxy:</p>
-              <div className="bg-zinc-800 p-4 rounded-lg" dir="ltr">
-                <p>Target: <code>http://127.0.0.1:3000</code></p>
+              <div className="bg-gray-100 border border-gray-300 p-4 rounded-lg" dir="ltr">
+                <p>Target: <code className="bg-gray-200 px-2 py-1 rounded">http://127.0.0.1:3000</code></p>
               </div>
               <p>4. שמור</p>
             </div>
@@ -364,7 +410,7 @@ services:
           <Section id="step11" title="שלב 11 – בדיקות אחרונות" icon={CheckCircle2}>
             <CodeBlock code="curl http://127.0.0.1:3000" />
             
-            <p className="text-muted-foreground mb-4">בדיקת פתיחת פורט:</p>
+            <p className="text-gray-600 mb-4">בדיקת פתיחת פורט:</p>
             <CodeBlock code="ss -tulnp | grep 3000" />
             
             <ExpectedOutput>
@@ -386,17 +432,17 @@ services:
               <code dir="ltr">id_rsa / id_rsa.pub</code> או <code dir="ltr">id_ed25519 / id_ed25519.pub</code>
             </ExpectedOutput>
             
-            <p className="text-muted-foreground mb-4">✅ אם קיימים → דלג לשלב 2.3</p>
-            <p className="text-muted-foreground mb-4">❌ אם התיקייה ריקה או לא קיימת → צריך ליצור מפתח</p>
+            <p className="text-gray-600 mb-4">✅ אם קיימים → דלג לשלב 2.3</p>
+            <p className="text-gray-600 mb-4">❌ אם התיקייה ריקה או לא קיימת → צריך ליצור מפתח</p>
 
             <h4 className="font-bold text-lg mb-4 mt-8">2.2 יצירת SSH Key חדש</h4>
             <CodeBlock code='ssh-keygen -t ed25519 -C "your_email@example.com"' />
             
             <ChangeNote>
-              <p>החלף את <code className="bg-zinc-700 px-1 rounded">your_email@example.com</code> באימייל של חשבון GitHub שלך</p>
+              <p>החלף את <code className="bg-blue-200 px-1 rounded">your_email@example.com</code> באימייל של חשבון GitHub שלך</p>
             </ChangeNote>
             
-            <p className="text-muted-foreground mb-4">במהלך התהליך: Enter על הכל (בלי סיסמה)</p>
+            <p className="text-gray-600 mb-4">במהלך התהליך: Enter על הכל (בלי סיסמה)</p>
 
             <h4 className="font-bold text-lg mb-4 mt-8">2.3 הצגת המפתח הציבורי</h4>
             <CodeBlock code="cat ~/.ssh/id_ed25519.pub" />
@@ -406,9 +452,9 @@ services:
               <code dir="ltr">ssh-ed25519 AAAAC3...</code>
             </ExpectedOutput>
             
-            <div className="bg-zinc-800/50 p-4 rounded-lg my-4">
-              <p className="font-bold mb-2">👉 את כל השורה הזו:</p>
-              <ol className="list-decimal list-inside space-y-1 text-muted-foreground">
+            <div className="bg-gray-100 border border-gray-300 p-4 rounded-lg my-4">
+              <p className="font-bold mb-2 text-gray-900">👉 את כל השורה הזו:</p>
+              <ol className="list-decimal list-inside space-y-1 text-gray-600">
                 <li>מעתיקים</li>
                 <li>נכנסים ל-GitHub → Settings → SSH and GPG keys</li>
                 <li>New SSH key → מדביקים → Save</li>
@@ -430,8 +476,8 @@ cd projects`} />
             <CodeBlock code="git clone git@github.com:USERNAME/PROJECT_NAME.git" />
             
             <ChangeNote>
-              <p><code className="bg-zinc-700 px-1 rounded">USERNAME</code> → שם המשתמש בגיטהאב</p>
-              <p><code className="bg-zinc-700 px-1 rounded">PROJECT_NAME</code> → שם הריפו</p>
+              <p><code className="bg-blue-200 px-1 rounded">USERNAME</code> → שם המשתמש בגיטהאב</p>
+              <p><code className="bg-blue-200 px-1 rounded">PROJECT_NAME</code> → שם הריפו</p>
             </ChangeNote>
           </Section>
 
@@ -455,8 +501,8 @@ docker run -d -p 3000:3000 --name <PROJECT_NAME> <PROJECT_NAME>`} />
           </Section>
 
           {/* Summary */}
-          <div className="mt-12 bg-gradient-to-r from-primary/20 to-primary/5 border border-primary/30 rounded-xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-primary">סיכום – מה בדקנו שיש בשרת ✅</h3>
+          <div className="mt-12 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-8">
+            <h3 className="text-2xl font-bold mb-6 text-green-700">סיכום – מה בדקנו שיש בשרת ✅</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 "Docker",
@@ -469,8 +515,8 @@ docker run -d -p 3000:3000 --name <PROJECT_NAME> <PROJECT_NAME>`} />
                 "SSH + GitHub",
                 "משיכת שינויים"
               ].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-400" />
+                <div key={item} className="flex items-center gap-2 text-gray-800">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
                   <span>{item}</span>
                 </div>
               ))}
