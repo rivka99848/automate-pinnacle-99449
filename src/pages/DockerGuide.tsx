@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -137,7 +136,6 @@ const DockerGuide = () => {
 
   return (
     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
-      <Header />
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-gray-50 to-white">
@@ -520,7 +518,15 @@ docker run -d -p 3000:3000 --name <PROJECT_NAME> <PROJECT_NAME>`} />
         </div>
       </section>
 
-      <Footer />
+      {/* Minimal Footer */}
+      <footer className="bg-gray-100 border-t border-gray-300 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <Button asChild className="mb-4">
+            <Link to="/contact">צור קשר</Link>
+          </Button>
+          <p className="text-gray-600 text-sm">&copy; {new Date().getFullYear()} Smartbiz. כל הזכויות שמורות.</p>
+        </div>
+      </footer>
     </div>
   );
 };
