@@ -257,7 +257,6 @@ const ServiceCRM = () => {
               <div 
                 ref={containerRef}
                 className="relative"
-                style={{ minHeight: `${modules.length * 280}px` }}
               >
                 {/* Progress Indicator */}
                 <div className="fixed left-8 top-1/2 -translate-y-1/2 space-y-3 z-30 hidden lg:block">
@@ -278,7 +277,7 @@ const ServiceCRM = () => {
                     const cardOffset = Math.max(0, cardProgress - index * 0.35);
                     const scale = 1 - Math.min(cardOffset * 0.08, 0.12);
                     const opacity = 1;
-                    const translateY = cardOffset * -60;
+                    const translateY = cardOffset * -40;
                     
                     // ✨ זיהוי סוג הכרטיס - זוגי = לבן, אי-זוגי = כחול
                     const isWhiteCard = index % 2 === 0;
@@ -304,7 +303,7 @@ const ServiceCRM = () => {
                         }}
                       >
                         <div className={`
-                          relative p-10 rounded-3xl overflow-hidden shadow-2xl 
+                          relative p-8 rounded-3xl overflow-hidden shadow-2xl 
                           transition-all duration-500
                           ${isWhiteCard 
                             ? 'bg-white/95 border-2 border-gray-200 hover:border-brand-blue/50 hover:shadow-brand-blue/20' 
@@ -320,9 +319,9 @@ const ServiceCRM = () => {
                           {/* התוכן */}
                           <div className="relative z-10">
                             {/* Layout אופקי - אייקון משמאל, תוכן מימין */}
-                            <div className="flex items-start gap-8">
+                            <div className="flex items-start gap-4">
                               <div className={`
-                                w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg
+                                w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg
                                 group-hover/card:rotate-12 group-hover/card:scale-110 transition-all duration-500
                                 ${isWhiteCard
                                   ? 'bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20'
@@ -330,7 +329,7 @@ const ServiceCRM = () => {
                                 }
                               `}>
                                 <module.icon className={`
-                                  w-11 h-11 transition-colors duration-500
+                                  w-8 h-8 transition-colors duration-500
                                   ${isWhiteCard 
                                     ? 'text-brand-blue group-hover/card:text-brand-cyan' 
                                     : 'text-brand-cyan group-hover/card:text-white'
@@ -340,7 +339,7 @@ const ServiceCRM = () => {
                               
                               <div className="flex-1">
                                 <h3 className={`
-                                  text-2xl font-bold mb-4 transition-colors duration-300
+                                  text-xl font-bold mb-3 transition-colors duration-300
                                   ${isWhiteCard 
                                     ? 'text-gray-900 group-hover/card:text-brand-blue' 
                                     : 'text-white group-hover/card:text-brand-cyan'
@@ -349,7 +348,7 @@ const ServiceCRM = () => {
                                   {module.title}
                                 </h3>
                                 <p className={`
-                                  text-lg leading-relaxed
+                                  leading-relaxed
                                   ${isWhiteCard ? 'text-gray-700' : 'text-foreground/80'}
                                 `}>
                                   {module.description}
