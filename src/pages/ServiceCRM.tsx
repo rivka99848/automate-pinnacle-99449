@@ -98,7 +98,8 @@ const ServiceCRM = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
                 <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in">
-                  <span className="text-white">מערכת</span> <span className="text-brand-blue">CRM</span>
+                  <span className="text-white">מערכת</span>{" "}
+                  <span className="text-brand-blue" style={{ fontFamily: 'Rubik, sans-serif' }}>CRM</span>
                 </h1>
                 
                 <div className="max-w-4xl mx-auto space-y-6 text-xl md:text-2xl text-foreground/80 leading-relaxed">
@@ -371,8 +372,8 @@ const ServiceCRM = () => {
               ref={processReveal.ref}
               className={`max-w-6xl mx-auto mb-8 transition-all duration-1000 delay-200 ${
                 processReveal.isVisible 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 translate-x-20'
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-20'
               }`}
             >
               <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
