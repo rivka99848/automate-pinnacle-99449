@@ -312,7 +312,8 @@ const DockerGuide = () => {
 
           {/* Step 2 - Create Project Folder */}
           <Section id="step2" title="2️⃣ יצירת תיקייה לפרויקט" icon={FolderCheck}>
-            <CodeBlock code={`mkdir <PROJECT_FOLDER>
+            <CodeBlock code={`cd /var/www
+mkdir <PROJECT_FOLDER>
 cd <PROJECT_FOLDER>`} />
             
             <ChangeNote>
