@@ -431,18 +431,35 @@ services:
               כשתרצו לעדכן את האתר עם שינויים חדשים מ-GitHub:
             </p>
             
-            <CodeBlock code={`cd <PROJECT_FOLDER>
+            <h4 className="font-bold text-lg mb-3 text-blue-900">א. בדיקת הריפו המחובר</h4>
+            <CodeBlock code="git remote -v" />
+            
+            <ExpectedOutput>
+              <p>צריך לראות את הריפו שלכם:</p>
+              <code dir="ltr" className="block mt-2">
+                origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (fetch)<br />
+                origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (push)
+              </code>
+            </ExpectedOutput>
+            
+            <WarningBox>
+              <p><strong>אם הריפו לא נכון?</strong> תקנו עם:</p>
+              <CodeBlock code="git remote set-url origin git@github.com:<USERNAME>/<REPO_NAME>.git" />
+            </WarningBox>
+            
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">ב. משיכת השינויים והפעלה מחדש</h4>
+            <CodeBlock code={`cd /var/www/<PROJECT_FOLDER>
 git pull origin main
 docker compose down
 docker compose up --build -d`} />
             
             <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → הנתיב לתיקייה</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → שם תיקיית הפרויקט</p>
               <p><code className="bg-blue-200 px-1 rounded">main</code> → ה-branch שאתם רוצים למשוך</p>
             </ChangeNote>
             
             <TipsBox>
-              <p>🚀 <strong>זהו! 4 שורות לעדכון מלא.</strong></p>
+              <p>🚀 <strong>זהו! עכשיו אתם יודעים שאתם מושכים מהמקום הנכון.</strong></p>
             </TipsBox>
           </Section>
 
