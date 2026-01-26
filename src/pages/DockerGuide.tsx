@@ -1,27 +1,69 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck, Lightbulb, Key, FileCode, Shield, Settings } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck, Lightbulb, Key, FileCode, Shield, Settings, Edit3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+// Context for variable values
+interface VariableValues {
+  serverIp: string;
+  projectFolder: string;
+  githubUsername: string;
+  repoName: string;
+  hostPort: string;
+  domainName: string;
+  email: string;
+}
+
+const VariablesContext = createContext<VariableValues>({
+  serverIp: "<SERVER_IP>",
+  projectFolder: "<PROJECT_FOLDER>",
+  githubUsername: "<USERNAME>",
+  repoName: "<REPO_NAME>",
+  hostPort: "<HOST_PORT>",
+  domainName: "<DOMAIN_NAME>",
+  email: "your_email@example.com",
+});
+
+// Function to replace placeholders with actual values
+const replacePlaceholders = (text: string, values: VariableValues): string => {
+  return text
+    .replace(/<SERVER_IP>/g, values.serverIp || "<SERVER_IP>")
+    .replace(/<PROJECT_FOLDER>/g, values.projectFolder || "<PROJECT_FOLDER>")
+    .replace(/<USERNAME>/g, values.githubUsername || "<USERNAME>")
+    .replace(/<REPO_NAME>/g, values.repoName || "<REPO_NAME>")
+    .replace(/<HOST_PORT>/g, values.hostPort || "<HOST_PORT>")
+    .replace(/<PORT>/g, values.hostPort || "<PORT>")
+    .replace(/<DOMAIN_NAME>/g, values.domainName || "<DOMAIN_NAME>")
+    .replace(/your_email@example\.com/g, values.email || "your_email@example.com");
+};
 
 // CodeBlock component with copy functionality
 const CodeBlock = ({ code, language = "bash" }: { code: string; language?: string }) => {
   const [copied, setCopied] = useState(false);
+  const values = useContext(VariablesContext);
+  
+  const processedCode = replacePlaceholders(code, values);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
+    await navigator.clipboard.writeText(processedCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Check if any placeholder was replaced with an actual value
+  const hasReplacements = processedCode !== code;
+
   return (
     <div className="relative group my-4" dir="ltr">
-      <pre className="bg-gray-200 border border-gray-300 rounded-lg p-4 pr-12 overflow-x-auto text-sm text-gray-800 font-mono">
-        <code>{code}</code>
+      <pre className={`border rounded-lg p-4 pr-12 overflow-x-auto text-sm font-mono ${hasReplacements ? 'bg-green-50 border-green-300 text-gray-800' : 'bg-gray-200 border-gray-300 text-gray-800'}`}>
+        <code>{processedCode}</code>
       </pre>
       <button
         onClick={handleCopy}
-        className="absolute top-3 right-3 p-1.5 rounded hover:bg-gray-300 transition-colors text-gray-600 hover:text-gray-800"
+        className={`absolute top-3 right-3 p-1.5 rounded transition-colors ${hasReplacements ? 'hover:bg-green-200 text-green-700 hover:text-green-800' : 'hover:bg-gray-300 text-gray-600 hover:text-gray-800'}`}
       >
         {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </button>
@@ -115,7 +157,83 @@ const Section = ({
   );
 };
 
+// Variables input form component
+const VariablesForm = ({ values, onChange }: { 
+  values: VariableValues; 
+  onChange: (key: keyof VariableValues, value: string) => void;
+}) => {
+  const fields = [
+    { key: "serverIp" as const, label: "כתובת IP של השרת", placeholder: "123.45.67.89", icon: Server },
+    { key: "projectFolder" as const, label: "שם תיקיית הפרויקט", placeholder: "my-website", icon: FolderCheck },
+    { key: "githubUsername" as const, label: "שם משתמש GitHub", placeholder: "myusername", icon: GitBranch },
+    { key: "repoName" as const, label: "שם הריפו", placeholder: "my-repo", icon: Package },
+    { key: "hostPort" as const, label: "פורט (למשל 3001)", placeholder: "3001", icon: Terminal },
+    { key: "domainName" as const, label: "שם הדומיין", placeholder: "example.com", icon: Globe },
+    { key: "email" as const, label: "אימייל (ל-GitHub)", placeholder: "you@example.com", icon: Key },
+  ];
+
+  const filledCount = Object.values(values).filter(v => v && !v.startsWith("<") && v !== "your_email@example.com").length;
+
+  return (
+    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 bg-blue-100 rounded-lg">
+          <Edit3 className="h-6 w-6 text-blue-700" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-blue-900">הזן את הנתונים שלך</h3>
+          <p className="text-sm text-blue-600">הפקודות במדריך יתעדכנו אוטומטית</p>
+        </div>
+        <div className="mr-auto bg-blue-100 px-3 py-1 rounded-full text-sm font-medium text-blue-700">
+          {filledCount}/{fields.length} שדות מולאו
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {fields.map(({ key, label, placeholder, icon: Icon }) => (
+          <div key={key} className="space-y-1.5">
+            <Label htmlFor={key} className="text-sm font-medium text-gray-700 flex items-center gap-2">
+              <Icon className="h-4 w-4 text-blue-600" />
+              {label}
+            </Label>
+            <Input
+              id={key}
+              value={values[key].startsWith("<") || values[key] === "your_email@example.com" ? "" : values[key]}
+              onChange={(e) => onChange(key, e.target.value)}
+              placeholder={placeholder}
+              className="bg-white border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              dir="ltr"
+            />
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-100 p-3 rounded-lg">
+        <Lightbulb className="h-4 w-4 flex-shrink-0" />
+        <span>ברגע שתמלא שדה, כל הפקודות במדריך יתעדכנו אוטומטית עם הערך שהזנת ויודגשו בירוק</span>
+      </div>
+    </div>
+  );
+};
+
 const DockerGuide = () => {
+  const [variableValues, setVariableValues] = useState<VariableValues>({
+    serverIp: "<SERVER_IP>",
+    projectFolder: "<PROJECT_FOLDER>",
+    githubUsername: "<USERNAME>",
+    repoName: "<REPO_NAME>",
+    hostPort: "<HOST_PORT>",
+    domainName: "<DOMAIN_NAME>",
+    email: "your_email@example.com",
+  });
+
+  const handleVariableChange = (key: keyof VariableValues, value: string) => {
+    setVariableValues(prev => ({
+      ...prev,
+      [key]: value || (key === "email" ? "your_email@example.com" : `<${key.toUpperCase()}>`)
+    }));
+  };
+
   const tableOfContents = [
     { id: "step1", title: "התחברות לשרת ב-SSH", icon: Server },
     { id: "step2", title: "יצירת תיקייה לפרויקט", icon: FolderCheck },
@@ -131,6 +249,7 @@ const DockerGuide = () => {
   ];
 
   return (
+    <VariablesContext.Provider value={variableValues}>
     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
       
       {/* Hero Section */}
@@ -153,23 +272,9 @@ const DockerGuide = () => {
             </p>
           </motion.div>
 
-          {/* Important Notes */}
-          <div className="bg-gray-100 border border-gray-300 rounded-xl p-6 mb-8 mt-8">
-            <h3 className="text-lg font-bold mb-4 text-blue-900">📋 הערות חשובות לפני שמתחילים:</h3>
-            <ul className="space-y-2 text-gray-700">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-900">🔹</span>
-                <span>כל מה שמופיע בתוך <code className="bg-gray-200 px-2 py-1 rounded text-gray-800">&lt;...&gt;</code> – להחליף בערך האמיתי שלכם</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-900">🔹</span>
-                <span>כל הפקודות רצות כ־root או משתמש עם sudo</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-900">🔹</span>
-                <span>הפקודות מוכנות להעתקה – לחצו על אייקון ההעתקה</span>
-              </li>
-            </ul>
+          {/* Variables Form */}
+          <div className="mt-12">
+            <VariablesForm values={variableValues} onChange={handleVariableChange} />
           </div>
 
           {/* Table of Contents */}
@@ -500,6 +605,7 @@ certbot --nginx -d <DOMAIN_NAME> -d www.<DOMAIN_NAME>`} />
         </div>
       </footer>
     </div>
+    </VariablesContext.Provider>
   );
 };
 
