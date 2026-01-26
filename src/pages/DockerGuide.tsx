@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck, Info } from "lucide-react";
+import { Copy, Check, ChevronDown, ChevronUp, Terminal, Server, GitBranch, Package, Play, Globe, RefreshCw, CheckCircle2, AlertTriangle, Wrench, FolderCheck, Lightbulb } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -57,57 +57,20 @@ const ChangeNote = ({ children }: { children: React.ReactNode }) => (
   <div className="bg-blue-100 border-r-4 border-blue-500 p-4 rounded-lg my-4">
     <div className="flex items-center gap-2 mb-2 text-blue-700 font-bold">
       <Wrench className="h-5 w-5" />
-      <span>מה לשנות:</span>
+      <span>🔧 מה להחליף:</span>
     </div>
     <div className="text-blue-900">{children}</div>
   </div>
 );
 
-// Directory reminder box - appears before critical steps
-const DirectoryReminder = () => (
-  <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 my-4 flex items-center gap-3">
-    <FolderCheck className="h-5 w-5 text-amber-600 flex-shrink-0" />
-    <span className="text-amber-800 text-sm">
-      ⚠️ לפני הפקודה הבאה – וודאו שאתם בתיקיית הפרויקט: <code className="bg-amber-200 px-1 rounded">pwd</code>
-    </span>
-  </div>
-);
-
-// Options box - for showing two parallel options
-const OptionsBox = ({ 
-  optionA, 
-  optionB,
-  note
-}: { 
-  optionA: { title: string; content: React.ReactNode };
-  optionB: { title: string; content: React.ReactNode };
-  note?: string;
-}) => (
-  <div className="my-6">
-    {note && (
-      <div className="bg-purple-100 border-r-4 border-purple-500 p-4 rounded-lg mb-4">
-        <div className="flex items-center gap-2 text-purple-800 font-bold">
-          <Info className="h-5 w-5" />
-          <span>{note}</span>
-        </div>
-      </div>
-    )}
-    <div className="grid md:grid-cols-2 gap-4">
-      <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-5">
-        <h4 className="font-bold text-blue-800 mb-3 flex items-center gap-2">
-          <span className="bg-blue-200 text-blue-800 px-2 py-1 rounded text-sm">א׳</span>
-          {optionA.title}
-        </h4>
-        {optionA.content}
-      </div>
-      <div className="bg-purple-50 border-2 border-purple-300 rounded-xl p-5">
-        <h4 className="font-bold text-purple-800 mb-3 flex items-center gap-2">
-          <span className="bg-purple-200 text-purple-800 px-2 py-1 rounded text-sm">ב׳</span>
-          {optionB.title}
-        </h4>
-        {optionB.content}
-      </div>
+// Tips box
+const TipsBox = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-purple-100 border-r-4 border-purple-500 p-4 rounded-lg my-4">
+    <div className="flex items-center gap-2 mb-2 text-purple-700 font-bold">
+      <Lightbulb className="h-5 w-5" />
+      <span>💡 טיפ:</span>
     </div>
+    <div className="text-purple-900">{children}</div>
   </div>
 );
 
@@ -153,34 +116,18 @@ const Section = ({
   );
 };
 
-// Iron rule box
-const IronRuleBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-400 p-6 rounded-xl my-6 shadow-md">
-    <div className="flex items-center gap-3 mb-4 text-amber-700 font-bold text-xl">
-      <FolderCheck className="h-7 w-7" />
-      <span>💡 חוק ברזל: תמיד בדקי איפה את נמצאת!</span>
-    </div>
-    <div className="text-amber-900">{children}</div>
-  </div>
-);
-
 const DockerGuide = () => {
   const tableOfContents = [
-    { id: "intro", title: "חיבור לפרויקט והכנת סביבת עבודה", icon: FolderCheck },
-    { id: "step1", title: "התחברות לשרת ובדיקה בסיסית", icon: Server },
-    { id: "step2", title: "חיבור ל-GitHub (SSH)", icon: GitBranch },
-    { id: "step3", title: "יצירת / משיכת תיקיית הפרויקט", icon: Package },
-    { id: "step4", title: "בדיקה שאנחנו בתיקייה הנכונה", icon: FolderCheck },
-    { id: "step5", title: "בדיקה והתקנת Docker", icon: Package },
-    { id: "step6", title: "בדיקה והתקנת Docker Compose", icon: Package },
-    { id: "step7", title: "בדיקה והתקנת Node.js ו-NPM", icon: Terminal },
-    { id: "step8", title: "יצירת Dockerfile", icon: Terminal },
-    { id: "step9", title: "יצירת docker-compose.yml", icon: Terminal },
-    { id: "step10", title: "בנייה והרצה של הדוקר", icon: Play },
-    { id: "step11", title: "בדיקת לוגים", icon: Terminal },
-    { id: "step12", title: "חיבור לדומיין ב-aaPanel", icon: Globe },
-    { id: "step13", title: "בדיקות אחרונות", icon: CheckCircle2 },
-    { id: "updates", title: "משיכת שינויים (עדכונים)", icon: RefreshCw },
+    { id: "step1", title: "התחברות לשרת ב-SSH", icon: Server },
+    { id: "step2", title: "יצירת תיקייה לפרויקט", icon: FolderCheck },
+    { id: "step3", title: "חיבור ל-GitHub", icon: GitBranch },
+    { id: "step4", title: "בדיקת פורט פנוי", icon: Terminal },
+    { id: "step5", title: "יצירת Dockerfile", icon: Terminal },
+    { id: "step6", title: "בניית Docker Image", icon: Package },
+    { id: "step7", title: "הרצת הקונטיינר", icon: Play },
+    { id: "step8", title: "משיכת שינויים מ-Git", icon: RefreshCw },
+    { id: "step9", title: "חיבור לדומיין (Nginx)", icon: Globe },
+    { id: "step10", title: "בדיקה אחרונה", icon: CheckCircle2 },
   ];
 
   return (
@@ -196,13 +143,13 @@ const DockerGuide = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
-              מדריך להקמת פרויקט Docker על שרת
+              מדריך מקיף: העלאת אתר לשרת עם Docker
             </h1>
             <p className="text-xl text-gray-600 mb-4">
-              מדריך שלב-אחר-שלב עם פקודות מוכנות להעתקה
+              כולל חיבור GitHub, בדיקות פורט, משיכת שינויים וחיבור לדומיין
             </p>
             <p className="text-gray-500 text-sm">
-              מתאים לכל סוגי השרתים: aaPanel, VPS, AWS, DigitalOcean ועוד
+              מתאים ל־React / Vite / פרויקטים סטטיים, שרת Linux כללי
             </p>
           </motion.div>
 
@@ -212,7 +159,7 @@ const DockerGuide = () => {
             <ul className="space-y-2 text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-blue-900">🔹</span>
-                <span>כל מה שמופיע בתוך <code className="bg-gray-200 px-2 py-1 rounded text-gray-800">&lt;PROJECT_NAME&gt;</code> – להחליף בשם הפרויקט שלך</span>
+                <span>כל מה שמופיע בתוך <code className="bg-gray-200 px-2 py-1 rounded text-gray-800">&lt;...&gt;</code> – להחליף בערך האמיתי שלכם</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-900">🔹</span>
@@ -220,11 +167,7 @@ const DockerGuide = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-900">🔹</span>
-                <span><strong>Git הוא הבסיס</strong> – ממנו נבנה האתר, לכן הוא מופיע לפני Docker</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-900">⚠️</span>
-                <span>ייתכן שכבר קיימים קונטיינרים שרצים על השרת – לפני שמריצים קונטיינר חדש, <strong>ודאו שהפורט פנוי</strong></span>
+                <span>הפקודות מוכנות להעתקה – לחצו על אייקון ההעתקה</span>
               </li>
             </ul>
           </div>
@@ -253,286 +196,103 @@ const DockerGuide = () => {
       <section className="pb-20 px-4">
         <div className="container mx-auto max-w-4xl">
           
-          {/* Intro - Project Setup Overview */}
-          <div id="intro">
-            <IronRuleBox>
-              <p className="mb-4 text-lg">כל העבודה מתבצעת מתוך תיקיית הפרויקט!</p>
-              <p className="mb-4">לפני כל פקודה טכנית (Docker, npm, git) – וודאו שאתם בתיקייה הנכונה.</p>
-              
-              <p className="text-amber-800 mb-2 font-medium">איך בודקים?</p>
-              <CodeBlock code="pwd" />
-              
-              <ExpectedOutput>
-                <p>הפלט צריך להראות את הנתיב לתיקיית הפרויקט, למשל:</p>
-                <code dir="ltr" className="block mt-2">/home/projects/PROJECT_NAME</code>
-                <p className="mt-2">או:</p>
-                <code dir="ltr" className="block mt-2">/www/wwwroot/PROJECT_NAME</code>
-              </ExpectedOutput>
-              
-              <p className="text-amber-800 mb-2 font-medium mt-4">ואז לבדוק שהקבצים קיימים:</p>
-              <CodeBlock code="ls" />
-              
-              <p className="text-amber-800 mb-2 font-medium mt-4">קבצים שחייבים להופיע (אחרי שמשכנו מגיט):</p>
-              <ul className="list-disc list-inside space-y-1 mr-4 text-amber-900">
-                <li><code className="bg-amber-200 px-1 rounded">package.json</code></li>
-                <li><code className="bg-amber-200 px-1 rounded">Dockerfile</code> (ניצור בהמשך אם אין)</li>
-                <li><code className="bg-amber-200 px-1 rounded">docker-compose.yml</code> (ניצור בהמשך אם אין)</li>
-              </ul>
-              
-              <WarningBox>
-                <p>❌ אם הקבצים לא מופיעים — אתם לא בתיקייה הנכונה. אל תריצו שום פקודה!</p>
-              </WarningBox>
-            </IronRuleBox>
-          </div>
-
-          {/* Step 1 - Server Connection */}
-          <Section id="step1" title="שלב 1 – התחברות לשרת ובדיקה בסיסית" icon={Server} defaultOpen>
+          {/* Step 1 - SSH Connection */}
+          <Section id="step1" title="1️⃣ התחברות לשרת ב-SSH" icon={Server} defaultOpen>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> מתחברים לשרת דרך SSH כדי להריץ פקודות. אחרי החיבור, בודקים שהשרת תקין.
+              מתחילים בהתחברות לשרת מהמחשב שלכם.
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">1.1 התחברות לשרת</h4>
-            <p className="text-gray-600 mb-2">מהמחשב שלך, פתחי Terminal והריצי:</p>
-            <CodeBlock code="ssh root@YOUR_SERVER_IP" />
+            <CodeBlock code="ssh root@<SERVER_IP>" />
+            
             <ChangeNote>
-              <p>החליפי <code className="bg-blue-200 px-1 rounded">YOUR_SERVER_IP</code> בכתובת ה-IP של השרת שלך</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;SERVER_IP&gt;</code> → כתובת ה-IP של השרת שלכם</p>
             </ChangeNote>
             
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">1.2 בדיקת מערכת ההפעלה</h4>
-            <p className="text-gray-600 mb-2">לוודא שהשרת עובד:</p>
-            <CodeBlock code="uname -a" />
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">1.3 בדיקת נפח דיסק</h4>
-            <p className="text-gray-600 mb-2">לוודא שיש מספיק מקום:</p>
-            <CodeBlock code="df -h" />
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">1.4 בדיקת זיכרון</h4>
-            <p className="text-gray-600 mb-2">לוודא שיש מספיק RAM:</p>
-            <CodeBlock code="free -h" />
-            
             <ExpectedOutput>
-              <p>אם כל הפקודות עבדו ללא שגיאות – השרת תקין ומוכן לעבודה.</p>
+              <p>התחברות מוצלחת לשרת ומעבר לשורת פקודה חדשה</p>
             </ExpectedOutput>
           </Section>
 
-          {/* Step 2 - GitHub Connection (MOVED FROM END) */}
-          <Section id="step2" title="שלב 2 – חיבור ל-GitHub (SSH)" icon={GitBranch}>
+          {/* Step 2 - Create Project Folder */}
+          <Section id="step2" title="2️⃣ יצירת תיקייה לפרויקט" icon={FolderCheck}>
             <p className="text-gray-600 mb-4">
-              <strong>למה עכשיו?</strong> Git הוא הבסיס שממנו נמשוך את הפרויקט. בלי חיבור ל-GitHub, לא נוכל להוריד את הקוד.
+              יוצרים תיקייה חדשה לפרויקט ונכנסים אליה.
             </p>
             
-            <h4 className="font-bold text-lg mb-4 text-blue-900">2.1 בדיקה אם כבר יש SSH Key</h4>
-            <CodeBlock code="ls ~/.ssh" />
-            
-            <ExpectedOutput>
-              <p>אחד או יותר מהקבצים:</p>
-              <code dir="ltr">id_rsa / id_rsa.pub</code> או <code dir="ltr">id_ed25519 / id_ed25519.pub</code>
-            </ExpectedOutput>
-            
-            <p className="text-gray-600 mb-4">✅ אם קיימים → דלגו לשלב 2.3</p>
-            <p className="text-gray-600 mb-4">❌ אם התיקייה ריקה או לא קיימת → צריך ליצור מפתח</p>
-
-            <h4 className="font-bold text-lg mb-4 mt-8 text-blue-900">2.2 יצירת SSH Key חדש</h4>
-            <CodeBlock code='ssh-keygen -t ed25519 -C "your_email@example.com"' />
-            
-            <ChangeNote>
-              <p>החליפו את <code className="bg-blue-200 px-1 rounded">your_email@example.com</code> באימייל של חשבון GitHub שלכם</p>
-            </ChangeNote>
-            
-            <p className="text-gray-600 mb-4">במהלך התהליך: Enter על הכל (בלי סיסמה)</p>
-
-            <h4 className="font-bold text-lg mb-4 mt-8 text-blue-900">2.3 הצגת המפתח הציבורי</h4>
-            <CodeBlock code="cat ~/.ssh/id_ed25519.pub" />
-            
-            <ExpectedOutput>
-              <p>שורה ארוכה שמתחילה ב-:</p>
-              <code dir="ltr">ssh-ed25519 AAAAC3...</code>
-            </ExpectedOutput>
-            
-            <div className="bg-gray-100 border border-gray-300 p-4 rounded-lg my-4">
-              <p className="font-bold mb-2 text-gray-900">👉 את כל השורה הזו:</p>
-              <ol className="list-decimal list-inside space-y-1 text-gray-600">
-                <li>מעתיקים</li>
-                <li>נכנסים ל-GitHub → Settings → SSH and GPG keys</li>
-                <li>New SSH key → מדביקים → Save</li>
-              </ol>
-            </div>
-
-            <h4 className="font-bold text-lg mb-4 mt-8 text-blue-900">2.4 בדיקת חיבור ל-GitHub</h4>
-            <CodeBlock code="ssh -T git@github.com" />
-            
-            <ExpectedOutput>
-              <code dir="ltr">Hi username! You've successfully authenticated</code>
-            </ExpectedOutput>
-            
-            <WarningBox>
-              <p>אם מקבלים "Permission denied" – המפתח לא נוסף נכון ל-GitHub. חזרו לשלב 2.3.</p>
-            </WarningBox>
-          </Section>
-
-          {/* Step 3 - Create or Clone Project Folder (SPLIT INTO TWO OPTIONS) */}
-          <Section id="step3" title="שלב 3 – יצירת / משיכת תיקיית הפרויקט" icon={Package}>
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> אנחנו צריכים תיקייה שבה יישב הפרויקט. יש שתי דרכים להשיג אותה.
-            </p>
-            
-            <OptionsBox
-              note="⚠️ בחרו רק אחת מהאפשרויות – לא את שתיהן!"
-              optionA={{
-                title: "יצירת תיקייה ידנית",
-                content: (
-                  <div>
-                    <p className="text-gray-600 mb-3 text-sm">מתאים אם אין עדיין ריפו ב-GitHub או שתרצו להעלות קבצים ידנית.</p>
-                    <CodeBlock code={`cd /www/wwwroot
-mkdir <PROJECT_NAME>
+            <CodeBlock code={`mkdir <PROJECT_NAME>
 cd <PROJECT_NAME>`} />
-                    <ChangeNote>
-                      <p className="text-sm">החליפו <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט</p>
-                    </ChangeNote>
-                  </div>
-                )
-              }}
-              optionB={{
-                title: "משיכת הפרויקט מ-GitHub (Clone)",
-                content: (
-                  <div>
-                    <p className="text-gray-600 mb-3 text-sm">מתאים אם הפרויקט כבר קיים ב-GitHub – הדרך המומלצת!</p>
-                    <CodeBlock code={`cd /www/wwwroot
-git clone git@github.com:USERNAME/PROJECT_NAME.git
-cd PROJECT_NAME`} />
-                    <ChangeNote>
-                      <p className="text-sm"><code className="bg-purple-200 px-1 rounded">USERNAME</code> → שם המשתמש בגיטהאב</p>
-                      <p className="text-sm"><code className="bg-purple-200 px-1 rounded">PROJECT_NAME</code> → שם הריפו</p>
-                    </ChangeNote>
-                  </div>
-                )
-              }}
-            />
-          </Section>
-
-          {/* Step 4 - Verify Directory */}
-          <Section id="step4" title="שלב 4 – בדיקה שאנחנו בתיקייה הנכונה" icon={FolderCheck}>
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> זה השלב הקריטי ביותר! רוב הבעיות קורות כי מריצים פקודות מהתיקייה הלא נכונה.
-            </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">4.1 בדיקת מיקום נוכחי</h4>
-            <CodeBlock code="pwd" />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> → שם התיקייה / האתר שלכם</p>
+            </ChangeNote>
+            
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">בדיקה:</h4>
+            <CodeBlock code="ls" />
             
             <ExpectedOutput>
-              <code dir="ltr">/www/wwwroot/PROJECT_NAME</code>
-              <p className="mt-2">או נתיב דומה שמסתיים בשם הפרויקט שלכם</p>
-            </ExpectedOutput>
-
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">4.2 בדיקת תוכן התיקייה</h4>
-            <CodeBlock code="ls -la" />
-            
-            <ExpectedOutput>
-              <p>רשימת קבצים שכוללת לפחות:</p>
-              <ul className="list-disc list-inside mt-2">
-                <li><code>package.json</code></li>
-                <li>תיקיית <code>src/</code> או <code>pages/</code></li>
-              </ul>
-            </ExpectedOutput>
-            
-            <WarningBox>
-              <p>❌ אם אתם רואים תיקייה ריקה או קבצים לא מוכרים – אתם לא במקום הנכון!</p>
-              <p className="mt-2">פתרון: <code className="bg-yellow-200 px-1 rounded">cd /www/wwwroot/PROJECT_NAME</code></p>
-            </WarningBox>
-          </Section>
-
-          {/* Step 5 - Docker Installation */}
-          <Section id="step5" title="שלב 5 – בדיקה והתקנת Docker" icon={Package}>
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> Docker מאפשר להריץ את האפליקציה בצורה מבודדת ואחידה על כל שרת.
-            </p>
-            
-            <h4 className="font-bold text-lg mb-3 text-blue-900">5.1 בדיקה אם Docker קיים</h4>
-            <CodeBlock code="docker -v" />
-            
-            <ExpectedOutput>
-              <code dir="ltr">Docker version 24.x.x, build xxxxxxx</code>
-            </ExpectedOutput>
-            
-            <p className="text-gray-600 mb-4">✅ אם קיבלתם גרסה → דלגו לשלב 6</p>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">5.2 התקנת Docker (אם אין)</h4>
-            <CodeBlock code="curl -fsSL https://get.docker.com | sh" />
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">5.3 הפעלת Docker והגדרה להפעלה אוטומטית</h4>
-            <CodeBlock code={`systemctl start docker
-systemctl enable docker`} />
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">5.4 בדיקה שהכל עובד</h4>
-            <CodeBlock code="docker ps" />
-            
-            <ExpectedOutput>
-              <p>טבלה (ריקה או עם קונטיינרים) – ללא שגיאות</p>
+              <p>התיקייה ריקה בשלב זה (עד שנמשוך מגיט)</p>
             </ExpectedOutput>
           </Section>
 
-          {/* Step 6 - Docker Compose */}
-          <Section id="step6" title="שלב 6 – בדיקה והתקנת Docker Compose" icon={Package}>
+          {/* Step 3 - GitHub Connection */}
+          <Section id="step3" title="3️⃣ חיבור ל-GitHub" icon={GitBranch}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> Docker Compose מקל על ניהול קונטיינרים עם קובץ הגדרות אחד.
+              מושכים את הפרויקט מ-GitHub לתוך התיקייה שיצרנו.
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">6.1 בדיקה</h4>
-            <CodeBlock code="docker compose version" />
+            <CodeBlock code="git clone git@github.com:<USERNAME>/<REPO_NAME>.git ." />
+            
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;USERNAME&gt;</code> → שם המשתמש שלכם ב-GitHub</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;REPO_NAME&gt;</code> → שם הריפו שלכם</p>
+            </ChangeNote>
+            
+            <TipsBox>
+              <p>הנקודה בסוף (<code>.</code>) אומרת "תמשוך לתיקייה הנוכחית" ולא ליצור תת-תיקייה</p>
+            </TipsBox>
+            
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">בדיקה:</h4>
+            <CodeBlock code="ls" />
             
             <ExpectedOutput>
-              <code dir="ltr">Docker Compose version v2.27.0</code>
+              <p>רשימת קבצי הפרויקט (package.json, src/, וכו׳)</p>
             </ExpectedOutput>
-            
-            <p className="text-gray-600 mb-4">✅ אם קיבלתם גרסה → דלגו לשלב 7</p>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">6.2 התקנה (אם אין)</h4>
-            <CodeBlock code={`mkdir -p /usr/local/lib/docker/cli-plugins
-curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 \\
--o /usr/local/lib/docker/cli-plugins/docker-compose
-chmod +x /usr/local/lib/docker/cli-plugins/docker-compose`} />
           </Section>
 
-          {/* Step 7 - Node.js */}
-          <Section id="step7" title="שלב 7 – בדיקה והתקנת Node.js ו-NPM" icon={Terminal}>
+          {/* Step 4 - Check Port */}
+          <Section id="step4" title="4️⃣ בדיקת פורט פנוי" icon={Terminal}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> Node.js נדרש לבניית פרויקטים של React/Next.js לפני שמריצים אותם ב-Docker.
+              לפני הרצת Docker, בודקים שהפורט שנרצה להשתמש בו פנוי.
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">7.1 בדיקה</h4>
-            <CodeBlock code={`node -v
-npm -v`} />
+            <CodeBlock code="lsof -i :<PORT>" />
+            
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PORT&gt;</code> → הפורט שבו תרצו שהאתר ירוץ (למשל 3001)</p>
+            </ChangeNote>
             
             <ExpectedOutput>
-              <code dir="ltr">v20.x.x</code><br/>
-              <code dir="ltr">10.x.x</code>
+              <p>אם הפלט <strong>ריק</strong> → הפורט פנוי ✅</p>
+              <p>אם יש פלט → הפורט תפוס, בחרו פורט אחר</p>
             </ExpectedOutput>
             
-            <p className="text-gray-600 mb-4">✅ אם קיבלתם גרסאות → דלגו לשלב 8</p>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">7.2 התקנה (אם אין)</h4>
-            <CodeBlock code={`curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt install -y nodejs`} />
+            <TipsBox>
+              <p>פורטים נפוצים: 3000, 3001, 3002, 8080, 8081</p>
+            </TipsBox>
           </Section>
 
-          {/* Step 8 - Create Dockerfile */}
-          <Section id="step8" title="שלב 8 – יצירת Dockerfile (לא לדלג! ❗)" icon={Terminal}>
-            <DirectoryReminder />
-            
+          {/* Step 5 - Create Dockerfile */}
+          <Section id="step5" title="5️⃣ יצירת Dockerfile" icon={Terminal}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> ה-Dockerfile מגדיר איך לבנות את האפליקציה ולהריץ אותה.
+              יוצרים קובץ הגדרות שמסביר ל-Docker איך לבנות את האתר.
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">8.1 בדיקה אם כבר קיים Dockerfile</h4>
-            <CodeBlock code="ls Dockerfile" />
-            <p className="text-gray-600 mb-4">אם הקובץ קיים ומתאים → דלגו לשלב 9</p>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">8.2 יצירת Dockerfile</h4>
             <CodeBlock code="nano Dockerfile" />
             
-            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא (לפרויקט React / Next / Frontend):</p>
-            <CodeBlock code={`FROM node:20-alpine
-
+            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא:</p>
+            
+            <CodeBlock code={`# ---------- Build ----------
+FROM node:18-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -541,194 +301,173 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-EXPOSE 3000
+# ---------- Serve ----------
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
 
-CMD ["npm", "run", "start"]`} language="dockerfile" />
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]`} language="dockerfile" />
             
             <WarningBox>
-              <p>שמירה: <code dir="ltr">CTRL + O</code> → Enter → <code dir="ltr">CTRL + X</code></p>
+              <p>שמירה ויציאה: <code dir="ltr">CTRL+X</code> → <code>Y</code> → <code>Enter</code></p>
             </WarningBox>
           </Section>
 
-          {/* Step 9 - Create docker-compose.yml */}
-          <Section id="step9" title="שלב 9 – יצירת docker-compose.yml" icon={Terminal}>
-            <DirectoryReminder />
-            
+          {/* Step 6 - Build Docker Image */}
+          <Section id="step6" title="6️⃣ בניית Docker Image" icon={Package}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> קובץ זה מגדיר את ההגדרות של הקונטיינר: שם, פורט, התנהגות בהפעלה מחדש.
+              בונים את ה-Image של הפרויקט (זה לוקח כמה דקות בפעם הראשונה).
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">9.1 בדיקה אם כבר קיים</h4>
-            <CodeBlock code="ls docker-compose.yml" />
-            <p className="text-gray-600 mb-4">אם הקובץ קיים ומתאים → דלגו לשלב 10</p>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">9.2 יצירת הקובץ</h4>
-            <CodeBlock code="nano docker-compose.yml" />
-            
-            <CodeBlock code={`version: "3.8"
-
-services:
-  app:
-    build: .
-    container_name: <PROJECT_NAME>
-    restart: always
-    ports:
-      - "3000:3000"`} language="yaml" />
+            <CodeBlock code="docker build -t <PROJECT_NAME> ." />
             
             <ChangeNote>
-              <p>החליפו את <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הפרויקט שלכם</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> → שם האתר/פרויקט</p>
             </ChangeNote>
             
-            <p className="text-gray-600">שמירה ויציאה: <code dir="ltr">CTRL + O</code> → Enter → <code dir="ltr">CTRL + X</code></p>
+            <ExpectedOutput>
+              <p>סדרת שלבים שמסתיימת ב: <code dir="ltr">Successfully built...</code></p>
+            </ExpectedOutput>
           </Section>
 
-          {/* Step 10 - Build and Run */}
-          <Section id="step10" title="שלב 10 – בנייה והרצה של הדוקר" icon={Play}>
-            <DirectoryReminder />
-            
+          {/* Step 7 - Run Container */}
+          <Section id="step7" title="7️⃣ הרצת הקונטיינר" icon={Play}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> זה השלב שבו הכל מתחבר – בונים את ה-Image ומריצים את הקונטיינר.
+              מריצים את הקונטיינר עם הפורט שבדקנו שפנוי.
             </p>
             
-            <h4 className="font-bold text-lg mb-3 text-blue-900">10.1 בדיקת פורט פנוי</h4>
-            <p className="text-gray-600 mb-2">לפני שמריצים, וודאו שהפורט 3000 לא תפוס:</p>
-            <CodeBlock code="ss -tulnp | grep 3000" />
-            <p className="text-gray-600 mb-4">אם הפלט ריק → הפורט פנוי ✅</p>
+            <CodeBlock code="docker run -d -p <PORT>:80 --name <PROJECT_NAME> <PROJECT_NAME>" />
             
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">10.2 בנייה</h4>
-            <CodeBlock code="docker compose build" />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PORT&gt;</code> → הפורט שבדקתם פנוי (למשל 3001)</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> → שם האתר/פרויקט</p>
+            </ChangeNote>
             
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">10.3 הרצה</h4>
-            <CodeBlock code="docker compose up -d" />
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">10.4 בדיקה</h4>
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">בדיקה שהקונטיינר רץ:</h4>
             <CodeBlock code="docker ps" />
             
             <ExpectedOutput>
-              <p>הקונטיינר מופיע ברשימה עם סטטוס <code>"Up"</code></p>
+              <p>טבלה שמראה את הקונטיינר עם סטטוס <code>"Up"</code></p>
             </ExpectedOutput>
           </Section>
 
-          {/* Step 11 - Logs */}
-          <Section id="step11" title="שלב 11 – בדיקת לוגים (חובה אם משהו לא עולה)" icon={Terminal}>
+          {/* Step 8 - Pull Changes */}
+          <Section id="step8" title="8️⃣ משיכת שינויים מה-Git בעתיד" icon={RefreshCw}>
             <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> אם הקונטיינר לא עולה או נופל, הלוגים יראו בדיוק מה הבעיה.
+              כשתרצו לעדכן את האתר עם שינויים חדשים מ-GitHub:
             </p>
             
-            <CodeBlock code="docker logs <PROJECT_NAME>" />
-            
-            <p className="text-gray-600 mb-4">או לצפייה בזמן אמת:</p>
-            <CodeBlock code="docker compose logs -f" />
+            <CodeBlock code={`cd /path/to/<PROJECT_NAME>
+git pull origin main
+docker restart <PROJECT_NAME>`} />
             
             <ChangeNote>
-              <p>החליפו את <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הקונטיינר שלכם</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> → שם הפרויקט</p>
+              <p><code className="bg-blue-200 px-1 rounded">main</code> → ה-branch שאתם רוצים למשוך</p>
             </ChangeNote>
             
             <WarningBox>
-              <p>אם יש שגיאות – הלוגים יראו בדיוק מה הבעיה. חפשו שורות עם "error" או "failed".</p>
+              <p>אם שיניתם את ה-Dockerfile או package.json, צריך לבנות מחדש:</p>
             </WarningBox>
-          </Section>
-
-          {/* Step 12 - Domain */}
-          <Section id="step12" title="שלב 12 – חיבור לדומיין דרך aaPanel" icon={Globe}>
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> כדי שהאתר יהיה נגיש דרך דומיין ולא רק דרך IP:PORT.
-            </p>
             
-            <div className="space-y-4 text-gray-600">
-              <div className="bg-gray-100 border border-gray-300 p-4 rounded-lg">
-                <p className="font-bold mb-3 text-blue-900">השלבים ב-aaPanel:</p>
-                <ol className="list-decimal list-inside space-y-2">
-                  <li>פתחו את aaPanel → Website</li>
-                  <li>Add site → הכניסו את הדומיין</li>
-                  <li>לכו ל-Proxy / Reverse Proxy</li>
-                  <li>הגדירו Target:</li>
-                </ol>
-                <div className="bg-gray-200 border border-gray-300 p-3 rounded-lg mt-3" dir="ltr">
-                  <code>http://127.0.0.1:3000</code>
-                </div>
-                <p className="mt-3">5. שמרו</p>
-              </div>
-            </div>
-          </Section>
-
-          {/* Step 13 - Final Checks */}
-          <Section id="step13" title="שלב 13 – בדיקות אחרונות" icon={CheckCircle2}>
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> לוודא שהכל עובד לפני שמסיימים.
-            </p>
-            
-            <h4 className="font-bold text-lg mb-3 text-blue-900">13.1 בדיקת תגובה מהשרת</h4>
-            <CodeBlock code="curl http://127.0.0.1:3000" />
-            
-            <ExpectedOutput>
-              <p>תוכן HTML של האתר (או לפחות תגובה כלשהי)</p>
-            </ExpectedOutput>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">13.2 בדיקת פורט פתוח</h4>
-            <CodeBlock code="ss -tulnp | grep 3000" />
-            
-            <ExpectedOutput>
-              <p>שורה שמראה שהפורט 3000 פתוח ומאזין</p>
-            </ExpectedOutput>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">13.3 בדיקה מהדפדפן</h4>
-            <p className="text-gray-600">
-              פתחו את הדומיין בדפדפן ובדקו שהאתר נטען כראוי.
-            </p>
-          </Section>
-
-          {/* Updates Section */}
-          <div className="mt-12 mb-6">
-            <h2 className="text-2xl font-bold text-blue-900 mb-2">📦 עדכון הפרויקט</h2>
-            <p className="text-gray-600">כשיש שינויים ב-GitHub ורוצים לעדכן את השרת</p>
-          </div>
-          
-          <Section id="updates" title="משיכת שינויים מה-GitHub (עדכונים)" icon={RefreshCw}>
-            <DirectoryReminder />
-            
-            <p className="text-gray-600 mb-4">
-              <strong>למה?</strong> כשעובדים עם Git, כל עדכון בקוד מחייב משיכה לשרת ובנייה מחדש.
-            </p>
-            
-            <h4 className="font-bold text-lg mb-4 text-blue-900">1. וידוא מיקום</h4>
-            <CodeBlock code="pwd" />
-            
-            <ExpectedOutput>
-              <code dir="ltr">/www/wwwroot/PROJECT_NAME</code>
-            </ExpectedOutput>
-
-            <h4 className="font-bold text-lg mb-4 mt-8 text-blue-900">2. משיכת השינויים</h4>
-            <CodeBlock code="git pull" />
-
-            <h4 className="font-bold text-lg mb-4 mt-8 text-blue-900">3. בנייה מחדש והרצה</h4>
             <CodeBlock code={`docker stop <PROJECT_NAME>
 docker rm <PROJECT_NAME>
-docker compose build
-docker compose up -d`} />
+docker build -t <PROJECT_NAME> .
+docker run -d -p <PORT>:80 --name <PROJECT_NAME> <PROJECT_NAME>`} />
+          </Section>
+
+          {/* Step 9 - Domain Connection */}
+          <Section id="step9" title="9️⃣ חיבור לדומיין (ללא aaPanel)" icon={Globe}>
+            <p className="text-gray-600 mb-4">
+              הגדרת Nginx כ-Reverse Proxy כדי שהאתר יהיה נגיש דרך דומיין.
+            </p>
+            
+            <h4 className="font-bold text-lg mb-3 text-blue-900">9.1 התקנת Nginx:</h4>
+            <CodeBlock code={`sudo apt update
+sudo apt install nginx -y`} />
+            
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">9.2 יצירת קובץ קונפיגורציה לדומיין:</h4>
+            <CodeBlock code="sudo nano /etc/nginx/sites-available/<DOMAIN>" />
+            
+            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא:</p>
+            
+            <CodeBlock code={`server {
+    listen 80;
+    server_name <DOMAIN>;
+
+    location / {
+        proxy_pass http://localhost:<PORT>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}`} language="nginx" />
             
             <ChangeNote>
-              <p>החליפו את <code className="bg-blue-200 px-1 rounded">&lt;PROJECT_NAME&gt;</code> בשם הקונטיינר שלכם</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;DOMAIN&gt;</code> → הדומיין שלכם (למשל <code>mysite.com</code>)</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PORT&gt;</code> → הפורט שבו הקונטיינר רץ (למשל 3001)</p>
             </ChangeNote>
             
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">9.3 הפעלת הקונפיגורציה:</h4>
+            <CodeBlock code={`sudo ln -s /etc/nginx/sites-available/<DOMAIN> /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx`} />
+            
             <ExpectedOutput>
-              <p>הקונטיינר עולה מחדש עם הקוד המעודכן</p>
+              <p>הפקודה <code>nginx -t</code> צריכה להחזיר: <code dir="ltr">syntax is ok</code></p>
             </ExpectedOutput>
           </Section>
 
+          {/* Step 10 - Final Check */}
+          <Section id="step10" title="🔟 בדיקה אחרונה" icon={CheckCircle2}>
+            <p className="text-gray-600 mb-4">
+              בקרו בדפדפן בכתובת:
+            </p>
+            
+            <div className="bg-gray-200 border border-gray-300 p-4 rounded-lg my-4 text-center" dir="ltr">
+              <code className="text-lg">http://&lt;DOMAIN&gt;</code>
+            </div>
+            
+            <ExpectedOutput>
+              <p>אם הכול נכון – האתר מופיע! 🎉</p>
+            </ExpectedOutput>
+          </Section>
+
+          {/* Tips Section */}
+          <div className="mt-12 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-300 rounded-xl p-8">
+            <h3 className="text-2xl font-bold mb-6 text-purple-700">💡 טיפים חשובים</h3>
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span>ודאו שהקונטיינר רץ בפורט פנוי – בדקו לפני כל ריצה</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span>כשמושכים שינויים מ-GitHub, תמיד עשו <code className="bg-purple-200 px-1 rounded">git pull</code> לפני <code className="bg-purple-200 px-1 rounded">docker restart</code></span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span>בדקו שה-DNS של הדומיין מצביע ל-IP הנכון של השרת</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span>לצפייה בלוגים של הקונטיינר: <code className="bg-purple-200 px-1 rounded" dir="ltr">docker logs &lt;PROJECT_NAME&gt;</code></span>
+              </li>
+            </ul>
+          </div>
+
           {/* Summary */}
-          <div className="mt-12 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-8">
+          <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-8">
             <h3 className="text-2xl font-bold mb-6 text-green-700">✅ סיכום – מה עשינו</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {[
                 "התחברנו לשרת",
-                "חיברנו GitHub",
-                "משכנו/יצרנו פרויקט",
-                "התקנו Docker",
-                "התקנו Docker Compose",
-                "התקנו Node.js",
+                "יצרנו תיקייה",
+                "משכנו מ-GitHub",
+                "בדקנו פורט פנוי",
                 "יצרנו Dockerfile",
-                "בנינו והרצנו",
+                "בנינו Image",
+                "הרצנו קונטיינר",
+                "הגדרנו Nginx",
                 "חיברנו דומיין"
               ].map((item) => (
                 <div key={item} className="flex items-center gap-2 text-gray-800">
@@ -749,12 +488,16 @@ docker compose up -d`} />
       </section>
 
       {/* Minimal Footer */}
-      <footer className="bg-gray-100 border-t border-gray-300 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <Button asChild className="mb-4">
-            <Link to="/contact">צור קשר</Link>
-          </Button>
-          <p className="text-gray-600 text-sm">&copy; {new Date().getFullYear()} Smartbiz. כל הזכויות שמורות.</p>
+      <footer className="py-8 px-4 bg-gray-50 border-t border-gray-200">
+        <div className="container mx-auto max-w-4xl flex flex-col items-center gap-4">
+          <Link to="/contact">
+            <Button className="bg-blue-900 hover:bg-blue-800 text-white">
+              צור קשר
+            </Button>
+          </Link>
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} SmartBiz. כל הזכויות שמורות.
+          </p>
         </div>
       </footer>
     </div>
