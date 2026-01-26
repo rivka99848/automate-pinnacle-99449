@@ -500,7 +500,7 @@ certbot --nginx -d <DOMAIN_NAME> -d www.<DOMAIN_NAME>`} />
             
             <div className="bg-green-100 border border-green-300 p-4 rounded-lg mt-6">
               <p className="text-green-800 font-bold text-center">
-                🔒 זהו! האתר זמין ב-https://&lt;DOMAIN_NAME&gt;
+                🔒 זהו! האתר זמין ב-https://{"<DOMAIN_NAME>"}
               </p>
             </div>
           </Section>
