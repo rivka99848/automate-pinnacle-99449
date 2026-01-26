@@ -235,17 +235,13 @@ const DockerGuide = () => {
   };
 
   const tableOfContents = [
-    { id: "step1", title: "התחברות לשרת ב-SSH", icon: Server },
-    { id: "step2", title: "יצירת תיקייה לפרויקט", icon: FolderCheck },
-    { id: "step3", title: "הגדרת SSH ל-GitHub (חד-פעמי)", icon: Key },
-    { id: "step4", title: "משיכת קוד מ-GitHub", icon: GitBranch },
-    { id: "step5", title: "בדיקת פורט פנוי", icon: Terminal },
-    { id: "step6", title: "יצירת Dockerfile", icon: FileCode },
-    { id: "step7", title: "יצירת docker-compose.yml", icon: Package },
-    { id: "step8", title: "הרצת האתר", icon: Play },
-    { id: "step9", title: "משיכת שינויים בעתיד", icon: RefreshCw },
-    { id: "step10", title: "חיבור לדומיין", icon: Globe },
-    { id: "step11", title: "פקודות שימושיות", icon: Settings },
+    { id: "intro", title: "בחירת מסלול", icon: Shield },
+    { id: "track-a", title: "מסלול A: עם aaPanel", icon: Settings },
+    { id: "track-b", title: "מסלול B: שרת Ubuntu נקי", icon: Terminal },
+    { id: "commands", title: "פקודות ניהול שימושיות", icon: Wrench },
+    { id: "troubleshooting", title: "פתרון בעיות נפוצות", icon: AlertTriangle },
+    { id: "tips", title: "טיפים חשובים", icon: Lightbulb },
+    { id: "summary", title: "סיכום זריזות", icon: CheckCircle2 },
   ];
 
   return (
@@ -262,7 +258,7 @@ const DockerGuide = () => {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
-              🔹 מדריך Plug & Play: הרצת אתר ב-Docker וחיבור לדומיין
+              🚀 מדריך מלא: הרצת אתר Docker וחיבור לדומיין
             </h1>
             <p className="text-xl text-gray-600 mb-4">
               כולל חיבור GitHub, docker-compose, SSL והכל מוכן להעתקה
@@ -301,76 +297,94 @@ const DockerGuide = () => {
       <section className="pb-20 px-4">
         <div className="container mx-auto max-w-4xl">
           
-          {/* Step 1 - SSH Connection */}
-          <Section id="step1" title="1️⃣ התחברות לשרת דרך SSH" icon={Server} defaultOpen>
+          {/* Track Selection */}
+          <Section id="intro" title="🎯 בחרי את המסלול המתאים לך" icon={Shield} defaultOpen>
+            <div className="grid md:grid-cols-2 gap-4">
+              <a href="#track-a" className="block p-6 bg-blue-50 border-2 border-blue-200 rounded-xl hover:bg-blue-100 transition-colors">
+                <h4 className="font-bold text-lg text-blue-900 mb-2">📘 מסלול A</h4>
+                <p className="text-gray-600">שרת עם aaPanel/cPanel/Plesk</p>
+              </a>
+              <a href="#track-b" className="block p-6 bg-green-50 border-2 border-green-200 rounded-xl hover:bg-green-100 transition-colors">
+                <h4 className="font-bold text-lg text-green-900 mb-2">📗 מסלול B</h4>
+                <p className="text-gray-600">שרת Ubuntu נקי (ללא ממשק ניהול)</p>
+              </a>
+            </div>
+          </Section>
+
+          {/* ========== TRACK A - aaPanel ========== */}
+          <div id="track-a" className="mt-8 mb-4 p-4 bg-blue-100 rounded-xl">
+            <h2 className="text-2xl font-bold text-blue-900">📘 מסלול A: עם aaPanel/cPanel</h2>
+          </div>
+
+          {/* A Step 1 - SSH Connection */}
+          <Section id="a-step1" title="1️⃣ התחברות לשרת" icon={Server}>
             <CodeBlock code="ssh root@<SERVER_IP>" />
-            
             <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;SERVER_IP&gt;</code> → כתובת ה-IP של השרת שלך</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;SERVER_IP&gt;</code> → כתובת ה-IP של השרת</p>
             </ChangeNote>
           </Section>
 
-          {/* Step 2 - Create Project Folder */}
-          <Section id="step2" title="2️⃣ יצירת תיקייה לפרויקט" icon={FolderCheck}>
-            <CodeBlock code={`cd /var/www
-mkdir <PROJECT_FOLDER>
-cd <PROJECT_FOLDER>`} />
-            
+          {/* A Step 2 - Create Project Folder */}
+          <Section id="a-step2" title="2️⃣ יצירת תיקיית פרויקט" icon={FolderCheck}>
+            <CodeBlock code={`mkdir -p /www/wwwroot/<PROJECT_FOLDER>
+cd /www/wwwroot/<PROJECT_FOLDER>`} />
             <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → שם התיקייה</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → שם הפרויקט (למשל: myapp)</p>
             </ChangeNote>
-          </Section>
-
-          {/* Step 3 - GitHub SSH Setup */}
-          <Section id="step3" title="3️⃣ הגדרת SSH ל-GitHub (חד-פעמי)" icon={Key}>
-            <p className="text-gray-600 mb-4">
-              אם זו הפעם הראשונה שאתם מתחברים ל-GitHub מהשרת הזה:
-            </p>
-            
-            <CodeBlock code={`ssh-keygen -t ed25519 -C "your_email@example.com"
-cat ~/.ssh/id_ed25519.pub`} />
-            
-            <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">your_email@example.com</code> → האימייל שלכם ב-GitHub</p>
-            </ChangeNote>
-            
-            <TipsBox>
-              <p>העתיקו את המפתח שמופיע והוסיפו אותו ב:</p>
-              <p className="mt-2"><strong>GitHub.com → Settings → SSH Keys → New SSH key</strong></p>
-            </TipsBox>
-          </Section>
-
-          {/* Step 4 - Clone from GitHub */}
-          <Section id="step4" title="4️⃣ משיכת קוד מ-GitHub" icon={GitBranch}>
-            <CodeBlock code="git clone git@github.com:<USERNAME>/<REPO_NAME>.git ." />
-            
-            <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;USERNAME&gt;</code> → שם המשתמש שלכם ב-GitHub</p>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;REPO_NAME&gt;</code> → שם הריפו שלכם</p>
-            </ChangeNote>
-          </Section>
-
-          {/* Step 5 - Check Port */}
-          <Section id="step5" title="5️⃣ בדיקת פורט פנוי" icon={Terminal}>
-            <CodeBlock code="lsof -i :<PORT>" />
-            
-            <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;PORT&gt;</code> → הפורט שבו האתר ירוץ (למשל 3001)</p>
-            </ChangeNote>
-            
             <ExpectedOutput>
-              <p>אם הפלט <strong>ריק</strong> → הפורט פנוי ✅</p>
+              <p>✅ בדיקה שזה עבד:</p>
+              <CodeBlock code="pwd" />
+              <p>אמור להחזיר: <code dir="ltr">/www/wwwroot/&lt;PROJECT_FOLDER&gt;</code></p>
             </ExpectedOutput>
           </Section>
 
-          {/* Step 6 - Create Dockerfile */}
-          <Section id="step6" title="6️⃣ יצירת Dockerfile" icon={FileCode}>
+          {/* A Step 3 - GitHub SSH Setup */}
+          <Section id="a-step3" title="3️⃣ הגדרת SSH ל-GitHub (חד-פעמי)" icon={Key}>
+            <CodeBlock code={`ssh-keygen -t ed25519 -C "your_email@example.com"
+cat ~/.ssh/id_ed25519.pub`} />
+            <TipsBox>
+              <p>העתיקי את המפתח ל: <strong>GitHub.com → Settings → SSH Keys → New SSH key</strong></p>
+            </TipsBox>
+            <p className="text-gray-600 mt-4 mb-2">בדיקה:</p>
+            <CodeBlock code="ssh -T git@github.com" />
+            <ExpectedOutput>
+              <p>✅ אמור להחזיר: <code>Hi &lt;USERNAME&gt;! You've successfully authenticated</code></p>
+            </ExpectedOutput>
+          </Section>
+
+          {/* A Step 4 - Clone from GitHub */}
+          <Section id="a-step4" title="4️⃣ משיכת קוד מ-GitHub" icon={GitBranch}>
+            <CodeBlock code="git clone git@github.com:<USERNAME>/<REPO_NAME>.git ." />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;USERNAME&gt;</code> → שם המשתמש ב-GitHub</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;REPO_NAME&gt;</code> → שם הריפו</p>
+            </ChangeNote>
+            <ExpectedOutput>
+              <p>✅ בדיקה שזה הפרויקט הנכון:</p>
+              <CodeBlock code="git remote -v" />
+              <p>אמור להראות: <code dir="ltr">origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git</code></p>
+              <CodeBlock code="ls -la" />
+              <p>אמור להראות את הקבצים: <code>package.json</code>, <code>Dockerfile</code>, וכו'</p>
+            </ExpectedOutput>
+          </Section>
+
+          {/* A Step 5 - Check Port */}
+          <Section id="a-step5" title="5️⃣ בדיקת פורט פנוי" icon={Terminal}>
+            <CodeBlock code="lsof -i :<PORT>" />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PORT&gt;</code> → הפורט שבו האתר ירוץ (למשל 3001)</p>
+            </ChangeNote>
+            <ExpectedOutput>
+              <p>✅ אם הפורט פנוי: לא יחזיר כלום (טוב!)</p>
+              <p>❌ אם הפורט תפוס: יראה תהליך → בחרי פורט אחר (3002, 3003...)</p>
+            </ExpectedOutput>
+          </Section>
+
+          {/* A Step 6 - Create Dockerfile */}
+          <Section id="a-step6" title="6️⃣ יצירת Dockerfile" icon={FileCode}>
             <CodeBlock code="nano Dockerfile" />
-            
-            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא:</p>
-            
-            <CodeBlock code={`# ---------- build ----------
-FROM node:18-alpine AS build
+            <p className="text-gray-600 mb-4">תוכן לדבק (Vite/React/Vue):</p>
+            <CodeBlock code={`FROM node:18-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -379,25 +393,21 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# ---------- serve ----------
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]`} language="dockerfile" />
-            
             <WarningBox>
-              <p>⚠️ מתאים ל-Vite/React/Vue. אם אתם משתמשים ב-Next.js/PHP - צריך Dockerfile שונה.</p>
-              <p className="mt-2">שמירה ויציאה: <code dir="ltr">CTRL+X</code> → <code>Y</code> → <code>Enter</code></p>
+              <p>⚠️ מתאים ל-Vite/React/Vue. אם את משתמשת ב-Next.js/PHP - צריך Dockerfile שונה.</p>
+              <p className="mt-2">שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
             </WarningBox>
           </Section>
 
-          {/* Step 7 - Create docker-compose.yml */}
-          <Section id="step7" title="7️⃣ יצירת docker-compose.yml" icon={Package}>
+          {/* A Step 7 - Create docker-compose.yml */}
+          <Section id="a-step7" title="7️⃣ יצירת docker-compose.yml" icon={Package}>
             <CodeBlock code="nano docker-compose.yml" />
-            
-            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא:</p>
-            
+            <p className="text-gray-600 mb-4">תוכן לדבק:</p>
             <CodeBlock code={`version: '3.8'
 
 services:
@@ -406,205 +416,422 @@ services:
     ports:
       - "<HOST_PORT>:80"
     restart: unless-stopped`} language="yaml" />
-            
             <ChangeNote>
               <p><code className="bg-blue-200 px-1 rounded">&lt;HOST_PORT&gt;</code> → הפורט על השרת (למשל 3001)</p>
             </ChangeNote>
-            
             <WarningBox>
-              <p>שמירה ויציאה: <code dir="ltr">CTRL+X</code> → <code>Y</code> → <code>Enter</code></p>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
             </WarningBox>
           </Section>
 
-          {/* Step 8 - Run the Site */}
-          <Section id="step8" title="8️⃣ הרצת האתר" icon={Play}>
+          {/* A Step 8 - Run the Site */}
+          <Section id="a-step8" title="8️⃣ הרצת האתר" icon={Play}>
             <CodeBlock code="docker compose up --build -d" />
-            
             <ExpectedOutput>
-              <p>גשו ל: <code dir="ltr">http://&lt;SERVER_IP&gt;:&lt;HOST_PORT&gt;</code></p>
+              <p>✅ בדיקה שהקונטיינר רץ:</p>
+              <CodeBlock code="docker ps" />
+              <p>אמור להראות: השורה עם הקונטיינר שלך עם <code>Up X seconds</code></p>
             </ExpectedOutput>
-          </Section>
-
-          {/* Step 9 - Pull Changes */}
-          <Section id="step9" title="9️⃣ משיכת שינויים בעתיד" icon={RefreshCw}>
-            <p className="text-gray-600 mb-4">
-              כשתרצו לעדכן את האתר עם שינויים חדשים מ-GitHub:
-            </p>
-            
-            <h4 className="font-bold text-lg mb-3 text-blue-900">א. בדיקת הריפו המחובר</h4>
-            <CodeBlock code="git remote -v" />
-            
+            <p className="text-gray-600 mt-4 mb-2">בדיקה ישירה:</p>
+            <CodeBlock code="curl -I http://127.0.0.1:<HOST_PORT>" />
             <ExpectedOutput>
-              <p>צריך לראות את הריפו שלכם:</p>
-              <code dir="ltr" className="block mt-2">
-                origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (fetch)<br />
-                origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (push)
-              </code>
+              <p>אמור להחזיר: <code>HTTP/1.1 200 OK</code></p>
             </ExpectedOutput>
-            
-            <WarningBox>
-              <p><strong>אם הריפו לא נכון?</strong> תקנו עם:</p>
-              <CodeBlock code="git remote set-url origin git@github.com:<USERNAME>/<REPO_NAME>.git" />
-            </WarningBox>
-            
-            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">ב. משיכת השינויים והפעלה מחדש</h4>
-            <CodeBlock code={`cd /var/www/<PROJECT_FOLDER>
-git pull origin main
-docker compose down
-docker compose up --build -d`} />
-            
-            <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → שם תיקיית הפרויקט</p>
-              <p><code className="bg-blue-200 px-1 rounded">main</code> → ה-branch שאתם רוצים למשוך</p>
-            </ChangeNote>
-            
             <TipsBox>
-              <p>🚀 <strong>זהו! עכשיו אתם יודעים שאתם מושכים מהמקום הנכון.</strong></p>
+              <p>בדיקה בדפדפן: <code dir="ltr">http://&lt;SERVER_IP&gt;:&lt;HOST_PORT&gt;</code></p>
             </TipsBox>
           </Section>
 
-          {/* Step 10 - Domain Connection */}
-          <Section id="step10" title="🔟 חיבור לדומיין" icon={Globe}>
-            
+          {/* A Step 9 - Pull Changes */}
+          <Section id="a-step9" title="9️⃣ משיכת שינויים בעתיד" icon={RefreshCw}>
+            <WarningBox>
+              <p>⚠️ לפני משיכה - וודאי שאת בתיקייה הנכונה:</p>
+            </WarningBox>
+            <CodeBlock code="pwd" />
+            <ExpectedOutput>
+              <p>אמור להחזיר: <code dir="ltr">/www/wwwroot/&lt;PROJECT_FOLDER&gt;</code></p>
+            </ExpectedOutput>
+            <CodeBlock code="git remote -v" />
+            <ExpectedOutput>
+              <p>אמור להראות את הריפו הנכון: <code dir="ltr">origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git</code></p>
+            </ExpectedOutput>
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">✅ אם זה נכון - המשיכי:</h4>
+            <CodeBlock code={`cd /www/wwwroot/<PROJECT_FOLDER>
+git pull origin main
+docker compose down
+docker compose up --build -d`} />
+            <ExpectedOutput>
+              <p>✅ בדיקה שהעדכון עבד:</p>
+              <CodeBlock code="docker ps" />
+              <p>תראי שהקונטיינר <code>Created X seconds ago</code> (זמן חדש!)</p>
+              <CodeBlock code="curl -I http://127.0.0.1:<HOST_PORT>" />
+              <p>אמור להחזיר: <code>HTTP/1.1 200 OK</code></p>
+            </ExpectedOutput>
+            <TipsBox>
+              <p>🚀 <strong>זהו! 4 שורות לעדכון מלא.</strong></p>
+            </TipsBox>
+          </Section>
+
+          {/* A Step 10 - Domain Connection with aaPanel */}
+          <Section id="a-step10" title="🔟 חיבור לדומיין + SSL" icon={Globe}>
             <h4 className="font-bold text-lg mb-3 text-blue-900">א. הגדרת DNS</h4>
-            <p className="text-gray-600 mb-4">
-              צרו רשומות A אצל ספק הדומיין:
-            </p>
-            
+            <p className="text-gray-600 mb-4">צרי רשומות A אצל ספק הדומיין:</p>
             <div className="bg-gray-200 border border-gray-300 p-4 rounded-lg my-4 font-mono text-sm" dir="ltr">
               <p>@   → &lt;SERVER_IP&gt;</p>
               <p>www → &lt;SERVER_IP&gt;</p>
             </div>
-            
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ב. יצירת Reverse Proxy ב-aaPanel</h4>
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li><strong>aaPanel</strong> → <strong>Website</strong> → <strong>Proxy Project</strong></li>
+              <li><strong>Add Proxy</strong></li>
+              <li>מלאי:
+                <ul className="list-disc list-inside mr-4 mt-2 space-y-1">
+                  <li><strong>Domain:</strong> <code>&lt;DOMAIN_NAME&gt;</code></li>
+                  <li><strong>Add www:</strong> ✅</li>
+                  <li><strong>Proxy Type:</strong> Reverse Proxy</li>
+                  <li><strong>Target URL:</strong> <code dir="ltr">http://127.0.0.1:&lt;HOST_PORT&gt;</code></li>
+                </ul>
+              </li>
+              <li><strong>Submit</strong></li>
+            </ol>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ג. הוספת SSL</h4>
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li>לחצי על שם האתר ברשימה</li>
+              <li><strong>SSL</strong> → <strong>Let's Encrypt</strong></li>
+              <li>סמני את הדומיינים (<code>&lt;DOMAIN_NAME&gt;</code> + <code>www.&lt;DOMAIN_NAME&gt;</code>)</li>
+              <li><strong>Apply</strong></li>
+            </ol>
+
+            <div className="bg-green-100 border border-green-300 p-4 rounded-lg mt-6">
+              <p className="text-green-800 font-bold text-center">🔒 זהו! האתר זמין ב-https://&lt;DOMAIN_NAME&gt;</p>
+            </div>
+          </Section>
+
+          {/* Cloudflare Warning */}
+          <Section id="cloudflare" title="⚠️ אזהרה חשובה - Cloudflare Proxy" icon={AlertTriangle}>
+            <p className="text-gray-600 mb-4">אם הדומיין עובר דרך Cloudflare:</p>
+            <WarningBox>
+              <p><strong>כבי את ה-Proxy (☁️ → ⚪)</strong> עבור:</p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>אתרים עם WebSocket (n8n, Socket.io)</li>
+                <li>Long-running connections</li>
+                <li>אתרים שצריכים חיבור ישיר</li>
+              </ul>
+            </WarningBox>
+            <p className="text-gray-600 mt-4 mb-2"><strong>איך לכבות:</strong></p>
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li>Cloudflare Dashboard → DNS</li>
+              <li>לחצי על הענן הכתום ליד הדומיין</li>
+              <li>הופך לאפור (DNS only)</li>
+            </ol>
+          </Section>
+
+          {/* ========== TRACK B - Clean Ubuntu ========== */}
+          <div id="track-b" className="mt-12 mb-4 p-4 bg-green-100 rounded-xl">
+            <h2 className="text-2xl font-bold text-green-900">📗 מסלול B: שרת Ubuntu נקי (ללא aaPanel)</h2>
+          </div>
+
+          {/* B Step 1 - SSH Connection */}
+          <Section id="b-step1" title="1️⃣ התחברות לשרת" icon={Server}>
+            <CodeBlock code="ssh root@<SERVER_IP>" />
+          </Section>
+
+          {/* B Step 2 - Create Project Folder */}
+          <Section id="b-step2" title="2️⃣ יצירת תיקיית פרויקט" icon={FolderCheck}>
+            <CodeBlock code={`mkdir -p /www/wwwroot/<PROJECT_FOLDER>
+cd /www/wwwroot/<PROJECT_FOLDER>`} />
             <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;SERVER_IP&gt;</code> → כתובת ה-IP של השרת</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;PROJECT_FOLDER&gt;</code> → שם הפרויקט</p>
             </ChangeNote>
-            
-            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ב. התקנת Nginx</h4>
-            <CodeBlock code={`apt update && apt install nginx -y
-nano /etc/nginx/sites-available/<DOMAIN_NAME>`} />
-            
-            <p className="text-gray-600 mb-4">הדביקו את התוכן הבא:</p>
-            
+          </Section>
+
+          {/* B Step 3 - GitHub SSH Setup */}
+          <Section id="b-step3" title="3️⃣ הגדרת SSH ל-GitHub (זהה למסלול A)" icon={Key}>
+            <CodeBlock code={`ssh-keygen -t ed25519 -C "your_email@example.com"
+cat ~/.ssh/id_ed25519.pub`} />
+          </Section>
+
+          {/* B Step 4 - Clone from GitHub */}
+          <Section id="b-step4" title="4️⃣ משיכת קוד מ-GitHub" icon={GitBranch}>
+            <CodeBlock code="git clone git@github.com:<USERNAME>/<REPO_NAME>.git ." />
+          </Section>
+
+          {/* B Step 5 - Check Port */}
+          <Section id="b-step5" title="5️⃣ בדיקת פורט פנוי" icon={Terminal}>
+            <CodeBlock code="lsof -i :<PORT>" />
+          </Section>
+
+          {/* B Step 6 - Create Dockerfile */}
+          <Section id="b-step6" title="6️⃣ יצירת Dockerfile (זהה למסלול A)" icon={FileCode}>
+            <CodeBlock code="nano Dockerfile" />
+          </Section>
+
+          {/* B Step 7 - Create docker-compose.yml */}
+          <Section id="b-step7" title="7️⃣ יצירת docker-compose.yml (זהה למסלול A)" icon={Package}>
+            <CodeBlock code="nano docker-compose.yml" />
+          </Section>
+
+          {/* B Step 8 - Run the Site */}
+          <Section id="b-step8" title="8️⃣ הרצת האתר" icon={Play}>
+            <CodeBlock code="docker compose up --build -d" />
+          </Section>
+
+          {/* B Step 9 - Pull Changes */}
+          <Section id="b-step9" title="9️⃣ משיכת שינויים בעתיד (זהה למסלול A)" icon={RefreshCw}>
+            <CodeBlock code={`cd /www/wwwroot/<PROJECT_FOLDER>
+git pull origin main
+docker compose down
+docker compose up --build -d`} />
+          </Section>
+
+          {/* B Step 10 - Domain Connection (Manual) */}
+          <Section id="b-step10" title="🔟 חיבור לדומיין + SSL (ידני)" icon={Globe}>
+            <h4 className="font-bold text-lg mb-3 text-blue-900">א. הגדרת DNS (זהה למסלול A)</h4>
+            <div className="bg-gray-200 border border-gray-300 p-4 rounded-lg my-4 font-mono text-sm" dir="ltr">
+              <p>@   → &lt;SERVER_IP&gt;</p>
+              <p>www → &lt;SERVER_IP&gt;</p>
+            </div>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ב. ⚠️ הסרת קובץ default (חשוב מאוד!)</h4>
+            <CodeBlock code="rm /etc/nginx/sites-enabled/default" />
+            <WarningBox>
+              <p><strong>למה?</strong> הקובץ הזה גורם לכל האתרים להופנות למקום הלא נכון!</p>
+            </WarningBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ג. התקנת Nginx (אם לא מותקן)</h4>
+            <CodeBlock code="apt update && apt install nginx -y" />
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ד. יצירת קובץ הגדרות Nginx</h4>
+            <CodeBlock code="nano /etc/nginx/sites-available/<DOMAIN_NAME>" />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;DOMAIN_NAME&gt;</code> → הדומיין שלך (למשל: example.com)</p>
+            </ChangeNote>
+            <p className="text-gray-600 mb-4">תוכן לדבק:</p>
             <CodeBlock code={`server {
     listen 80;
     server_name <DOMAIN_NAME> www.<DOMAIN_NAME>;
 
     location / {
-        proxy_pass http://localhost:<HOST_PORT>;
+        proxy_pass http://127.0.0.1:<HOST_PORT>;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
 }`} language="nginx" />
-            
             <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;DOMAIN_NAME&gt;</code> → הדומיין שלכם (למשל example.com)</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;DOMAIN_NAME&gt;</code> → הדומיין שלך</p>
               <p><code className="bg-blue-200 px-1 rounded">&lt;HOST_PORT&gt;</code> → הפורט (למשל 3001)</p>
             </ChangeNote>
-            
-            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ג. הפעלת ההגדרות</h4>
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
+            <ExpectedOutput>
+              <p>✅ בדיקה שהקובץ נוצר:</p>
+              <CodeBlock code="cat /etc/nginx/sites-available/<DOMAIN_NAME>" />
+              <p>אמור להראות את התוכן שהדבקת</p>
+            </ExpectedOutput>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ה. הפעלת ההגדרות</h4>
             <CodeBlock code={`ln -s /etc/nginx/sites-available/<DOMAIN_NAME> /etc/nginx/sites-enabled/
 nginx -t
 systemctl reload nginx`} />
-            
             <ExpectedOutput>
-              <p>הפקודה <code>nginx -t</code> צריכה להחזיר: <code dir="ltr">syntax is ok</code></p>
+              <p>אחרי <code>nginx -t</code> אמור להחזיר:</p>
+              <code dir="ltr" className="block mt-2 bg-gray-100 p-2 rounded">nginx: configuration file /etc/nginx/nginx.conf test is successful</code>
             </ExpectedOutput>
-            
-            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ד. הוספת SSL (HTTPS)</h4>
+            <p className="text-gray-600 mt-4 mb-2">בדיקה שהאתר עובד:</p>
+            <CodeBlock code="curl -I http://<DOMAIN_NAME>" />
+            <ExpectedOutput>
+              <p>אמור להחזיר: <code>HTTP/1.1 200 OK</code> או redirect ל-HTTPS</p>
+            </ExpectedOutput>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">ו. הוספת SSL</h4>
             <CodeBlock code={`apt install certbot python3-certbot-nginx -y
 certbot --nginx -d <DOMAIN_NAME> -d www.<DOMAIN_NAME>`} />
-            
+            <ExpectedOutput>
+              <p>✅ בדיקה שSSL עובד:</p>
+              <CodeBlock code="curl -I https://<DOMAIN_NAME>" />
+              <p>אמור להחזיר: <code>HTTP/2 200</code> (שים לב ל-HTTP/2!)</p>
+              <p className="mt-2">בדפדפן: <code dir="ltr">https://&lt;DOMAIN_NAME&gt;</code> → אמור להיות <strong>🔒 מנעול ירוק</strong></p>
+            </ExpectedOutput>
+
             <div className="bg-green-100 border border-green-300 p-4 rounded-lg mt-6">
-              <p className="text-green-800 font-bold text-center">
-                🔒 זהו! האתר זמין ב-https://{"<DOMAIN_NAME>"}
-              </p>
+              <p className="text-green-800 font-bold text-center">🔒 זהו! האתר זמין ב-https://&lt;DOMAIN_NAME&gt;</p>
             </div>
           </Section>
 
-          {/* Step 11 - Useful Commands */}
-          <Section id="step11" title="🛠️ פקודות שימושיות" icon={Settings}>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-bold mb-2 text-gray-700"># צפייה בלוגים</h4>
-                <CodeBlock code="docker logs <container_name>" />
+          {/* ========== USEFUL COMMANDS ========== */}
+          <Section id="commands" title="🛠️ פקודות ניהול שימושיות" icon={Settings}>
+            <CodeBlock code={`# לוגים של קונטיינר
+docker logs <container_name>
+docker logs -f <container_name>  # מצב live
+
+# כניסה לקונטיינר
+docker exec -it <container_name> sh
+
+# רשימת קונטיינרים
+docker ps -a
+
+# עצירת קונטיינר
+docker compose down
+
+# הפעלה מחדש
+docker compose restart
+
+# ניקוי images ישנים
+docker image prune -a`} />
+          </Section>
+
+          {/* ========== TROUBLESHOOTING ========== */}
+          <Section id="troubleshooting" title="🚨 פתרון בעיות נפוצות" icon={AlertTriangle}>
+            <h4 className="font-bold text-lg mb-3 text-blue-900">בעיה: 502 Bad Gateway</h4>
+            <p className="text-gray-600 mb-2">אבחון:</p>
+            <CodeBlock code={`docker ps  # האם הקונטיינר רץ?
+docker logs <container_name>  # מה השגיאה?
+curl -I http://127.0.0.1:<HOST_PORT>  # האם עובד ישירות?`} />
+            <TipsBox>
+              <p><strong>פתרונות:</strong></p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>קונטיינר לא רץ → <code>docker compose up -d</code></li>
+                <li>פורט שגוי ב-Nginx → בדקי את proxy_pass</li>
+                <li>Cloudflare חוסם → כבי Proxy</li>
+              </ul>
+            </TipsBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בעיה: כל האתרים מופנים לאותו מקום</h4>
+            <p className="text-gray-600 mb-2">סיבה: קובץ <code>/etc/nginx/sites-enabled/default</code> עם <code>default_server</code></p>
+            <CodeBlock code={`rm /etc/nginx/sites-enabled/default
+systemctl reload nginx`} />
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בעיה: שגיאת SSL (ERR_CERT_AUTHORITY_INVALID)</h4>
+            <TipsBox>
+              <p><strong>פתרונות:</strong></p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li><strong>עם aaPanel:</strong> SSL → Let's Encrypt → Apply</li>
+                <li><strong>בלי aaPanel:</strong> <code>certbot --nginx -d &lt;DOMAIN_NAME&gt;</code></li>
+                <li><strong>Cloudflare:</strong> שני SSL mode ל-Full או Full (strict)</li>
+              </ul>
+            </TipsBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בעיה: docker compose לא עובד</h4>
+            <p className="text-gray-600 mb-2">בדיקה:</p>
+            <CodeBlock code="docker compose version" />
+            <p className="text-gray-600 mt-4 mb-2">אם לא מותקן:</p>
+            <CodeBlock code={`apt update
+apt install docker-compose-plugin`} />
+          </Section>
+
+          {/* ========== TIPS ========== */}
+          <Section id="tips" title="💡 טיפים חשובים" icon={Lightbulb}>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-bold text-green-800 mb-3">✅ תמיד עשי:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>בדיקת פורט לפני הפעלת קונטיינר חדש</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span><code>docker compose up --build</code> כדי לבנות מחדש אחרי שינויים</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>Snapshot אחרי שהכל עובד</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span><code>nginx -t</code> לפני reload</span>
+                  </li>
+                </ul>
               </div>
-              
-              <div>
-                <h4 className="font-bold mb-2 text-gray-700"># כניסה לקונטיינר</h4>
-                <CodeBlock code="docker exec -it <container_name> sh" />
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-2 text-gray-700"># רשימת קונטיינרים</h4>
-                <CodeBlock code="docker ps -a" />
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-2 text-gray-700"># עצירת אתר</h4>
-                <CodeBlock code="docker compose down" />
-              </div>
-              
-              <div>
-                <h4 className="font-bold mb-2 text-gray-700"># הפעלה מחדש</h4>
-                <CodeBlock code="docker compose restart" />
+              <div className="bg-red-50 p-4 rounded-lg">
+                <h4 className="font-bold text-red-800 mb-3">❌ לעולם אל:</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span>תפעילי קונטיינר על פורט תפוס</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span>תשכחי את ה-<code>--build</code> בעדכונים</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span>תשאירי <code>default_server</code> בNginx</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <span>תשתמשי ב-Cloudflare Proxy לWebSocket</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </Section>
 
-          {/* Tips Section */}
-          <div className="mt-12 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-300 rounded-xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-purple-700">💡 טיפים חשובים</h3>
-            <ul className="space-y-4 text-gray-700">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span>תמיד בדקו שהפורט פנוי לפני הרצה</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span>ה-<code className="bg-purple-200 px-1 rounded">--build</code> ב-<code className="bg-purple-200 px-1 rounded">docker compose up</code> חשוב - זה בונה מחדש את השינויים</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span>אם משהו לא עובד: <code className="bg-purple-200 px-1 rounded">docker logs</code> מראה את השגיאות</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                <span>לעדכון אתר: רק 4 שורות (שלב 9)</span>
-              </li>
-            </ul>
-          </div>
+          {/* ========== QUICK SUMMARY ========== */}
+          <Section id="summary" title="🎯 סיכום זריזות" icon={CheckCircle2}>
+            <h4 className="font-bold text-lg mb-3 text-blue-900">הקמת אתר חדש:</h4>
+            <CodeBlock code={`# 1. יצירת תיקייה
+mkdir -p /www/wwwroot/<PROJECT_FOLDER> && cd /www/wwwroot/<PROJECT_FOLDER>
 
-          {/* Summary */}
-          <div className="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-300 rounded-xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-green-700">✅ סיכום – מה עשינו</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                "התחברנו לשרת",
-                "יצרנו תיקייה",
-                "הגדרנו SSH ל-GitHub",
-                "משכנו מ-GitHub",
-                "בדקנו פורט פנוי",
-                "יצרנו Dockerfile",
-                "יצרנו docker-compose",
-                "הרצנו את האתר",
-                "הגדרנו DNS",
-                "התקנו Nginx",
-                "הוספנו SSL"
-              ].map((item) => (
-                <div key={item} className="flex items-center gap-2 text-gray-800">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-6 p-4 bg-green-100 rounded-lg">
-              <p className="text-green-800 font-medium">
-                🎉 כל הכבוד! הפרויקט שלכם רץ על השרת עם HTTPS ומוכן לעולם.
-              </p>
-            </div>
-          </div>
+# ✅ בדיקה:
+pwd  # אמור להחזיר: /www/wwwroot/<PROJECT_FOLDER>
+
+# 2. Clone
+git clone git@github.com:<USERNAME>/<REPO_NAME>.git .
+
+# ✅ בדיקה:
+git remote -v  # אמור להראות את הריפו הנכון
+ls -la  # אמור להראות package.json
+
+# 3. הרצה
+docker compose up --build -d
+
+# ✅ בדיקה:
+docker ps  # אמור להראות קונטיינר רץ
+curl -I http://127.0.0.1:<HOST_PORT>  # אמור להחזיר 200 OK
+
+# 4. חיבור לדומיין (aaPanel או Nginx ידני)`} />
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">עדכון אתר קיים:</h4>
+            <CodeBlock code={`# ✅ בדיקה שאת בפרויקט הנכון:
+pwd  # /www/wwwroot/<PROJECT_FOLDER>
+git remote -v  # הריפו הנכון
+
+# עדכון:
+cd /www/wwwroot/<PROJECT_FOLDER>
+git pull origin main
+docker compose up --build -d
+
+# ✅ בדיקה:
+docker ps  # תראי Created X seconds ago (זמן חדש!)
+curl -I http://127.0.0.1:<HOST_PORT>  # 200 OK`} />
+
+            <TipsBox>
+              <p>🚀 <strong>זהו!</strong></p>
+            </TipsBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">📝 רשימת בדיקות מהירה (Checklist)</h4>
+            <p className="text-gray-600 mb-4">לפני משיכת שינויים, תמיד ריצי:</p>
+            <CodeBlock code={`# 1. איפה אני?
+pwd
+
+# 2. זה הפרויקט הנכון?
+git remote -v
+
+# 3. על איזה branch?
+git branch
+
+# 4. יש שינויים לא שמורים?
+git status`} />
+            <ExpectedOutput>
+              <p><strong>אם הכל נראה טוב</strong> ✅ → <code>git pull origin main</code></p>
+            </ExpectedOutput>
+          </Section>
 
         </div>
       </section>
