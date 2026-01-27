@@ -319,52 +319,32 @@ const DockerGuide = () => {
           </div>
 
           {/* Step 0 Part 1 - Connect to GitHub */}
-          <Section id="step0-part1" title="חלק 1: חיבור פרויקט ל-GitHub (עושים במחשב המקומי)" icon={GitBranch}>
-            <h4 className="font-bold text-lg mb-3 text-blue-900">אם הפרויקט נבנה ב-Lovable / Bolt:</h4>
+          <Section id="step0-part1" title="🔗 חיבור פרויקט ל-GitHub (הדרך הנכונה!)" icon={GitBranch}>
+            <h4 className="font-bold text-lg mb-4 text-blue-900">✅ ב-Lovable (הכי פשוט!)</h4>
             
-            <h5 className="font-bold text-md mb-2 mt-4 text-blue-800">א. פתחי את הפרויקט ב-IDE (VSCode/Cursor)</h5>
-            <CodeBlock code="cd /path/to/your/project" />
+            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+              <h5 className="font-bold text-md mb-4 text-blue-800">שלב 1: פתחי הגדרות</h5>
+              <p className="text-gray-700 mb-4">בפרויקט → לחצי על ⚙️ <strong>Settings</strong> (למעלה מימין)</p>
 
-            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ב. אתחול Git (אם עוד לא)</h5>
-            <CodeBlock code="git init" />
+              <h5 className="font-bold text-md mb-4 mt-6 text-blue-800">שלב 2: חיבור ל-GitHub</h5>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 mr-4">
+                <li><strong>GitHub Integration</strong> (בצד)</li>
+                <li><strong>Connect to GitHub</strong> (כפתור כחול)</li>
+                <li>אשרי הרשאות ל-GitHub</li>
+              </ul>
 
-            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ג. צרי `.gitignore` (חשוב!)</h5>
-            <CodeBlock code="nano .gitignore" />
-            <p className="text-gray-600 mb-2">תוכן לדבק:</p>
-            <CodeBlock code={`node_modules/
-dist/
-build/
-.env
-.env.local
-.DS_Store
-*.log`} />
-            <WarningBox>
-              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
-            </WarningBox>
+              <h5 className="font-bold text-md mb-4 mt-6 text-blue-800">שלב 3: יצירת Repository</h5>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 mr-4">
+                <li><strong>Create new repository</strong></li>
+                <li>שם הפרויקט: (למשל: <code>my-website</code>)</li>
+                <li><strong>Public</strong> או <strong>Private</strong> (לבחירה)</li>
+                <li><strong>Create & Push</strong></li>
+              </ul>
 
-            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ד. צרי Repository חדש ב-GitHub</h5>
-            <ol className="list-decimal list-inside space-y-2 text-gray-700">
-              <li><strong>GitHub.com</strong> → <strong>New Repository</strong></li>
-              <li>שם: <code>my-project</code></li>
-              <li><strong>לא</strong> לסמן "Initialize with README"</li>
-              <li><strong>Create Repository</strong></li>
-            </ol>
-
-            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ה. חבר את הפרויקט ל-GitHub</h5>
-            <CodeBlock code={`git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin git@github.com:<USERNAME>/<REPO_NAME>.git
-git push -u origin main`} />
-            <ChangeNote>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;USERNAME&gt;</code> → שם המשתמש שלך ב-GitHub</p>
-              <p><code className="bg-blue-200 px-1 rounded">&lt;REPO_NAME&gt;</code> → שם הריפו שיצרת</p>
-            </ChangeNote>
-            <ExpectedOutput>
-              <p>✅ בדיקה:</p>
-              <CodeBlock code="git remote -v" />
-              <p>אמור להראות: <code dir="ltr">origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git</code></p>
-            </ExpectedOutput>
+              <ExpectedOutput>
+                <p>✅ <strong>זהו! הפרויקט עלה ל-GitHub אוטומטית!</strong></p>
+              </ExpectedOutput>
+            </div>
           </Section>
 
           {/* Step 0 Part 2 - Check Server Software */}
