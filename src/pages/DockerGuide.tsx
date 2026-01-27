@@ -236,12 +236,14 @@ const DockerGuide = () => {
 
   const tableOfContents = [
     { id: "intro", title: "בחירת מסלול", icon: Shield },
+    { id: "step0", title: "שלב 0: הכנת הפרויקט והשרת", icon: Package },
     { id: "track-a", title: "מסלול A: עם aaPanel", icon: Settings },
     { id: "track-b", title: "מסלול B: שרת Ubuntu נקי", icon: Terminal },
     { id: "commands", title: "פקודות ניהול שימושיות", icon: Wrench },
     { id: "troubleshooting", title: "פתרון בעיות נפוצות", icon: AlertTriangle },
     { id: "tips", title: "טיפים חשובים", icon: Lightbulb },
     { id: "summary", title: "סיכום זריזות", icon: CheckCircle2 },
+    { id: "maintenance", title: "פקודות תחזוקה", icon: Settings },
   ];
 
   return (
@@ -309,6 +311,132 @@ const DockerGuide = () => {
                 <p className="text-gray-600">שרת Ubuntu נקי (ללא ממשק ניהול)</p>
               </a>
             </div>
+          </Section>
+
+          {/* ========== STEP 0 - Preparation ========== */}
+          <div id="step0" className="mt-8 mb-4 p-4 bg-purple-100 rounded-xl">
+            <h2 className="text-2xl font-bold text-purple-900">📦 שלב 0: הכנת הפרויקט והשרת</h2>
+          </div>
+
+          {/* Step 0 Part 1 - Connect to GitHub */}
+          <Section id="step0-part1" title="חלק 1: חיבור פרויקט ל-GitHub (עושים במחשב המקומי)" icon={GitBranch}>
+            <h4 className="font-bold text-lg mb-3 text-blue-900">אם הפרויקט נבנה ב-Lovable / Bolt:</h4>
+            
+            <h5 className="font-bold text-md mb-2 mt-4 text-blue-800">א. פתחי את הפרויקט ב-IDE (VSCode/Cursor)</h5>
+            <CodeBlock code="cd /path/to/your/project" />
+
+            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ב. אתחול Git (אם עוד לא)</h5>
+            <CodeBlock code="git init" />
+
+            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ג. צרי `.gitignore` (חשוב!)</h5>
+            <CodeBlock code="nano .gitignore" />
+            <p className="text-gray-600 mb-2">תוכן לדבק:</p>
+            <CodeBlock code={`node_modules/
+dist/
+build/
+.env
+.env.local
+.DS_Store
+*.log`} />
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
+
+            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ד. צרי Repository חדש ב-GitHub</h5>
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li><strong>GitHub.com</strong> → <strong>New Repository</strong></li>
+              <li>שם: <code>my-project</code></li>
+              <li><strong>לא</strong> לסמן "Initialize with README"</li>
+              <li><strong>Create Repository</strong></li>
+            </ol>
+
+            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">ה. חבר את הפרויקט ל-GitHub</h5>
+            <CodeBlock code={`git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin git@github.com:<USERNAME>/<REPO_NAME>.git
+git push -u origin main`} />
+            <ChangeNote>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;USERNAME&gt;</code> → שם המשתמש שלך ב-GitHub</p>
+              <p><code className="bg-blue-200 px-1 rounded">&lt;REPO_NAME&gt;</code> → שם הריפו שיצרת</p>
+            </ChangeNote>
+            <ExpectedOutput>
+              <p>✅ בדיקה:</p>
+              <CodeBlock code="git remote -v" />
+              <p>אמור להראות: <code dir="ltr">origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git</code></p>
+            </ExpectedOutput>
+          </Section>
+
+          {/* Step 0 Part 2 - Check Server Software */}
+          <Section id="step0-part2" title="חלק 2: בדיקת תוכנות נדרשות בשרת" icon={Server}>
+            <p className="text-gray-600 mb-4">התחברי לשרת:</p>
+            <CodeBlock code="ssh root@<SERVER_IP>" />
+
+            <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">בדיקה 1: האם Docker מותקן?</h4>
+            <CodeBlock code="docker --version" />
+            <ExpectedOutput>
+              <p>✅ אם מותקן: יראה <code>Docker version 20.x.x</code></p>
+              <p>❌ אם לא: המשיכי להתקנה למטה</p>
+            </ExpectedOutput>
+
+            <h5 className="font-bold text-md mb-2 mt-4 text-blue-800">התקנת Docker:</h5>
+            <CodeBlock code={`apt update
+apt install -y docker.io docker-compose-plugin
+systemctl start docker
+systemctl enable docker`} />
+            <ExpectedOutput>
+              <p>✅ בדיקה:</p>
+              <CodeBlock code={`docker --version
+docker compose version`} />
+            </ExpectedOutput>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בדיקה 2: האם Git מותקן?</h4>
+            <CodeBlock code="git --version" />
+            <ExpectedOutput>
+              <p>✅ אם מותקן: יראה <code>git version 2.x.x</code></p>
+              <p>❌ אם לא:</p>
+            </ExpectedOutput>
+            <CodeBlock code="apt install -y git" />
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בדיקה 3: האם יש Nginx?</h4>
+            <CodeBlock code="nginx -v" />
+            <ExpectedOutput>
+              <p>✅ אם מותקן: יראה <code>nginx version: nginx/1.x.x</code></p>
+              <p>❌ אם לא (ורק אם אין aaPanel!):</p>
+            </ExpectedOutput>
+            <CodeBlock code={`apt install -y nginx
+systemctl start nginx
+systemctl enable nginx`} />
+            <WarningBox>
+              <p>⚠️ <strong>אם יש aaPanel</strong> - אל תתקיני Nginx ידנית! aaPanel מנהל את זה.</p>
+            </WarningBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בדיקה 4: פורטים פתוחים</h4>
+            <CodeBlock code="ufw status" />
+            <p className="text-gray-600 mt-4 mb-2"><strong>אם UFW פעיל</strong>, ודאי שהפורטים פתוחים:</p>
+            <CodeBlock code={`ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow <HOST_PORT>/tcp  # הפורט של Docker`} />
+            <TipsBox>
+              <p><strong>אם יש aaPanel</strong>, בדקי גם בממשק: <strong>Security</strong> → <strong>Firewall</strong> → ודאי שפורטים 80, 443 פתוחים</p>
+            </TipsBox>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">בדיקה 5: שטח דיסק פנוי</h4>
+            <CodeBlock code="df -h" />
+            <ExpectedOutput>
+              <p>✅ ודאי שיש לפחות <strong>5GB פנויים</strong> ב-<code>/</code> או <code>/www</code></p>
+            </ExpectedOutput>
+
+            <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">✅ סיכום בדיקות - הכל מוכן!</h4>
+            <CodeBlock code={`echo "=== בדיקת מערכת ==="
+docker --version && echo "✅ Docker מותקן" || echo "❌ Docker חסר"
+docker compose version && echo "✅ Docker Compose מותקן" || echo "❌ Compose חסר"
+git --version && echo "✅ Git מותקן" || echo "❌ Git חסר"
+nginx -v 2>&1 | head -1 && echo "✅ Nginx מותקן" || echo "⚠️ Nginx לא מותקן"
+df -h | grep -E "/$|/www"`} />
+            <TipsBox>
+              <p><strong>אם הכל מסומן ✅ - אפשר להמשיך!</strong></p>
+            </TipsBox>
           </Section>
 
           {/* ========== TRACK A - aaPanel ========== */}
@@ -383,7 +511,7 @@ cat ~/.ssh/id_ed25519.pub`} />
           {/* A Step 6 - Create Dockerfile */}
           <Section id="a-step6" title="6️⃣ יצירת Dockerfile" icon={FileCode}>
             <CodeBlock code="nano Dockerfile" />
-            <p className="text-gray-600 mb-4">תוכן לדבק (Vite/React/Vue):</p>
+            <p className="text-gray-600 mb-4">תוכן לדבק (Vite/React/Vue/Lovable/Bolt):</p>
             <CodeBlock code={`FROM node:18-alpine AS build
 WORKDIR /app
 
@@ -399,9 +527,25 @@ COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]`} language="dockerfile" />
             <WarningBox>
-              <p>⚠️ מתאים ל-Vite/React/Vue. אם את משתמשת ב-Next.js/PHP - צריך Dockerfile שונה.</p>
-              <p className="mt-2">שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+              <p>⚠️ <strong>הערה חשובה:</strong></p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li><strong>Vite/React/Vue/Lovable</strong> → התיקייה היא <code>dist</code></li>
+                <li><strong>Next.js</strong> → התיקייה היא <code>.next</code> וצריך Dockerfile שונה</li>
+                <li><strong>Bolt/v0</strong> → לרוב <code>dist</code> או <code>build</code> (בדקי ב-package.json)</li>
+              </ul>
             </WarningBox>
+            <TipsBox>
+              <p><strong>איך לדעת?</strong> בדקי ב-<code>package.json</code>:</p>
+              <CodeBlock code='cat package.json | grep "build"' />
+              <p>חפשי את השורה: <code>"build": "vite build"</code> → התיקייה היא <code>dist</code></p>
+            </TipsBox>
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
+            <ExpectedOutput>
+              <p>✅ בדיקה שהקובץ נוצר:</p>
+              <CodeBlock code="cat Dockerfile" />
+            </ExpectedOutput>
           </Section>
 
           {/* A Step 7 - Create docker-compose.yml */}
@@ -816,7 +960,15 @@ curl -I http://127.0.0.1:<HOST_PORT>  # 200 OK`} />
             </TipsBox>
 
             <h4 className="font-bold text-lg mb-3 mt-8 text-blue-900">📝 רשימת בדיקות מהירה (Checklist)</h4>
-            <p className="text-gray-600 mb-4">לפני משיכת שינויים, תמיד ריצי:</p>
+            
+            <h5 className="font-bold text-md mb-2 text-blue-800">לפני התחלת התקנה:</h5>
+            <CodeBlock code={`# בדיקת תוכנות
+docker --version          # צריך להיות מותקן
+docker compose version    # צריך להיות מותקן
+git --version            # צריך להיות מותקן
+df -h                    # יש מקום פנוי?`} />
+
+            <h5 className="font-bold text-md mb-2 mt-6 text-blue-800">לפני משיכת שינויים:</h5>
             <CodeBlock code={`# 1. איפה אני?
 pwd
 
@@ -831,6 +983,27 @@ git status`} />
             <ExpectedOutput>
               <p><strong>אם הכל נראה טוב</strong> ✅ → <code>git pull origin main</code></p>
             </ExpectedOutput>
+          </Section>
+
+          {/* ========== MAINTENANCE COMMANDS ========== */}
+          <Section id="maintenance" title="🔧 פקודות תחזוקה שוטפת" icon={Settings}>
+            <CodeBlock code={`# ניקוי Docker (פעם בחודש)
+docker system prune -a
+
+# בדיקת שימוש בדיסק
+df -h
+
+# בדיקת קונטיינרים רצים
+docker ps
+
+# בדיקת כל הקונטיינרים (כולל עצורים)
+docker ps -a
+
+# מחיקת קונטיינר ישן שלא בשימוש
+docker rm <container_id>
+
+# מחיקת image ישן
+docker rmi <image_id>`} />
           </Section>
 
         </div>
