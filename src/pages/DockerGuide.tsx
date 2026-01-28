@@ -16,7 +16,6 @@ interface VariableValues {
   domainName: string;
   email: string;
 }
-
 const VariablesContext = createContext<VariableValues>({
   serverIp: "<SERVER_IP>",
   projectFolder: "<PROJECT_FOLDER>",
@@ -24,29 +23,25 @@ const VariablesContext = createContext<VariableValues>({
   repoName: "<REPO_NAME>",
   hostPort: "<HOST_PORT>",
   domainName: "<DOMAIN_NAME>",
-  email: "your_email@example.com",
+  email: "your_email@example.com"
 });
 
 // Function to replace placeholders with actual values
 const replacePlaceholders = (text: string, values: VariableValues): string => {
-  return text
-    .replace(/<SERVER_IP>/g, values.serverIp || "<SERVER_IP>")
-    .replace(/<PROJECT_FOLDER>/g, values.projectFolder || "<PROJECT_FOLDER>")
-    .replace(/<USERNAME>/g, values.githubUsername || "<USERNAME>")
-    .replace(/<REPO_NAME>/g, values.repoName || "<REPO_NAME>")
-    .replace(/<HOST_PORT>/g, values.hostPort || "<HOST_PORT>")
-    .replace(/<PORT>/g, values.hostPort || "<PORT>")
-    .replace(/<DOMAIN_NAME>/g, values.domainName || "<DOMAIN_NAME>")
-    .replace(/your_email@example\.com/g, values.email || "your_email@example.com");
+  return text.replace(/<SERVER_IP>/g, values.serverIp || "<SERVER_IP>").replace(/<PROJECT_FOLDER>/g, values.projectFolder || "<PROJECT_FOLDER>").replace(/<USERNAME>/g, values.githubUsername || "<USERNAME>").replace(/<REPO_NAME>/g, values.repoName || "<REPO_NAME>").replace(/<HOST_PORT>/g, values.hostPort || "<HOST_PORT>").replace(/<PORT>/g, values.hostPort || "<PORT>").replace(/<DOMAIN_NAME>/g, values.domainName || "<DOMAIN_NAME>").replace(/your_email@example\.com/g, values.email || "your_email@example.com");
 };
 
 // CodeBlock component with copy functionality
-const CodeBlock = ({ code, language = "bash" }: { code: string; language?: string }) => {
+const CodeBlock = ({
+  code,
+  language = "bash"
+}: {
+  code: string;
+  language?: string;
+}) => {
   const [copied, setCopied] = useState(false);
   const values = useContext(VariablesContext);
-  
   const processedCode = replacePlaceholders(code, values);
-
   const handleCopy = async () => {
     await navigator.clipboard.writeText(processedCode);
     setCopied(true);
@@ -55,127 +50,152 @@ const CodeBlock = ({ code, language = "bash" }: { code: string; language?: strin
 
   // Check if any placeholder was replaced with an actual value
   const hasReplacements = processedCode !== code;
-
-  return (
-    <div className="relative group my-4" dir="ltr">
+  return <div className="relative group my-4" dir="ltr">
       <pre className={`border rounded-lg p-4 pr-12 overflow-x-auto text-sm font-mono ${hasReplacements ? 'bg-green-50 border-green-300 text-gray-800' : 'bg-gray-200 border-gray-300 text-gray-800'}`}>
         <code>{processedCode}</code>
       </pre>
-      <button
-        onClick={handleCopy}
-        className={`absolute top-3 right-3 p-1.5 rounded transition-colors ${hasReplacements ? 'hover:bg-green-200 text-green-700 hover:text-green-800' : 'hover:bg-gray-300 text-gray-600 hover:text-gray-800'}`}
-      >
+      <button onClick={handleCopy} className={`absolute top-3 right-3 p-1.5 rounded transition-colors ${hasReplacements ? 'hover:bg-green-200 text-green-700 hover:text-green-800' : 'hover:bg-gray-300 text-gray-600 hover:text-gray-800'}`}>
         {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
       </button>
-    </div>
-  );
+    </div>;
 };
 
 // Expected output box
-const ExpectedOutput = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-green-100 border-r-4 border-green-500 p-4 rounded-lg my-4">
+const ExpectedOutput = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <div className="bg-green-100 border-r-4 border-green-500 p-4 rounded-lg my-4">
     <div className="flex items-center gap-2 mb-2 text-green-700 font-bold">
       <CheckCircle2 className="h-5 w-5" />
       <span>מה אמור לחזור?</span>
     </div>
     <div className="text-green-900">{children}</div>
-  </div>
-);
+  </div>;
 
 // Warning box
-const WarningBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-yellow-100 border-r-4 border-yellow-500 p-4 rounded-lg my-4">
+const WarningBox = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <div className="bg-yellow-100 border-r-4 border-yellow-500 p-4 rounded-lg my-4">
     <div className="flex items-center gap-2 mb-2 text-yellow-700 font-bold">
       <AlertTriangle className="h-5 w-5" />
       <span>שים לב!</span>
     </div>
     <div className="text-yellow-900">{children}</div>
-  </div>
-);
+  </div>;
 
 // Change note box
-const ChangeNote = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-blue-100 border-r-4 border-blue-500 p-4 rounded-lg my-4">
+const ChangeNote = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <div className="bg-blue-100 border-r-4 border-blue-500 p-4 rounded-lg my-4">
     <div className="flex items-center gap-2 mb-2 text-blue-700 font-bold">
       <Wrench className="h-5 w-5" />
       <span>🔧 מה להחליף:</span>
     </div>
     <div className="text-blue-900">{children}</div>
-  </div>
-);
+  </div>;
 
 // Tips box
-const TipsBox = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-purple-100 border-r-4 border-purple-500 p-4 rounded-lg my-4">
+const TipsBox = ({
+  children
+}: {
+  children: React.ReactNode;
+}) => <div className="bg-purple-100 border-r-4 border-purple-500 p-4 rounded-lg my-4">
     <div className="flex items-center gap-2 mb-2 text-purple-700 font-bold">
       <Lightbulb className="h-5 w-5" />
       <span>💡 טיפ:</span>
     </div>
     <div className="text-purple-900">{children}</div>
-  </div>
-);
+  </div>;
 
 // Collapsible section
-const Section = ({ 
-  id, 
-  title, 
-  icon: Icon, 
+const Section = ({
+  id,
+  title,
+  icon: Icon,
   children,
   defaultOpen = false
-}: { 
-  id: string; 
-  title: string; 
+}: {
+  id: string;
+  title: string;
   icon: React.ElementType;
   children: React.ReactNode;
   defaultOpen?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-
-  return (
-    <div id={id} className="border border-gray-300 rounded-xl overflow-hidden mb-4 shadow-sm">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 transition-colors text-right"
-      >
+  return <div id={id} className="border border-gray-300 rounded-xl overflow-hidden mb-4 shadow-sm">
+      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 transition-colors text-right">
         <div className="flex items-center gap-3">
           <Icon className="h-6 w-6 text-blue-900" />
           <span className="text-lg font-bold text-blue-900">{title}</span>
         </div>
         {isOpen ? <ChevronUp className="h-5 w-5 text-gray-500" /> : <ChevronDown className="h-5 w-5 text-gray-500" />}
       </button>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="p-6 bg-white"
-        >
+      {isOpen && <motion.div initial={{
+      opacity: 0,
+      height: 0
+    }} animate={{
+      opacity: 1,
+      height: "auto"
+    }} exit={{
+      opacity: 0,
+      height: 0
+    }} className="p-6 bg-white">
           {children}
-        </motion.div>
-      )}
-    </div>
-  );
+        </motion.div>}
+    </div>;
 };
 
 // Variables input form component
-const VariablesForm = ({ values, onChange }: { 
-  values: VariableValues; 
+const VariablesForm = ({
+  values,
+  onChange
+}: {
+  values: VariableValues;
   onChange: (key: keyof VariableValues, value: string) => void;
 }) => {
-  const fields = [
-    { key: "serverIp" as const, label: "כתובת IP של השרת", placeholder: "123.45.67.89", icon: Server },
-    { key: "projectFolder" as const, label: "שם תיקיית הפרויקט", placeholder: "my-website", icon: FolderCheck },
-    { key: "githubUsername" as const, label: "שם משתמש GitHub", placeholder: "myusername", icon: GitBranch },
-    { key: "repoName" as const, label: "שם הריפו", placeholder: "my-repo", icon: Package },
-    { key: "hostPort" as const, label: "פורט (למשל 3001)", placeholder: "3001", icon: Terminal },
-    { key: "domainName" as const, label: "שם הדומיין", placeholder: "example.com", icon: Globe },
-    { key: "email" as const, label: "אימייל (ל-GitHub)", placeholder: "you@example.com", icon: Key },
-  ];
-
+  const fields = [{
+    key: "serverIp" as const,
+    label: "כתובת IP של השרת",
+    placeholder: "123.45.67.89",
+    icon: Server
+  }, {
+    key: "projectFolder" as const,
+    label: "שם תיקיית הפרויקט",
+    placeholder: "my-website",
+    icon: FolderCheck
+  }, {
+    key: "githubUsername" as const,
+    label: "שם משתמש GitHub",
+    placeholder: "myusername",
+    icon: GitBranch
+  }, {
+    key: "repoName" as const,
+    label: "שם הריפו",
+    placeholder: "my-repo",
+    icon: Package
+  }, {
+    key: "hostPort" as const,
+    label: "פורט (למשל 3001)",
+    placeholder: "3001",
+    icon: Terminal
+  }, {
+    key: "domainName" as const,
+    label: "שם הדומיין",
+    placeholder: "example.com",
+    icon: Globe
+  }, {
+    key: "email" as const,
+    label: "אימייל (ל-GitHub)",
+    placeholder: "you@example.com",
+    icon: Key
+  }];
   const filledCount = Object.values(values).filter(v => v && !v.startsWith("<") && v !== "your_email@example.com").length;
-
-  return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+  return <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-blue-100 rounded-lg">
           <Edit3 className="h-6 w-6 text-blue-700" />
@@ -190,32 +210,26 @@ const VariablesForm = ({ values, onChange }: {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {fields.map(({ key, label, placeholder, icon: Icon }) => (
-          <div key={key} className="space-y-1.5">
+        {fields.map(({
+        key,
+        label,
+        placeholder,
+        icon: Icon
+      }) => <div key={key} className="space-y-1.5">
             <Label htmlFor={key} className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <Icon className="h-4 w-4 text-blue-600" />
               {label}
             </Label>
-            <Input
-              id={key}
-              value={values[key].startsWith("<") || values[key] === "your_email@example.com" ? "" : values[key]}
-              onChange={(e) => onChange(key, e.target.value)}
-              placeholder={placeholder}
-              className="bg-white border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-              dir="ltr"
-            />
-          </div>
-        ))}
+            <Input id={key} value={values[key].startsWith("<") || values[key] === "your_email@example.com" ? "" : values[key]} onChange={e => onChange(key, e.target.value)} placeholder={placeholder} className="bg-white border-gray-300 focus:border-blue-500 focus:ring-blue-500" dir="ltr" />
+          </div>)}
       </div>
       
       <div className="mt-4 flex items-center gap-2 text-sm text-blue-700 bg-blue-100 p-3 rounded-lg">
         <Lightbulb className="h-4 w-4 flex-shrink-0" />
         <span>ברגע שתמלא שדה, כל הפקודות במדריך יתעדכנו אוטומטית עם הערך שהזנת ויודגשו בירוק</span>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 const DockerGuide = () => {
   const [variableValues, setVariableValues] = useState<VariableValues>({
     serverIp: "<SERVER_IP>",
@@ -224,41 +238,66 @@ const DockerGuide = () => {
     repoName: "<REPO_NAME>",
     hostPort: "<HOST_PORT>",
     domainName: "<DOMAIN_NAME>",
-    email: "your_email@example.com",
+    email: "your_email@example.com"
   });
-
   const handleVariableChange = (key: keyof VariableValues, value: string) => {
     setVariableValues(prev => ({
       ...prev,
       [key]: value || (key === "email" ? "your_email@example.com" : `<${key.toUpperCase()}>`)
     }));
   };
-
-  const tableOfContents = [
-    { id: "intro", title: "בחירת מסלול", icon: Shield },
-    { id: "step0", title: "שלב 0: הכנת הפרויקט והשרת", icon: Package },
-    { id: "track-a", title: "מסלול A: עם aaPanel", icon: Settings },
-    { id: "track-b", title: "מסלול B: שרת Ubuntu נקי", icon: Terminal },
-    { id: "commands", title: "פקודות ניהול שימושיות", icon: Wrench },
-    { id: "troubleshooting", title: "פתרון בעיות נפוצות", icon: AlertTriangle },
-    { id: "tips", title: "טיפים חשובים", icon: Lightbulb },
-    { id: "summary", title: "סיכום זריזות", icon: CheckCircle2 },
-    { id: "maintenance", title: "פקודות תחזוקה", icon: Settings },
-  ];
-
-  return (
-    <VariablesContext.Provider value={variableValues}>
+  const tableOfContents = [{
+    id: "intro",
+    title: "בחירת מסלול",
+    icon: Shield
+  }, {
+    id: "step0",
+    title: "שלב 0: הכנת הפרויקט והשרת",
+    icon: Package
+  }, {
+    id: "track-a",
+    title: "מסלול A: עם aaPanel",
+    icon: Settings
+  }, {
+    id: "track-b",
+    title: "מסלול B: שרת Ubuntu נקי",
+    icon: Terminal
+  }, {
+    id: "commands",
+    title: "פקודות ניהול שימושיות",
+    icon: Wrench
+  }, {
+    id: "troubleshooting",
+    title: "פתרון בעיות נפוצות",
+    icon: AlertTriangle
+  }, {
+    id: "tips",
+    title: "טיפים חשובים",
+    icon: Lightbulb
+  }, {
+    id: "summary",
+    title: "סיכום זריזות",
+    icon: CheckCircle2
+  }, {
+    id: "maintenance",
+    title: "פקודות תחזוקה",
+    icon: Settings
+  }];
+  return <VariablesContext.Provider value={variableValues}>
     <div className="min-h-screen bg-white text-gray-900" dir="rtl">
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.6
+          }} className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-blue-900">
               🚀 מדריך מלא: הרצת אתר Docker וחיבור לדומיין
             </h1>
@@ -279,17 +318,11 @@ const DockerGuide = () => {
           <div className="bg-gray-50 border border-gray-300 rounded-xl p-6 mb-12">
             <h3 className="text-lg font-bold mb-4 text-gray-900">📑 תוכן עניינים:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {tableOfContents.map((item, index) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-900"
-                >
+              {tableOfContents.map((item, index) => <a key={item.id} href={`#${item.id}`} className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 transition-colors text-gray-600 hover:text-gray-900">
                   <item.icon className="h-4 w-4 text-blue-900" />
                   <span className="text-blue-900/70">{index + 1}.</span>
                   <span>{item.title}</span>
-                </a>
-              ))}
+                </a>)}
             </div>
           </div>
         </div>
@@ -993,9 +1026,7 @@ docker rmi <image_id>`} />
       <footer className="py-8 px-4 bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto max-w-4xl flex flex-col items-center gap-4">
           <Link to="/contact">
-            <Button className="bg-blue-900 hover:bg-blue-800 text-white">
-              צור קשר
-            </Button>
+            
           </Link>
           <p className="text-sm text-gray-500">
             © {new Date().getFullYear()} SmartBiz. כל הזכויות שמורות.
@@ -1003,8 +1034,6 @@ docker rmi <image_id>`} />
         </div>
       </footer>
     </div>
-    </VariablesContext.Provider>
-  );
+    </VariablesContext.Provider>;
 };
-
 export default DockerGuide;
