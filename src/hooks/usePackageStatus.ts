@@ -24,10 +24,24 @@ export const usePackageStatus = () => {
       });
 
       if (response.ok) {
-        const data: PackageInfo = await response.json();
-        setPackageInfo(data);
+        const rawData = await response.json();
+        
+        // Handle response format: [{"hasActivePackage": true}] or {"hasActivePackage": true}
+        const responseData = Array.isArray(rawData) ? rawData[0] : rawData;
+        
+        // Map the response to our PackageInfo interface
+        const packageData: PackageInfo = {
+          has_package: responseData?.hasActivePackage === true,
+          remaining_tickets: responseData?.remaining_tickets ?? (responseData?.hasActivePackage ? 1 : 0),
+          total_tickets: responseData?.total_tickets,
+          package_name: responseData?.package_name,
+          package_status: responseData?.hasActivePackage ? "active" : "inactive",
+          expires_at: responseData?.expires_at,
+        };
+        
+        setPackageInfo(packageData);
         setHasChecked(true);
-        return data;
+        return packageData;
       } else {
         setError("שגיאה בבדיקת החבילה. נסה שוב.");
         return null;
