@@ -1,69 +1,153 @@
 
+# תוכנית מקיפה: מערכת ניהול חבילות פניות
 
-# תוכנית: הוספת בדיקת ריפו לפני משיכת שינויים
+## סקירת המצב הנוכחי
 
-## מה נוסיף
+כרגע כל משתמש יכול לשלוח פניה ללא הגבלה - אין בדיקה של חבילה פעילה.
 
-בשלב 9 (משיכת שינויים בעתיד) נוסיף פקודה לבדיקת ה-remote repository לפני המשיכה, כדי לוודא שמושכים מהמקום הנכון.
+## הזרימה החדשה
 
-## השינויים
+```text
++------------------+     +------------------+     +------------------+
+|  משתמש מזין     | --> | בדיקת חבילה      | --> | יש חבילה פעילה?  |
+|  אימייל         |     | webhook support3 |     |                  |
++------------------+     +------------------+     +--------+---------+
+                                                          |
+                         +--------------------------------+
+                         |                                |
+                    כן (יש פניות)                   לא (אין חבילה/נגמרו)
+                         |                                |
+                         v                                v
+              +------------------+              +------------------+
+              | הצג טופס פנייה  |              | הצג הודעה +      |
+              | + מספר פניות    |              | כפתור רכישה     |
+              | שנותרו         |              +------------------+
+              +------------------+                       |
+                         |                               v
+                         v                    +------------------+
+              +------------------+            | הפניה לדף תשלום |
+              | שליחת פנייה    |            | pay.sumit.co.il  |
+              | webhook support1 |            +------------------+
+              +------------------+
+```
 
-### שלב 9 - עדכון הקוד
+## שינויים נדרשים
 
-נוסיף לפני הפקודות הקיימות:
+### 1. דף "הפניות שלי" (SupportMyTickets.tsx)
 
-1. **פקודת בדיקה** - `git remote -v` להצגת הריפו המחובר
-2. **הסבר** - מה צריך לראות בפלט
-3. **פקודת תיקון** - במקרה שהריפו לא נכון
+**תוספות:**
+- כפתור "רכישת חבילת פניות" בראש הדף (תמיד מוצג)
+- לאחר חיפוש - הצגת מצב החבילה:
+  - כמה פניות נותרו
+  - סטטוס החבילה (פעילה/לא פעילה)
+- אם אין חבילה פעילה - הודעה ברורה עם כפתור רכישה
 
-### הקוד החדש:
+**קריאה חדשה:**
+- Webhook `support3` עם האימייל
+- תגובה צפויה: `{ active: true/false, remaining: 5, total: 10 }`
 
-```jsx
-{/* Step 9 - Pull Changes */}
-<Section id="step9" title="9️⃣ משיכת שינויים בעתיד" icon={RefreshCw}>
-  <p className="text-gray-600 mb-4">
-    כשתרצו לעדכן את האתר עם שינויים חדשים מ-GitHub:
-  </p>
-  
-  <h4 className="font-bold text-lg mb-3 text-blue-900">א. בדיקת הריפו המחובר</h4>
-  <CodeBlock code="git remote -v" />
-  
-  <ExpectedOutput>
-    <p>צריך לראות את הריפו שלכם:</p>
-    <code dir="ltr" className="block mt-2">
-      origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (fetch)
-      origin  git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git (push)
-    </code>
-  </ExpectedOutput>
-  
-  <WarningBox>
-    <p><strong>אם הריפו לא נכון?</strong> תקנו עם:</p>
-    <code dir="ltr" className="block mt-2 bg-yellow-200 p-2 rounded">
-      git remote set-url origin git@github.com:&lt;USERNAME&gt;/&lt;REPO_NAME&gt;.git
-    </code>
-  </WarningBox>
-  
-  <h4 className="font-bold text-lg mb-3 mt-6 text-blue-900">ב. משיכת השינויים והפעלה מחדש</h4>
-  <CodeBlock code={`cd /var/www/<PROJECT_FOLDER>
-git pull origin main
-docker compose down
-docker compose up --build -d`} />
-  
-  <ChangeNote>...</ChangeNote>
-  <TipsBox>...</TipsBox>
-</Section>
+### 2. דף "פתיחת פנייה" (SupportCreate.tsx)
+
+**שינוי הזרימה:**
+
+**שלב א - הזנת אימייל:**
+- המשתמש מזין אימייל
+- כפתור "בדיקת חבילה"
+
+**שלב ב - בדיקה (webhook support3):**
+- טעינה עם spinner
+- בדיקה האם יש חבילה פעילה עם פניות זמינות
+
+**שלב ג - תוצאות:**
+
+אם יש חבילה פעילה:
+- הצגת "נותרו לך X פניות מתוך Y"
+- הצגת טופס הפנייה המלא
+- אפשרות לשלוח
+
+אם אין חבילה/נגמרו הפניות:
+- הודעה ברורה: "אין לך חבילת פניות פעילה" או "נגמרו הפניות בחבילה"
+- כפתור בולט "רכישת חבילת פניות"
+- לחיצה → פתיחה בחלון חדש לדף התשלום
+- קישור "כבר רכשת? לחצי לבדיקה מחדש"
+
+### 3. רכיב חדש: PackageStatus
+
+רכיב לתצוגת מצב חבילה שיופיע בשני הדפים:
+- אייקון וצבע לפי מצב (ירוק/צהוב/אדום)
+- מספר פניות שנותרו
+- כפתור רכישה אם צריך
+
+### 4. רכיב חדש: NoPackageMessage
+
+הודעה מעוצבת שמוצגת כשאין חבילה:
+- אייקון אזהרה
+- טקסט הסבר
+- כפתור רכישה בולט
+- עיצוב מושך תשומת לב
+
+## מבנה התגובה הצפוי מ-support3
+
+```json
+{
+  "has_package": true,
+  "package_status": "active",
+  "remaining_tickets": 5,
+  "total_tickets": 10,
+  "package_name": "חבילה בסיסית",
+  "expires_at": "2025-03-01"
+}
+```
+
+או אם אין חבילה:
+```json
+{
+  "has_package": false,
+  "message": "לא נמצאה חבילה פעילה"
+}
+```
+
+## קישור התשלום
+
+```
+https://pay.sumit.co.il/6ir0yg/mh9r7w/mh9r7x/payment/
 ```
 
 ## פרטים טכניים
 
-**קובץ לעריכה:** `src/pages/DockerGuide.tsx` (שורות 428-447)
+### קבצים לעריכה:
+1. `src/pages/SupportCreate.tsx` - שינוי מהותי בזרימה
+2. `src/pages/SupportMyTickets.tsx` - הוספת כפתור ומצב חבילה
 
-**מה יתווסף:**
-- תת-כותרות (א. בדיקת הריפו, ב. משיכת השינויים)
-- פקודת `git remote -v`
-- `ExpectedOutput` עם הפלט הצפוי (כולל הפלייסהולדרים הדינמיים)
-- `WarningBox` עם פקודת תיקון במקרה שהריפו לא נכון
-- עדכון הנתיב לכלול `/var/www/` לפני שם הפרויקט
+### קבצים חדשים:
+1. `src/components/support/PackageStatus.tsx` - רכיב תצוגת מצב
+2. `src/components/support/NoPackageMessage.tsx` - הודעה ללא חבילה
 
-**הפלייסהולדרים הדינמיים** (`<USERNAME>`, `<REPO_NAME>`, `<PROJECT_FOLDER>`) ימשיכו לעבוד אוטומטית כי הם כבר מוגדרים בקונטקסט.
+### States חדשים ב-SupportCreate:
+```typescript
+const [packageStatus, setPackageStatus] = useState<PackageInfo | null>(null);
+const [isCheckingPackage, setIsCheckingPackage] = useState(false);
+const [packageChecked, setPackageChecked] = useState(false);
+```
 
+### Interface חדש:
+```typescript
+interface PackageInfo {
+  has_package: boolean;
+  package_status?: string;
+  remaining_tickets?: number;
+  total_tickets?: number;
+  package_name?: string;
+  expires_at?: string;
+  message?: string;
+}
+```
+
+## חוויית משתמש
+
+1. משתמש נכנס לדף פתיחת פנייה
+2. מזין אימייל ולוחץ "בדיקת חבילה"
+3. רואה ספינר בזמן הבדיקה
+4. אם יש חבילה - רואה כמה פניות נשארו והטופס מופיע
+5. אם אין - רואה הודעה ברורה וכפתור רכישה
+6. לאחר רכישה - יכול לחזור ולבדוק שוב
