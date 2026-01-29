@@ -68,7 +68,7 @@ const PackageStatus = ({ packageInfo, showPurchaseButton = true }: PackageStatus
                 <Package className="w-3.5 h-3.5" />
                 <span>
                   {package_name && `${package_name} • `}
-                  נותרו {remaining_tickets} מתוך {total_tickets} פניות
+                  {total_tickets ? `נותרו ${remaining_tickets} מתוך ${total_tickets} פניות` : "ניתן לפתוח פניות"}
                 </span>
               </div>
             )}
