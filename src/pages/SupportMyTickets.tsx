@@ -5,7 +5,10 @@ import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Search, Eye, Clock, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { Search, Eye, Clock, CheckCircle, AlertCircle, Loader2, ShoppingCart } from "lucide-react";
+import { usePackageStatus } from "@/hooks/usePackageStatus";
+import PackageStatus from "@/components/support/PackageStatus";
+import { PAYMENT_URL } from "@/types/support";
 
 interface Ticket {
   ticket_id: string;
@@ -23,6 +26,8 @@ const SupportMyTickets = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  
+  const { packageInfo, isChecking, checkPackage } = usePackageStatus();
 
   // Load email from URL params or localStorage on mount
   useEffect(() => {
@@ -33,6 +38,7 @@ const SupportMyTickets = () => {
       setEmail(urlEmail);
       // Auto-search if email is in URL
       fetchTickets(urlEmail);
+      checkPackage(urlEmail);
     } else if (savedEmail) {
       setEmail(savedEmail);
     }
@@ -70,6 +76,7 @@ const SupportMyTickets = () => {
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     fetchTickets(email);
+    checkPackage(email);
   };
 
   const getStatusIcon = (status: string) => {
@@ -114,7 +121,7 @@ const SupportMyTickets = () => {
       
       <main className="flex-1 py-20">
         <div className="container mx-auto px-4 max-w-3xl">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               הפניות שלי
             </h1>
@@ -123,7 +130,21 @@ const SupportMyTickets = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSearch} className="flex gap-3 mb-8">
+          {/* Purchase Package Button - Always visible */}
+          <div className="mb-6 flex justify-center">
+            <Button
+              asChild
+              variant="outline"
+              className="border-primary/30 hover:border-primary hover:bg-primary/5"
+            >
+              <a href={PAYMENT_URL} target="_blank" rel="noopener noreferrer">
+                <ShoppingCart className="w-4 h-4 ml-2" />
+                רכישת חבילת פניות חדשה
+              </a>
+            </Button>
+          </div>
+
+          <form onSubmit={handleSearch} className="flex gap-3 mb-6">
             <Input
               type="email"
               value={email}
@@ -135,10 +156,10 @@ const SupportMyTickets = () => {
             />
             <Button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isChecking}
               className="h-12 px-6 bg-primary hover:bg-primary/90"
             >
-              {isLoading ? (
+              {isLoading || isChecking ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
               ) : (
                 <>
@@ -148,6 +169,13 @@ const SupportMyTickets = () => {
               )}
             </Button>
           </form>
+
+          {/* Package Status - Show after search */}
+          {hasSearched && packageInfo && (
+            <div className="mb-6">
+              <PackageStatus packageInfo={packageInfo} showPurchaseButton={true} />
+            </div>
+          )}
 
           {hasSearched && (
             <div className="space-y-4">
