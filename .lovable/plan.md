@@ -1,114 +1,108 @@
 
-# תוכנית: עדכון מערכת הפניות
 
-## מה צריך להשתנות
+# תוכנית: מערכת פניות מבוססת חבילות
 
-### 1. מיפוי נכון של שדות מהשרת
+## הזרימה החדשה
 
-התגובה מ-`support2` מגיעה בשדות בעברית:
-- `מזהה_פניה` -> ticket_id
-- `תאריך_פניה` -> created_at
-- `סטטוס_פניה` -> status
-- `נושא_הפניה` -> subject
-- `תוכן_פניה` -> message
-- `מסמכים_מצורפים` -> attachments
-- `תקשורת` -> replies (מערך)
-
-התגובה מ-`support3` כבר כוללת נתוני חבילה מפורטים:
-- `totalQuantity` -> סה"כ פניות בחבילה
-- `usedQuantity` -> פניות בשימוש
-- `remainingQuantity` -> פניות שנותרו
-
-### 2. עדכון `usePackageStatus.ts` - מיפוי נתוני החבילה
-
-למפות את `totalQuantity`, `usedQuantity`, `remainingQuantity` מהתגובה לממשק `PackageInfo`.
-
-### 3. עדכון `PackageStatus.tsx` - תצוגת חבילה
-
-במקום "נשארו מעט פניות", להציג:
-- **X פניות בשימוש מתוך Y** (לדוגמה: "1 פניות בשימוש מתוך 10")
-- **נותרו Z פניות** 
-
-ללא הודעת אזהרה על "מעט פניות" - פשוט להציג את המספרים.
-
-### 4. עדכון `SupportMyTickets.tsx` - מיפוי שדות עבריים
-
-הפניות מגיעות בשדות עברית. צריך למפות אותן לממשק `Ticket` כדי להציג נכון.
-
-### 5. עדכון `SupportTicketDetail.tsx` - שני שינויים מרכזיים
-
-**א. מיפוי שדות עבריים:**
-התגובה מ-`support2` עם `ticket_id` מחזירה גם שדות בעברית + מערך `תקשורת`.
-
-**ב. שינוי webhook לתגובות:**
-כשהלקוח עונה על פנייה, לשלוח ל-webhook החדש:
+```text
+שלב 1: הזנת אימייל
+    |
+    v
+שלב 2: תצוגת חבילות (מ-support3)
+    כל חבילה = כרטיס עם: סוג, כמות בשימוש, כמות שנותרה, סטטוס
+    |
+    לחיצה על חבילה
+    v
+שלב 3: תצוגת פניות של החבילה (שליחת ID חבילה ל-support2)
+    רשימת פניות עם: נושא, תאריך, סטטוס
+    |
+    לחיצה על פנייה
+    v
+שלב 4: פרטי פנייה + שיחה + תגובה (כמו היום)
 ```
-POST https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd
-```
-במקום `support3` הנוכחי.
 
-**ג. העלאת קובץ בתגובה:**
-להוסיף אפשרות להעלות קובץ (תמונה/PDF) כחלק מהתגובה, בדומה לטופס פתיחת פנייה.
+## מה משתנה
+
+### 1. עדכון `usePackageStatus.ts`
+- במקום להחזיר `PackageInfo` בודד, יחזיר מערך חבילות
+- כל חבילה תכלול: `id`, `סוג חבילה`, `כמות בחבילה`, `כמות פניות בשימוש לחבילה`, `כמות שנותרה`, `סטטוס חבילה`, `תאריך רכישה`, `מחיר`
+
+### 2. עדכון `src/types/support.ts`
+- הוספת interface חדש `PackageDetail` למבנה החבילה המלא
+- עדכון `PackageInfo` לכלול מערך חבילות
+
+```typescript
+interface PackageDetail {
+  id: string;
+  package_type: string;       // סוג חבילה
+  total_tickets: number;      // כמות בחבילה
+  used_tickets: number;       // כמות פניות בשימוש לחבילה
+  remaining_tickets: number;  // כמות שנותרה
+  status: string;             // סטטוס חבילה
+  purchase_date: string;      // תאריך רכישה
+  price: number;              // מחיר
+}
+```
+
+### 3. שינוי מהותי ב-`SupportMyTickets.tsx`
+- שלב 1: אימייל (כמו היום)
+- שלב 2 (חדש): תצוגת כרטיסי חבילות - כל חבילה מציגה סוג, כמות בשימוש/נותרה, סטטוס
+- שלב 3: לחיצה על חבילה -> שליחת `package_id` ל-`support2` -> קבלת פניות -> הצגת רשימת פניות
+- שלב 4: לחיצה על פנייה -> ניווט לדף פרטי פנייה (כמו היום)
+
+### 4. `SupportTicketDetail.tsx` - ללא שינוי מהותי
+- נשאר כמו שהוא - מציג פנייה בודדת עם תגובות ואפשרות להגיב
+
+## עיצוב כרטיסי חבילות
+
+כל חבילה תוצג ככרטיס עם:
+- שם/סוג החבילה (כותרת)
+- סטטוס (badge צבעוני)
+- פס התקדמות: X בשימוש מתוך Y
+- כמות שנותרה בולטת
+- תאריך רכישה
+- כפתור "צפייה בפניות"
 
 ## פרטים טכניים
 
 ### קבצים לעריכה:
+1. **`src/types/support.ts`** - הוספת `PackageDetail` interface
+2. **`src/hooks/usePackageStatus.ts`** - מיפוי מערך חבילות מלא מ-support3
+3. **`src/pages/SupportMyTickets.tsx`** - שינוי מהותי: הוספת שכבת חבילות לפני פניות
+4. **`src/components/support/PackageStatus.tsx`** - עדכון להצגת חבילות מרובות
 
-1. **`src/hooks/usePackageStatus.ts`** - מיפוי `totalQuantity`/`usedQuantity`/`remainingQuantity`
-2. **`src/types/support.ts`** - הוספת `used_tickets` ל-`PackageInfo`, הוספת URL webhook חדש לתגובות
-3. **`src/components/support/PackageStatus.tsx`** - שינוי תצוגה ל"X בשימוש מתוך Y, נותרו Z"
-4. **`src/pages/SupportMyTickets.tsx`** - מיפוי שדות עבריים מהתגובה
-5. **`src/pages/SupportTicketDetail.tsx`** - מיפוי שדות + webhook חדש לתגובות + העלאת קובץ
+### זרימת הנתונים:
 
-### שינויים בממשק PackageInfo:
+**שלב חבילות:**
+```
+POST support3 { email }
+-> [{ packages: [{ id, סוג חבילה, כמות בחבילה, כמות שנותרה, ... }] }]
+```
+
+**שלב פניות (לחיצה על חבילה):**
+```
+POST support2 { package_id: "recWgOOHphD4AT9dO" }
+-> רשימת פניות של אותה חבילה
+```
+
+**שלב פנייה בודדת (לחיצה על פנייה):**
+```
+POST support2 { ticket_id: "..." }
+-> פרטי פנייה + תקשורת
+```
+
+### ניהול State ב-SupportMyTickets:
 ```typescript
-interface PackageInfo {
-  has_package: boolean;
-  package_status?: string;
-  remaining_tickets?: number;
-  used_tickets?: number;      // חדש
-  total_tickets?: number;
-  package_name?: string;
-  expires_at?: string;
-  message?: string;
-}
+const [packages, setPackages] = useState<PackageDetail[]>([]);
+const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
+const [tickets, setTickets] = useState<Ticket[]>([]);
+const [isLoadingPackages, setIsLoadingPackages] = useState(false);
+const [isLoadingTickets, setIsLoadingTickets] = useState(false);
 ```
 
-### שינוי בתצוגת PackageStatus:
-- ירוק: "חבילה פעילה - 1 בשימוש מתוך 10, נותרו 9 פניות"
-- אדום: "אין חבילה פעילה" או "נגמרו הפניות" (0 remaining)
-- ללא הודעת "נשארו מעט" - רק מספרים
+### UX:
+- כשבוחרים חבילה, מוצג spinner ואז רשימת הפניות
+- כפתור "חזרה לחבילות" מעל רשימת הפניות
+- אם חבילה ריקה (0 פניות בשימוש) - הודעה "אין פניות בחבילה זו"
+- כפתור רכישת חבילה חדשה תמיד זמין
 
-### Webhook תגובות חדש:
-```
-POST https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd
-Body: {
-  ticket_id: "...",
-  message: "...",
-  sender_type: "customer",
-  attachments: [{ filename, content_type, data }]  // אופציונלי
-}
-```
-
-### מיפוי שדות בטעינת פניות (SupportMyTickets):
-```typescript
-const mappedTickets = data.map(item => ({
-  ticket_id: item.מזהה_פניה || item.ticket_id,
-  subject: item.נושא_הפניה || item.subject,
-  status: item.סטטוס_פניה || item.status,
-  created_at: item.תאריך_פניה || item.created_at,
-}));
-```
-
-### מיפוי שדות בטעינת פנייה בודדת (SupportTicketDetail):
-```typescript
-const mappedTicket = {
-  ticket_id: data.מזהה_פניה || data.ticket_id,
-  subject: data.נושא_הפניה || data.subject,
-  message: data.תוכן_פניה || data.message,
-  status: data.סטטוס_פניה || data.status,
-  created_at: data.תאריך_פניה || data.created_at,
-  attachments: data.מסמכים_מצורפים,
-  replies: data.תקשורת || data.replies || [],
-};
-```
