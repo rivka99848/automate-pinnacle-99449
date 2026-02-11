@@ -1,141 +1,72 @@
 
-# תוכנית מקיפה: מערכת ניהול חבילות פניות
+# תוכנית: עדכון מערכת הפניות
 
-## סקירת המצב הנוכחי
+## מה צריך להשתנות
 
-כרגע כל משתמש יכול לשלוח פניה ללא הגבלה - אין בדיקה של חבילה פעילה.
+### 1. מיפוי נכון של שדות מהשרת
 
-## הזרימה החדשה
+התגובה מ-`support2` מגיעה בשדות בעברית:
+- `מזהה_פניה` -> ticket_id
+- `תאריך_פניה` -> created_at
+- `סטטוס_פניה` -> status
+- `נושא_הפניה` -> subject
+- `תוכן_פניה` -> message
+- `מסמכים_מצורפים` -> attachments
+- `תקשורת` -> replies (מערך)
 
-```text
-+------------------+     +------------------+     +------------------+
-|  משתמש מזין     | --> | בדיקת חבילה      | --> | יש חבילה פעילה?  |
-|  אימייל         |     | webhook support3 |     |                  |
-+------------------+     +------------------+     +--------+---------+
-                                                          |
-                         +--------------------------------+
-                         |                                |
-                    כן (יש פניות)                   לא (אין חבילה/נגמרו)
-                         |                                |
-                         v                                v
-              +------------------+              +------------------+
-              | הצג טופס פנייה  |              | הצג הודעה +      |
-              | + מספר פניות    |              | כפתור רכישה     |
-              | שנותרו         |              +------------------+
-              +------------------+                       |
-                         |                               v
-                         v                    +------------------+
-              +------------------+            | הפניה לדף תשלום |
-              | שליחת פנייה    |            | pay.sumit.co.il  |
-              | webhook support1 |            +------------------+
-              +------------------+
+התגובה מ-`support3` כבר כוללת נתוני חבילה מפורטים:
+- `totalQuantity` -> סה"כ פניות בחבילה
+- `usedQuantity` -> פניות בשימוש
+- `remainingQuantity` -> פניות שנותרו
+
+### 2. עדכון `usePackageStatus.ts` - מיפוי נתוני החבילה
+
+למפות את `totalQuantity`, `usedQuantity`, `remainingQuantity` מהתגובה לממשק `PackageInfo`.
+
+### 3. עדכון `PackageStatus.tsx` - תצוגת חבילה
+
+במקום "נשארו מעט פניות", להציג:
+- **X פניות בשימוש מתוך Y** (לדוגמה: "1 פניות בשימוש מתוך 10")
+- **נותרו Z פניות** 
+
+ללא הודעת אזהרה על "מעט פניות" - פשוט להציג את המספרים.
+
+### 4. עדכון `SupportMyTickets.tsx` - מיפוי שדות עבריים
+
+הפניות מגיעות בשדות עברית. צריך למפות אותן לממשק `Ticket` כדי להציג נכון.
+
+### 5. עדכון `SupportTicketDetail.tsx` - שני שינויים מרכזיים
+
+**א. מיפוי שדות עבריים:**
+התגובה מ-`support2` עם `ticket_id` מחזירה גם שדות בעברית + מערך `תקשורת`.
+
+**ב. שינוי webhook לתגובות:**
+כשהלקוח עונה על פנייה, לשלוח ל-webhook החדש:
 ```
-
-## שינויים נדרשים
-
-### 1. דף "הפניות שלי" (SupportMyTickets.tsx)
-
-**תוספות:**
-- כפתור "רכישת חבילת פניות" בראש הדף (תמיד מוצג)
-- לאחר חיפוש - הצגת מצב החבילה:
-  - כמה פניות נותרו
-  - סטטוס החבילה (פעילה/לא פעילה)
-- אם אין חבילה פעילה - הודעה ברורה עם כפתור רכישה
-
-**קריאה חדשה:**
-- Webhook `support3` עם האימייל
-- תגובה צפויה: `{ active: true/false, remaining: 5, total: 10 }`
-
-### 2. דף "פתיחת פנייה" (SupportCreate.tsx)
-
-**שינוי הזרימה:**
-
-**שלב א - הזנת אימייל:**
-- המשתמש מזין אימייל
-- כפתור "בדיקת חבילה"
-
-**שלב ב - בדיקה (webhook support3):**
-- טעינה עם spinner
-- בדיקה האם יש חבילה פעילה עם פניות זמינות
-
-**שלב ג - תוצאות:**
-
-אם יש חבילה פעילה:
-- הצגת "נותרו לך X פניות מתוך Y"
-- הצגת טופס הפנייה המלא
-- אפשרות לשלוח
-
-אם אין חבילה/נגמרו הפניות:
-- הודעה ברורה: "אין לך חבילת פניות פעילה" או "נגמרו הפניות בחבילה"
-- כפתור בולט "רכישת חבילת פניות"
-- לחיצה → פתיחה בחלון חדש לדף התשלום
-- קישור "כבר רכשת? לחצי לבדיקה מחדש"
-
-### 3. רכיב חדש: PackageStatus
-
-רכיב לתצוגת מצב חבילה שיופיע בשני הדפים:
-- אייקון וצבע לפי מצב (ירוק/צהוב/אדום)
-- מספר פניות שנותרו
-- כפתור רכישה אם צריך
-
-### 4. רכיב חדש: NoPackageMessage
-
-הודעה מעוצבת שמוצגת כשאין חבילה:
-- אייקון אזהרה
-- טקסט הסבר
-- כפתור רכישה בולט
-- עיצוב מושך תשומת לב
-
-## מבנה התגובה הצפוי מ-support3
-
-```json
-{
-  "has_package": true,
-  "package_status": "active",
-  "remaining_tickets": 5,
-  "total_tickets": 10,
-  "package_name": "חבילה בסיסית",
-  "expires_at": "2025-03-01"
-}
+POST https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd
 ```
+במקום `support3` הנוכחי.
 
-או אם אין חבילה:
-```json
-{
-  "has_package": false,
-  "message": "לא נמצאה חבילה פעילה"
-}
-```
-
-## קישור התשלום
-
-```
-https://pay.sumit.co.il/6ir0yg/mh9r7w/mh9r7x/payment/
-```
+**ג. העלאת קובץ בתגובה:**
+להוסיף אפשרות להעלות קובץ (תמונה/PDF) כחלק מהתגובה, בדומה לטופס פתיחת פנייה.
 
 ## פרטים טכניים
 
 ### קבצים לעריכה:
-1. `src/pages/SupportCreate.tsx` - שינוי מהותי בזרימה
-2. `src/pages/SupportMyTickets.tsx` - הוספת כפתור ומצב חבילה
 
-### קבצים חדשים:
-1. `src/components/support/PackageStatus.tsx` - רכיב תצוגת מצב
-2. `src/components/support/NoPackageMessage.tsx` - הודעה ללא חבילה
+1. **`src/hooks/usePackageStatus.ts`** - מיפוי `totalQuantity`/`usedQuantity`/`remainingQuantity`
+2. **`src/types/support.ts`** - הוספת `used_tickets` ל-`PackageInfo`, הוספת URL webhook חדש לתגובות
+3. **`src/components/support/PackageStatus.tsx`** - שינוי תצוגה ל"X בשימוש מתוך Y, נותרו Z"
+4. **`src/pages/SupportMyTickets.tsx`** - מיפוי שדות עבריים מהתגובה
+5. **`src/pages/SupportTicketDetail.tsx`** - מיפוי שדות + webhook חדש לתגובות + העלאת קובץ
 
-### States חדשים ב-SupportCreate:
-```typescript
-const [packageStatus, setPackageStatus] = useState<PackageInfo | null>(null);
-const [isCheckingPackage, setIsCheckingPackage] = useState(false);
-const [packageChecked, setPackageChecked] = useState(false);
-```
-
-### Interface חדש:
+### שינויים בממשק PackageInfo:
 ```typescript
 interface PackageInfo {
   has_package: boolean;
   package_status?: string;
   remaining_tickets?: number;
+  used_tickets?: number;      // חדש
   total_tickets?: number;
   package_name?: string;
   expires_at?: string;
@@ -143,11 +74,41 @@ interface PackageInfo {
 }
 ```
 
-## חוויית משתמש
+### שינוי בתצוגת PackageStatus:
+- ירוק: "חבילה פעילה - 1 בשימוש מתוך 10, נותרו 9 פניות"
+- אדום: "אין חבילה פעילה" או "נגמרו הפניות" (0 remaining)
+- ללא הודעת "נשארו מעט" - רק מספרים
 
-1. משתמש נכנס לדף פתיחת פנייה
-2. מזין אימייל ולוחץ "בדיקת חבילה"
-3. רואה ספינר בזמן הבדיקה
-4. אם יש חבילה - רואה כמה פניות נשארו והטופס מופיע
-5. אם אין - רואה הודעה ברורה וכפתור רכישה
-6. לאחר רכישה - יכול לחזור ולבדוק שוב
+### Webhook תגובות חדש:
+```
+POST https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd
+Body: {
+  ticket_id: "...",
+  message: "...",
+  sender_type: "customer",
+  attachments: [{ filename, content_type, data }]  // אופציונלי
+}
+```
+
+### מיפוי שדות בטעינת פניות (SupportMyTickets):
+```typescript
+const mappedTickets = data.map(item => ({
+  ticket_id: item.מזהה_פניה || item.ticket_id,
+  subject: item.נושא_הפניה || item.subject,
+  status: item.סטטוס_פניה || item.status,
+  created_at: item.תאריך_פניה || item.created_at,
+}));
+```
+
+### מיפוי שדות בטעינת פנייה בודדת (SupportTicketDetail):
+```typescript
+const mappedTicket = {
+  ticket_id: data.מזהה_פניה || data.ticket_id,
+  subject: data.נושא_הפניה || data.subject,
+  message: data.תוכן_פניה || data.message,
+  status: data.סטטוס_פניה || data.status,
+  created_at: data.תאריך_פניה || data.created_at,
+  attachments: data.מסמכים_מצורפים,
+  replies: data.תקשורת || data.replies || [],
+};
+```
