@@ -137,8 +137,8 @@ const SupportTicketDetail = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    const statusLower = status.toLowerCase();
+  const getStatusColor = (status?: string) => {
+    const statusLower = (status ?? "").toLowerCase();
     if (statusLower.includes("סגור") || statusLower.includes("closed")) {
       return "bg-green-100 text-green-800";
     }
