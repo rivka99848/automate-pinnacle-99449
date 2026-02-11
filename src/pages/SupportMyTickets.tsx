@@ -79,8 +79,8 @@ const SupportMyTickets = () => {
     checkPackage(email);
   };
 
-  const getStatusIcon = (status: string) => {
-    const statusLower = status.toLowerCase();
+  const getStatusIcon = (status?: string) => {
+    const statusLower = (status ?? "").toLowerCase();
     if (statusLower.includes("סגור") || statusLower.includes("closed")) {
       return <CheckCircle className="w-5 h-5 text-green-500" />;
     }
@@ -90,8 +90,8 @@ const SupportMyTickets = () => {
     return <AlertCircle className="w-5 h-5 text-blue-500" />;
   };
 
-  const getStatusColor = (status: string) => {
-    const statusLower = status.toLowerCase();
+  const getStatusColor = (status?: string) => {
+    const statusLower = (status ?? "").toLowerCase();
     if (statusLower.includes("סגור") || statusLower.includes("closed")) {
       return "bg-green-100 text-green-800";
     }
