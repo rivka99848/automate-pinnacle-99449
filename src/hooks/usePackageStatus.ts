@@ -32,8 +32,9 @@ export const usePackageStatus = () => {
         // Map the response to our PackageInfo interface
         const packageData: PackageInfo = {
           has_package: responseData?.hasActivePackage === true,
-          remaining_tickets: responseData?.remaining_tickets ?? (responseData?.hasActivePackage ? 1 : 0),
-          total_tickets: responseData?.total_tickets,
+          remaining_tickets: responseData?.remainingQuantity ?? responseData?.remaining_tickets ?? (responseData?.hasActivePackage ? 1 : 0),
+          used_tickets: responseData?.usedQuantity ?? responseData?.used_tickets ?? 0,
+          total_tickets: responseData?.totalQuantity ?? responseData?.total_tickets,
           package_name: responseData?.package_name,
           package_status: responseData?.hasActivePackage ? "active" : "inactive",
           expires_at: responseData?.expires_at,

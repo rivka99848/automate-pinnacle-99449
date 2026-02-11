@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { REPLY_WEBHOOK_URL } from "@/types/support";
 import { 
   Send, 
   Clock, 
@@ -14,7 +15,9 @@ import {
   ArrowRight,
   User,
   Headphones,
-  Loader2
+  Loader2,
+  Paperclip,
+  X
 } from "lucide-react";
 
 interface Reply {
@@ -55,6 +58,8 @@ const SupportTicketDetail = () => {
   const [ticket, setTicket] = useState<TicketDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [replyMessage, setReplyMessage] = useState("");
+  const [replyFile, setReplyFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSendingReply, setIsSendingReply] = useState(false);
 
   const fetchTicket = async () => {
@@ -72,8 +77,22 @@ const SupportTicketDetail = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setTicket(data);
+        const rawData = await response.json();
+        const data = Array.isArray(rawData) ? rawData[0] : rawData;
+        const mappedTicket: TicketDetails = {
+          ticket_id: data.מזהה_פניה || data.ticket_id || ticketId || "",
+          subject: data.נושא_הפניה || data.subject || "",
+          message: data.תוכן_פניה || data.message || "",
+          status: data.סטטוס_פניה || data.status || "",
+          created_at: data.תאריך_פניה || data.created_at || "",
+          attachments: data.מסמכים_מצורפים || data.attachments || [],
+          replies: (data.תקשורת || data.replies || []).map((r: any) => ({
+            sender_type: r.sender_type || r.סוג_שולח || "admin",
+            message: r.message || r.הודעה || "",
+            created_at: r.created_at || r.תאריך || "",
+          })),
+        };
+        setTicket(mappedTicket);
       } else {
         toast.error("שגיאה בטעינת הפנייה");
         navigate("/support/my-tickets");
@@ -97,20 +116,35 @@ const SupportTicketDetail = () => {
     setIsSendingReply(true);
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support3", {
+      const body: any = {
+        ticket_id: ticketId,
+        message: replyMessage,
+        sender_type: "customer",
+      };
+
+      if (replyFile) {
+        const reader = new FileReader();
+        const fileData = await new Promise<string>((resolve) => {
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(replyFile);
+        });
+        body.attachments = [{
+          filename: replyFile.name,
+          content_type: replyFile.type,
+          data: fileData,
+        }];
+      }
+
+      const response = await fetch(REPLY_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ticket_id: ticketId,
-          message: replyMessage,
-          sender_type: "customer"
-        })
+        body: JSON.stringify(body),
       });
 
       if (response.ok) {
         toast.success("התגובה נשלחה בהצלחה");
         setReplyMessage("");
-        // Refresh ticket to show new reply
+        setReplyFile(null);
         await fetchTicket();
       } else {
         toast.error("שגיאה בשליחת התגובה");
@@ -344,6 +378,45 @@ const SupportTicketDetail = () => {
                 className="min-h-[120px]"
                 required
               />
+              
+              {/* File Upload */}
+              <div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={(e) => setReplyFile(e.target.files?.[0] || null)}
+                  accept="image/*,.pdf,.doc,.docx"
+                  className="hidden"
+                />
+                <div className="flex items-center gap-3">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <Paperclip className="w-4 h-4 ml-2" />
+                    צרף קובץ
+                  </Button>
+                  {replyFile && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/50 rounded-lg px-3 py-1.5">
+                      <FileText className="w-4 h-4" />
+                      <span className="truncate max-w-[200px]">{replyFile.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setReplyFile(null);
+                          if (fileInputRef.current) fileInputRef.current.value = "";
+                        }}
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               <Button
                 type="submit"
                 disabled={isSendingReply || !replyMessage.trim()}

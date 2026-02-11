@@ -56,8 +56,15 @@ const SupportMyTickets = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        setTickets(Array.isArray(data) ? data : []);
+        const rawData = await response.json();
+        const data = Array.isArray(rawData) ? rawData : [];
+        const mappedTickets: Ticket[] = data.map((item: any) => ({
+          ticket_id: item.מזהה_פניה || item.ticket_id,
+          subject: item.נושא_הפניה || item.subject || "",
+          status: item.סטטוס_פניה || item.status || "",
+          created_at: item.תאריך_פניה || item.created_at || "",
+        }));
+        setTickets(mappedTickets);
         // Save email to localStorage on successful search
         localStorage.setItem(STORAGE_KEY, searchEmail);
       } else {
