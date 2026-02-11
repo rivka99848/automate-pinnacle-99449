@@ -2,6 +2,7 @@ export interface PackageInfo {
   has_package: boolean;
   package_status?: string;
   remaining_tickets?: number;
+  used_tickets?: number;
   total_tickets?: number;
   package_name?: string;
   expires_at?: string;
@@ -10,3 +11,4 @@ export interface PackageInfo {
 
 export const PAYMENT_URL = "https://pay.sumit.co.il/6ir0yg/mh9r7w/mh9r7x/payment/";
 export const SUPPORT3_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/support3";
+export const REPLY_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd";

@@ -8,7 +8,7 @@ interface PackageStatusProps {
 }
 
 const PackageStatus = ({ packageInfo, showPurchaseButton = true }: PackageStatusProps) => {
-  const { has_package, remaining_tickets = 0, total_tickets = 0, package_name } = packageInfo;
+  const { has_package, remaining_tickets = 0, used_tickets = 0, total_tickets = 0, package_name } = packageInfo;
   
   const getStatusConfig = () => {
     if (!has_package) {
@@ -28,16 +28,6 @@ const PackageStatus = ({ packageInfo, showPurchaseButton = true }: PackageStatus
         bgColor: "bg-amber-500/10",
         borderColor: "border-amber-500/30",
         label: "נגמרו הפניות בחבילה",
-      };
-    }
-    
-    if (remaining_tickets <= 2) {
-      return {
-        icon: AlertTriangle,
-        color: "text-amber-500",
-        bgColor: "bg-amber-500/10",
-        borderColor: "border-amber-500/30",
-        label: "נשארו מעט פניות",
       };
     }
     
@@ -68,7 +58,7 @@ const PackageStatus = ({ packageInfo, showPurchaseButton = true }: PackageStatus
                 <Package className="w-3.5 h-3.5" />
                 <span>
                   {package_name && `${package_name} • `}
-                  {total_tickets ? `נותרו ${remaining_tickets} מתוך ${total_tickets} פניות` : "ניתן לפתוח פניות"}
+                  {total_tickets ? `${used_tickets} בשימוש מתוך ${total_tickets}, נותרו ${remaining_tickets} פניות` : "ניתן לפתוח פניות"}
                 </span>
               </div>
             )}
