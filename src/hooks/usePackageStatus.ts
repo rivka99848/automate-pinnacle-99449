@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
-import { PackageInfo, SUPPORT3_WEBHOOK_URL } from "@/types/support";
+import { PackageDetail, SUPPORT3_WEBHOOK_URL } from "@/types/support";
 
 export const usePackageStatus = () => {
-  const [packageInfo, setPackageInfo] = useState<PackageInfo | null>(null);
+  const [packages, setPackages] = useState<PackageDetail[]>([]);
   const [isChecking, setIsChecking] = useState(false);
   const [hasChecked, setHasChecked] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -25,24 +25,23 @@ export const usePackageStatus = () => {
 
       if (response.ok) {
         const rawData = await response.json();
-        
-        // Handle response format: [{"hasActivePackage": true}] or {"hasActivePackage": true}
         const responseData = Array.isArray(rawData) ? rawData[0] : rawData;
-        
-        // Map the response to our PackageInfo interface
-        const packageData: PackageInfo = {
-          has_package: responseData?.hasActivePackage === true,
-          remaining_tickets: responseData?.remainingQuantity ?? responseData?.remaining_tickets ?? (responseData?.hasActivePackage ? 1 : 0),
-          used_tickets: responseData?.usedQuantity ?? responseData?.used_tickets ?? 0,
-          total_tickets: responseData?.totalQuantity ?? responseData?.total_tickets,
-          package_name: responseData?.package_name,
-          package_status: responseData?.hasActivePackage ? "active" : "inactive",
-          expires_at: responseData?.expires_at,
-        };
-        
-        setPackageInfo(packageData);
+        const packagesRaw = responseData?.packages || [];
+
+        const mapped: PackageDetail[] = packagesRaw.map((pkg: any) => ({
+          id: pkg.id || "",
+          package_type: pkg["סוג חבילה"] || "",
+          total_tickets: pkg["כמות בחבילה"] || 0,
+          used_tickets: pkg["כמות פניות בשימוש לחבילה"] || 0,
+          remaining_tickets: pkg["כמות שנותרה"] || 0,
+          status: pkg["סטטוס חבילה"] || "",
+          purchase_date: pkg["תאריך רכישה"] || "",
+          price: pkg["מחיר"] || 0,
+        }));
+
+        setPackages(mapped);
         setHasChecked(true);
-        return packageData;
+        return mapped;
       } else {
         setError("שגיאה בבדיקת החבילה. נסה שוב.");
         return null;
@@ -57,20 +56,20 @@ export const usePackageStatus = () => {
   }, []);
 
   const reset = useCallback(() => {
-    setPackageInfo(null);
+    setPackages([]);
     setHasChecked(false);
     setError(null);
   }, []);
 
-  const canSubmitTicket = packageInfo?.has_package && (packageInfo?.remaining_tickets ?? 0) > 0;
+  const hasActivePackage = packages.some(p => p.remaining_tickets > 0);
 
   return {
-    packageInfo,
+    packages,
     isChecking,
     hasChecked,
     error,
     checkPackage,
     reset,
-    canSubmitTicket,
+    hasActivePackage,
   };
 };

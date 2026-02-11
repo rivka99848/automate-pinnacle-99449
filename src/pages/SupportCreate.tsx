@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Send, Paperclip, X, FileText, Image, Mail, MessageSquare, HelpCircle, Upload, Loader2, ShoppingCart } from "lucide-react";
 import { usePackageStatus } from "@/hooks/usePackageStatus";
-import PackageStatus from "@/components/support/PackageStatus";
 import NoPackageMessage from "@/components/support/NoPackageMessage";
 import { PAYMENT_URL } from "@/types/support";
 
@@ -24,7 +23,6 @@ const SupportCreate = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  // Get saved email from localStorage
   const savedEmail = localStorage.getItem(STORAGE_KEY) || "";
   
   const [email, setEmail] = useState(savedEmail);
@@ -33,9 +31,11 @@ const SupportCreate = () => {
   const [attachments, setAttachments] = useState<Attachment[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const { packageInfo, isChecking, hasChecked, checkPackage, canSubmitTicket } = usePackageStatus();
+  const { packages, isChecking, hasChecked, checkPackage, hasActivePackage } = usePackageStatus();
 
-  const MAX_FILE_SIZE = 1536 * 1024; // 1.5MB in bytes
+  const canSubmitTicket = hasActivePackage;
+
+  const MAX_FILE_SIZE = 1536 * 1024;
 
   const handleCheckPackage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,7 +160,7 @@ const SupportCreate = () => {
 
             <div className="animate-fade-in-up delay-100">
               <NoPackageMessage 
-                message={packageInfo?.remaining_tickets === 0 ? "נגמרו הפניות בחבילה שלך" : packageInfo?.message}
+                message={packages.length > 0 ? "נגמרו הפניות בחבילה שלך" : undefined}
                 onRecheck={handleRecheck}
                 isRechecking={isChecking}
               />
@@ -185,6 +185,11 @@ const SupportCreate = () => {
     );
   }
 
+  // Calculate total remaining for display
+  const totalRemaining = packages.reduce((sum, p) => sum + p.remaining_tickets, 0);
+  const totalUsed = packages.reduce((sum, p) => sum + p.used_tickets, 0);
+  const totalInPackages = packages.reduce((sum, p) => sum + p.total_tickets, 0);
+
   return (
     <div className="min-h-screen bg-background flex flex-col" dir="rtl">
       <Header />
@@ -207,7 +212,7 @@ const SupportCreate = () => {
             </p>
           </div>
 
-          {/* Purchase Package Button - Always visible */}
+          {/* Purchase Package Button */}
           <div className="mb-6 flex justify-center animate-fade-in-up">
             <Button
               asChild
@@ -261,11 +266,21 @@ const SupportCreate = () => {
           )}
 
           {/* Step 2: Package Status + Form */}
-          {hasChecked && canSubmitTicket && packageInfo && (
+          {hasChecked && canSubmitTicket && (
             <>
-              {/* Package Status */}
-              <div className="mb-6 animate-fade-in-up">
-                <PackageStatus packageInfo={packageInfo} showPurchaseButton={false} />
+              {/* Package Status Summary */}
+              <div className="mb-6 animate-fade-in-up rounded-xl border border-green-500/30 bg-green-500/10 p-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+                    <HelpCircle className="w-5 h-5 text-green-500" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-green-500">חבילה פעילה</p>
+                    <p className="text-sm text-muted-foreground">
+                      {totalUsed} בשימוש מתוך {totalInPackages}, נותרו {totalRemaining} פניות
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Form Card */}
@@ -353,7 +368,6 @@ const SupportCreate = () => {
                       </div>
                     </div>
 
-                    {/* Attached Files */}
                     {attachments.length > 0 && (
                       <div className="space-y-2 mt-4">
                         {attachments.map((file, index) => (

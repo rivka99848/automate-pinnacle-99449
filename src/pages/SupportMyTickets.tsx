@@ -5,10 +5,10 @@ import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { Search, Eye, Clock, CheckCircle, AlertCircle, Loader2, ShoppingCart } from "lucide-react";
+import { Search, Eye, Clock, CheckCircle, AlertCircle, Loader2, ShoppingCart, ArrowRight } from "lucide-react";
 import { usePackageStatus } from "@/hooks/usePackageStatus";
-import PackageStatus from "@/components/support/PackageStatus";
-import { PAYMENT_URL } from "@/types/support";
+import PackageCard from "@/components/support/PackageCard";
+import { PAYMENT_URL, SUPPORT2_WEBHOOK_URL } from "@/types/support";
 
 interface Ticket {
   ticket_id: string;
@@ -24,35 +24,40 @@ const SupportMyTickets = () => {
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState("");
   const [tickets, setTickets] = useState<Ticket[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [selectedPackageId, setSelectedPackageId] = useState<string | null>(null);
+  const [isLoadingTickets, setIsLoadingTickets] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   
-  const { packageInfo, isChecking, checkPackage } = usePackageStatus();
+  const { packages, isChecking, hasChecked, checkPackage } = usePackageStatus();
 
-  // Load email from URL params or localStorage on mount
   useEffect(() => {
     const urlEmail = searchParams.get("email");
     const savedEmail = localStorage.getItem(STORAGE_KEY);
     
     if (urlEmail) {
       setEmail(urlEmail);
-      // Auto-search if email is in URL
-      fetchTickets(urlEmail);
       checkPackage(urlEmail);
     } else if (savedEmail) {
       setEmail(savedEmail);
     }
   }, [searchParams]);
 
-  const fetchTickets = async (searchEmail: string) => {
-    setIsLoading(true);
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem(STORAGE_KEY, email);
+    checkPackage(email);
+  };
+
+  const fetchTicketsForPackage = async (packageId: string) => {
+    setSelectedPackageId(packageId);
+    setIsLoadingTickets(true);
     setHasSearched(true);
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support2", {
+      const response = await fetch(SUPPORT2_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: searchEmail })
+        body: JSON.stringify({ package_id: packageId })
       });
 
       if (response.ok) {
@@ -65,8 +70,6 @@ const SupportMyTickets = () => {
           created_at: item.תאריך_פניה || item.created_at || "",
         }));
         setTickets(mappedTickets);
-        // Save email to localStorage on successful search
-        localStorage.setItem(STORAGE_KEY, searchEmail);
       } else {
         toast.error("שגיאה בטעינת הפניות. נסה שוב.");
         setTickets([]);
@@ -76,14 +79,14 @@ const SupportMyTickets = () => {
       toast.error("שגיאה בטעינת הפניות. נסה שוב.");
       setTickets([]);
     } finally {
-      setIsLoading(false);
+      setIsLoadingTickets(false);
     }
   };
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    fetchTickets(email);
-    checkPackage(email);
+  const handleBackToPackages = () => {
+    setSelectedPackageId(null);
+    setTickets([]);
+    setHasSearched(false);
   };
 
   const getStatusIcon = (status?: string) => {
@@ -122,6 +125,8 @@ const SupportMyTickets = () => {
     }
   };
 
+  const selectedPkg = packages.find(p => p.id === selectedPackageId);
+
   return (
     <div className="min-h-screen bg-background flex flex-col" dir="rtl">
       <Header />
@@ -133,11 +138,12 @@ const SupportMyTickets = () => {
               הפניות שלי
             </h1>
             <p className="text-lg text-muted-foreground">
-              הזן את האימייל שלך לצפייה בפניות
+              {!hasChecked ? "הזן את האימייל שלך לצפייה בחבילות ובפניות" : 
+               selectedPackageId ? `פניות בחבילת ${selectedPkg?.package_type || ""}` : "בחר חבילה לצפייה בפניות"}
             </p>
           </div>
 
-          {/* Purchase Package Button - Always visible */}
+          {/* Purchase Package Button */}
           <div className="mb-6 flex justify-center">
             <Button
               asChild
@@ -151,45 +157,91 @@ const SupportMyTickets = () => {
             </Button>
           </div>
 
-          <form onSubmit={handleSearch} className="flex gap-3 mb-6">
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="הזן את האימייל שלך"
-              required
-              className="h-12 flex-1"
-              dir="ltr"
-            />
-            <Button
-              type="submit"
-              disabled={isLoading || isChecking}
-              className="h-12 px-6 bg-primary hover:bg-primary/90"
-            >
-              {isLoading || isChecking ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <>
-                  <Search className="w-5 h-5 ml-2" />
-                  חפש
-                </>
-              )}
-            </Button>
-          </form>
+          {/* Email Search Form */}
+          {!hasChecked && (
+            <form onSubmit={handleSearch} className="flex gap-3 mb-6">
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="הזן את האימייל שלך"
+                required
+                className="h-12 flex-1"
+                dir="ltr"
+              />
+              <Button
+                type="submit"
+                disabled={isChecking}
+                className="h-12 px-6 bg-primary hover:bg-primary/90"
+              >
+                {isChecking ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <>
+                    <Search className="w-5 h-5 ml-2" />
+                    חפש
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
 
-          {/* Package Status - Show after search */}
-          {hasSearched && packageInfo && (
-            <div className="mb-6">
-              <PackageStatus packageInfo={packageInfo} showPurchaseButton={true} />
+          {/* Loading packages */}
+          {isChecking && (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
           )}
 
-          {hasSearched && (
+          {/* Package Cards View */}
+          {hasChecked && !selectedPackageId && !isChecking && (
             <div className="space-y-4">
-              {tickets.length === 0 ? (
+              {packages.length === 0 ? (
                 <div className="text-center py-12 bg-muted/30 rounded-lg">
                   <p className="text-muted-foreground text-lg">
-                    לא נמצאו פניות עבור אימייל זה
+                    לא נמצאו חבילות עבור אימייל זה
+                  </p>
+                  <Button
+                    onClick={() => window.open(PAYMENT_URL, "_blank")}
+                    className="mt-4"
+                  >
+                    רכישת חבילה
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2">
+                  {packages.map((pkg) => (
+                    <PackageCard
+                      key={pkg.id}
+                      pkg={pkg}
+                      onSelect={fetchTicketsForPackage}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tickets View (after selecting a package) */}
+          {selectedPackageId && (
+            <div className="space-y-4">
+              <Button
+                variant="ghost"
+                onClick={handleBackToPackages}
+                className="mb-2"
+              >
+                <ArrowRight className="w-4 h-4 ml-2" />
+                חזרה לחבילות
+              </Button>
+
+              {isLoadingTickets ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                </div>
+              ) : tickets.length === 0 ? (
+                <div className="text-center py-12 bg-muted/30 rounded-lg">
+                  <p className="text-muted-foreground text-lg">
+                    אין פניות בחבילה זו
                   </p>
                   <Button
                     onClick={() => navigate("/support")}
