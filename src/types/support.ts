@@ -21,6 +21,7 @@ export interface PackageDetail {
 }
 
 export const PAYMENT_URL = "https://pay.sumit.co.il/6ir0yg/mh9r7w/mh9r7x/payment/";
+export const SUPPORT1_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/support1";
 export const SUPPORT3_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/support3";
 export const SUPPORT2_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/support2";
 export const REPLY_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd";

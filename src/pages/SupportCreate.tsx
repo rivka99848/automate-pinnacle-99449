@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { Send, Paperclip, X, FileText, Image, Mail, MessageSquare, HelpCircle, Upload, Loader2, ShoppingCart } from "lucide-react";
 import { usePackageStatus } from "@/hooks/usePackageStatus";
 import NoPackageMessage from "@/components/support/NoPackageMessage";
-import { PAYMENT_URL } from "@/types/support";
+import { PAYMENT_URL, SUPPORT1_WEBHOOK_URL } from "@/types/support";
 
 interface Attachment {
   filename: string;
@@ -110,7 +110,7 @@ const SupportCreate = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support1", {
+      const response = await fetch(SUPPORT1_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

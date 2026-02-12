@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { REPLY_WEBHOOK_URL } from "@/types/support";
+import { REPLY_WEBHOOK_URL, SUPPORT2_WEBHOOK_URL } from "@/types/support";
 import { 
   Send, 
   Clock, 
@@ -70,7 +70,7 @@ const SupportTicketDetail = () => {
     }
 
     try {
-      const response = await fetch("https://n8n.chatnaki.co.il/webhook/support2", {
+      const response = await fetch(SUPPORT2_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ticket_id: ticketId })
