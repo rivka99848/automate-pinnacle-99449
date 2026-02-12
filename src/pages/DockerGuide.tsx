@@ -521,6 +521,31 @@ cat ~/.ssh/id_ed25519.pub`} />
             </ExpectedOutput>
           </Section>
 
+          {/* A Step 5.5 - Create nginx.conf */}
+          <Section id="a-step5-5" title="5.5️⃣ יצירת קובץ nginx.conf" icon={FileCode}>
+            <p className="text-gray-600 mb-4">קובץ זה נדרש כדי שה-SPA routing יעבוד כמו שצריך (ניווט בין דפים בלי שגיאות 404):</p>
+            <CodeBlock code="nano nginx.conf" />
+            <p className="text-gray-600 mb-4">תוכן לדבק:</p>
+            <CodeBlock code={`server {
+    listen 80;
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+}`} language="nginx" />
+            <TipsBox>
+              <p><strong>למה צריך את זה?</strong> בלי <code>try_files</code>, כשמנסים לגשת ישירות לנתיב כמו <code>/about</code> הדפדפן יקבל שגיאת 404 כי Nginx מחפש קובץ בשם <code>about</code> במקום להעביר ל-<code>index.html</code>.</p>
+            </TipsBox>
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
+            <ExpectedOutput>
+              <p>✅ בדיקה שהקובץ נוצר:</p>
+              <CodeBlock code="cat nginx.conf" />
+            </ExpectedOutput>
+          </Section>
+
           {/* A Step 6 - Create Dockerfile */}
           <Section id="a-step6" title="6️⃣ יצירת Dockerfile" icon={FileCode}>
             <CodeBlock code="nano Dockerfile" />
@@ -536,6 +561,7 @@ RUN npm run build
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]`} language="dockerfile" />
@@ -720,9 +746,46 @@ cat ~/.ssh/id_ed25519.pub`} />
             <CodeBlock code="lsof -i :<PORT>" />
           </Section>
 
+          {/* B Step 5.5 - Create nginx.conf */}
+          <Section id="b-step5-5" title="5.5️⃣ יצירת קובץ nginx.conf (זהה למסלול A)" icon={FileCode}>
+            <p className="text-gray-600 mb-4">קובץ זה נדרש כדי שה-SPA routing יעבוד כמו שצריך:</p>
+            <CodeBlock code="nano nginx.conf" />
+            <p className="text-gray-600 mb-4">תוכן לדבק:</p>
+            <CodeBlock code={`server {
+    listen 80;
+    location / {
+        root /usr/share/nginx/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+}`} language="nginx" />
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
+          </Section>
+
           {/* B Step 6 - Create Dockerfile */}
-          <Section id="b-step6" title="6️⃣ יצירת Dockerfile (זהה למסלול A)" icon={FileCode}>
+          <Section id="b-step6" title="6️⃣ יצירת Dockerfile" icon={FileCode}>
             <CodeBlock code="nano Dockerfile" />
+            <p className="text-gray-600 mb-4">תוכן לדבק:</p>
+            <CodeBlock code={`FROM node:18-alpine AS build
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]`} language="dockerfile" />
+            <WarningBox>
+              <p>שמירה: <code dir="ltr">Ctrl+O</code> → <code>Enter</code> → <code dir="ltr">Ctrl+X</code></p>
+            </WarningBox>
           </Section>
 
           {/* B Step 7 - Create docker-compose.yml */}
