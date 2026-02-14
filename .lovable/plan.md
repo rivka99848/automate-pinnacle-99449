@@ -1,46 +1,71 @@
 
 
-# עדכון וובהוקים בדף פנייה ספציפית
+# תיקון: ticket_id ריק + שמירה לוקאלית של נתוני פניות
 
-## מצב נוכחי
+## הבעיה
 
-| פעולה | וובהוק נוכחי |
-|-------|-------------|
-| טעינת פרטי פנייה | `SUPPORT2_WEBHOOK_URL` (`support2`) |
-| שליחת תגובה | `REPLY_WEBHOOK_URL` (`1016231e-...`) |
+1. **ticket_id מגיע undefined** - כשלוחצים "צפייה" על פנייה, הניווט שולח `ticket_id=undefined` כי המיפוי של השדה `מזהה_פניה` מה-API לא תואם (ייתכן ששם השדה שונה)
+2. **אין שמירה לוקאלית** - נתוני הפניות שנטענו מרשימת החבילות לא נשמרים, ולכן בדף הפנייה הספציפית אין גישה אליהם
 
-## מה משתנה
+## הפתרון
 
-| פעולה | וובהוק חדש |
-|-------|-----------|
-| טעינת פרטי פנייה | `1016231e-df1b-4668-b55f-c96dcbaf5cbd` |
-| שליחת תגובה | `a878879d-4218-4413-9b5e-c1d987dfdf61` |
+### 1. הוספת console.log לדיבוג שמות השדות
+ב-`SupportMyTickets.tsx` - הוספת לוג של ה-raw data שחוזר מה-API כדי לזהות את שמות השדות הנכונים מהוובהוק
+
+### 2. שמירת פניות ב-localStorage
+כשהפניות נטענות בהצלחה מה-API ב-`SupportMyTickets.tsx`, לשמור אותן ב-`localStorage` תחת מפתח כמו `support_tickets_{package_id}`
+
+### 3. שמירת פנייה נבחרת ב-localStorage
+כשלוחצים "צפייה" על פנייה ספציפית, לשמור את כל פרטי הפנייה ב-`localStorage` תחת מפתח `support_selected_ticket` לפני הניווט
+
+### 4. עדכון `SupportTicketDetail.tsx`
+- בטעינה ראשונית, לנסות לקרוא את הפנייה מ-localStorage
+- לשלוח את ה-ticket_id לוובהוק `TICKET_DETAIL_WEBHOOK_URL` לקבלת פרטים מלאים
+- fallback: אם אין ticket_id ב-URL, לנסות לקרוא מה-localStorage
 
 ## פרטים טכניים
 
-### 1. `src/types/support.ts` - עדכון קבועים
+### קובץ `src/pages/SupportMyTickets.tsx`
 
-- שינוי שם `REPLY_WEBHOOK_URL` ל-`TICKET_DETAIL_WEBHOOK_URL` (כי עכשיו הוא משמש לטעינת פרטי פנייה)
-- הוספת קבוע חדש `TICKET_REPLY_WEBHOOK_URL` עם הכתובת החדשה
-
+**שינוי 1 - דיבוג (שורה 64):**
 ```typescript
-export const TICKET_DETAIL_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/1016231e-df1b-4668-b55f-c96dcbaf5cbd";
-export const TICKET_REPLY_WEBHOOK_URL = "https://n8n.chatnaki.co.il/webhook/a878879d-4218-4413-9b5e-c1d987dfdf61";
+const rawData = await response.json();
+console.log("Raw tickets data from API:", rawData);
 ```
 
-### 2. `src/pages/SupportTicketDetail.tsx` - עדכון שימוש
+**שינוי 2 - שמירה לוקאלית של פניות (אחרי שורה 72):**
+```typescript
+setTickets(mappedTickets);
+// שמירה לוקאלית
+localStorage.setItem(`support_tickets_${packageId}`, JSON.stringify(mappedTickets));
+```
 
-- שורה 8: שינוי ייבוא ל-`TICKET_DETAIL_WEBHOOK_URL, TICKET_REPLY_WEBHOOK_URL`
-- שורה 73: טעינת פרטי פנייה תשתמש ב-`TICKET_DETAIL_WEBHOOK_URL` (במקום `SUPPORT2_WEBHOOK_URL`)
-- שליחת תגובה תשתמש ב-`TICKET_REPLY_WEBHOOK_URL` (במקום `REPLY_WEBHOOK_URL`)
+**שינוי 3 - שמירת פנייה לפני ניווט (שורה 285):**
+```typescript
+onClick={() => {
+  // שמירת הפנייה הנבחרת לוקאלית
+  localStorage.setItem("support_selected_ticket", JSON.stringify(ticket));
+  navigate(`/support/ticket?ticket_id=${ticket.ticket_id}&email=${encodeURIComponent(email)}`);
+}}
+```
 
-### סיכום וובהוקים סופי
+### קובץ `src/pages/SupportTicketDetail.tsx`
 
-| קבוע | כתובת | שימוש |
-|------|-------|-------|
-| `SUPPORT1_WEBHOOK_URL` | `support1` | יצירת פנייה |
-| `SUPPORT2_WEBHOOK_URL` | `support2` | טעינת רשימת פניות לפי חבילה |
-| `SUPPORT3_WEBHOOK_URL` | `support3` | בדיקת חבילות לפי אימייל |
-| `TICKET_DETAIL_WEBHOOK_URL` | `1016231e-...` | טעינת פרטי פנייה בודדת |
-| `TICKET_REPLY_WEBHOOK_URL` | `a878879d-...` | שליחת תגובה על פנייה |
+**שינוי 1 - קריאת fallback מ-localStorage:**
+בפונקציית טעינת הפנייה, אם `ticket_id` חסר מה-URL, לנסות לקרוא מ-localStorage:
+```typescript
+const ticketId = searchParams.get("ticket_id");
+if (!ticketId || ticketId === "undefined") {
+  // ניסיון לקרוא מ-localStorage
+  const saved = localStorage.getItem("support_selected_ticket");
+  if (saved) {
+    const savedTicket = JSON.parse(saved);
+    // להשתמש ב-savedTicket.ticket_id
+  }
+}
+```
 
+### תוצאה צפויה
+- הפניות יישמרו לוקאלית מרגע הטעינה מהחבילה
+- לחיצה על "צפייה" תשמור את הפנייה הנבחרת ותעביר ID תקין
+- ה-console.log יעזור לזהות את שמות השדות הנכונים אם המיפוי עדיין לא עובד
