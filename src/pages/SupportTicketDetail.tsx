@@ -41,7 +41,19 @@ const STORAGE_KEY = "support_customer_email";
 const SupportTicketDetail = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const ticketId = searchParams.get("ticket_id");
+  
+  // Get ticket_id from URL, fallback to localStorage
+  let ticketId = searchParams.get("ticket_id");
+  if (!ticketId || ticketId === "undefined") {
+    try {
+      const saved = localStorage.getItem("support_selected_ticket");
+      if (saved) {
+        const savedTicket = JSON.parse(saved);
+        ticketId = savedTicket.ticket_id || null;
+      }
+    } catch {}
+  }
+  
   const emailFromUrl = searchParams.get("email");
   
   // Get email from URL or localStorage

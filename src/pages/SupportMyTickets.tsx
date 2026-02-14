@@ -62,6 +62,7 @@ const SupportMyTickets = () => {
 
       if (response.ok) {
         const rawData = await response.json();
+        console.log("Raw tickets data from API:", rawData);
         const data = Array.isArray(rawData) ? rawData : [];
         const mappedTickets: Ticket[] = data.map((item: any) => ({
           ticket_id: item.מזהה_פניה || item.ticket_id,
@@ -70,6 +71,7 @@ const SupportMyTickets = () => {
           created_at: item.תאריך_פניה || item.created_at || "",
         }));
         setTickets(mappedTickets);
+        localStorage.setItem(`support_tickets_${packageId}`, JSON.stringify(mappedTickets));
       } else {
         toast.error("שגיאה בטעינת הפניות. נסה שוב.");
         setTickets([]);
@@ -282,7 +284,10 @@ const SupportMyTickets = () => {
                         <div className="flex items-center gap-3">
                           {getStatusIcon(ticket.status)}
                           <Button
-                            onClick={() => navigate(`/support/ticket?ticket_id=${ticket.ticket_id}&email=${encodeURIComponent(email)}`)}
+                            onClick={() => {
+                              localStorage.setItem("support_selected_ticket", JSON.stringify(ticket));
+                              navigate(`/support/ticket?ticket_id=${ticket.ticket_id}&email=${encodeURIComponent(email)}`);
+                            }}
                             variant="outline"
                             size="sm"
                           >
