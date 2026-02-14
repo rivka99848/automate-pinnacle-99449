@@ -65,10 +65,10 @@ const SupportMyTickets = () => {
         console.log("Raw tickets data from API:", rawData);
         const data = Array.isArray(rawData) ? rawData : [];
         const mappedTickets: Ticket[] = data.map((item: any) => ({
-          ticket_id: item.מזהה_פניה || item.ticket_id,
+          ticket_id: item.id || item.מזהה_פניה || item.ticket_id,
           subject: item.נושא_הפניה || item.subject || "",
-          status: item.סטטוס_פניה || item.status || "",
-          created_at: item.תאריך_פניה || item.created_at || "",
+          status: item.סטטוס || item.סטטוס_פניה || item.status || "",
+          created_at: item.תאריך_הפניה || item.תאריך_פניה || item.created_at || "",
         }));
         setTickets(mappedTickets);
         localStorage.setItem(`support_tickets_${packageId}`, JSON.stringify(mappedTickets));
