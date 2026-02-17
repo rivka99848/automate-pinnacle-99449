@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { TICKET_DETAIL_WEBHOOK_URL, TICKET_REPLY_WEBHOOK_URL } from "@/types/support";
 import { 
@@ -17,7 +18,11 @@ import {
   Headphones,
   Loader2,
   Paperclip,
-  X
+  X,
+  Hash,
+  MessageSquare,
+  CalendarDays,
+  Tag
 } from "lucide-react";
 
 interface Reply {
@@ -34,6 +39,7 @@ interface TicketDetails {
   status: string;
   created_at: string;
   replies: Reply[];
+  package_type?: string;
 }
 
 const STORAGE_KEY = "support_customer_email";
@@ -42,7 +48,6 @@ const SupportTicketDetail = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   
-  // Get ticket_id from URL, fallback to localStorage
   let ticketId = searchParams.get("ticket_id");
   if (!ticketId || ticketId === "undefined") {
     try {
@@ -55,8 +60,6 @@ const SupportTicketDetail = () => {
   }
   
   const emailFromUrl = searchParams.get("email");
-  
-  // Get email from URL or localStorage
   const customerEmail = emailFromUrl || localStorage.getItem(STORAGE_KEY) || "";
   
   const navigateToMyTickets = () => {
@@ -90,19 +93,21 @@ const SupportTicketDetail = () => {
 
       if (response.ok) {
         const rawData = await response.json();
+        console.log("Raw ticket detail data:", rawData);
         const data = Array.isArray(rawData) ? rawData[0] : rawData;
         const mappedTicket: TicketDetails = {
-          ticket_id: data.מזהה_פניה || data.ticket_id || ticketId || "",
-          subject: data.נושא_הפניה || data.subject || "",
-          message: data.תוכן_פניה || data.message || "",
-          status: data.סטטוס_פניה || data.status || "",
-          created_at: data.תאריך_פניה || data.created_at || "",
+          ticket_id: data.מזהה || data.id || data.ticket_id || ticketId || "",
+          subject: data["נושא הפניה"] || data.נושא_הפניה || data.subject || "",
+          message: data["תוכן הפניה"] || data.תוכן_פניה || data.message || "",
+          status: data["סטטוס הפניה"] || data.סטטוס_פניה || data.status || "",
+          created_at: data["תאריך הפניה"] || data.תאריך_פניה || data.created_at || "",
           attachments: data.מסמכים_מצורפים || data.attachments || [],
           replies: (data.תקשורת || data.replies || []).map((r: any) => ({
             sender_type: r.sender_type || r.סוג_שולח || "admin",
             message: r.message || r.הודעה || "",
             created_at: r.created_at || r.תאריך || "",
           })),
+          package_type: data["סוג חבילה (from חבילות פניות ללקוח)"]?.[0] || "",
         };
         setTicket(mappedTicket);
       } else {
@@ -175,6 +180,18 @@ const SupportTicketDetail = () => {
         year: "numeric",
         month: "long",
         day: "numeric",
+      });
+    } catch {
+      return dateString;
+    }
+  };
+
+  const formatDateTime = (dateString: string) => {
+    try {
+      return new Date(dateString).toLocaleDateString("he-IL", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
         hour: "2-digit",
         minute: "2-digit"
       });
@@ -183,15 +200,18 @@ const SupportTicketDetail = () => {
     }
   };
 
-  const getStatusColor = (status?: string) => {
+  const getStatusVariant = (status?: string): { color: string; label: string } => {
     const statusLower = (status ?? "").toLowerCase();
     if (statusLower.includes("סגור") || statusLower.includes("closed")) {
-      return "bg-green-100 text-green-800";
+      return { color: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400", label: status || "" };
     }
     if (statusLower.includes("ממתין") || statusLower.includes("pending")) {
-      return "bg-yellow-100 text-yellow-800";
+      return { color: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400", label: status || "" };
     }
-    return "bg-blue-100 text-blue-800";
+    if (statusLower.includes("בטיפול")) {
+      return { color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400", label: status || "" };
+    }
+    return { color: "bg-muted text-muted-foreground", label: status || "" };
   };
 
   const isImageUrl = (url: string) => {
@@ -203,7 +223,10 @@ const SupportTicketDetail = () => {
       <div className="min-h-screen bg-background flex flex-col" dir="rtl">
         <Header />
         <main className="flex-1 flex items-center justify-center">
-          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          <div className="flex flex-col items-center gap-3">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            <p className="text-muted-foreground text-sm">טוען פרטי פנייה...</p>
+          </div>
         </main>
         <Footer />
       </div>
@@ -227,6 +250,8 @@ const SupportTicketDetail = () => {
     );
   }
 
+  const statusInfo = getStatusVariant(ticket.status);
+
   return (
     <div className="min-h-screen bg-background flex flex-col" dir="rtl">
       <Header />
@@ -237,149 +262,145 @@ const SupportTicketDetail = () => {
           <Button
             variant="ghost"
             onClick={navigateToMyTickets}
-            className="mb-6"
+            className="mb-6 hover:bg-muted/50"
           >
             <ArrowRight className="w-4 h-4 ml-2" />
             חזרה לפניות שלי
           </Button>
 
-          {/* Ticket Info - Read Only */}
-          <div className="bg-card border border-border rounded-lg p-6 mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm text-muted-foreground font-mono">
-                #{ticket.ticket_id}
-              </span>
-              <span className={`text-sm px-3 py-1 rounded-full ${getStatusColor(ticket.status)}`}>
-                {ticket.status}
+          {/* Ticket Header Card */}
+          <div className="bg-card border border-border rounded-2xl overflow-hidden mb-6 shadow-sm">
+            {/* Status Bar */}
+            <div className="bg-muted/30 border-b border-border px-6 py-3 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Hash className="w-3.5 h-3.5" />
+                  <span className="text-xs font-mono">{ticket.ticket_id}</span>
+                </div>
+                {ticket.package_type && (
+                  <div className="flex items-center gap-1.5 text-muted-foreground">
+                    <Tag className="w-3.5 h-3.5" />
+                    <span className="text-xs">{ticket.package_type}</span>
+                  </div>
+                )}
+              </div>
+              <span className={`text-xs font-medium px-3 py-1 rounded-full ${statusInfo.color}`}>
+                {statusInfo.label}
               </span>
             </div>
 
-            <h1 className="text-2xl font-bold text-foreground mb-4">
-              {ticket.subject}
-            </h1>
+            {/* Subject & Content */}
+            <div className="p-6">
+              <h1 className="text-xl font-bold text-foreground mb-4 leading-relaxed">
+                {ticket.subject}
+              </h1>
 
-            <div className="bg-muted/30 rounded-lg p-4 mb-4">
-              <p className="text-foreground whitespace-pre-wrap">
-                {ticket.message}
-              </p>
-            </div>
+              <div className="bg-muted/20 rounded-xl p-5 mb-5 border border-border/50">
+                <p className="text-foreground/90 whitespace-pre-wrap leading-relaxed text-sm">
+                  {ticket.message}
+                </p>
+              </div>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="w-4 h-4" />
-              נפתח ב-{formatDate(ticket.created_at)}
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <CalendarDays className="w-3.5 h-3.5" />
+                <span>נפתח ב-{formatDate(ticket.created_at)}</span>
+              </div>
             </div>
 
             {/* Attachments */}
             {ticket.attachments && ticket.attachments.length > 0 && (
-              <div className="mt-6 pt-6 border-t border-border">
-                <h3 className="text-sm font-medium text-foreground mb-3">
-                  קבצים מצורפים
-                </h3>
-                <div className="grid gap-3">
-                  {ticket.attachments.map((url, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      {isImageUrl(url) ? (
-                        <>
-                          <Image className="w-5 h-5 text-muted-foreground" />
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline flex-1 truncate"
-                          >
-                            תמונה {index + 1}
-                          </a>
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-muted-foreground hover:text-foreground"
-                          >
-                            <Download className="w-4 h-4" />
-                          </a>
-                        </>
-                      ) : (
-                        <>
-                          <FileText className="w-5 h-5 text-muted-foreground" />
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline flex-1 truncate"
-                          >
-                            קובץ {index + 1}
-                          </a>
-                          <a
-                            href={url}
-                            download
-                            className="text-muted-foreground hover:text-foreground"
-                          >
-                            <Download className="w-4 h-4" />
-                          </a>
-                        </>
-                      )}
-                    </div>
-                  ))}
+              <div className="px-6 pb-6">
+                <div className="border-t border-border pt-5">
+                  <h3 className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
+                    <Paperclip className="w-4 h-4 text-muted-foreground" />
+                    קבצים מצורפים
+                  </h3>
+                  <div className="grid gap-2">
+                    {ticket.attachments.map((url, index) => (
+                      <a
+                        key={index}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors border border-border/50"
+                      >
+                        {isImageUrl(url) ? (
+                          <Image className="w-4 h-4 text-primary" />
+                        ) : (
+                          <FileText className="w-4 h-4 text-primary" />
+                        )}
+                        <span className="text-sm text-foreground flex-1 truncate">
+                          {isImageUrl(url) ? `תמונה ${index + 1}` : `קובץ ${index + 1}`}
+                        </span>
+                        <Download className="w-4 h-4 text-muted-foreground" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Replies Section */}
-          <div className="mb-8">
-            <h2 className="text-xl font-bold text-foreground mb-4">
-              שיחה
-            </h2>
+          {/* Conversation Section */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <MessageSquare className="w-5 h-5 text-primary" />
+              <h2 className="text-lg font-bold text-foreground">שיחה</h2>
+            </div>
 
             {ticket.replies && ticket.replies.length > 0 ? (
-              <div className="space-y-4">
-                {ticket.replies.map((reply, index) => (
-                  <div
-                    key={index}
-                    className={`rounded-lg p-4 ${
-                      reply.sender_type === "admin"
-                        ? "bg-muted/50 border-r-4 border-primary"
-                        : "bg-blue-50 dark:bg-blue-950/30 border-r-4 border-blue-500"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      {reply.sender_type === "admin" ? (
-                        <>
-                          <Headphones className="w-4 h-4 text-primary" />
-                          <span className="text-sm font-medium text-primary">
-                            צוות התמיכה
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <User className="w-4 h-4 text-blue-500" />
-                          <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
-                            אני
-                          </span>
-                        </>
-                      )}
-                      <span className="text-xs text-muted-foreground mr-auto">
-                        {formatDate(reply.created_at)}
-                      </span>
+              <div className="space-y-3">
+                {ticket.replies.map((reply, index) => {
+                  const isAdmin = reply.sender_type === "admin";
+                  return (
+                    <div
+                      key={index}
+                      className={`rounded-xl p-4 transition-colors ${
+                        isAdmin
+                          ? "bg-primary/5 border border-primary/20"
+                          : "bg-muted/30 border border-border/50"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-2.5">
+                        <div className={`w-7 h-7 rounded-full flex items-center justify-center ${
+                          isAdmin ? "bg-primary/10" : "bg-muted"
+                        }`}>
+                          {isAdmin ? (
+                            <Headphones className="w-3.5 h-3.5 text-primary" />
+                          ) : (
+                            <User className="w-3.5 h-3.5 text-muted-foreground" />
+                          )}
+                        </div>
+                        <span className={`text-sm font-medium ${
+                          isAdmin ? "text-primary" : "text-foreground"
+                        }`}>
+                          {isAdmin ? "צוות התמיכה" : "אני"}
+                        </span>
+                        <span className="text-xs text-muted-foreground mr-auto">
+                          {formatDateTime(reply.created_at)}
+                        </span>
+                      </div>
+                      <p className="text-sm text-foreground/90 whitespace-pre-wrap pr-9 leading-relaxed">
+                        {reply.message}
+                      </p>
                     </div>
-                    <p className="text-foreground whitespace-pre-wrap">
-                      {reply.message}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
-              <div className="text-center py-8 bg-muted/20 rounded-lg">
-                <p className="text-muted-foreground">
+              <div className="text-center py-10 bg-muted/10 rounded-xl border border-dashed border-border">
+                <MessageSquare className="w-8 h-8 text-muted-foreground/40 mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">
                   עדיין אין תגובות בשיחה זו
                 </p>
               </div>
             )}
           </div>
 
-          {/* Add Reply Form */}
-          <div className="bg-card border border-border rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-foreground mb-4">
+          {/* Reply Form */}
+          <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
+            <h3 className="text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Send className="w-4 h-4 text-primary" />
               הוסף תגובה
             </h3>
             <form onSubmit={handleSendReply} className="space-y-4">
@@ -387,25 +408,26 @@ const SupportTicketDetail = () => {
                 value={replyMessage}
                 onChange={(e) => setReplyMessage(e.target.value)}
                 placeholder="כתוב את התגובה שלך..."
-                className="min-h-[120px]"
+                className="min-h-[120px] rounded-xl resize-none"
                 required
               />
               
               {/* File Upload */}
-              <div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={(e) => setReplyFile(e.target.files?.[0] || null)}
-                  accept="image/*,.pdf,.doc,.docx"
-                  className="hidden"
-                />
+              <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={(e) => setReplyFile(e.target.files?.[0] || null)}
+                    accept="image/*,.pdf,.doc,.docx"
+                    className="hidden"
+                  />
                   <Button
                     type="button"
                     variant="outline"
                     size="sm"
                     onClick={() => fileInputRef.current?.click()}
+                    className="rounded-lg"
                   >
                     <Paperclip className="w-4 h-4 ml-2" />
                     צרף קובץ
@@ -427,25 +449,25 @@ const SupportTicketDetail = () => {
                     </div>
                   )}
                 </div>
-              </div>
 
-              <Button
-                type="submit"
-                disabled={isSendingReply || !replyMessage.trim()}
-                className="bg-primary hover:bg-primary/90"
-              >
-                {isSendingReply ? (
-                  <>
-                    <Loader2 className="w-4 h-4 ml-2 animate-spin" />
-                    שולח...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4 ml-2" />
-                    שלח תגובה
-                  </>
-                )}
-              </Button>
+                <Button
+                  type="submit"
+                  disabled={isSendingReply || !replyMessage.trim()}
+                  className="rounded-lg"
+                >
+                  {isSendingReply ? (
+                    <>
+                      <Loader2 className="w-4 h-4 ml-2 animate-spin" />
+                      שולח...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 ml-2" />
+                      שלח תגובה
+                    </>
+                  )}
+                </Button>
+              </div>
             </form>
           </div>
         </div>
