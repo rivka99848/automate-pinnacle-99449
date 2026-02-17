@@ -22,13 +22,20 @@ import {
   Hash,
   MessageSquare,
   CalendarDays,
-  Tag
+  Tag,
+  ClipboardList,
+  ScrollText
 } from "lucide-react";
 
 interface Reply {
   sender_type: "admin" | "customer";
   message: string;
   created_at: string;
+}
+
+interface CommunicationLog {
+  content: string;
+  date: string;
 }
 
 interface TicketDetails {
@@ -40,6 +47,8 @@ interface TicketDetails {
   created_at: string;
   replies: Reply[];
   package_type?: string;
+  summary?: string;
+  communication_logs: CommunicationLog[];
 }
 
 const STORAGE_KEY = "support_customer_email";
@@ -95,6 +104,14 @@ const SupportTicketDetail = () => {
         const rawData = await response.json();
         console.log("Raw ticket detail data:", rawData);
         const data = Array.isArray(rawData) ? rawData[0] : rawData;
+        // Build communication logs from linked records
+        const logContents = data["תוכן (from לוג תקשורת פניות)"] || [];
+        const logDates = data["תאריך (from לוג תקשורת פניות)"] || [];
+        const communicationLogs: CommunicationLog[] = logContents.map((content: string, i: number) => ({
+          content,
+          date: logDates[i] || "",
+        }));
+
         const mappedTicket: TicketDetails = {
           ticket_id: data.מזהה || data.id || data.ticket_id || ticketId || "",
           subject: data["נושא הפניה"] || data.נושא_הפניה || data.subject || "",
@@ -108,6 +125,8 @@ const SupportTicketDetail = () => {
             created_at: r.created_at || r.תאריך || "",
           })),
           package_type: data["סוג חבילה (from חבילות פניות ללקוח)"]?.[0] || "",
+          summary: data["סיכום פניה"] || "",
+          communication_logs: communicationLogs,
         };
         setTicket(mappedTicket);
       } else {
@@ -305,6 +324,46 @@ const SupportTicketDetail = () => {
                 <CalendarDays className="w-3.5 h-3.5" />
                 <span>נפתח ב-{formatDate(ticket.created_at)}</span>
               </div>
+
+              {/* Summary */}
+              {ticket.summary && (
+                <div className="mt-5 bg-primary/5 rounded-xl p-5 border border-primary/15">
+                  <h3 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
+                    <ClipboardList className="w-4 h-4" />
+                    סיכום פנייה
+                  </h3>
+                  <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
+                    {ticket.summary}
+                  </p>
+                </div>
+              )}
+
+              {/* Communication Log */}
+              {ticket.communication_logs && ticket.communication_logs.length > 0 && (
+                <div className="mt-5 bg-accent/30 rounded-xl p-5 border border-border/50">
+                  <h3 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <ScrollText className="w-4 h-4 text-muted-foreground" />
+                    לוג תקשורת
+                  </h3>
+                  <div className="space-y-3">
+                    {ticket.communication_logs.map((log, index) => (
+                      <div key={index} className="flex gap-3 items-start">
+                        <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                        <div className="flex-1">
+                          <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
+                            {log.content}
+                          </p>
+                          {log.date && (
+                            <span className="text-xs text-muted-foreground mt-1 block">
+                              {formatDate(log.date)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Attachments */}
