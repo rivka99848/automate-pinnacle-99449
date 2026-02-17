@@ -325,19 +325,6 @@ const SupportTicketDetail = () => {
                 <span>נפתח ב-{formatDate(ticket.created_at)}</span>
               </div>
 
-              {/* Summary */}
-              {ticket.summary && (
-                <div className="mt-5 bg-primary/5 rounded-xl p-5 border border-primary/15">
-                  <h3 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
-                    <ClipboardList className="w-4 h-4" />
-                    סיכום פנייה
-                  </h3>
-                  <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
-                    {ticket.summary}
-                  </p>
-                </div>
-              )}
-
               {/* Communication Log */}
               {ticket.communication_logs && ticket.communication_logs.length > 0 && (
                 <div className="mt-5 bg-accent/30 rounded-xl p-5 border border-border/50">
@@ -362,6 +349,19 @@ const SupportTicketDetail = () => {
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Summary */}
+              {ticket.summary && (
+                <div className="mt-5 bg-primary/5 rounded-xl p-5 border border-primary/15">
+                  <h3 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
+                    <ClipboardList className="w-4 h-4" />
+                    סיכום פנייה
+                  </h3>
+                  <p className="text-sm text-foreground/90 whitespace-pre-wrap leading-relaxed">
+                    {ticket.summary}
+                  </p>
                 </div>
               )}
             </div>
@@ -447,12 +447,14 @@ const SupportTicketDetail = () => {
                 })}
               </div>
             ) : (
-              <div className="text-center py-10 bg-muted/10 rounded-xl border border-dashed border-border">
-                <MessageSquare className="w-8 h-8 text-muted-foreground/40 mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">
-                  עדיין אין תגובות בשיחה זו
-                </p>
-              </div>
+              !ticket.communication_logs?.length && !ticket.summary ? (
+                <div className="text-center py-10 bg-muted/10 rounded-xl border border-dashed border-border">
+                  <MessageSquare className="w-8 h-8 text-muted-foreground/40 mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground">
+                    עדיין אין תגובות בשיחה זו
+                  </p>
+                </div>
+              ) : null
             )}
           </div>
 
